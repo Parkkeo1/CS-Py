@@ -42,8 +42,6 @@ class GSRequestHandler(BaseHTTPRequestHandler):
             print(self.server.map_name)
             print(self.server.map_round)
             print(self.server.player_name)
-        else:
-            print('game is not live')
 
     # get time, map_name, map_live, map_round, player_name
     def get_game_info(self, payload):
