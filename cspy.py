@@ -3,8 +3,7 @@
 from http.server import BaseHTTPRequestHandler, HTTPServer
 import json
 from datetime import datetime
-from logiPy.logipy import logi_led
-
+from logiPy.logiPy import logi_led
 
 class InfoServer(HTTPServer):
     def start(self):
