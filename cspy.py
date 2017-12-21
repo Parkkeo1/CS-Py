@@ -1,18 +1,15 @@
 # Based on this template: https://github.com/tsuriga/csgo-gsi-qsguide/blob/master/quickstartguide.py
 
 from http.server import BaseHTTPRequestHandler, HTTPServer
-import sys
 import json
 from datetime import datetime
 
 
 class InfoServer(HTTPServer):
-    def init_state(self):
+    def start(self):
         self.time = None
         self.map_name = None
-        self.map_live = False
         self.map_round = None
-        self.round_phase = None
         self.round_winner = None
         self.player_name = None
         self.player_team = None
@@ -28,49 +25,76 @@ class GSRequestHandler(BaseHTTPRequestHandler):
         length = int(self.headers['Content-Length'])
         data = self.rfile.read(length).decode('utf-8')
 
-        self.parse_payload(json.loads(data))
+        self.main_payload(json.loads(data))
 
         self.send_header('Content-type', 'text/html')
         self.send_response(200)
         self.end_headers()
 
-    def parse_payload(self, payload):
-        self.get_game_info(payload)
-        if self.server.map_live:  # check if map is live before collecting stats
-            print('new payload info:')
-            print(self.server.time)
-            print(self.server.map_name)
+    def main_payload(self, payload):
+        if self.check_status(payload):
+            self.get_round_info(payload)
+
             print(self.server.map_round)
-            print(self.server.player_name)
+            print(self.server.player_team)
+            print(self.server.round_winner)
+            print(self.server.player_round_kills)
+            print(self.server.player_round_hs)
+            print('\n\n')
 
-    # get time, map_name, map_live, map_round, player_name
-    def get_game_info(self, payload):
+    def check_status(self, payload):
         if 'map' in payload and 'phase' in payload['map']:
-            phase = str(payload['map']['phase'])
-            if phase == 'live':
-                self.server.map_live = True
-            else:
-                self.server.map_live = False
+            map_phase = payload['map']['phase']
+            if map_phase == 'live':
+                if 'round' in payload and 'phase' in payload['round']:
+                    round_phase = payload['round']['phase']
+                    if round_phase == 'over':
+                        return True
 
-        if self.server.map_live:
-            if 'provider' in payload and 'timestamp' in payload['provider']:
-                time = datetime.utcfromtimestamp(payload['provider']['timestamp'])
-                format_time = str(time.strftime('%b %d, %Y'))
-                self.server.time = format_time
+        return False
 
-            if 'map' in payload:
-                if 'name' in payload['map']:
-                    map = str(payload['map']['name'])
-                    self.server.map_name = map
+    def get_round_info(self, payload):
+        if 'map' in payload:
+            if 'round' in payload['map']:  # get round number
+                self.server.map_round = payload['map']['round']
 
-                if 'round' in payload['map']:
-                    nth_round = payload['map']['round']
-                    self.server.map_round = nth_round
+        if 'player_id' in payload:
+            if 'team' in payload['player_id']:  # get which side player is on
+                self.server.player_team = payload['player_id']['team']
 
-            if 'player_id' in payload:
-                if 'name' in payload['player_id']:
-                    name = str(payload['player_id']['name'])
-                    self.server.player_name = name
+        if 'round' in payload:
+            if 'win_team' in payload['round']:  # get winning team
+                self.server.round_winner = payload['round']['win_team']
+
+        if 'player_state' in payload:  # get player stats for the past round
+            if 'player' in payload['player_state']:
+                if 'state' in payload['player_state']['player']:
+                    if 'round_kills' in payload['player_state']['player']['state']:
+                        self.server.player_round_kills = payload['player_state']['player']['state']['round_kills']
+
+                    if 'round_killhs' in payload['player_state']['player']['state']:
+                        self.server.player_round_hs = payload['player_state']['player']['state']['round_killhs']
+
+    # # get time, map_name, map_round, player_name
+    # def get_game_info(self, payload):
+    #     if 'provider' in payload and 'timestamp' in payload['provider']:
+    #         time = datetime.utcfromtimestamp(payload['provider']['timestamp'])
+    #         format_time = str(time.strftime('%b %d, %Y'))
+    #         self.server.time = format_time
+    #
+    #     if 'map' in payload:
+    #         if 'name' in payload['map']:
+    #             map = str(payload['map']['name'])
+    #             self.server.map_name = map
+    #
+    #         if 'round' in payload['map']:
+    #             nth_round = payload['map']['round']
+    #             self.server.map_round = nth_round
+    #
+    #     if 'player_id' in payload:
+    #         if 'name' in payload['player_id']:
+    #             name = str(payload['player_id']['name'])
+    #             self.server.player_name = name
 
     # using round_phase and round_winner, get player stats per round:
     # player_team, player_round_kills, player_round_hs
@@ -86,7 +110,7 @@ class GSRequestHandler(BaseHTTPRequestHandler):
 
 
 server = InfoServer(('localhost', 3000), GSRequestHandler)
-server.init_state()
+server.start()
 
 print('server has started')
 
