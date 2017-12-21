@@ -15,9 +15,6 @@ class InfoServer(HTTPServer):
         self.player_team = None
         self.player_round_kills = None
         self.player_round_hs = None
-        self.player_kills = None
-        self.player_assists = None
-        self.player_deaths = None
 
 
 class GSRequestHandler(BaseHTTPRequestHandler):
@@ -40,7 +37,7 @@ class GSRequestHandler(BaseHTTPRequestHandler):
             print(self.server.round_winner)
             print(self.server.player_round_kills)
             print(self.server.player_round_hs)
-            print('\n\n')
+            print('\n')
 
     def check_status(self, payload):
         if 'map' in payload and 'phase' in payload['map']:
@@ -58,22 +55,20 @@ class GSRequestHandler(BaseHTTPRequestHandler):
             if 'round' in payload['map']:  # get round number
                 self.server.map_round = payload['map']['round']
 
-        if 'player_id' in payload:
-            if 'team' in payload['player_id']:  # get which side player is on
+        if 'player' in payload:
+            if 'team' in payload['player']:  # get which side player is on
                 self.server.player_team = payload['player_id']['team']
+
+            if 'state' in payload['player']: # get player stats for the past round
+                if 'round_kills' in payload['player']['state']:
+                    self.server.player_round_kills = payload['player']['state']['round_kills']
+
+                if 'round_killhs' in payload['player']['state']:
+                    self.server.player_round_hs = payload['player']['state']['round_killhs']
 
         if 'round' in payload:
             if 'win_team' in payload['round']:  # get winning team
                 self.server.round_winner = payload['round']['win_team']
-
-        if 'player_state' in payload:  # get player stats for the past round
-            if 'player' in payload['player_state']:
-                if 'state' in payload['player_state']['player']:
-                    if 'round_kills' in payload['player_state']['player']['state']:
-                        self.server.player_round_kills = payload['player_state']['player']['state']['round_kills']
-
-                    if 'round_killhs' in payload['player_state']['player']['state']:
-                        self.server.player_round_hs = payload['player_state']['player']['state']['round_killhs']
 
     # # get time, map_name, map_round, player_name
     # def get_game_info(self, payload):
@@ -95,11 +90,6 @@ class GSRequestHandler(BaseHTTPRequestHandler):
     #         if 'name' in payload['player_id']:
     #             name = str(payload['player_id']['name'])
     #             self.server.player_name = name
-
-    # using round_phase and round_winner, get player stats per round:
-    # player_team, player_round_kills, player_round_hs
-    def get_round_info(self, payload):
-        pass
 
     # get overall player stats for the entire map/game: kills, assists, deaths
     def get_overall_stats(self, payload):
