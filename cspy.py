@@ -3,6 +3,7 @@
 from http.server import BaseHTTPRequestHandler, HTTPServer
 import json
 from datetime import datetime
+from logiPy.logipy import logi_led
 
 
 class InfoServer(HTTPServer):
@@ -20,13 +21,18 @@ class InfoServer(HTTPServer):
 class GSRequestHandler(BaseHTTPRequestHandler):
     def do_POST(self):
         length = int(self.headers['Content-Length'])
-        data = self.rfile.read(length).decode('utf-8')
+        body = self.rfile.read(length).decode('utf-8')
+        data = json.loads(body)
 
-        self.main_payload(json.loads(data))
+        self.logi_payload(data)
+        self.main_payload(data)
 
         self.send_header('Content-type', 'text/html')
         self.send_response(200)
         self.end_headers()
+
+    def logi_payload(self, payload):  # TODO: Logitech's RGB LED SDK for mice. Testing on G303 and G203.
+        pass
 
     def main_payload(self, payload):
         if self.check_status(payload):
