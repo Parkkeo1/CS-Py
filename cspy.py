@@ -48,7 +48,7 @@ class GSRequestHandler(BaseHTTPRequestHandler):
                     if round_phase == 'over':  # make sure round is over
                         if 'map' in payload and 'round' in payload['map']:
                             number = payload['map']['round']
-                            if number != self.server.map_round:  # make sure it is a new round
+                            if number != self.server.map_round and number != 0:  # make sure it is a new round
                                 return True
 
         return False
