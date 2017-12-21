@@ -11,9 +11,9 @@ A Python Project that uses Valve's game state integration service to augment the
 ### Current Ideas For Player Statistics & Analysis
 1. KDR and KDA
 2. HSR
-3. modified KAST (based on HLTV, but changed to not take traded kills into account).
+3. Modified KAST (based on HLTV, but changed to not take traded kills into account).
 4. Correlation between # of kills and monetary value of primary + secondary weapon in each round
 5. Using all of the above statistics to determine how well a player overall plays on different maps.
-6. Using all of the above statistics to determine how CT/T-sided a player tends to play (also depending on the map).
+6. Using all of the above statistics to determine how CT/T-sided a player tends to play (overall vs. depending on the map).
 7. Graphing these statistics by time to see player's skill improvement. 
 
