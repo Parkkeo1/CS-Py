@@ -32,21 +32,24 @@ class GSRequestHandler(BaseHTTPRequestHandler):
         if self.check_status(payload):
             self.get_round_info(payload)
 
-            print(self.server.map_round)
-            print(self.server.player_team)
-            print(self.server.round_winner)
-            print(self.server.player_round_kills)
-            print(self.server.player_round_hs)
+            print('what round is it? %s' % self.server.map_round)
+            print('the player is on the %s side.' % self.server.player_team)
+            print('the %s side won the round.' % self.server.round_winner)
+            print('player killed %s enemies this past round.' % self.server.player_round_kills)
+            print('player killed %s enemies with headshots this past round.' % self.server.player_round_hs)
             print('\n')
 
-    def check_status(self, payload):
+    def check_status(self, payload):  # to prevent repetitious data
         if 'map' in payload and 'phase' in payload['map']:
             map_phase = payload['map']['phase']
-            if map_phase == 'live':
+            if map_phase == 'live':  # make sure map is live
                 if 'round' in payload and 'phase' in payload['round']:
                     round_phase = payload['round']['phase']
-                    if round_phase == 'over':
-                        return True
+                    if round_phase == 'over':  # make sure round is over
+                        if 'map' in payload and 'round' in payload['map']:
+                            number = payload['map']['round']
+                            if number != self.server.map_round:  # make sure it is a new round
+                                return True
 
         return False
 
@@ -57,9 +60,9 @@ class GSRequestHandler(BaseHTTPRequestHandler):
 
         if 'player' in payload:
             if 'team' in payload['player']:  # get which side player is on
-                self.server.player_team = payload['player_id']['team']
+                self.server.player_team = payload['player']['team']
 
-            if 'state' in payload['player']: # get player stats for the past round
+            if 'state' in payload['player']:  # get player stats for the past round
                 if 'round_kills' in payload['player']['state']:
                     self.server.player_round_kills = payload['player']['state']['round_kills']
 
