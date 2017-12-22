@@ -15,6 +15,12 @@ class InfoServer(HTTPServer):
         self.player_team = None
         self.player_round_kills = None
         self.player_round_hs = None
+        self.player_kills = None
+        self.player_assists = None
+        self.player_deaths = None
+        self.player_mvps = None
+        self.player_score = None
+        self.dup_remover = True
 
 
 class GSRequestHandler(BaseHTTPRequestHandler):
@@ -38,6 +44,7 @@ class GSRequestHandler(BaseHTTPRequestHandler):
         if status == 1:
             self.get_round_info(payload)
 
+            print('game is currently going on.')
             print('current date: %s' % self.server.time)
             print('current name of map: %s' % self.server.map_name)
             print('player name: %s' % self.server.player_name)
@@ -49,7 +56,21 @@ class GSRequestHandler(BaseHTTPRequestHandler):
             print('\n')
         else:
             if status == 2:
-                pass
+                if self.server.dup_remover:
+                    self.server.dup_remover = False
+                else:
+                    self.get_overall_stats(payload)
+
+                    print('game has ended.')
+                    print('current date: %s' % self.server.time)
+                    print('current name of map: %s' % self.server.map_name)
+                    print('player name: %s' % self.server.player_name)
+                    print('player total kills: %s' % self.server.player_kills)
+                    print('player total deaths: %s' % self.server.player_deaths)
+                    print('player total assists: %s' % self.server.player_assists)
+                    print('player score: %s' % self.server.player_score)
+                    print('# of mvps: %s' % self.server.player_mvps)
+                    print('\n')
 
     def check_status(self, payload):  # to prevent repetitious data
         if 'map' in payload and 'phase' in payload['map']:
@@ -62,11 +83,13 @@ class GSRequestHandler(BaseHTTPRequestHandler):
                             number = payload['map']['round']
                             if number != self.server.map_round and number != 0:  # make sure it is a new round
                                 return 1
-            else:
-                if map_phase == 'gameover':  # if match is over, indicate as such, in order to collect match stats.
+
+            if map_phase == 'gameover':  # if match is over, indicate as such, in order to collect match stats.
+                if payload['player']['match_stats']['score'] != self.server.player_score:
                     return 2
         return 0
 
+    # individual round data
     def get_round_info(self, payload):
         if 'map' in payload:
             if 'name' in payload['map']:  # get map name
@@ -76,7 +99,7 @@ class GSRequestHandler(BaseHTTPRequestHandler):
                 self.server.map_round = payload['map']['round']
 
         if 'player' in payload:
-            if 'name' in payload['player']: # get player nae
+            if 'name' in payload['player']:  # get player name
                 self.server.player_name = payload['player']['name']
 
             if 'team' in payload['player']:  # get which side player is on
@@ -93,14 +116,42 @@ class GSRequestHandler(BaseHTTPRequestHandler):
             if 'win_team' in payload['round']:  # get winning team
                 self.server.round_winner = payload['round']['win_team']
 
-        if 'provider' in payload and 'timestamp' in payload['provider']: # get time of game
+        if 'provider' in payload and 'timestamp' in payload['provider']:  # get time of game
             time = datetime.utcfromtimestamp(payload['provider']['timestamp'])
             format_time = str(time.strftime('%b %d, %Y'))
             self.server.time = format_time
 
-    # get overall player stats for the entire map/game: kills, assists, deaths
+    # overall match data
     def get_overall_stats(self, payload):
-        pass
+        if 'map' in payload:
+            if 'name' in payload['map']:  # get map name
+                self.server.map_name = payload['map']['name']
+
+        if 'player' in payload:
+
+            if 'name' in payload['player']:  # get player name
+                self.server.player_name = payload['player']['name']
+
+            if 'match_stats' in payload['player']:  # get player's match stats
+                if 'kills' in payload['player']['match_stats']:
+                    self.server.player_kills = payload['player']['match_stats']['kills']
+
+                if 'assists' in payload['player']['match_stats']:
+                    self.server.player_assists = payload['player']['match_stats']['assists']
+
+                if 'deaths' in payload['player']['match_stats']:
+                    self.server.player_deaths = payload['player']['match_stats']['deaths']
+
+                if 'mvps' in payload['player']['match_stats']:
+                    self.server.player_mvps = payload['player']['match_stats']['mvps']
+
+                if 'score' in payload['player']['match_stats']:
+                    self.server.player_score = payload['player']['match_stats']['score']
+
+        if 'provider' in payload and 'timestamp' in payload['provider']:  # get time of game
+            time = datetime.utcfromtimestamp(payload['provider']['timestamp'])
+            format_time = str(time.strftime('%b %d, %Y'))
+            self.server.time = format_time
 
     def log_message(self, format, *args):
         return
