@@ -1,7 +1,7 @@
 # CS-Py
 A Python Project that uses Valve's game state integration service to augment the player experience in Counter-Strike: Global Offensive. By Isaac Park, CS Major @ UIUC.
 
-### TODO: Change current server setup to Flask, using server-side cookies from Flask-Session.
+12/22/17: Switch to Flask successful (I think). Will be implementing SQLite3 DB functionality instead of using Flask-Session. TODO: put received data into pandas dataframe, then insert dataframe contents into sql table. Create DB file.
 
 ### Current Project Objectives (By Priority)
 1. Implement by-round data storage for statistical analysis using Pandas dataframes
