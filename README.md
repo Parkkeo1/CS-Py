@@ -1,11 +1,9 @@
 # CS-Py
 A Python Project that uses Valve's game state integration service to augment the player experience in Counter-Strike: Global Offensive. By Isaac Park, CS Major @ UIUC.
 
-12/22/17: Switch to Flask successful (I think). Will be implementing SQLite3 DB functionality instead of using Flask-Session. TODO: put received data into pandas dataframe, then insert dataframe contents into sql table. Create DB file.
-
-### Current Project Objectives (By Priority)
-1. Implement by-round data storage for statistical analysis using Pandas dataframes
-2. Integrate SQL database functionality and store player data by individual rounds.
+### Project Objectives (By Priority)
+1. Implement by-round data storage for statistical analysis using Pandas dataframes #### Completed 12/23/17
+2. Integrate SQL database functionality and store player data by individual rounds. #### Completd 12/23/17
 3. Integrate Logitech's RGB SDK for its gaming mice to trigger colors depending on in-game events.
 4. Develop front-end GUI for the program (probably an in-web-browser application) to display player statistics and graphs
 5. Develop full-screen (transparent) overlay to be used on top of the CSGO application as a live statistics display for the player.
@@ -19,3 +17,8 @@ A Python Project that uses Valve's game state integration service to augment the
 6. Using all of the above statistics to determine how CT/T-sided a player tends to play (overall vs. depending on the map).
 7. Graphing these statistics by time to see player's skill improvement. 
 
+### Changelog
+12/22/17: Switch to Flask successful (I think). Will be implementing SQLite3 DB functionality instead of using Flask-Session. TODO: put 
+received data into pandas dataframe, then insert dataframe contents into sql table. Create DB file.
+
+12/23/17: Previous day's goals accomplished; POST data is put into pandas dataframes and then inserted into SQLite DB tables accordingly: per_round_data and per_map_data. TODO: Work on front-end; auto-refreshing display page for live match stats? Maybe also work on statistical analysis & visualizations using the ideas above.
