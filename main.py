@@ -1,5 +1,6 @@
 from flask import Flask, request, render_template, session
 from run import check_payload, parse_payload
+import pandas as pd
 import pprint
 
 app = Flask(__name__)
@@ -16,8 +17,7 @@ def GSHandler():
     if request.is_json:
         payload = request.get_json()
         if check_payload(payload):
-            pprint.pprint(payload)
-            print('\n')
+            print(parse_payload(payload))
 
     return 'JSON Posted'
 

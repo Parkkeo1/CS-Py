@@ -14,7 +14,6 @@ def check_payload(payload):
                                     if 'round' in payload['previously']:
                                         if 'phase' in payload['previously']['round'] and payload['previously']['round']['phase'] == 'live':
                                             return True
-                                    # if 'map' in payload['previously']:
 
     return False
 
@@ -24,25 +23,28 @@ def parse_payload(payload):
     format_time = str(time.strftime('%b %d, %Y'))
 
     data_df = pd.DataFrame({
-        'Time': format_time,
-        'Map': payload['map']['name'],
-        'Map Status': payload['map']['phase'],
-        'Round #': payload['map']['round'],
-        'Round Winner': payload['round']['win_team'],
-        'Player Name': payload['player']['name'],
-        'Player Team': payload['player']['team'],
-        'Overall Kills': payload['player']['match_stats']['kills'],
-        'Overall Assists': payload['player']['match_stats']['assists'],
-        'Overall Deaths': payload['player']['match_stats']['deaths'],
-        'Overall MVPs': payload['player']['match_stats']['mvps'],
-        'Overall Score': payload['player']['match_stats']['score'],
-        'Current Equip. Value': payload['player']['state']['equip_value'],
-        'Round Kills': payload['player']['state']['round_kills'],
-        'Round HS Kills': payload['player']['state']['round_killhs']
+        'Time': [format_time],
+        'Map': [payload['map']['name']],
+        'Map Status': [payload['map']['phase']],
+        'Round #': [payload['map']['round']],
+        'Round Winner': [payload['round']['win_team']],
+        'Player Name': [payload['player']['name']],
+        'Player Team': [payload['player']['team']],
+        'Kills': [payload['player']['match_stats']['kills']],
+        'Assists': [payload['player']['match_stats']['assists']],
+        'Deaths': [payload['player']['match_stats']['deaths']],
+        'MVPs': [payload['player']['match_stats']['mvps']],
+        'Score': [payload['player']['match_stats']['score']],
+        'Current Equip. Value': [payload['player']['state']['equip_value']],
+        'Round Kills': [payload['player']['state']['round_kills']],
+        'Round HS Kills': [payload['player']['state']['round_killhs']]
     })
 
-    return data_df
+    data_df = data_df[['Time', 'Map', 'Map Status', 'Round #', 'Round Winner', 'Player Name', 'Player Team',
+                       'Kills', 'Assists', 'Deaths', 'MVPs', 'Score',
+                       'Current Equip. Value', 'Round Kills', 'Round HS Kills']]
 
+    return data_df
 
     # if 'player' in payload and 'state' in payload['player']:
     #     if 'round_kills' in payload['player']['state'] and 'round_killhs' in payload['player']['state']:
