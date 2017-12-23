@@ -2,8 +2,8 @@
 A Python Project that uses Valve's game state integration service to augment the player experience in Counter-Strike: Global Offensive. By Isaac Park, CS Major @ UIUC.
 
 ### Project Objectives (By Priority)
-1. Implement by-round data storage for statistical analysis using Pandas dataframes #### Completed 12/23/17
-2. Integrate SQL database functionality and store player data by individual rounds. #### Completd 12/23/17
+1. Implement by-round data storage for statistical analysis using Pandas dataframes (Completed 12/23/17)
+2. Integrate SQL database functionality and store player data by individual rounds. (Completd 12/23/17)
 3. Integrate Logitech's RGB SDK for its gaming mice to trigger colors depending on in-game events.
 4. Develop front-end GUI for the program (probably an in-web-browser application) to display player statistics and graphs
 5. Develop full-screen (transparent) overlay to be used on top of the CSGO application as a live statistics display for the player.
