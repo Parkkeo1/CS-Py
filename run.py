@@ -1,5 +1,6 @@
 import pandas as pd
 from datetime import datetime
+import sqlite3
 
 
 def check_payload(payload):
@@ -46,3 +47,6 @@ def parse_payload(payload):
 
     return data_df
 
+
+def query_db(conn):
+    pass

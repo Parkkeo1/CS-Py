@@ -1,5 +1,5 @@
-from flask import Flask, request, render_template, session, g
-from run import check_payload, parse_payload
+from flask import Flask, request, render_template, g, session, redirect, url_for
+from run import check_payload, parse_payload, query_db
 import os
 import sqlite3
 import pandas as pd
@@ -28,9 +28,22 @@ def close_db(error):
 
 
 # the to-be frontend
-@app.route('/', methods=['GET'])
+@app.route('/', methods=['GET', 'POST'])
 def index():
-    return render_template('index.html')
+    if request.method == 'POST':
+        conn = get_db()
+        session['display'] = query_db(conn)
+        # have user input whether: what stats for what day to look at, overall lifetime stats, certain maps,
+        # certain sides (T vs. CT), etc
+        return redirect(url_for('results'))
+    else:
+        return render_template('index.html')
+
+
+@app.route('/results')
+def results():
+    # call appropriate session variables
+    return render_template('results.html')
 
 
 # backend POST request handler
