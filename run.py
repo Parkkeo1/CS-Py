@@ -46,6 +46,3 @@ def parse_payload(payload):
 
     return data_df
 
-    # if 'player' in payload and 'state' in payload['player']:
-    #     if 'round_kills' in payload['player']['state'] and 'round_killhs' in payload['player']['state']:
-    #         return [payload['player']['state']['round_kills'], payload['player']['state']['round_killhs']]
