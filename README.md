@@ -21,4 +21,4 @@ A Python Project that uses Valve's game state integration service to augment the
 12/22/17: Switch to Flask successful (I think). Will be implementing SQLite3 DB functionality instead of using Flask-Session. TODO: put 
 received data into pandas dataframe, then insert dataframe contents into sql table. Create DB file.
 
-12/23/17: Previous day's goals accomplished; POST data is put into pandas dataframes and then inserted into SQLite DB tables accordingly: per_round_data and per_map_data. TODO: Work on front-end; auto-refreshing display page for live match stats? Maybe also work on statistical analysis & visualizations using the ideas above.
+12/23/17: Previous day's goals accomplished; POST data is put into pandas dataframes and then inserted into SQLite DB tables accordingly: per_round_data and per_map_data. Also made some preliminary frontend changes to set up for the todo. TODO: Work on front-end; auto-refreshing display page for live match stats? Maybe also work on statistical analysis & visualizations using the ideas above.
