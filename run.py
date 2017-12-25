@@ -48,5 +48,26 @@ def parse_payload(payload):
     return data_df
 
 
-def query_db(conn, time):
+# query database with pandas to gather statistical data.
+# calculate & collect: HSR, KDR, KDA, KAST
+# graph: CT vs. T, player stats on various maps, player stats over rounds in a match and/or over other metrics of time
+
+def query_db_match(conn):
     pass
+
+
+def query_db_today(conn):
+    pass
+
+
+def query_db_week(conn):
+    pass
+
+
+def query_db_month(conn):
+    pass
+
+
+def query_db_lifetime(conn):
+    pass
+

@@ -1,8 +1,9 @@
 from flask import Flask, request, render_template, g, session, redirect, url_for
-from run import check_payload, parse_payload, query_db
+from run import *
 import os
 import sqlite3
 import pandas as pd
+import webbrowser
 
 
 app = Flask(__name__)
@@ -31,21 +32,28 @@ def close_db(error):
 @app.route('/', methods=['GET', 'POST'])
 def index():
     if request.method == 'POST':
-        test = request.form.get('choose')
-        print(str(test))
-        # session['display'] = query_db(conn)
-        # # have user input whether: what stats for what day to look at, overall lifetime stats, certain maps,
-        # # certain sides (T vs. CT), etc
-        # return redirect(url_for('results'))
-        return 'post test'
+        conn = get_db()
+        value = str(request.form.get('choose'))
+        if value == 'match':
+            result = query_db_match(conn)
+        if value == 'today':
+            result = query_db_today(conn)
+        if value == 'week':
+            result = query_db_week(conn)
+        if value == 'month':
+            result = query_db_month(conn)
+        if value == 'lifetime':
+            result = query_db_lifetime(conn)
+        session['result'] = result
+        return redirect(url_for('results'))
     else:
         return render_template('index.html')
 
 
 @app.route('/results')
 def results():
-    # call appropriate session variables
-    return render_template('results.html')
+    result = session['result']
+    return render_template('results.html', result=result)
 
 
 # backend POST request handler
@@ -68,4 +76,5 @@ def GSHandler():
 
 
 if __name__ == "__main__":
+    webbrowser.open_new('http://127.0.0.1:5000')
     app.run(debug=True)
