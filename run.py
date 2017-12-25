@@ -48,5 +48,5 @@ def parse_payload(payload):
     return data_df
 
 
-def query_db(conn):
+def query_db(conn, time):
     pass

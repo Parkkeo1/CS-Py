@@ -31,11 +31,13 @@ def close_db(error):
 @app.route('/', methods=['GET', 'POST'])
 def index():
     if request.method == 'POST':
-        conn = get_db()
-        session['display'] = query_db(conn)
-        # have user input whether: what stats for what day to look at, overall lifetime stats, certain maps,
-        # certain sides (T vs. CT), etc
-        return redirect(url_for('results'))
+        test = request.form.get('choose')
+        print(str(test))
+        # session['display'] = query_db(conn)
+        # # have user input whether: what stats for what day to look at, overall lifetime stats, certain maps,
+        # # certain sides (T vs. CT), etc
+        # return redirect(url_for('results'))
+        return 'post test'
     else:
         return render_template('index.html')
 

@@ -4,23 +4,24 @@
     <div class="site-wrapper">
         <div class="site-wrapper-inner">
             <div class="cover-container">
-                <div class="jumbotron" style="background-color: #ffffff;">
-                    <h1 class="text-center">CS-Py</h1>
-                    <p class="text-center">A Python-based Player Statistics Display & Analysis Program For CS:GO</p>
-                </div>
+                <h1 class="text-center">CS-Py</h1>
+                <p class="text-center">A Python-based Player Statistics Display & Analysis Program For CS:GO</p>
+                <hr style="width: 50%;" class="pb-2">
+                <form method="POST">
+                    <label class="mr-sm-2" for="choose">Stats From:</label>
+                    <select class="custom-select mr-sm-2" name='choose' id="choose">
+                        <option selected value="last match">Last Match</option>
+                        <option value="today">Today</option>
+                        <option value="week">Past 7 Days</option>
+                        <option value="month">Past Month</option>
+                        <option value="lifetime">Lifetime</option>
+                    </select>
+                    <button type="submit" class="btn btn-primary">Analyze</button>
+                </form>
                 <div class="footer">
                     <a href="https://github.com/Parkkeo1" target="_blank">Created By @Parkkeo1</a>
                 </div>
             </div>
         </div>
     </div>
-    <!--<div class="container justify-content-sm-start" style="text-align: center;">-->
-        <!--<div class="jumbotron pt-5 pb-0" style="background-color: #ffffff;">-->
-            <!--<h1 class="text-center">CS-Py</h1>-->
-            <!--<p class="text-center">A Python-based Player Statistics Display & Analysis Program For CS:GO</p>-->
-            <!--&lt;!&ndash;<form method="POST" >&ndash;&gt;-->
-                <!--&lt;!&ndash;<button class="btn btn-primary" type="submit" name="start">Start GS Data Collection</button>&ndash;&gt;-->
-            <!--&lt;!&ndash;</form>&ndash;&gt;-->
-        <!--</div>-->
-    <!--</div>-->
 {% endblock %}
