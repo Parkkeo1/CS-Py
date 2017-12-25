@@ -22,3 +22,5 @@ A Python Project that uses Valve's game state integration service to augment the
 received data into pandas dataframe, then insert dataframe contents into sql table. Create DB file.
 
 12/23/17: Previous day's goals accomplished; POST data is put into pandas dataframes and then inserted into SQLite DB tables accordingly: per_round_data and per_map_data. Also made some preliminary frontend changes to set up for the todo. TODO: Work on front-end; auto-refreshing display page for live match stats? Maybe also work on statistical analysis & visualizations using the ideas above.
+
+12/24/17: Continued to work on front-end. Flask app now can receive 1 of 5 possible, different inputs from the user (last match, today, past 7 days, past month, lifetime). TODO: work on creating a query_db function that queries the database table differently depending on user request.
