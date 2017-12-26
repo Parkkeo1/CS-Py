@@ -34,6 +34,7 @@ def index():
     if request.method == 'POST':
         conn = get_db()
         value = str(request.form.get('choose'))
+        result = None
         if value == 'match':
             result = query_db_match(conn)
         if value == 'today':
@@ -44,8 +45,11 @@ def index():
             result = query_db_month(conn)
         if value == 'lifetime':
             result = query_db_lifetime(conn)
-        session['result'] = result
-        return redirect(url_for('results'))
+        if result is None:
+            return render_template('index.html')
+        else:
+            session['result'] = result
+            return redirect(url_for('results'))
     else:
         return render_template('index.html')
 
@@ -64,17 +68,15 @@ def GSHandler():
         conn = get_db()
         if check_payload(payload):
             stats_df = parse_payload(payload)
-            stats_df.to_sql("per_round_data", conn, if_exists="append")
-            print('this dataframe contains per-round values')
-            print(pd.read_sql_query('select * from per_round_data;', conn))
-            if str(stats_df.iloc[0]['Map Status']) == 'gameover':
-                stats_df.to_sql("per_map_data", conn, if_exists="append")
-                print('this dataframe also contains overall match values')
-                print(pd.read_sql_query('select * from per_map_data;', conn))
+            print(stats_df)
+            print('\n')
+            stats_df.to_sql("per_round_data", conn, if_exists="append", index=False)
+            clean_db(conn)
+            print(pd.read_sql('select * from per_round_data;', conn))
 
     return 'JSON Posted'
 
 
 if __name__ == "__main__":
-    webbrowser.open_new('http://127.0.0.1:5000')
+    # webbrowser.open_new('http://127.0.0.1:5000') # for deployment
     app.run(debug=True)
