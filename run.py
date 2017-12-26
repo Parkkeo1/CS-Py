@@ -67,7 +67,6 @@ def clean_db(conn):
 # query database with pandas to gather statistical data.
 # calculate & collect: HSR, KDR, KDA, KAST
 # graph: CT vs. T, player stats on various maps, player stats over rounds in a match and/or over other metrics of time
-
 def query_db_match(conn):
     pass
 
