@@ -6,7 +6,7 @@ A Python Project that uses Valve's game state integration service to augment the
 2. Integrate SQL database functionality and store player data by individual rounds. *Completed 12/23/17*
 4. Develop front-end GUI (probably an in-web-browser application) to display player statistics and graphs. *WIP*
 4. Develop full-screen (transparent) overlay to be used on top of the CSGO application as a live statistics display for the player.
-5/For Fun. Integrate Logitech's RGB SDK for its gaming mice to trigger colors depending on in-game events.
+5. *For Fun:* Integrate Logitech's RGB SDK for its gaming mice to trigger colors depending on in-game events.
 
 ### Current Ideas For Player Statistics & Analysis
 1. KDR and KDA
