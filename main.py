@@ -56,8 +56,8 @@ def index():
 
 @app.route('/results')
 def results():
-    # result = session['result']
-    return render_template('results.html')  # result=result
+    result = session['result']
+    return render_template('results.html', result=result)
 
 
 # backend POST request handler

@@ -1,6 +1,7 @@
 import pandas as pd
 from datetime import datetime
 import sqlite3
+import time
 
 
 def check_payload(payload):
@@ -102,8 +103,14 @@ def query_db_match(conn):
 
 
 def query_db_today(conn):
+    result = {}
     data_df = pd.read_sql('SELECT * FROM per_round_data;', conn)
-    pass
+    lower = int(time.time()) - 86400
+
+    data_df = data_df[data_df['Time'] >= lower]
+    result['hsr'] = hsr(data_df)
+
+    return result
 
 
 def query_db_week(conn):
@@ -115,5 +122,22 @@ def query_db_month(conn):
 
 
 def query_db_lifetime(conn):
+    pass
+
+
+def hsr(data_df):
+    total_kills = data_df['Round Kills'].sum()
+    total_hs = data_df['Round HS Kills'].sum()
+
+    cal_hsr = float(round(total_hs / total_kills, 3))
+
+    return cal_hsr
+
+
+def kdr(data_df):
+    pass
+
+
+def kast(data_df):
     pass
 
