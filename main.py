@@ -57,7 +57,7 @@ def index():
 @app.route('/results')
 def results():
     # result = session['result']
-    return render_template('results.html') # result=result
+    return render_template('results.html')  # result=result
 
 
 # backend POST request handler
@@ -66,8 +66,12 @@ def GSHandler():
     if request.is_json:
         payload = request.get_json()
         conn = get_db()
-        if check_payload(payload):
-            stats_df = parse_payload(payload)
+        counter = check_payload(payload)
+        if counter == 1 or counter == 2:
+            if counter == 1:
+                stats_df = parse_payload(payload)
+            else:
+                stats_df = endgame_payload(payload)
             print(stats_df)
             print('\n')
             stats_df.to_sql("per_round_data", conn, if_exists="append", index=False)

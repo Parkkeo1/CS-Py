@@ -1,3 +1,5 @@
+# standalone database viewer helper python script
+
 import sqlite3
 import pandas as pd
 
