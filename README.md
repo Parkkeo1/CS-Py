@@ -1,5 +1,5 @@
 # CS-Py
-A Python Project that uses Valve's game state integration service to augment the player experience in Counter-Strike: Global Offensive. By Isaac Park, CS Major @ UIUC.
+A Python Project that uses Valve's game state integration service to augment the player experience in Counter-Strike: Global Offensive by analyzing in-game performance with data-driven metrics. By Isaac Park, CS Major @ UIUC.
 
 ### Project Objectives (By Priority)
 1. Implement by-round data storage for statistical analysis using Pandas dataframe.s *Completed 12/23/17*
@@ -28,3 +28,5 @@ received data into pandas dataframe, then insert dataframe contents into sql tab
 12/25/17: Today was more testing, gathering data, and refining collection methods. Fixed some data collection bugs by editing check_payload. Also edited DB structure and implemented a clean_db function to remove accidental duplicate data from the SQL table. Decided to delete the per_map_data SQL table; unnecessary. Same TODO as yesterday: work on creating a query_db function that queries the database table differently depending on user request.
 
 12/26/17: Changed Data collection approach: changed 'Time' column back to the default UNIX Timestamps and added a 'gameover' event entry to make it easier to sort by individual matches. Tests for these changes were successful. Also worked on a simple HSR calculation function to call in the various query_db functions. Query_db functions return a 'result' dictionary back to the flask main.py. Basic test to display the calculated HSR for the past 24 hours onto the front-end was successful. TODO: keep working on the query_db functions.
+
+12/26/17 (More): WIP start and end data collection functionality/options available to the user (to make sure the user can start collecting performance data for actual matches, not warmup or retake mode games). Using app.config because the default session module did not carry over to GSHandler. Updated front-end. TODO: work on query_db functions and create a helper function to determine entries where map status == 'gameover', in order to pinpoint individual match data.
