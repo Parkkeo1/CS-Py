@@ -1,13 +1,47 @@
 {% extends 'layout.html' %}
 
 {% block body %}
-    <div class="container justify-content-sm-start ">
+    <div class="container-fluid" style="width: 95%;">
         <div class="jumbotron pt-5 pb-0" style="background-color: #ffffff;">
-            <h3 class="text-center">Your Statistics & Performance</h3>
+            <h3 class="text-center">Statistics & Performance Analysis</h3>
             <p class="text-center">CS-Py uses CS:GO's <a href="https://developer.valvesoftware.com/wiki/Counter-Strike:_Global_Offensive_Game_State_Integration" target="_blank">Game State Integration</a> to gather detailed information about you as a player.</p>
             <hr style="width: 75%;" class="pb-2">
         </div>
-        <h4>{{ result['hsr'] }}</h4>
+        <div class="row">
+            <div class="col-4">
+                <table class="table">
+                    <caption>Performance metrics: <a href="/docs" target="_blank">How are these calculated?</a></caption>
+                    <thead class="thead-light">
+                        <tr class="bg-primary">
+                            <th scope="col">Statistic</th>
+                            <th scope="col">Value</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Headshot Ratio</td>
+                            <td>{{ result['hsr'] }}</td>
+                        </tr>
+                        <tr>
+                            <td>KAS Ratio</td>
+                            <td>Placeholder</td>
+                        </tr>
+                        <tr>
+                            <td>KDR, KDA</td>
+                            <td>Placeholder, Placeholder</td>
+                        </tr>
+                        <tr>
+                            <td>Mean Equipment Value</td>
+                            <td>$ Placeholder</td>
+                        </tr>
+                        <tr>
+                            <td>MD Correlation Coeff.</td>
+                            <td>PlaceHolder</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
         <div class="footer">
             <a href="https://github.com/Parkkeo1" target="_blank">Created By @Parkkeo1</a>
         </div>

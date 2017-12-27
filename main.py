@@ -60,6 +60,11 @@ def results():
     return render_template('results.html', result=result)
 
 
+@app.route('/docs')
+def docs():
+    return render_template('docs.html')
+
+
 # backend POST request handler
 @app.route('/GS', methods=['POST'])
 def GSHandler():
@@ -82,5 +87,5 @@ def GSHandler():
 
 
 if __name__ == "__main__":
-    # webbrowser.open_new('http://127.0.0.1:5000') # for deployment
+    webbrowser.open_new('http://127.0.0.1:5000') # for deployment
     app.run(debug=True)
