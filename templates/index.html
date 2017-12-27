@@ -7,17 +7,25 @@
                 <h1 class="text-center">CS-Py</h1>
                 <p class="text-center">A Python-based Player Statistics Display & Analysis Program For CS:GO</p>
                 <hr style="width: 50%;" class="pb-2">
-                <form method="POST">
-                    <label class="mr-sm-2" for="choose">Stats From:</label>
-                    <select class="custom-select mr-sm-2" name='choose' id="choose">
-                        <option selected value="last match">Last Match</option>
-                        <option value="today">Today</option>
-                        <option value="week">Past 7 Days</option>
-                        <option value="month">Past Month</option>
-                        <option value="lifetime">Lifetime</option>
-                    </select>
-                    <button type="submit" class="btn btn-primary">Analyze</button>
-                </form>
+                <div class="container-fluid">
+                    <form method="POST">
+                        <button type="submit" value="starter" name="starter" id="starter" class="btn btn-primary">Start GS Data Collection</button>
+                    </form>
+                    <form method="POST">
+                        <button type="submit" value="ender" name="ender" id="ender" class="btn btn-primary">Stop</button>
+                    </form>
+                    <form method="POST">
+                        <label class="mr-sm-2" for="choose">Or Examine Stats From:</label>
+                        <select class="custom-select mr-sm-2" name='choose' id="choose">
+                            <option selected value="last match">Last Match</option>
+                            <option value="today">Today</option>
+                            <option value="week">Past 7 Days</option>
+                            <option value="month">Past Month</option>
+                            <option value="lifetime">Lifetime</option>
+                        </select>
+                        <button type="submit" class="btn btn-primary">Analyze</button>
+                    </form>
+                </div>
                 <div class="footer">
                     <a href="https://github.com/Parkkeo1" target="_blank">Created By @Parkkeo1</a>
                 </div>

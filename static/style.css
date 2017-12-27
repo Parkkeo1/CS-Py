@@ -9,6 +9,12 @@ body {
     text-align: center;
 }
 
+form {
+    display: inline;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
 .site-wrapper {
     display: table;
     width: 100%;
