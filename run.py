@@ -136,10 +136,7 @@ def separate(data_df):
 def hsr(data_df):
     total_kills = data_df['Round Kills'].sum()
     total_hs = data_df['Round HS Kills'].sum()
-
-    cal_hsr = float(round(total_hs / total_kills, 3))
-
-    return cal_hsr
+    return float(round(total_hs / total_kills, 3))
 
 
 def correl(data_df):
