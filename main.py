@@ -31,38 +31,38 @@ def close_db(error):
 # the frontend
 @app.route('/', methods=['GET', 'POST'])
 def index():
-    if request.method == 'POST':  # TODO: add 'ender' request.form handler to set app.config['STARTER'] to False and end collection.
+    if request.method == 'POST':
         starter = str(request.form.get('starter'))
+        ender = str(request.form.get('ender'))
         if starter == 'starter':
             app.config['STARTER'] = True
             return redirect(url_for('index'))
         else:
-            conn = get_db()
-            value = str(request.form.get('choose'))
-            result = None
-            if value == 'match':
-                result = query_db_match(conn)
-            if value == 'today':
-                result = query_db_today(conn)
-            if value == 'week':
-                result = query_db_week(conn)
-            if value == 'month':
-                result = query_db_month(conn)
-            if value == 'lifetime':
-                result = query_db_lifetime(conn)
-            if result is None:
+            if ender == 'ender':
+                app.config['STARTER'] = False
                 return redirect(url_for('index'))
             else:
+                conn = get_db()
+                value = str(request.form.get('choose'))
+                if value == 'match':
+                    result = query_db_match(conn)
+                else:
+                    result = query_db_time(conn, value)
                 session['result'] = result
+                session.modified = True
                 return redirect(url_for('results'))
     else:
-        print(app.config['STARTER'])
-        return render_template('index.html')
+        if app.config['STARTER']:
+            status = 'GS is currently ON'
+        else:
+            status = 'GS is currently OFF'
+        return render_template('index.html', status=status)
 
 
 @app.route('/results')
 def results():
     result = session['result']
+    print(result)
     return render_template('results.html', result=result)
 
 

@@ -1,5 +1,4 @@
 import pandas as pd
-from datetime import datetime
 import sqlite3
 import time
 
@@ -102,10 +101,23 @@ def query_db_match(conn):
     pass
 
 
-def query_db_today(conn):
+def query_db_time(conn, time_value):
     result = {}
     data_df = pd.read_sql('SELECT * FROM per_round_data;', conn)
-    lower = int(time.time()) - 86400
+    offset = 0
+    if time_value == 'today':
+        offset = 86400
+        result['timeframe'] = 'today'
+    if time_value == 'week':
+        offset = 604800
+        result['timeframe'] = 'week'
+    if time_value == 'month':
+        offset = 2592000
+        result['timeframe'] = 'month'
+    lower = int(time.time()) - offset
+    if time_value == 'lifetime':
+        result['timeframe'] = 'lifetime'
+        lower = 0
 
     data_df = data_df[data_df['Time'] >= lower]
     result['hsr'] = hsr(data_df)
@@ -113,18 +125,6 @@ def query_db_today(conn):
     result['correl'] = correl(data_df)
 
     return result
-
-
-def query_db_week(conn):
-    pass
-
-
-def query_db_month(conn):
-    pass
-
-
-def query_db_lifetime(conn):
-    pass
 
 
 # querying db helper function, returns list of indices of the rows of the dataframe where map status == 'gameover'.
