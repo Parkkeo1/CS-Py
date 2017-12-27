@@ -109,6 +109,8 @@ def query_db_today(conn):
 
     data_df = data_df[data_df['Time'] >= lower]
     result['hsr'] = hsr(data_df)
+    result['equip'] = int(data_df['Current Equip. Value'].mean())
+    result['correl'] = correl(data_df)
 
     return result
 
@@ -125,6 +127,12 @@ def query_db_lifetime(conn):
     pass
 
 
+# querying db helper function, returns list of indices of the rows of the dataframe where map status == 'gameover'.
+# This function is used to separate data into individual matches.
+def separate(data_df):
+    pass
+
+
 def hsr(data_df):
     total_kills = data_df['Round Kills'].sum()
     total_hs = data_df['Round HS Kills'].sum()
@@ -134,10 +142,15 @@ def hsr(data_df):
     return cal_hsr
 
 
+def correl(data_df):
+    coeff = data_df['Round Kills'].corr(data_df['Current Equip. Value'])
+    return float(round(coeff, 3))
+
+
 def kdr(data_df):
     pass
 
 
-def kast(data_df):
+def kas(data_df):
     pass
 
