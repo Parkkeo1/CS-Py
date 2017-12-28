@@ -178,7 +178,11 @@ def query_db_time(conn, time_value):
 # querying db helper function, returns list of indices of the rows of the dataframe where map status == 'gameover'.
 # This function is used to separate data into individual matches.
 def separate(data_df):
-    pass
+    df_list = []
+    idx_range = data_df[data_df['Map Status'] == 'gameover'].index.tolist()
+
+
+    return df_list
 
 
 def hsr(data_df):

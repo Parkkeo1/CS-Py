@@ -9,10 +9,6 @@ pd.set_option('display.width', 1000)
 
 conn = sqlite3.connect('player_data.db')
 data_df = pd.read_sql('SELECT * FROM per_round_data;', conn)
-# data_df = data_df.drop_duplicates(subset=['Map', 'Map Status', 'Player Name', 'Player Team', 'Kills', 'Assists',
-#                                             'Deaths', 'MVPs', 'Score', 'Current Equip. Value', 'Round Kills',
-#                                             'Round HS Kills'])
-# data_df.to_sql("per_round_data", conn, if_exists="replace", index=False)
 
 print(data_df)
 
