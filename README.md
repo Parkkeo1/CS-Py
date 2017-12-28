@@ -8,11 +8,11 @@ Existing third-party websites such as csgo-stats.com seem to mostly provide over
 
 Thus, CS-Py's purpose, as a local/standalone application, is to expand the number of metrics available to normal players and provide more indicative and accurate analyses of their performance in CS:GO.
 
-As a flask app, CS-Py collects player data at the end of each in-game round from the POST JSON requests that are locally sent by the CS:GO client when GSI is enabled. After storing this information in a SQL table, the app calculates statistics such as Headshot Ratio, KAS Percentage, and Monetary Dependency that the user can then view in the web browser and filter his/her performance by match and time (day, week, month, lifetime).
+As a flask app, CS-Py collects player data at the end of each in-game round from the POST JSON requests that are locally sent by the CS:GO client when GSI is enabled. After storing this information in a SQL table, the app calculates performance metrics such as Headshot Ratio, KAS Percentage, KDR/KDA, and Monetary Dependency that the user can then view in the web browser and filter his/her data by match and time (day, week, month, lifetime). More ideas for analysis are below.
 
 My current end goal is to package this Python app into a Windows Executable so that any user can use it without having to install Python. In the future, I hope to implement remote/cloud SQL DB storage and an in-game GUI transparent overlay that will display live performance statistics for the current match.
 
-### Installation and Usage(for testing and development purposes)
+### Installation and Usage (for testing and development purposes)
 1. git clone this repository or download it as ZIP.
 2. CS-Py has the following dependencies: Python3 (+ SQLite3), Flask, and Pandas.
 3. The gamestate_integration_main.cfg file must be placed in the csgo/cfg directory. [More detailed instructions here.](https://developer.valvesoftware.com/wiki/Counter-Strike:_Global_Offensive_Game_State_Integration#Locating_CS:GO_Install_Directory)
