@@ -44,7 +44,7 @@ def index():
             else:
                 conn = get_db()
                 value = str(request.form.get('choose'))
-                if value == 'match':
+                if value == 'last match':
                     result = query_db_match(conn)
                 else:
                     result = query_db_time(conn, value)

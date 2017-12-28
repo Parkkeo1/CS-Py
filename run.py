@@ -1,5 +1,4 @@
 import pandas as pd
-import sqlite3
 import time
 
 
@@ -98,7 +97,29 @@ def clean_db(conn):
 # calculate & collect: HSR, KDR, KDA, KAST
 # graph: CT vs. T, player stats on various maps, player stats over rounds in a match and/or over other metrics of time
 def query_db_match(conn):
-    pass
+    result = {}
+    data_df = pd.read_sql('SELECT * FROM per_round_data;', conn)
+    idx_range = data_df[data_df['Map Status'] == 'gameover'].index.tolist()[-2:]
+    length = len(idx_range)
+    if length < 2:
+        if length == 1:  # there has only been one 'gameover' event.
+            data_df = data_df.iloc[0:idx_range[0] + 1]
+            result['hsr'] = hsr(data_df)
+            result['equip'] = int(data_df['Current Equip. Value'].mean())
+            result['correl'] = correl(data_df)
+            result['timeframe'] = 'Last Match'
+
+            return result
+        else:
+            return query_db_time(conn, 'lifetime')  # because there have been no 'gameover' events ever.
+    else:
+        data_df = data_df.iloc[idx_range[0] + 1:idx_range[1] + 1]
+        result['hsr'] = hsr(data_df)
+        result['equip'] = int(data_df['Current Equip. Value'].mean())
+        result['correl'] = correl(data_df)
+        result['timeframe'] = 'Last Match'
+
+        return result
 
 
 def query_db_time(conn, time_value):
@@ -107,16 +128,16 @@ def query_db_time(conn, time_value):
     offset = 0
     if time_value == 'today':
         offset = 86400
-        result['timeframe'] = 'today'
+        result['timeframe'] = 'Past 24 Hours'
     if time_value == 'week':
         offset = 604800
-        result['timeframe'] = 'week'
+        result['timeframe'] = 'Past 7 Days'
     if time_value == 'month':
         offset = 2592000
-        result['timeframe'] = 'month'
+        result['timeframe'] = 'Past 30 Days'
     lower = int(time.time()) - offset
     if time_value == 'lifetime':
-        result['timeframe'] = 'lifetime'
+        result['timeframe'] = 'Lifetime'
         lower = 0
 
     data_df = data_df[data_df['Time'] >= lower]
@@ -150,4 +171,3 @@ def kdr(data_df):
 
 def kas(data_df):
     pass
-
