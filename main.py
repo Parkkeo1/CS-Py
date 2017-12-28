@@ -47,7 +47,10 @@ def index():
                 if value == 'last match':
                     result = query_db_match(conn)
                 else:
-                    result = query_db_time(conn, value)
+                    if value == 'current match':
+                        result = query_db_current(conn)
+                    else:
+                        result = query_db_time(conn, value)
                 session['result'] = result
                 session.modified = True
                 return redirect(url_for('results'))

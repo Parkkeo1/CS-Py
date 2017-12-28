@@ -89,13 +89,40 @@ def endgame_payload(payload):
 # remove duplicates
 def clean_db(conn):
     temp_df = pd.read_sql('SELECT * FROM per_round_data;', conn)
-    temp_df = temp_df.drop_duplicates()
+    temp_df = temp_df.drop_duplicates(subset=['Map', 'Map Status', 'Player Name', 'Player Team', 'Kills', 'Assists',
+                                              'Deaths', 'MVPs', 'Score', 'Current Equip. Value', 'Round Kills',
+                                              'Round HS Kills'])
     temp_df.to_sql("per_round_data", conn, if_exists="replace", index=False)
 
 
 # query database with pandas to gather statistical data.
 # calculate & collect: HSR, KDR, KDA, KAST
 # graph: CT vs. T, player stats on various maps, player stats over rounds in a match and/or over other metrics of time
+def query_db_current(conn):
+    result = {}
+    data_df = pd.read_sql('SELECT * FROM per_round_data;', conn)
+    idx_range = data_df[data_df['Map Status'] == 'gameover'].index.tolist()
+    if not idx_range:
+        return query_db_time(conn, 'lifetime')  # because there have been no 'gameover' events ever.
+    else:
+        idx = idx_range[-1]
+        data_df = data_df.iloc[idx + 1:]
+        if data_df.empty:  # if there haven't been any rounds played since the last complete match.
+            result['hsr'] = 0
+            result['equip'] = 0
+            result['correl'] = 0
+            result['timeframe'] = 'Current Match'
+
+            return result
+        else:
+            result['hsr'] = hsr(data_df)
+            result['equip'] = int(data_df['Current Equip. Value'].mean())
+            result['correl'] = correl(data_df)
+            result['timeframe'] = 'Current Match'
+
+            return result
+
+
 def query_db_match(conn):
     result = {}
     data_df = pd.read_sql('SELECT * FROM per_round_data;', conn)
