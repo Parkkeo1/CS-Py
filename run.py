@@ -179,8 +179,13 @@ def query_db_time(conn, time_value):
 # This function is used to separate data into individual matches.
 def separate(data_df):
     df_list = []
-    idx_range = data_df[data_df['Map Status'] == 'gameover'].index.tolist()
+    idx_range = sorted(set([0] + data_df[data_df['Map Status'] == 'gameover'].index.tolist() + [data_df.index[-1]]))
 
+    for i in range(len(idx_range) - 1):
+        if i == 0:
+            df_list.append(data_df.iloc[idx_range[i]:idx_range[i + 1] + 1])
+        else:
+            df_list.append(data_df.iloc[idx_range[i] + 1:idx_range[i + 1] + 1])
 
     return df_list
 
