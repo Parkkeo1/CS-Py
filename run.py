@@ -181,6 +181,9 @@ def separate(data_df):
     df_list = []
     idx_range = sorted(set([0] + data_df[data_df['Map Status'] == 'gameover'].index.tolist() + [data_df.index[-1]]))
 
+    if len(idx_range) == 1:
+        return [data_df]
+
     for i in range(len(idx_range) - 1):
         if i == 0:
             df_list.append(data_df.iloc[idx_range[i]:idx_range[i + 1] + 1])
@@ -201,7 +204,7 @@ def correl(data_df):
     return float(round(coeff, 3))
 
 
-def kdr(data_df):
+def kdr_kda(data_df):
     pass
 
 
