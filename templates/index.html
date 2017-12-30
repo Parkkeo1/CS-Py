@@ -6,19 +6,22 @@
             <div class="cover-container">
                 <h1 class="text-center">CS-Py</h1>
                 <p class="text-center">A Python-based Player Statistics Display & Analysis Program For CS:GO</p>
-                <hr style="width: 50%;" class="pb-2">
+                <hr style="width: 55%;" class="pb-2">
                 <div class="container-fluid">
                     <form method="POST">
-                        <button type="submit" value="starter" name="starter" id="starter" class="btn btn-primary">Start GS Data Collection</button>
+                        <button type="submit" value="starter" name="starter" id="starter" class="btn btn-primary">Start GS Collection</button>
                     </form>
                     <form method="POST">
                         <button type="submit" value="ender" name="ender" id="ender" class="btn btn-primary">Stop</button>
                     </form>
                     <form method="POST">
+                        <button type="submit" value="reset" name="reset" id="reset" class="btn btn-primary">Reset Match</button>
+                    </form>
+                    <form method="POST">
                         <label class="mr-sm-2" for="choose">Or Examine Stats From:</label>
                         <select class="custom-select mr-sm-2" name='choose' id="choose">
                             <option selected value="current match">Current Match</option>
-                            <option value="last match">Last (Complete) Match</option>
+                            <option value="last match">Last Match</option>
                             <option value="today">Past 24 Hours</option>
                             <option value="week">Past 7 Days</option>
                             <option value="month">Past 30 Days</option>

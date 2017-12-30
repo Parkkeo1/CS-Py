@@ -4,6 +4,7 @@ import os
 import sqlite3
 import pandas as pd
 import webbrowser
+import time
 
 
 app = Flask(__name__)
@@ -22,6 +23,18 @@ def get_db():
     return g.sqlite_db
 
 
+def reset_match():
+    data_df = pd.DataFrame({
+        'Time': [int(time.time())],
+        'Map': ['RESET POINT'],
+        'Map Status': ['gameover'],
+    })
+
+    data_df = data_df[['Time', 'Map', 'Map Status']]
+
+    return data_df
+
+
 @app.teardown_appcontext
 def close_db(error):
     if hasattr(g, 'sqlite_db'):
@@ -34,6 +47,7 @@ def index():
     if request.method == 'POST':
         starter = str(request.form.get('starter'))
         ender = str(request.form.get('ender'))
+        reset = str(request.form.get('reset'))
         if starter == 'starter':
             app.config['STARTER'] = True
             return redirect(url_for('index'))
@@ -42,18 +56,24 @@ def index():
                 app.config['STARTER'] = False
                 return redirect(url_for('index'))
             else:
-                conn = get_db()
-                value = str(request.form.get('choose'))
-                if value == 'last match':
-                    result = query_db_match(conn)
+                if reset == 'reset':
+                    conn = get_db()
+                    reset_df = reset_match()
+                    reset_df.to_sql("per_round_data", conn, if_exists="append", index=False)
+                    return redirect(url_for('index'))
                 else:
-                    if value == 'current match':
-                        result = query_db_current(conn)
+                    conn = get_db()
+                    value = str(request.form.get('choose'))
+                    if value == 'last match':
+                        result = query_db_match(conn)
                     else:
-                        result = query_db_time(conn, value)
-                session['result'] = result
-                session.modified = True
-                return redirect(url_for('results'))
+                        if value == 'current match':
+                            result = query_db_current(conn)
+                        else:
+                            result = query_db_time(conn, value)
+                    session['result'] = result
+                    session.modified = True
+                    return redirect(url_for('results'))
     else:
         if app.config['STARTER']:
             status = 'GS is currently ON'
