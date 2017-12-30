@@ -1,5 +1,6 @@
 import pandas as pd
 import time
+import math
 
 
 def check_payload(payload):
@@ -111,6 +112,7 @@ def query_db_current(conn):
             result['hsr'] = 0
             result['equip'] = 0
             result['correl'] = 0
+            result['kdr_kda'] = [0, 0]
             result['timeframe'] = 'Current Match'
 
             return result
@@ -118,6 +120,7 @@ def query_db_current(conn):
             result['hsr'] = hsr(data_df)
             result['equip'] = int(data_df['Current Equip. Value'].mean())
             result['correl'] = correl(data_df)
+            result['kdr_kda'] = kdr_kda(data_df)
             result['timeframe'] = 'Current Match'
 
             return result
@@ -134,6 +137,7 @@ def query_db_match(conn):
             result['hsr'] = hsr(data_df)
             result['equip'] = int(data_df['Current Equip. Value'].mean())
             result['correl'] = correl(data_df)
+            result['kdr_kda'] = kdr_kda(data_df)
             result['timeframe'] = 'Last Match'
 
             return result
@@ -144,6 +148,7 @@ def query_db_match(conn):
         result['hsr'] = hsr(data_df)
         result['equip'] = int(data_df['Current Equip. Value'].mean())
         result['correl'] = correl(data_df)
+        result['kdr_kda'] = kdr_kda(data_df)
         result['timeframe'] = 'Last Match'
 
         return result
@@ -168,11 +173,20 @@ def query_db_time(conn, time_value):
         lower = 0
 
     data_df = data_df[data_df['Time'] >= lower]
-    result['hsr'] = hsr(data_df)
-    result['equip'] = int(data_df['Current Equip. Value'].mean())
-    result['correl'] = correl(data_df)
+    if data_df.empty:  # if there are no entries that match the time criteria (i.e. no games in the past 24 hours)
+        result['hsr'] = 0
+        result['equip'] = 0
+        result['correl'] = 0
+        result['kdr_kda'] = [0, 0]
 
-    return result
+        return result
+    else:
+        result['hsr'] = hsr(data_df)
+        result['equip'] = int(data_df['Current Equip. Value'].mean())
+        result['correl'] = correl(data_df)
+        result['kdr_kda'] = kdr_kda(data_df)
+
+        return result
 
 
 # querying db helper function, returns list of indices of the rows of the dataframe where map status == 'gameover'.
@@ -205,7 +219,31 @@ def correl(data_df):
 
 
 def kdr_kda(data_df):
-    pass
+    total_kills = 0
+    total_assists = 0
+    total_deaths = 0
+
+    df_list = separate(data_df)
+
+    for match_df in df_list:
+        if match_df.iloc[-1]['Player Name'] is None and match_df.iloc[-1]['Player Team'] is None and math.isnan(match_df.iloc[-1]['Score']):
+            try:
+                max_df = match_df.iloc[-2]
+            except IndexError:
+                max_df = match_df.iloc[-1].fillna(0)
+        else:
+            max_df = match_df.iloc[-1]
+        total_kills += int(max_df['Kills'])
+        total_assists += int(max_df['Assists'])
+        total_deaths += int(max_df['Deaths'])
+
+    if total_deaths == 0:
+        return ['Undef', 'Undef']
+
+    total_kdr = float(round(total_kills / total_deaths, 3))
+    total_kda = float(round((total_kills + total_assists) / total_deaths, 3))
+
+    return [total_kdr, total_kda]
 
 
 def kas(data_df):
