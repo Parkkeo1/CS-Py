@@ -113,6 +113,7 @@ def query_db_current(conn):
             result['equip'] = 0
             result['correl'] = 0
             result['kdr_kda'] = [0, 0]
+            result['kas'] = 0
             result['timeframe'] = 'Current Match'
 
             return result
@@ -121,6 +122,7 @@ def query_db_current(conn):
             result['equip'] = int(data_df['Current Equip. Value'].mean())
             result['correl'] = correl(data_df)
             result['kdr_kda'] = kdr_kda(data_df)
+            result['kas'] = kas(data_df)
             result['timeframe'] = 'Current Match'
 
             return result
@@ -138,6 +140,7 @@ def query_db_match(conn):
             result['equip'] = int(data_df['Current Equip. Value'].mean())
             result['correl'] = correl(data_df)
             result['kdr_kda'] = kdr_kda(data_df)
+            result['kas'] = kas(data_df)
             result['timeframe'] = 'Last Match'
 
             return result
@@ -149,6 +152,7 @@ def query_db_match(conn):
         result['equip'] = int(data_df['Current Equip. Value'].mean())
         result['correl'] = correl(data_df)
         result['kdr_kda'] = kdr_kda(data_df)
+        result['kas'] = kas(data_df)
         result['timeframe'] = 'Last Match'
 
         return result
@@ -173,11 +177,13 @@ def query_db_time(conn, time_value):
         lower = 0
 
     data_df = data_df[data_df['Time'] >= lower]
-    if data_df.empty:  # if there are no entries that match the time criteria (i.e. no games in the past 24 hours)
+    test_df = data_df[['Player Name', 'Player Team']]
+    if data_df.empty or test_df.isnull().all().all():  # if there are no entries that match the time criteria (i.e. no games in the past 24 hours)
         result['hsr'] = 0
         result['equip'] = 0
         result['correl'] = 0
         result['kdr_kda'] = [0, 0]
+        result['kas'] = 0
 
         return result
     else:
@@ -185,6 +191,7 @@ def query_db_time(conn, time_value):
         result['equip'] = int(data_df['Current Equip. Value'].mean())
         result['correl'] = correl(data_df)
         result['kdr_kda'] = kdr_kda(data_df)
+        result['kas'] = kas(data_df)
 
         return result
 
@@ -247,4 +254,24 @@ def kdr_kda(data_df):
 
 
 def kas(data_df):
-    pass
+    kas_counter = 0
+    round_counter = 0
+
+    df_list = separate(data_df)
+
+    for match_df in df_list:
+        for i in range(len(match_df.index)):
+            if match_df.iloc[i]['Player Name'] is None and match_df.iloc[i]['Player Team'] is None:  # check if row is None and NaN values
+                continue
+            else:
+                if i == 0:
+                    if match_df.iloc[i]['Kills'] > 0 or match_df.iloc[i]['Assists'] > 0 or match_df.iloc[i]['Deaths'] == 0:
+                        kas_counter += 1
+                    round_counter += 1
+                else:
+                    if match_df.iloc[i]['Kills'] > match_df.iloc[i - 1]['Kills'] or match_df.iloc[i]['Assists'] > match_df.iloc[i - 1]['Assists'] or match_df.iloc[i]['Deaths'] == match_df.iloc[i - 1]['Deaths']:
+                        kas_counter += 1
+                    round_counter += 1
+
+    kas_r = round((kas_counter / round_counter), 2)
+    return kas_r * 100

@@ -11,9 +11,6 @@ conn = sqlite3.connect('player_data.db')
 data_df = pd.read_sql('SELECT * FROM per_round_data;', conn)
 # data_df = data_df.drop([x for x in range(20, 49)])
 # data_df = data_df.reset_index(drop=True)
-# print(data_df)
-# print('\n')
-
 print(data_df)
 
 # df_list = []
@@ -28,21 +25,30 @@ print(data_df)
 #
 # if len(idx_range) == 1:
 #     df_list = [data_df]
-#
+
 # total_kills = 0
 # total_assists = 0
 # total_deaths = 0
+# kas_counter = 0
+# round_counter = 0
 #
 # for match_df in df_list:
-#     print(match_df)
-#     print('\n')
-#     if match_df.iloc[-1]['Player Name'] is None and match_df.iloc[-1]['Player Team'] is None and math.isnan(match_df.iloc[-1]['Score']):
-#         try:
-#             max_df = match_df.iloc[-2]
-#         except IndexError:
-#             max_df = match_df.iloc[-1].fillna(0)
-#     else:
-#         max_df = match_df.iloc[-1]
+#     for i in range(len(match_df.index)):
+#         if match_df.iloc[i]['Player Name'] is None and match_df.iloc[i]['Player Team'] is None:  # check if row is None and NaN values
+#             continue
+#         else:
+#             if i == 0:
+#                 if match_df.iloc[i]['Kills'] > 0 or match_df.iloc[i]['Assists'] > 0 or match_df.iloc[i]['Deaths'] == 0:
+#                     kas_counter += 1
+#                 round_counter += 1
+#             else:
+#                 if match_df.iloc[i]['Kills'] > match_df.iloc[i - 1]['Kills'] or match_df.iloc[i]['Assists'] > match_df.iloc[i - 1]['Assists'] or match_df.iloc[i]['Deaths'] == match_df.iloc[i - 1]['Deaths']:
+#                     kas_counter += 1
+#                 round_counter += 1
+#
+# print(kas_counter)
+# print(round_counter)
+
 #     total_kills += int(max_df['Kills'])
 #     total_assists += int(max_df['Assists'])
 #     total_deaths += int(max_df['Deaths'])
