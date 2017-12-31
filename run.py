@@ -118,7 +118,7 @@ def query_db_current(conn):
             result['correl'] = correl(data_df)
             result['kdr_kda'] = kdr_kda(data_df)
             result['kas'] = kas(data_df)
-            # rounds_per_map_plot(data_df)
+            rounds_per_map_plot(data_df)
             result['timeframe'] = 'Current Match'
 
             return result
@@ -137,7 +137,7 @@ def query_db_match(conn):
             result['correl'] = correl(data_df)
             result['kdr_kda'] = kdr_kda(data_df)
             result['kas'] = kas(data_df)
-            # rounds_per_map_plot(data_df)
+            rounds_per_map_plot(data_df)
             result['timeframe'] = 'Last Match'
 
             return result
@@ -150,7 +150,7 @@ def query_db_match(conn):
         result['correl'] = correl(data_df)
         result['kdr_kda'] = kdr_kda(data_df)
         result['kas'] = kas(data_df)
-        # rounds_per_map_plot(data_df)
+        rounds_per_map_plot(data_df)
         result['timeframe'] = 'Last Match'
 
         return result
@@ -191,7 +191,7 @@ def query_db_time(conn, time_value):
         result['correl'] = correl(data_df)
         result['kdr_kda'] = kdr_kda(data_df)
         result['kas'] = kas(data_df)
-        # rounds_per_map_plot(data_df)
+        rounds_per_map_plot(data_df)
 
         return result
 
@@ -293,22 +293,24 @@ def kas(data_df):
     return kas_r * 100
 
 
-# def rounds_per_map_plot(data_df):
-#     df_list = separate(data_df)
-#     map_list = list(set(data_df['Map'].tolist()))
-#     map_list = [x for x in map_list if x != 'RESET POINT']
-#
-#     round_count_dict = dict.fromkeys(map_list, 0)
-#
-#     for df in df_list:
-#         for cs_map in map_list:
-#             round_count_dict[cs_map] += len(df[df['Map'] == cs_map].index)
-#
-#     fig = plt.figure()
-#     plt.bar(range(len(round_count_dict)), list(round_count_dict.values()), align='center')
-#     plt.xticks(range(len(round_count_dict)), list(round_count_dict.keys()))
-#     fig.suptitle('Rounds Played by Map')
-#     plt.xlabel('Map')
-#     plt.ylabel('Count')
-#
-#     plt.savefig('static/images/rounds_per_map.png')
+def rounds_per_map_plot(data_df):
+    df_list = separate(data_df)
+    df_list = remove_empty(df_list)
+
+    map_list = list(set(data_df['Map'].tolist()))
+    map_list = [x for x in map_list if x != 'RESET POINT']
+
+    round_count_dict = dict.fromkeys(map_list, 0)
+
+    for df in df_list:
+        for cs_map in map_list:
+            round_count_dict[cs_map] += len(df[df['Map'] == cs_map].index)
+
+    fig = plt.figure()
+    plt.bar(range(len(round_count_dict)), list(round_count_dict.values()), align='center')
+    plt.xticks(range(len(round_count_dict)), list(round_count_dict.keys()))
+    fig.suptitle('Rounds Played by Map')
+    plt.xlabel('Map')
+    plt.ylabel('Count')
+
+    plt.savefig('static/images/rounds_per_map.png')

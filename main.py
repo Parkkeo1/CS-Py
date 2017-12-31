@@ -117,6 +117,12 @@ def GSHandler():
     return 'JSON Posted'
 
 
+@app.after_request  # temp fix for matplotlib plot images not refreshing unless page is manually refreshed.
+def add_header(response):
+    response.headers['Cache-Control'] = 'public, max-age=0'
+    return response
+
+
 if __name__ == "__main__":
     webbrowser.open_new('http://127.0.0.1:5000')  # for deployment
     app.config['STARTER'] = False  # starter variable
