@@ -34,3 +34,4 @@ My current end goal is to package this Python app into a Windows Executable so t
 5. Using all of the above statistics to determine how well a player overall plays on different maps.
 6. Using all of the above statistics to determine how CT/T-sided a player tends to play (overall vs. depending on the map).
 7. Graphing these statistics by time to see player's skill improvement. 
+8. Specific: pistol round performance: Kills/Pistol Round, HSR, KAS, KDR, etc
