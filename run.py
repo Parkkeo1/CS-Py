@@ -1,9 +1,8 @@
+import time
 import pandas as pd
 import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
-import time
-import math
 
 
 def check_payload(payload):
@@ -65,7 +64,7 @@ def parse_payload(payload):
 
     data_df = data_df[['Time', 'Map', 'Map Status', 'Player Name', 'Player Team',
                        'Kills', 'Assists', 'Deaths', 'MVPs', 'Score',
-                       'Current Equip. Value', 'Round Kills', 'Round HS Kills']]  # 'Round Winner', 'Round #'
+                       'Current Equip. Value', 'Round Kills', 'Round HS Kills']]
 
     return data_df
 
@@ -92,7 +91,7 @@ def clean_db(conn):
 
 
 # query database with pandas to gather statistical data.
-# calculate & collect: HSR, KDR, KDA, KAST
+# calculate & collect: HSR, KDR, KDA, KAS
 # graph: CT vs. T, player stats on various maps, player stats over rounds in a match and/or over other metrics of time
 def query_db_current(conn):
     result = {}
@@ -216,6 +215,16 @@ def separate(data_df):
     return df_list
 
 
+def remove_empty(df_list):
+    new_list = []
+
+    for df in df_list:
+        if not df.empty:
+            new_list.append(df)
+
+    return new_list
+
+
 def hsr(data_df):
     total_kills = data_df['Round Kills'].sum()
     total_hs = data_df['Round HS Kills'].sum()
@@ -233,6 +242,7 @@ def kdr_kda(data_df):
     total_deaths = 0
 
     df_list = separate(data_df)
+    df_list = remove_empty(df_list)
 
     for match_df in df_list:
         if match_df.iloc[-1]['Player Name'] is None and match_df.iloc[-1]['Player Team'] is None:
@@ -260,6 +270,7 @@ def kas(data_df):
     round_counter = 0
 
     df_list = separate(data_df)
+    df_list = remove_empty(df_list)
 
     for match_df in df_list:
         for i in range(len(match_df.index)):
@@ -274,6 +285,9 @@ def kas(data_df):
                     if match_df.iloc[i]['Round Kills'] > 0 or match_df.iloc[i]['Assists'] > match_df.iloc[i - 1]['Assists'] or match_df.iloc[i]['Deaths'] == match_df.iloc[i - 1]['Deaths']:
                         kas_counter += 1
                     round_counter += 1
+
+    if round_counter == 0:
+        return 'Undef'
 
     kas_r = round((kas_counter / round_counter), 2)
     return kas_r * 100
