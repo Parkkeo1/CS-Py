@@ -126,4 +126,4 @@ def add_header(response):
 if __name__ == "__main__":
     webbrowser.open_new('http://127.0.0.1:5000')  # for deployment
     app.config['STARTER'] = False  # starter variable
-    app.run(debug=True)
+    app.run(debug=False)
