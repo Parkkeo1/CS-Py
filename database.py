@@ -8,7 +8,8 @@ pd.options.display.max_rows = 999
 pd.set_option('display.width', 1000)
 
 conn = sqlite3.connect('player_data.db')
-data_df = pd.read_sql('SELECT * FROM per_round_data;', conn)
+data_df = pd.read_sql_query('SELECT * FROM per_round_data;', conn)
+# data_df = pd.read_sql_query('SELECT * FROM per_round_data ORDER BY Time DESC LIMIT 1;', conn)
 # data_df = data_df.drop([x for x in range(20, 49)])
 # data_df = data_df.reset_index(drop=True)
 print(data_df)

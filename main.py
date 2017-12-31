@@ -59,7 +59,9 @@ def index():
                 if reset == 'reset':
                     conn = get_db()
                     reset_df = reset_match()
-                    reset_df.to_sql("per_round_data", conn, if_exists="append", index=False)
+                    last_df = pd.read_sql('SELECT * FROM per_round_data ORDER BY Time DESC LIMIT 1;', conn)
+                    if last_df.iloc[0]['Map'] != 'RESET POINT':
+                        reset_df.to_sql("per_round_data", conn, if_exists="append", index=False)
                     return redirect(url_for('index'))
                 else:
                     conn = get_db()
