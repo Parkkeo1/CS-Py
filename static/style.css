@@ -39,6 +39,25 @@ form {
     right: 0;
     bottom: 0;
     left: 0;
-    padding: 2.5rem;
+    padding: 2rem;
     text-align: center;
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  height: 100px;
+  width: 100px;
+  background-image: none;
+}
+
+.carousel-control-next-icon:after {
+  content: '>';
+  font-size: 55px;
+  color: #1f77b4;
+}
+
+.carousel-control-prev-icon:after {
+  content: '<';
+  font-size: 55px;
+  color: #1f77b4;
 }
