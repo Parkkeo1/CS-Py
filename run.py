@@ -1,4 +1,7 @@
 import pandas as pd
+import matplotlib
+matplotlib.use('Agg')
+import matplotlib.pyplot as plt
 import time
 import math
 
@@ -39,9 +42,6 @@ def check_payload(payload):
 
 
 def parse_payload(payload):
-    # time = datetime.utcfromtimestamp(payload['provider']['timestamp'])
-    # format_time = str(time.strftime('%b %d, %Y'))
-
     if 'team' in payload['player']:
         player_team = payload['player']['team']
     else:
@@ -51,8 +51,6 @@ def parse_payload(payload):
         'Time': [payload['provider']['timestamp']],
         'Map': [payload['map']['name']],
         'Map Status': [payload['map']['phase']],
-        # 'Round #': [payload['map']['round']],
-        # 'Round Winner': [payload['round']['win_team']],
         'Player Name': [payload['player']['name']],
         'Player Team': [player_team],
         'Kills': [payload['player']['match_stats']['kills']],
@@ -73,9 +71,6 @@ def parse_payload(payload):
 
 
 def endgame_payload(payload):
-    # time = datetime.utcfromtimestamp(payload['provider']['timestamp'])
-    # format_time = str(time.strftime('%b %d, %Y'))
-
     data_df = pd.DataFrame({
         'Time': [payload['provider']['timestamp']],
         'Map': [payload['map']['name']],
@@ -114,6 +109,7 @@ def query_db_current(conn):
             result['correl'] = 0
             result['kdr_kda'] = [0, 0]
             result['kas'] = 0
+            # rounds_per_map_plot(data_df)
             result['timeframe'] = 'Current Match'
 
             return result
@@ -123,6 +119,7 @@ def query_db_current(conn):
             result['correl'] = correl(data_df)
             result['kdr_kda'] = kdr_kda(data_df)
             result['kas'] = kas(data_df)
+            # rounds_per_map_plot(data_df)
             result['timeframe'] = 'Current Match'
 
             return result
@@ -141,6 +138,7 @@ def query_db_match(conn):
             result['correl'] = correl(data_df)
             result['kdr_kda'] = kdr_kda(data_df)
             result['kas'] = kas(data_df)
+            # rounds_per_map_plot(data_df)
             result['timeframe'] = 'Last Match'
 
             return result
@@ -153,6 +151,7 @@ def query_db_match(conn):
         result['correl'] = correl(data_df)
         result['kdr_kda'] = kdr_kda(data_df)
         result['kas'] = kas(data_df)
+        # rounds_per_map_plot(data_df)
         result['timeframe'] = 'Last Match'
 
         return result
@@ -184,6 +183,7 @@ def query_db_time(conn, time_value):
         result['correl'] = 0
         result['kdr_kda'] = [0, 0]
         result['kas'] = 0
+        # rounds_per_map_plot(data_df)
 
         return result
     else:
@@ -192,6 +192,7 @@ def query_db_time(conn, time_value):
         result['correl'] = correl(data_df)
         result['kdr_kda'] = kdr_kda(data_df)
         result['kas'] = kas(data_df)
+        # rounds_per_map_plot(data_df)
 
         return result
 
@@ -199,6 +200,7 @@ def query_db_time(conn, time_value):
 # querying db helper function, returns list of indices of the rows of the dataframe where map status == 'gameover'.
 # This function is used to separate data into individual matches.
 def separate(data_df):
+    data_df = data_df.reset_index(drop=True)  # fixes IndexError: single positional indexer is out-of-bounds in kdr_kda
     df_list = []
     idx_range = sorted(set([0] + data_df[data_df['Map Status'] == 'gameover'].index.tolist() + [data_df.index[-1]]))
 
@@ -233,7 +235,7 @@ def kdr_kda(data_df):
     df_list = separate(data_df)
 
     for match_df in df_list:
-        if match_df.iloc[-1]['Player Name'] is None and match_df.iloc[-1]['Player Team'] is None and math.isnan(match_df.iloc[-1]['Score']):
+        if match_df.iloc[-1]['Player Name'] is None and match_df.iloc[-1]['Player Team'] is None:
             try:
                 max_df = match_df.iloc[-2]
             except IndexError:
@@ -265,13 +267,34 @@ def kas(data_df):
                 continue
             else:
                 if i == 0:
-                    if match_df.iloc[i]['Kills'] > 0 or match_df.iloc[i]['Assists'] > 0 or match_df.iloc[i]['Deaths'] == 0:
+                    if match_df.iloc[i]['Round Kills'] > 0 or match_df.iloc[i]['Assists'] > 0 or match_df.iloc[i]['Deaths'] == 0:
                         kas_counter += 1
                     round_counter += 1
                 else:
-                    if match_df.iloc[i]['Kills'] > match_df.iloc[i - 1]['Kills'] or match_df.iloc[i]['Assists'] > match_df.iloc[i - 1]['Assists'] or match_df.iloc[i]['Deaths'] == match_df.iloc[i - 1]['Deaths']:
+                    if match_df.iloc[i]['Round Kills'] > 0 or match_df.iloc[i]['Assists'] > match_df.iloc[i - 1]['Assists'] or match_df.iloc[i]['Deaths'] == match_df.iloc[i - 1]['Deaths']:
                         kas_counter += 1
                     round_counter += 1
 
     kas_r = round((kas_counter / round_counter), 2)
     return kas_r * 100
+
+
+# def rounds_per_map_plot(data_df):
+#     df_list = separate(data_df)
+#     map_list = list(set(data_df['Map'].tolist()))
+#     map_list = [x for x in map_list if x != 'RESET POINT']
+#
+#     round_count_dict = dict.fromkeys(map_list, 0)
+#
+#     for df in df_list:
+#         for cs_map in map_list:
+#             round_count_dict[cs_map] += len(df[df['Map'] == cs_map].index)
+#
+#     fig = plt.figure()
+#     plt.bar(range(len(round_count_dict)), list(round_count_dict.values()), align='center')
+#     plt.xticks(range(len(round_count_dict)), list(round_count_dict.keys()))
+#     fig.suptitle('Rounds Played by Map')
+#     plt.xlabel('Map')
+#     plt.ylabel('Count')
+#
+#     plt.savefig('static/images/rounds_per_map.png')
