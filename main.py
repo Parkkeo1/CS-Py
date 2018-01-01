@@ -60,8 +60,9 @@ def index():
                     conn = get_db()
                     reset_df = reset_match()
                     last_df = pd.read_sql('SELECT * FROM per_round_data ORDER BY Time DESC LIMIT 1;', conn)
-                    if last_df.iloc[0]['Map'] != 'RESET POINT':
+                    if last_df.iloc[0]['Map Status'] != 'gameover':
                         reset_df.to_sql("per_round_data", conn, if_exists="append", index=False)
+                    clean_db(conn)
                     return redirect(url_for('index'))
                 else:
                     conn = get_db()
@@ -110,9 +111,16 @@ def GSHandler():
                 stats_df = endgame_payload(payload)
             print(stats_df)
             print('\n')
-            stats_df.to_sql("per_round_data", conn, if_exists="append", index=False)
-            clean_db(conn)
-            print(pd.read_sql('select * from per_round_data;', conn))
+            if counter == 2:  # makes sure that, if we are attempting to enter in an endgame-stats_df, check that the current last entry in the table is not also a 'gameover' entry.
+                last_df = pd.read_sql('SELECT * FROM per_round_data ORDER BY Time DESC LIMIT 1;', conn)
+                if last_df.iloc[0]['Map Status'] != 'gameover':  # this prevents having two 'gameover' events in a row, where the latter is a None/NaN entry.
+                    stats_df.to_sql("per_round_data", conn, if_exists="append", index=False)
+                    clean_db(conn)
+                    print(pd.read_sql('select * from per_round_data;', conn))
+            else:
+                stats_df.to_sql("per_round_data", conn, if_exists="append", index=False)
+                clean_db(conn)
+                print(pd.read_sql('select * from per_round_data;', conn))
     print(app.config['STARTER'])
     return 'JSON Posted'
 

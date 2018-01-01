@@ -11,9 +11,13 @@ pd.options.display.max_rows = 999
 pd.set_option('display.width', 1000)
 
 conn = sqlite3.connect('player_data.db')
-data_df = pd.read_sql_query('SELECT * FROM per_round_data;', conn)
+data_df = pd.read_sql('SELECT * FROM per_round_data', conn)
+
+# new_df = data_df.iloc[:-1]
+# new_df.to_sql("per_round_data", conn, if_exists="replace", index=False)
 
 print(data_df)
+
 # df_list = separate(data_df)
 # map_list = list(set(data_df['Map'].tolist()))
 # map_list = [x for x in map_list if x != 'RESET POINT']
