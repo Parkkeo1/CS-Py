@@ -108,7 +108,7 @@ def query_db_current(conn):
             result['correl'] = 0
             result['kdr_kda'] = [0, 0]
             result['kas'] = 0
-            # rounds_per_map_plot(data_df)
+            blank_plot()
             result['timeframe'] = 'Current Match'
 
             return result
@@ -182,7 +182,7 @@ def query_db_time(conn, time_value):
         result['correl'] = 0
         result['kdr_kda'] = [0, 0]
         result['kas'] = 0
-        # rounds_per_map_plot(data_df)
+        blank_plot()
 
         return result
     else:
@@ -313,4 +313,10 @@ def rounds_per_map_plot(data_df):
     plt.xlabel('Map')
     plt.ylabel('Count')
 
+    plt.savefig('static/images/rounds_per_map.png')
+
+
+def blank_plot():
+    fig = plt.figure()
+    fig.suptitle('Rounds Played by Map')
     plt.savefig('static/images/rounds_per_map.png')
