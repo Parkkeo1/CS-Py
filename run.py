@@ -278,16 +278,21 @@ def kas(data_df):
                 continue
             else:
                 if i == 0:
-                    if match_df.iloc[i]['Round Kills'] > 0 or match_df.iloc[i]['Assists'] > 0 or match_df.iloc[i]['Deaths'] == 0:
+                    if match_df.iloc[i]['Round Kills'] > 0 or match_df.iloc[i]['Kills'] > 0 or match_df.iloc[i]['Assists'] > 0 or match_df.iloc[i]['Deaths'] == 0:
                         kas_counter += 1
                     round_counter += 1
+                    print(kas_counter)
                 else:
-                    if match_df.iloc[i]['Round Kills'] > 0 or match_df.iloc[i]['Assists'] > match_df.iloc[i - 1]['Assists'] or match_df.iloc[i]['Deaths'] == match_df.iloc[i - 1]['Deaths']:
+                    if match_df.iloc[i]['Round Kills'] > 0 or match_df.iloc[i]['Kills'] > match_df.iloc[i - 1]['Kills'] or match_df.iloc[i]['Assists'] > match_df.iloc[i - 1]['Assists'] or match_df.iloc[i]['Deaths'] == match_df.iloc[i - 1]['Deaths']:
                         kas_counter += 1
                     round_counter += 1
+                    print(kas_counter)
 
     if round_counter == 0:
         return 'Undef'
+
+    print(round_counter)
+    print(kas_counter)
 
     kas_r = round((kas_counter / round_counter), 2)
     return kas_r * 100
