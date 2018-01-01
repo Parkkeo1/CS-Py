@@ -62,7 +62,6 @@ def index():
                     last_df = pd.read_sql('SELECT * FROM per_round_data ORDER BY Time DESC LIMIT 1;', conn)
                     if last_df.iloc[0]['Map Status'] != 'gameover':
                         reset_df.to_sql("per_round_data", conn, if_exists="append", index=False)
-                    clean_db(conn)
                     return redirect(url_for('index'))
                 else:
                     conn = get_db()
