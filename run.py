@@ -119,6 +119,7 @@ def query_db_current(conn):
             result['kdr_kda'] = kdr_kda(data_df)
             result['kas'] = kas(data_df)
             rounds_per_map_plot(data_df)
+            money_scatter_plot(data_df)
             result['timeframe'] = 'Current Match'
 
             return result
@@ -138,6 +139,7 @@ def query_db_match(conn):
             result['kdr_kda'] = kdr_kda(data_df)
             result['kas'] = kas(data_df)
             rounds_per_map_plot(data_df)
+            money_scatter_plot(data_df)
             result['timeframe'] = 'Last Match'
 
             return result
@@ -151,6 +153,7 @@ def query_db_match(conn):
         result['kdr_kda'] = kdr_kda(data_df)
         result['kas'] = kas(data_df)
         rounds_per_map_plot(data_df)
+        money_scatter_plot(data_df)
         result['timeframe'] = 'Last Match'
 
         return result
@@ -192,6 +195,7 @@ def query_db_time(conn, time_value):
         result['kdr_kda'] = kdr_kda(data_df)
         result['kas'] = kas(data_df)
         rounds_per_map_plot(data_df)
+        money_scatter_plot(data_df)
 
         return result
 
@@ -306,17 +310,31 @@ def rounds_per_map_plot(data_df):
         for cs_map in map_list:
             round_count_dict[cs_map] += len(df[df['Map'] == cs_map].index)
 
-    fig = plt.figure()
+    plt.figure(1)
     plt.bar(range(len(round_count_dict)), list(round_count_dict.values()), align='center')
     plt.xticks(range(len(round_count_dict)), list(round_count_dict.keys()))
-    fig.suptitle('Rounds Played by Map')
+    plt.suptitle('Rounds Played By Map')
     plt.xlabel('Map')
     plt.ylabel('Count')
 
     plt.savefig('static/images/rounds_per_map.png')
 
 
+def money_scatter_plot(data_df):
+    x = data_df['Current Equip. Value']
+    y = data_df['Round Kills']
+
+    plt.figure(2)
+    plt.scatter(x, y)
+    plt.xlabel('Value In Round')
+    plt.ylabel('# of Kills In Round')
+    plt.yticks([0, 1, 2, 3, 4, 5])
+    plt.suptitle('Kills/Round vs. Equipment Value')
+    plt.savefig('static/images/money_vs_kills.png')
+
+
 def blank_plot():
-    fig = plt.figure()
-    fig.suptitle('Rounds Played by Map')
+    plt.figure(5)
+    plt.suptitle('No Results To Graph')
     plt.savefig('static/images/rounds_per_map.png')
+    plt.savefig('static/images/money_vs_kills.png')

@@ -43,10 +43,13 @@
             </div>
             <div class="col-7">
                 <div class="container-fluid" style="padding: 0;">
-                    <div id="matplotlib" class="carousel slide" data-ride="false">
+                    <div id="matplotlib" class="carousel slide" data-interval="false">
                         <div class="carousel-inner">
                             <div class="carousel-item active">
                                 <img src="{{ url_for('static', filename = 'images/rounds_per_map.png') }}" alt="round/map graph">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="{{ url_for('static', filename = 'images/money_vs_kills.png') }}" alt="round/map graph">
                             </div>
                         </div>
                         <a class="carousel-control-prev" href="#matplotlib" role="button" data-slide="prev">
