@@ -94,7 +94,6 @@ def clean_db(conn):
 # calculate & collect: HSR, KDR, KDA, KAS
 # graph: CT vs. T, player stats on various maps, player stats over rounds in a match and/or over other metrics of time
 def query_db_current(conn):
-    result = {}
     data_df = pd.read_sql('SELECT * FROM per_round_data;', conn)
     idx_range = data_df[data_df['Map Status'] == 'gameover'].index.tolist()
     if not idx_range:
@@ -103,23 +102,13 @@ def query_db_current(conn):
         idx = idx_range[-1]
         data_df = data_df.iloc[idx + 1:]
         if data_df.empty:  # if there haven't been any rounds played since the last complete match.
-            result['hsr'] = 0
-            result['equip'] = 0
-            result['correl'] = 0
-            result['kdr_kda'] = [0, 0]
-            result['kas'] = 0
-            result['kpr'] = 0
+            result = calculate_empty()
             blank_plot()
             result['timeframe'] = 'Current Match'
 
             return result
         else:
-            result['hsr'] = hsr(data_df)
-            result['equip'] = int(data_df['Current Equip. Value'].mean())
-            result['correl'] = correl(data_df)
-            result['kdr_kda'] = kdr_kda(data_df)
-            result['kas'] = kas(data_df)
-            result['kpr'] = kpr(data_df)
+            result = calculate_stats(data_df)
             rounds_per_map_plot(data_df)
             money_scatter_plot(data_df)
             result['timeframe'] = 'Current Match'
@@ -128,19 +117,13 @@ def query_db_current(conn):
 
 
 def query_db_match(conn):
-    result = {}
     data_df = pd.read_sql('SELECT * FROM per_round_data;', conn)
     idx_range = data_df[data_df['Map Status'] == 'gameover'].index.tolist()[-2:]
     length = len(idx_range)
     if length < 2:
         if length == 1:  # there has only been one 'gameover' event.
             data_df = data_df.iloc[0:idx_range[0] + 1]
-            result['hsr'] = hsr(data_df)
-            result['equip'] = int(data_df['Current Equip. Value'].mean())
-            result['correl'] = correl(data_df)
-            result['kdr_kda'] = kdr_kda(data_df)
-            result['kas'] = kas(data_df)
-            result['kpr'] = kpr(data_df)
+            result = calculate_stats(data_df)
             rounds_per_map_plot(data_df)
             money_scatter_plot(data_df)
             result['timeframe'] = 'Last Match'
@@ -150,12 +133,7 @@ def query_db_match(conn):
             return query_db_time(conn, 'lifetime')  # because there have been no 'gameover' events ever.
     else:
         data_df = data_df.iloc[idx_range[0] + 1:idx_range[1] + 1]
-        result['hsr'] = hsr(data_df)
-        result['equip'] = int(data_df['Current Equip. Value'].mean())
-        result['correl'] = correl(data_df)
-        result['kdr_kda'] = kdr_kda(data_df)
-        result['kas'] = kas(data_df)
-        result['kpr'] = kpr(data_df)
+        result = calculate_stats(data_df)
         rounds_per_map_plot(data_df)
         money_scatter_plot(data_df)
         result['timeframe'] = 'Last Match'
@@ -164,44 +142,36 @@ def query_db_match(conn):
 
 
 def query_db_time(conn, time_value):
-    result = {}
+    timeframe = {}
     data_df = pd.read_sql('SELECT * FROM per_round_data;', conn)
     offset = 0
     if time_value == 'today':
         offset = 86400
-        result['timeframe'] = 'Past 24 Hours'
+        timeframe['timeframe'] = 'Past 24 Hours'
     if time_value == 'week':
         offset = 604800
-        result['timeframe'] = 'Past 7 Days'
+        timeframe['timeframe'] = 'Past 7 Days'
     if time_value == 'month':
         offset = 2592000
-        result['timeframe'] = 'Past 30 Days'
+        timeframe['timeframe'] = 'Past 30 Days'
     lower = int(time.time()) - offset
     if time_value == 'lifetime':
-        result['timeframe'] = 'Lifetime'
+        timeframe['timeframe'] = 'Lifetime'
         lower = 0
 
     data_df = data_df[data_df['Time'] >= lower]
     test_df = data_df[['Player Name', 'Player Team']]
     if data_df.empty or test_df.isnull().all().all():  # if there are no entries that match the time criteria (i.e. no games in the past 24 hours)
-        result['hsr'] = 0
-        result['equip'] = 0
-        result['correl'] = 0
-        result['kdr_kda'] = [0, 0]
-        result['kas'] = 0
-        result['kpr'] = 0
+        result = calculate_empty()
+        result['timeframe'] = timeframe['timeframe']
         blank_plot()
 
         return result
     else:
-        result['hsr'] = hsr(data_df)
-        result['equip'] = int(data_df['Current Equip. Value'].mean())
-        result['correl'] = correl(data_df)
-        result['kdr_kda'] = kdr_kda(data_df)
-        result['kas'] = kas(data_df)
-        result['kpr'] = kpr(data_df)
+        result = calculate_stats(data_df)
         rounds_per_map_plot(data_df)
         money_scatter_plot(data_df)
+        result['timeframe'] = timeframe['timeframe']
 
         return result
 
@@ -209,7 +179,16 @@ def query_db_time(conn, time_value):
 # final abstraction method for ALL statistics to be displayed
 # hsr, mean equip. value, md correlation, kdr/kda, kas, kpr FOR OVERALL, CT AND T SIDES.
 def calculate_stats(data_df):
-    pass
+    result = {'hsr': hsr(data_df), 'equip': int(data_df['Current Equip. Value'].mean()), 'correl': correl(data_df),
+              'kdr_kda': kdr_kda(data_df), 'kas': kas(data_df), 'kpr': kpr(data_df)}
+
+    return result
+
+
+def calculate_empty():
+    result = {'hsr': 0, 'equip': 0, 'correl': 0, 'kdr_kda': [0, 0], 'kas': 0, 'kpr': 0}
+
+    return result
 
 
 # querying db helper function, returns list of indices of the rows of the dataframe where map status == 'gameover'.
