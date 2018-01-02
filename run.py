@@ -206,6 +206,12 @@ def query_db_time(conn, time_value):
         return result
 
 
+# final abstraction method for ALL statistics to be displayed
+# hsr, mean equip. value, md correlation, kdr/kda, kas, kpr FOR OVERALL, CT AND T SIDES.
+def calculate_stats(data_df):
+    pass
+
+
 # querying db helper function, returns list of indices of the rows of the dataframe where map status == 'gameover'.
 # This function is used to separate data into individual matches.
 def separate(data_df):
