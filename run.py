@@ -108,6 +108,7 @@ def query_db_current(conn):
             result['correl'] = 0
             result['kdr_kda'] = [0, 0]
             result['kas'] = 0
+            result['kpr'] = 0
             blank_plot()
             result['timeframe'] = 'Current Match'
 
@@ -118,6 +119,7 @@ def query_db_current(conn):
             result['correl'] = correl(data_df)
             result['kdr_kda'] = kdr_kda(data_df)
             result['kas'] = kas(data_df)
+            result['kpr'] = kpr(data_df)
             rounds_per_map_plot(data_df)
             money_scatter_plot(data_df)
             result['timeframe'] = 'Current Match'
@@ -138,6 +140,7 @@ def query_db_match(conn):
             result['correl'] = correl(data_df)
             result['kdr_kda'] = kdr_kda(data_df)
             result['kas'] = kas(data_df)
+            result['kpr'] = kpr(data_df)
             rounds_per_map_plot(data_df)
             money_scatter_plot(data_df)
             result['timeframe'] = 'Last Match'
@@ -152,6 +155,7 @@ def query_db_match(conn):
         result['correl'] = correl(data_df)
         result['kdr_kda'] = kdr_kda(data_df)
         result['kas'] = kas(data_df)
+        result['kpr'] = kpr(data_df)
         rounds_per_map_plot(data_df)
         money_scatter_plot(data_df)
         result['timeframe'] = 'Last Match'
@@ -185,6 +189,7 @@ def query_db_time(conn, time_value):
         result['correl'] = 0
         result['kdr_kda'] = [0, 0]
         result['kas'] = 0
+        result['kpr'] = 0
         blank_plot()
 
         return result
@@ -194,6 +199,7 @@ def query_db_time(conn, time_value):
         result['correl'] = correl(data_df)
         result['kdr_kda'] = kdr_kda(data_df)
         result['kas'] = kas(data_df)
+        result['kpr'] = kpr(data_df)
         rounds_per_map_plot(data_df)
         money_scatter_plot(data_df)
 
@@ -297,6 +303,14 @@ def kas(data_df):
     return kas_r * 100
 
 
+def kpr(data_df):
+    total_kills = data_df['Round Kills'].sum()
+    count_df = data_df[(data_df['Player Name'].notnull()) & (data_df['Player Team'].notnull())]
+    total_rounds = len(count_df.index)
+
+    return round((total_kills / total_rounds), 2)
+
+
 def rounds_per_map_plot(data_df):
     df_list = separate(data_df)
     df_list = remove_empty(df_list)
@@ -310,27 +324,26 @@ def rounds_per_map_plot(data_df):
         for cs_map in map_list:
             round_count_dict[cs_map] += len(df[df['Map'] == cs_map].index)
 
-    plt.figure(1)
+    fig = plt.figure()
     plt.bar(range(len(round_count_dict)), list(round_count_dict.values()), align='center')
     plt.xticks(range(len(round_count_dict)), list(round_count_dict.keys()))
     plt.suptitle('Rounds Played By Map')
     plt.xlabel('Map')
     plt.ylabel('Count')
-
-    plt.savefig('static/images/rounds_per_map.png')
+    fig.savefig('static/images/rounds_per_map.png')
 
 
 def money_scatter_plot(data_df):
     x = data_df['Current Equip. Value']
     y = data_df['Round Kills']
 
-    plt.figure(2)
+    fig = plt.figure()
     plt.scatter(x, y)
     plt.xlabel('Value In Round')
     plt.ylabel('# of Kills In Round')
     plt.yticks([0, 1, 2, 3, 4, 5])
     plt.suptitle('Kills/Round vs. Equipment Value')
-    plt.savefig('static/images/money_vs_kills.png')
+    fig.savefig('static/images/money_vs_kills.png')
 
 
 def ct_t_bar_plot(data_df):
@@ -338,7 +351,7 @@ def ct_t_bar_plot(data_df):
 
 
 def blank_plot():
-    plt.figure(5)
-    plt.suptitle('No Results To Graph')
-    plt.savefig('static/images/rounds_per_map.png')
-    plt.savefig('static/images/money_vs_kills.png')
+    fig = plt.figure()
+    fig.suptitle('No Results To Graph')
+    fig.savefig('static/images/rounds_per_map.png')
+    fig.savefig('static/images/money_vs_kills.png')
