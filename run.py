@@ -333,6 +333,10 @@ def money_scatter_plot(data_df):
     plt.savefig('static/images/money_vs_kills.png')
 
 
+def ct_t_bar_plot(data_df):
+    pass
+
+
 def blank_plot():
     plt.figure(5)
     plt.suptitle('No Results To Graph')
