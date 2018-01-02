@@ -179,14 +179,21 @@ def query_db_time(conn, time_value):
 # final abstraction method for ALL statistics to be displayed
 # hsr, mean equip. value, md correlation, kdr/kda, kas, kpr FOR OVERALL, CT AND T SIDES.
 def calculate_stats(data_df):
+    ct_df = data_df[(data_df['Player Team'] == 'CT')].reset_index(drop=True)
+    t_df = data_df[(data_df['Player Team'] == 'T')].reset_index(drop=True)
+
     result = {'hsr': hsr(data_df), 'equip': int(data_df['Current Equip. Value'].mean()), 'correl': correl(data_df),
-              'kdr_kda': kdr_kda(data_df), 'kas': kas(data_df), 'kpr': kpr(data_df)}
+              'kdr_kda': kdr_kda(data_df), 'kas': kas(data_df), 'kpr': kpr(data_df),
+              'ct_kpr': kpr(ct_df), 'ct_equip': int(ct_df['Current Equip. Value'].mean()),
+              'ct_hsr': hsr(ct_df), 'ct_correl': correl(ct_df), 't_kpr': kpr(t_df),
+              't_equip': int(t_df['Current Equip. Value'].mean()), 't_hsr': hsr(t_df), 't_correl': correl(t_df)}
 
     return result
 
 
 def calculate_empty():
-    result = {'hsr': 0, 'equip': 0, 'correl': 0, 'kdr_kda': [0, 0], 'kas': 0, 'kpr': 0}
+    result = {'hsr': 0, 'equip': 0, 'correl': 0, 'kdr_kda': [0, 0], 'kas': 0, 'kpr': 0, 'ct_kpr': 0, 'ct_equip': 0,
+              'ct_hsr': 0, 'ct_correl': 0, 't_kpr': 0, 't_equip': 0, 't_hsr': 0, 't_correl': 0}
 
     return result
 

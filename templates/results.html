@@ -70,32 +70,24 @@
                             <tbody>
                                 <tr>
                                     <td>Headshot Ratio</td>
-                                    <td>PLACEHOLDER</td>
+                                    <td>{{ result['ct_hsr'] }}</td>
                                 </tr>
                                 <tr>
                                     <td>Kills Per Round</td>
-                                    <td>PLACEHOLDER</td>
-                                </tr>
-                                <tr>
-                                    <td>KAS Percentage</td>
-                                    <td>PLACEHOLDER%</td>
-                                </tr>
-                                <tr>
-                                    <td>KDR, KDA</td>
-                                    <td>PLACEHOLDER, PLACEHOLDER</td>
+                                    <td>{{ result['ct_kpr'] }}</td>
                                 </tr>
                                 <tr>
                                     <td>Mean Equipment Value</td>
-                                    <td>$ PLACEHOLDER</td>
+                                    <td>$ {{ result['ct_equip'] }}</td>
                                 </tr>
                                 <tr>
                                     <td>MD Correlation Coeff.</td>
-                                    <td>PLACEHOLDER</td>
+                                    <td>{{ result['ct_correl'] }}</td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
-                    <div class="tab-pane fade" id="ct" role="tabpanel" aria-labelledby="ct-tab">
+                    <div class="tab-pane fade" id="t" role="tabpanel" aria-labelledby="t-tab">
                         <table class="table">
                             <caption>Performance metrics: <a href="/docs" target="_blank">How are these calculated?</a></caption>
                             <thead class="thead-light">
@@ -107,27 +99,19 @@
                             <tbody>
                                 <tr>
                                     <td>Headshot Ratio</td>
-                                    <td>PLACEHOLDER</td>
+                                    <td>{{ result['t_hsr'] }}</td>
                                 </tr>
                                 <tr>
                                     <td>Kills Per Round</td>
-                                    <td>PLACEHOLDER</td>
-                                </tr>
-                                <tr>
-                                    <td>KAS Percentage</td>
-                                    <td>PLACEHOLDER%</td>
-                                </tr>
-                                <tr>
-                                    <td>KDR, KDA</td>
-                                    <td>PLACEHOLDER, PLACEHOLDER</td>
+                                    <td>{{ result['t_kpr'] }}</td>
                                 </tr>
                                 <tr>
                                     <td>Mean Equipment Value</td>
-                                    <td>$ PLACEHOLDER</td>
+                                    <td>$ {{ result['t_equip'] }}</td>
                                 </tr>
                                 <tr>
                                     <td>MD Correlation Coeff.</td>
-                                    <td>PLACEHOLDER</td>
+                                    <td>{{ result['t_correl'] }}</td>
                                 </tr>
                             </tbody>
                         </table>
