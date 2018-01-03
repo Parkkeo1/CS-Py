@@ -110,11 +110,11 @@ def GSHandler():
                 if last_df.iloc[0]['Map Status'] != 'gameover':  # this prevents having two 'gameover' events in a row, where the latter is a None/NaN entry.
                     stats_df.to_sql("per_round_data", conn, if_exists="append", index=False)
                     clean_db(conn)
-                    print(pd.read_sql('select * from per_round_data;', conn))
+                    print('successful')
             else:
                 stats_df.to_sql("per_round_data", conn, if_exists="append", index=False)
                 clean_db(conn)
-                print(pd.read_sql('select * from per_round_data;', conn))
+                print('successful')
     print(app.config['STARTER'])
     return 'JSON Posted'
 

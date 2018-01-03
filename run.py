@@ -182,18 +182,27 @@ def calculate_stats(data_df):
     ct_df = data_df[(data_df['Player Team'] == 'CT')].reset_index(drop=True)
     t_df = data_df[(data_df['Player Team'] == 'T')].reset_index(drop=True)
 
+    pistol_results = pistol_stats(data_df)
+
     result = {'hsr': hsr(data_df), 'equip': int(data_df['Current Equip. Value'].mean()), 'correl': correl(data_df),
               'kdr_kda': kdr_kda(data_df), 'kas': kas(data_df), 'kpr': kpr(data_df),
               'ct_kpr': kpr(ct_df), 'ct_equip': int(ct_df['Current Equip. Value'].mean()),
               'ct_hsr': hsr(ct_df), 'ct_correl': correl(ct_df), 't_kpr': kpr(t_df),
-              't_equip': int(t_df['Current Equip. Value'].mean()), 't_hsr': hsr(t_df), 't_correl': correl(t_df)}
+              't_equip': int(t_df['Current Equip. Value'].mean()), 't_hsr': hsr(t_df), 't_correl': correl(t_df),
+              'pistol_hsr': pistol_results['pistol_hsr'], 'pistol_kpr': pistol_results['pistol_kpr'],
+              'pistol_k': pistol_results['pistol_k'], 'pistol_ct_hsr': pistol_results['pistol_ct_hsr'],
+              'pistol_ct_kpr': pistol_results['pistol_ct_kpr'], 'pistol_ct_k': pistol_results['pistol_ct_k'],
+              'pistol_t_hsr': pistol_results['pistol_t_hsr'], 'pistol_t_kpr': pistol_results['pistol_t_kpr'],
+              'pistol_t_k': pistol_results['pistol_t_k']}
 
     return result
 
 
 def calculate_empty():
     result = {'hsr': 0, 'equip': 0, 'correl': 0, 'kdr_kda': [0, 0], 'kas': 0, 'kpr': 0, 'ct_kpr': 0, 'ct_equip': 0,
-              'ct_hsr': 0, 'ct_correl': 0, 't_kpr': 0, 't_equip': 0, 't_hsr': 0, 't_correl': 0}
+              'ct_hsr': 0, 'ct_correl': 0, 't_kpr': 0, 't_equip': 0, 't_hsr': 0, 't_correl': 0, 'pistol_hsr': 0,
+              'pistol_kpr': 0, 'pistol_k': 0, 'pistol_ct_hsr': 0, 'pistol_ct_kpr': 0, 'pistol_ct_k': 0,
+              'pistol_t_hsr': 0, 'pistol_t_kpr': 0, 'pistol_t_k': 0}
 
     return result
 
@@ -303,6 +312,34 @@ def kpr(data_df):
     return round((total_kills / total_rounds), 2)
 
 
+def pistol_stats(data_df):
+    df_list = remove_empty(separate(data_df))
+
+    pistol_df = pd.DataFrame()
+    for df in df_list:
+        df = df.reset_index(drop=True)
+        try:
+            temp_df = df.iloc[[0, 15]]
+            pistol_df = pistol_df.append(temp_df, ignore_index=True)
+        except:
+            continue
+
+    pistol_df = pistol_df[(pistol_df['Current Equip. Value'] <= 850) & (pistol_df['Current Equip. Value'] > 0)]
+    ct_pistol_df = pistol_df[(pistol_df['Player Team'] == 'CT')].reset_index(drop=True)
+    t_pistol_df = pistol_df[(pistol_df['Player Team'] == 'T')].reset_index(drop=True)
+
+    pistol_results = {'pistol_hsr': hsr(pistol_df), 'pistol_kpr': kpr(pistol_df), 'pistol_k': pistol_k_ratio(pistol_df),
+                      'pistol_ct_hsr': hsr(ct_pistol_df), 'pistol_ct_kpr': kpr(ct_pistol_df),
+                      'pistol_ct_k': pistol_k_ratio(ct_pistol_df), 'pistol_t_hsr': hsr(t_pistol_df),
+                      'pistol_t_kpr': kpr(t_pistol_df), 'pistol_t_k': pistol_k_ratio(t_pistol_df)}
+
+    return pistol_results
+
+
+def pistol_k_ratio(pistol_df):
+    return round(len(pistol_df[pistol_df['Round Kills'] > 0].index) / len(pistol_df.index), 2)
+
+
 def rounds_per_map_plot(data_df):
     df_list = separate(data_df)
     df_list = remove_empty(df_list)
@@ -336,10 +373,6 @@ def money_scatter_plot(data_df):
     plt.yticks([0, 1, 2, 3, 4, 5])
     plt.suptitle('Kills/Round vs. Equipment Value')
     fig.savefig('static/images/money_vs_kills.png')
-
-
-def ct_t_bar_plot(data_df):
-    pass
 
 
 def blank_plot():
