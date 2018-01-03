@@ -91,11 +91,6 @@ def results():
     return render_template('results.html', result=result)
 
 
-@app.route('/docs')
-def docs():
-    return render_template('docs.html')
-
-
 # backend POST request handler
 @app.route('/GS', methods=['POST'])
 def GSHandler():
