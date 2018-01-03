@@ -14,7 +14,9 @@ pd.set_option('display.width', 1000)
 conn = sqlite3.connect('player_data.db')
 data_df = pd.read_sql('SELECT * FROM per_round_data', conn)
 # data_df = data_df.iloc[39:]
-data_df = data_df[data_df['Time'] >= int(time.time()) - 604800]
+# data_df = data_df[data_df['Time'] >= int(time.time()) - 604800]
+
+print(data_df)
 
 df_list = remove_empty(separate(data_df))
 print(data_df)
