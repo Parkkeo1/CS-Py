@@ -10,6 +10,7 @@ import time
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'half-life 3 confirmed'
 app.config['DATABASE'] = os.path.join(app.root_path, 'player_data.db')
+root_path = app.root_path
 
 
 def connect_db():
@@ -126,6 +127,7 @@ def add_header(response):
 
 
 if __name__ == "__main__":
+    blank_plot()
     webbrowser.open_new('http://127.0.0.1:5000')  # for deployment
     app.config['STARTER'] = False  # starter variable
     app.run(debug=False)

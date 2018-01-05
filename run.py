@@ -3,6 +3,9 @@ import pandas as pd
 import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
+import main
+import os
+import math
 
 
 def check_payload(payload):
@@ -182,13 +185,23 @@ def calculate_stats(data_df):
     ct_df = data_df[(data_df['Player Team'] == 'CT')].reset_index(drop=True)
     t_df = data_df[(data_df['Player Team'] == 'T')].reset_index(drop=True)
 
+    if len(ct_df.index) == 0:
+        ct_equip_value = 0
+    else:
+        ct_equip_value = int(ct_df['Current Equip. Value'].mean())
+
+    if len(t_df.index) == 0:
+        t_equip_value = 0
+    else:
+        t_equip_value = int(t_df['Current Equip. Value'].mean())
+
     pistol_results = pistol_stats(data_df)
 
     result = {'hsr': hsr(data_df), 'equip': int(data_df['Current Equip. Value'].mean()), 'correl': correl(data_df),
               'kdr_kda': kdr_kda(data_df), 'kas': kas(data_df), 'kpr': kpr(data_df),
-              'ct_kpr': kpr(ct_df), 'ct_equip': int(ct_df['Current Equip. Value'].mean()),
+              'ct_kpr': kpr(ct_df), 'ct_equip': ct_equip_value,
               'ct_hsr': hsr(ct_df), 'ct_correl': correl(ct_df), 't_kpr': kpr(t_df),
-              't_equip': int(t_df['Current Equip. Value'].mean()), 't_hsr': hsr(t_df), 't_correl': correl(t_df),
+              't_equip': t_equip_value, 't_hsr': hsr(t_df), 't_correl': correl(t_df),
               'pistol_hsr': pistol_results['pistol_hsr'], 'pistol_kpr': pistol_results['pistol_kpr'],
               'pistol_k': pistol_results['pistol_k'], 'pistol_ct_hsr': pistol_results['pistol_ct_hsr'],
               'pistol_ct_kpr': pistol_results['pistol_ct_kpr'], 'pistol_ct_k': pistol_results['pistol_ct_k'],
@@ -239,6 +252,13 @@ def remove_empty(df_list):
 def hsr(data_df):
     total_kills = data_df['Round Kills'].sum()
     total_hs = data_df['Round HS Kills'].sum()
+
+    if total_kills == 0 or math.isnan(total_kills):
+        return 0
+
+    if total_hs == 0 or math.isnan(total_hs):
+        return 0
+
     return float(round(total_hs / total_kills, 3))
 
 
@@ -267,8 +287,8 @@ def kdr_kda(data_df):
         total_assists += int(max_df['Assists'])
         total_deaths += int(max_df['Deaths'])
 
-    if total_deaths == 0:
-        return ['Undef', 'Undef']
+    if total_deaths == 0 or math.isnan(total_deaths):
+        return [0, 0]
 
     total_kdr = float(round(total_kills / total_deaths, 3))
     total_kda = float(round((total_kills + total_assists) / total_deaths, 3))
@@ -297,8 +317,8 @@ def kas(data_df):
                         kas_counter += 1
                     round_counter += 1
 
-    if round_counter == 0:
-        return 'Undef'
+    if round_counter == 0 or math.isnan(round_counter):
+        return 0
 
     kas_r = round((kas_counter / round_counter), 2)
     return kas_r * 100
@@ -308,6 +328,12 @@ def kpr(data_df):
     total_kills = data_df['Round Kills'].sum()
     count_df = data_df[(data_df['Player Name'].notnull()) & (data_df['Player Team'].notnull())]
     total_rounds = len(count_df.index)
+
+    if total_rounds == 0 or math.isnan(total_rounds):
+        return 0
+
+    if total_kills == 0 or math.isnan(total_kills):
+        return 0
 
     return round((total_kills / total_rounds), 2)
 
@@ -322,11 +348,17 @@ def pistol_stats(data_df):
             temp_df = df.iloc[[0, 15]]
             pistol_df = pistol_df.append(temp_df, ignore_index=True)
         except:
-            continue
+            try:
+                temp_df = df.iloc[0]
+                pistol_df = pistol_df.append(temp_df, ignore_index=True)
+            except:
+                continue
 
     pistol_df = pistol_df[(pistol_df['Current Equip. Value'] <= 850) & (pistol_df['Current Equip. Value'] > 0)]
     ct_pistol_df = pistol_df[(pistol_df['Player Team'] == 'CT')].reset_index(drop=True)
     t_pistol_df = pistol_df[(pistol_df['Player Team'] == 'T')].reset_index(drop=True)
+
+    # TODO: Improve style for code below.
 
     pistol_results = {'pistol_hsr': hsr(pistol_df), 'pistol_kpr': kpr(pistol_df), 'pistol_k': pistol_k_ratio(pistol_df),
                       'pistol_ct_hsr': hsr(ct_pistol_df), 'pistol_ct_kpr': kpr(ct_pistol_df),
@@ -337,6 +369,9 @@ def pistol_stats(data_df):
 
 
 def pistol_k_ratio(pistol_df):
+    if len(pistol_df.index) == 0 or math.isnan(len(pistol_df.index)):
+        return 0
+
     return round(len(pistol_df[pistol_df['Round Kills'] > 0].index) / len(pistol_df.index), 2)
 
 
@@ -359,7 +394,7 @@ def rounds_per_map_plot(data_df):
     plt.suptitle('Rounds Played By Map')
     plt.xlabel('Map')
     plt.ylabel('Count')
-    fig.savefig('static/images/rounds_per_map.png')
+    fig.savefig(os.path.join(get_path(), 'static/images/rounds_per_map.png'))
 
 
 def money_scatter_plot(data_df):
@@ -372,11 +407,15 @@ def money_scatter_plot(data_df):
     plt.ylabel('# of Kills In Round')
     plt.yticks([0, 1, 2, 3, 4, 5])
     plt.suptitle('Kills/Round vs. Equipment Value')
-    fig.savefig('static/images/money_vs_kills.png')
+    fig.savefig(os.path.join(get_path(), 'static/images/money_vs_kills.png'))
 
 
 def blank_plot():
     fig = plt.figure()
     fig.suptitle('No Results To Graph')
-    fig.savefig('static/images/rounds_per_map.png')
-    fig.savefig('static/images/money_vs_kills.png')
+    fig.savefig(os.path.join(get_path(), 'static/images/rounds_per_map.png'))
+    fig.savefig(os.path.join(get_path(), 'static/images/money_vs_kills.png'))
+
+
+def get_path():
+    return main.root_path
