@@ -394,7 +394,7 @@ def rounds_per_map_plot(data_df):
     plt.suptitle('Rounds Played By Map')
     plt.xlabel('Map')
     plt.ylabel('Count')
-    fig.savefig(os.path.join(get_path(), 'static/images/rounds_per_map.png'))
+    fig.savefig('static/images/rounds_per_map.png')
 
 
 def money_scatter_plot(data_df):
@@ -407,15 +407,11 @@ def money_scatter_plot(data_df):
     plt.ylabel('# of Kills In Round')
     plt.yticks([0, 1, 2, 3, 4, 5])
     plt.suptitle('Kills/Round vs. Equipment Value')
-    fig.savefig(os.path.join(get_path(), 'static/images/money_vs_kills.png'))
+    fig.savefig('static/images/money_vs_kills.png')
 
 
 def blank_plot():
     fig = plt.figure()
     fig.suptitle('No Results To Graph')
-    fig.savefig(os.path.join(get_path(), 'static/images/rounds_per_map.png'))
-    fig.savefig(os.path.join(get_path(), 'static/images/money_vs_kills.png'))
-
-
-def get_path():
-    return main.send_root_path
+    fig.savefig('static/images/rounds_per_map.png')
+    fig.savefig('static/images/money_vs_kills.png')
