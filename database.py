@@ -18,40 +18,40 @@ data_df = pd.read_sql('SELECT * FROM per_round_data', conn)
 
 print(data_df)
 
-df_list = remove_empty(separate(data_df))
-print(data_df)
-print('\n')
-
-pistol_df = pd.DataFrame()
-for df in df_list:
-    df = df.reset_index(drop=True)
-    try:
-        temp_df = df.iloc[[0, 15]]
-        pistol_df = pistol_df.append(temp_df, ignore_index=True)
-    except:
-        continue
-
-pistol_df = pistol_df[(pistol_df['Current Equip. Value'] <= 850) & (pistol_df['Current Equip. Value'] > 0)]
-ct_pistol_df = pistol_df[(pistol_df['Player Team'] == 'CT')].reset_index(drop=True)
-t_pistol_df = pistol_df[(pistol_df['Player Team'] == 'T')].reset_index(drop=True)
-print(pistol_df)
-print('\n')
-print(ct_pistol_df)
-print('\n')
-print(t_pistol_df)
-print('\n')
-print(hsr(pistol_df))
-print(kpr(pistol_df))
-print(pistol_k_ratio(pistol_df))
-print('\n')
-print(hsr(ct_pistol_df))
-print(kpr(ct_pistol_df))
-print(pistol_k_ratio(ct_pistol_df))
-print('\n')
-print(hsr(t_pistol_df))
-print(kpr(t_pistol_df))
-print(pistol_k_ratio(t_pistol_df))
-print('\n')
+# df_list = remove_empty(separate(data_df))
+# print(data_df)
+# print('\n')
+#
+# pistol_df = pd.DataFrame()
+# for df in df_list:
+#     df = df.reset_index(drop=True)
+#     try:
+#         temp_df = df.iloc[[0, 15]]
+#         pistol_df = pistol_df.append(temp_df, ignore_index=True)
+#     except:
+#         continue
+#
+# pistol_df = pistol_df[(pistol_df['Current Equip. Value'] <= 850) & (pistol_df['Current Equip. Value'] > 0)]
+# ct_pistol_df = pistol_df[(pistol_df['Player Team'] == 'CT')].reset_index(drop=True)
+# t_pistol_df = pistol_df[(pistol_df['Player Team'] == 'T')].reset_index(drop=True)
+# print(pistol_df)
+# print('\n')
+# print(ct_pistol_df)
+# print('\n')
+# print(t_pistol_df)
+# print('\n')
+# print(hsr(pistol_df))
+# print(kpr(pistol_df))
+# print(pistol_k_ratio(pistol_df))
+# print('\n')
+# print(hsr(ct_pistol_df))
+# print(kpr(ct_pistol_df))
+# print(pistol_k_ratio(ct_pistol_df))
+# print('\n')
+# print(hsr(t_pistol_df))
+# print(kpr(t_pistol_df))
+# print(pistol_k_ratio(t_pistol_df))
+# print('\n')
 
 
 # new_df = data_df.iloc[:-1]
