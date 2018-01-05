@@ -10,7 +10,7 @@ import time
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'half-life 3 confirmed'
 app.config['DATABASE'] = os.path.join(app.root_path, 'player_data.db')
-root_path = app.root_path
+send_root_path = app.root_path
 
 
 def connect_db():

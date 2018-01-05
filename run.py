@@ -418,4 +418,4 @@ def blank_plot():
 
 
 def get_path():
-    return main.root_path
+    return main.send_root_path
