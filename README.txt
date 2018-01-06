@@ -20,6 +20,8 @@ CS-Py Installation/Usage Instructions:
     b. Due to how CS:GO handles offline bot games, the pistol rounds statistics will be incorrect if data is collected for an offline bot match.
 
     c. The statistics calculated and data collected by CS-Py has been verified to be correct for MM games and other competitive mode matches. Due to how ESEA Pugs restart the match multiple times before going live, results may vary.
+    
+    d. This program can record and calculate your performance statistics for matches while the program is running and GS is enabled. Thus, it does not work for games that you have played in the past without having this program running and enabled.
 
 5. Report bugs here: https://github.com/Parkkeo1/CS-Py/issues
 
