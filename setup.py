@@ -12,8 +12,8 @@ cspy_exe = Executable(script="main.py", base=base, targetName="CS-Py.exe")
 
 setup(name="CS-Py",
       version="0.1",
-      author="@Parkkeo1, CS @ UIUC",
-      description="testing flask to exe",
+      author="@Parkkeo1",
+      description="testing",
       options={
           'build_exe': {
               'packages': ['jinja2.ext', 'jinja2', 'asyncio', 'numpy', 'pandas', 'sqlite3'],
