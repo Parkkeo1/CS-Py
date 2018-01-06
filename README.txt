@@ -2,7 +2,7 @@ CS-Py Installation/Usage Instructions:
 
 1. Place the gamestate_integration_main.cfg file into your csgo/cfg directory. More detailed instructions: https://developer.valvesoftware.com/wiki/Counter-Strike:_Global_Offensive_Game_State_Integration#Locating_CS:GO_Install_Directory
 
-2. Run CS-Py.exe.
+2. Run CS-Py.exe as administrator.
 
 3. When the browser opens:
     a. If this is your first time, then the player database must be created first.
