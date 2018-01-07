@@ -12,13 +12,9 @@ As a flask app, CS-Py collects player data at the end of each in-game round from
 
 My current end goal is to package this Python app into a Windows Executable so that any user can use it without having to install Python. In the future, I hope to implement remote/cloud SQL DB storage and an in-game GUI transparent overlay that will display live performance statistics for the current match.
 
-### Installation and Usage (for testing and development purposes)
-1. git clone this repository or download it as ZIP.
-2. CS-Py has the following dependencies: Python3 (+ SQLite3), Flask, and Pandas.
-3. The gamestate_integration_main.cfg file must be placed in the csgo/cfg directory. [More detailed instructions here.](https://developer.valvesoftware.com/wiki/Counter-Strike:_Global_Offensive_Game_State_Integration#Locating_CS:GO_Install_Directory)
-4. Run the flask server by navigating to the local directory where you copied the repository to and then running $ python main.py through terminal.
-5. When a new browser tab/window opens up, click 'Start GS Data Collection' to start collecting in-game data for your CS:GO (competitive mode) matches. After playing for a while, you can choose to analyze your performance from the same index page.
-6. Make sure to click 'Stop' after your match to prevent the app from collecting data about pseudo-competitive modes such as retakes, etc.
+### Installation and Usage (Pre-release)
+- For developers and contributors: git clone the repository, then in terminal: $ python main.py
+- For all other users: [See Releases](https://github.com/Parkkeo1/CS-Py/releases) and [README.txt](https://github.com/Parkkeo1/CS-Py/blob/master/README.txt)
 
 ### Project Objectives (By Priority)
 1. Implement by-round data storage for statistical analysis using Pandas dataframe.s *Completed 12/23/17*
