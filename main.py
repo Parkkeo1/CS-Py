@@ -5,6 +5,8 @@ import sqlite3
 import pandas as pd
 import webbrowser
 import time
+import winreg as registry
+from shutil import copyfile
 
 
 app = Flask(__name__)
@@ -40,6 +42,18 @@ def shutdown_server():
     if func is None:
         raise RuntimeError('Not running with the Werkzeug Server')
     func()
+
+
+def setup_gamestate_cfg():
+    key = registry.CreateKey(registry.HKEY_CURRENT_USER, "Software\Valve\Steam")
+    steam_path = registry.QueryValueEx(key, "SteamPath")[0]
+
+    steam_path = steam_path + '/steamapps/common/Counter-Strike Global Offensive/csgo/cfg'
+
+    src = 'gamestate_integration_main.cfg'
+    dst = steam_path + '/gamestate_integration_main.cfg'
+
+    copyfile(src, dst)
 
 
 @app.teardown_appcontext
@@ -138,6 +152,10 @@ def add_header(response):
 
 if __name__ == "__main__":
     blank_plot()
+    try:
+        setup_gamestate_cfg()
+    except:
+        pass
     webbrowser.open_new('http://127.0.0.1:5000')  # for deployment
     app.config['STARTER'] = False  # starter variable
     app.run(debug=False)
