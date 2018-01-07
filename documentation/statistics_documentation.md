@@ -34,7 +34,10 @@ The correlation between how many kills you get in each round and your equipment 
 
 This stat is useful for calculating whether a player tends to need better weapons/equipment to play much better (i.e. player relies on having an AWP or a full nadeset to be good) or do as well with all types of low and high tier equipment.
 
-#### WIP, to be added.
+#### (Pistol) Kill-Round Ratio:
+Ratio of pistol rounds in which you got at least one kill in. Essentially KAS but with only kills. 
+
+CS-Py only considers kills because assists and surviving aren't really important in pistol rounds. The general KAS stat still accounts for all rounds, including pistol rounds.
 
 ### The Graphs
 
@@ -44,4 +47,4 @@ Self-explanatory. Shows how much you play many different maps or just a handful.
 #### Kill/Round vs. Equipment Value
 The MD correlation in graph form. The regression slope would be the correlation coefficient.
 
-#### WIP, to be added.
+#### More Graphs To Be Added In The Future.
