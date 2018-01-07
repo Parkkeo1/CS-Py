@@ -4,7 +4,9 @@ CS-Py Installation/Usage Instructions:
             so using it is fine/legal (and ethical, since it doesn't give you an in-game advantage).
       
       1. Run install_cspy.exe. Follow the instructions on the installer.
+      
       2. After installation, run CS-Py.exe as administrator.
+      
       3. Check to make sure gamestate_integration_main.cfg is in your csgo/cfg directory.
          More detailed instructions: http://bit.ly/2D32JSu (Valve Developer Website/Wiki)
       
