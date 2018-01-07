@@ -35,6 +35,13 @@ def reset_match():
     return data_df
 
 
+def shutdown_server():
+    func = request.environ.get('werkzeug.server.shutdown')
+    if func is None:
+        raise RuntimeError('Not running with the Werkzeug Server')
+    func()
+
+
 @app.teardown_appcontext
 def close_db(error):
     if hasattr(g, 'sqlite_db'):
@@ -45,18 +52,16 @@ def close_db(error):
 @app.route('/', methods=['GET', 'POST'])
 def index():
     if request.method == 'POST':
-        starter = str(request.form.get('starter'))
-        ender = str(request.form.get('ender'))
-        reset = str(request.form.get('reset'))
-        if starter == 'starter':
+        post_input = str(request.form.get('input'))
+        if post_input == 'starter':
             app.config['STARTER'] = True
             return redirect(url_for('index'))
         else:
-            if ender == 'ender':
+            if post_input == 'ender':
                 app.config['STARTER'] = False
                 return redirect(url_for('index'))
             else:
-                if reset == 'reset':
+                if post_input == 'reset':
                     conn = get_db()
                     reset_df = reset_match()
                     last_df = pd.read_sql('SELECT * FROM per_round_data ORDER BY Time DESC LIMIT 1;', conn)
@@ -82,6 +87,12 @@ def index():
         else:
             status = 'GS is currently OFF'
         return render_template('index.html', status=status)
+
+
+@app.route('/shutdown', methods=['POST'])
+def shutdown():
+    shutdown_server()
+    return 'CS-Py is shutting down. You may now close this browser window/tab.'
 
 
 @app.route('/results')

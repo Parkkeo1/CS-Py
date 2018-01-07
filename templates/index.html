@@ -6,16 +6,19 @@
             <div class="cover-container">
                 <h1 class="text-center">CS-Py</h1>
                 <p class="text-center">A Python-based Player Statistics Display & Analysis Program For CS:GO</p>
-                <hr style="width: 55%;" class="pb-2">
+                <hr style="width: 60%;" class="pb-2">
                 <div class="container-fluid">
                     <form method="POST">
-                        <button type="submit" value="starter" name="starter" id="starter" class="btn btn-primary">Start GS Collection</button>
+                        <button type="submit" value="starter" name="input" id="starter" class="btn btn-primary">Start GS</button>
                     </form>
                     <form method="POST">
-                        <button type="submit" value="ender" name="ender" id="ender" class="btn btn-primary">Stop</button>
+                        <button type="submit" value="ender" name="input" id="ender" class="btn btn-primary">Stop</button>
                     </form>
                     <form method="POST">
-                        <button type="submit" value="reset" name="reset" id="reset" class="btn btn-primary">Reset Match</button>
+                        <button type="submit" value="reset" name="input" id="reset" class="btn btn-primary">Reset Match</button>
+                    </form>
+                    <form action="{{ url_for('shutdown') }}" method="POST">
+                        <button type="submit" value="shutdown" name="input" id="shutdown" class="btn btn-danger">Quit CS-Py</button>
                     </form>
                     <form method="POST">
                         <label class="mr-sm-2" for="choose">Or Examine Stats From:</label>
@@ -31,7 +34,7 @@
                     </form>
                 </div>
                 <div class="footer">
-                    <a class="pr-4" href="https://github.com/Parkkeo1/CS-Py/blob/master/README.md" target="_blank">README for CS-Py</a>
+                    <a class="pr-4" href="https://github.com/Parkkeo1/CS-Py/blob/master/README.md" target="_blank">README For CS-Py</a>
                     <a class="pl-4" href="https://github.com/Parkkeo1" target="_blank">Created By @Parkkeo1</a>
                 </div>
             </div>
