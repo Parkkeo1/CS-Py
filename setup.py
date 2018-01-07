@@ -11,8 +11,8 @@ files = ['static/', 'templates/', 'gamestate_integration_main.cfg', 'run.py', '_
 cspy_exe = Executable(script="main.py", base=base, targetName="CS-Py.exe")
 
 setup(name="CS-Py",
-      version="0.35",
-      author="@Parkkeo1",
+      version="0.4",
+      author="Parkkeo1",
       description="Pre-release",
       options={
           'build_exe': {
