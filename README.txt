@@ -14,14 +14,16 @@ CS-Py Installation/Usage Instructions:
       
       4. When the browser opens:
           a. If this is your first time, then the player database must be created first.
-              - Press the 'Start GS Collection' button and play a competitive game, preferably a standard matchmaking game.
+              - Press the 'Start GS' button and play a competitive game, preferably a standard matchmaking game.
               - During the game, you can examine your current stats for the match by choosing 'Current Match' to analyze.
               - After the game, you can examine your past game stats by choosing 'Past Match' to analyze.
-              - Start collecting when you begin another game, stop afterwards, etc.
+              - Other analyze options are available: day, week, month, lifetime.
+              - Press 'Stop' to stop gathering data. Do this when you arent actively playing a competitive match.
+              - Make sure 'GS is currently ON' before your MM/competitive match starts.
               
           b. If you have already recorded data previously with the program, you can immediately analyze your stats after starting CS-Py.              You can also choose to do the above and collect data while playing a match.
               
-      NOTE: CS-Py only collects 'competitive' mode games/matches. Deathmatch and Casual, for example, are ignored.
+      NOTE: CS-Py only collects 'competitive' mode games/matches. Deathmatch and Casual, for example, are automatically ignored.
 
       5. Important details:
           a. The 'Reset Match' button is for when you exit a match early (i.e. retake server) and want to start a new game (i.e. MM).
@@ -34,7 +36,7 @@ CS-Py Installation/Usage Instructions:
              Due to how ESEA Pugs restart the match multiple times before going live, results may vary.
     
           d. This program can record and calculate your performance statistics for matches while GS is enabled. 
-             Thus, it does not work for games that you played in the past without having this program running and enabled.
+             Thus, it does not work for games that you play(ed) without having this program running and enabled.
 
       6. Report bugs here: https://github.com/Parkkeo1/CS-Py/issues
 
