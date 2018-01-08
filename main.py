@@ -151,7 +151,7 @@ def add_header(response):
 
 
 if __name__ == "__main__":
-    blank_plot()
+    # blank_plot()
     try:
         setup_gamestate_cfg()
     except:
