@@ -155,27 +155,29 @@
                 </div>
             </div>
             <div class="col-7">
-                <h6>Graphs are WIP and being overhauled.</h6>
-{#                <div class="container-fluid" style="padding: 0;">#}
-{#                    <div id="matplotlib" class="carousel slide" data-interval="false">#}
-{#                        <div class="carousel-inner">#}
-{#                            <div class="carousel-item active">#}
+{#                <h6>Graphs are WIP and being overhauled.</h6>#}
+                <div class="container-fluid" style="padding: 0;">
+                    <div id="matplotlib" class="carousel slide" data-interval="false">
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                {{ result['rounds_map_plot'] }}
 {#                                <img src="{{ url_for('static', filename = 'images/rounds_per_map.png') }}" alt="round/map graph">#}
-{#                            </div>#}
-{#                            <div class="carousel-item">#}
+                            </div>
+                            <div class="carousel-item">
+                                {{ result['money_plot'] }}
 {#                                <img src="{{ url_for('static', filename = 'images/money_vs_kills.png') }}" alt="round/map graph">#}
-{#                            </div>#}
-{#                        </div>#}
-{#                        <a class="carousel-control-prev" href="#matplotlib" role="button" data-slide="prev">#}
-{#                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>#}
-{#                            <span class="sr-only">Previous</span>#}
-{#                        </a>#}
-{#                        <a class="carousel-control-next" href="#matplotlib" role="button" data-slide="next">#}
-{#                            <span class="carousel-control-next-icon" aria-hidden="true"></span>#}
-{#                            <span class="sr-only">Next</span>#}
-{#                        </a>#}
-{#                    </div>#}
-{#                </div>#}
+                            </div>
+                        </div>
+                        <a class="carousel-control-prev" href="#matplotlib" role="button" data-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                        <a class="carousel-control-next" href="#matplotlib" role="button" data-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Next</span>
+                        </a>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="footer">

@@ -1,10 +1,6 @@
 import time
 import pandas as pd
-# import matplotlib
-# matplotlib.use('Agg')
-# import matplotlib.pyplot as plt
-import main
-import os
+import matplotlib.pyplot as plt, mpld3
 import math
 
 
@@ -106,14 +102,15 @@ def query_db_current(conn):
         data_df = data_df.iloc[idx + 1:]
         if data_df.empty:  # if there haven't been any rounds played since the last complete match.
             result = calculate_empty()
-            # blank_plot()
+            result['money_plot'] = blank_plot()
+            result['rounds_map_plot'] = blank_plot()
             result['timeframe'] = 'Current Match'
 
             return result
         else:
             result = calculate_stats(data_df)
-            # rounds_per_map_plot(data_df)
-            # money_scatter_plot(data_df)
+            result['money_plot'] = money_scatter_plot(data_df)
+            result['rounds_map_plot'] = rounds_per_map_plot(data_df)
             result['timeframe'] = 'Current Match'
 
             return result
@@ -127,8 +124,8 @@ def query_db_match(conn):
         if length == 1:  # there has only been one 'gameover' event.
             data_df = data_df.iloc[0:idx_range[0] + 1]
             result = calculate_stats(data_df)
-            # rounds_per_map_plot(data_df)
-            # money_scatter_plot(data_df)
+            result['money_plot'] = money_scatter_plot(data_df)
+            result['rounds_map_plot'] = rounds_per_map_plot(data_df)
             result['timeframe'] = 'Last Match'
 
             return result
@@ -137,8 +134,8 @@ def query_db_match(conn):
     else:
         data_df = data_df.iloc[idx_range[0] + 1:idx_range[1] + 1]
         result = calculate_stats(data_df)
-        # rounds_per_map_plot(data_df)
-        # money_scatter_plot(data_df)
+        result['money_plot'] = money_scatter_plot(data_df)
+        result['rounds_map_plot'] = rounds_per_map_plot(data_df)
         result['timeframe'] = 'Last Match'
 
         return result
@@ -166,14 +163,15 @@ def query_db_time(conn, time_value):
     test_df = data_df[['Player Name', 'Player Team']]
     if data_df.empty or test_df.isnull().all().all():  # if there are no entries that match the time criteria (i.e. no games in the past 24 hours)
         result = calculate_empty()
+        result['money_plot'] = blank_plot()
+        result['rounds_map_plot'] = blank_plot()
         result['timeframe'] = timeframe['timeframe']
-        # blank_plot()
 
         return result
     else:
         result = calculate_stats(data_df)
-        # rounds_per_map_plot(data_df)
-        # money_scatter_plot(data_df)
+        result['money_plot'] = money_scatter_plot(data_df)
+        result['rounds_map_plot'] = rounds_per_map_plot(data_df)
         result['timeframe'] = timeframe['timeframe']
 
         return result
@@ -375,43 +373,42 @@ def pistol_k_ratio(pistol_df):
     return round(len(pistol_df[pistol_df['Round Kills'] > 0].index) / len(pistol_df.index), 2)
 
 
-# def rounds_per_map_plot(data_df):
-#     df_list = separate(data_df)
-#     df_list = remove_empty(df_list)
-#
-#     map_list = list(set(data_df['Map'].tolist()))
-#     map_list = [x for x in map_list if x != 'RESET POINT']
-#
-#     round_count_dict = dict.fromkeys(map_list, 0)
-#
-#     for df in df_list:
-#         for cs_map in map_list:
-#             round_count_dict[cs_map] += len(df[df['Map'] == cs_map].index)
-#
-#     fig = plt.figure()
-#     plt.bar(range(len(round_count_dict)), list(round_count_dict.values()), align='center')
-#     plt.xticks(range(len(round_count_dict)), list(round_count_dict.keys()))
-#     plt.suptitle('Rounds Played By Map')
-#     plt.xlabel('Map')
-#     plt.ylabel('Count')
-#     fig.savefig('static/images/rounds_per_map.png')
-#
-#
-# def money_scatter_plot(data_df):
-#     x = data_df['Current Equip. Value']
-#     y = data_df['Round Kills']
-#
-#     fig = plt.figure()
-#     plt.scatter(x, y)
-#     plt.xlabel('Value In Round')
-#     plt.ylabel('# of Kills In Round')
-#     plt.yticks([0, 1, 2, 3, 4, 5])
-#     plt.suptitle('Kills/Round vs. Equipment Value')
-#     fig.savefig('static/images/money_vs_kills.png')
-#
-#
-# def blank_plot():
-#     fig = plt.figure()
-#     fig.suptitle('No Results To Graph')
-#     fig.savefig('static/images/rounds_per_map.png')
-#     fig.savefig('static/images/money_vs_kills.png')
+def rounds_per_map_plot(data_df):
+    df_list = separate(data_df)
+    df_list = remove_empty(df_list)
+
+    map_list = list(set(data_df['Map'].tolist()))
+    map_list = [x for x in map_list if x != 'RESET POINT']
+
+    round_count_dict = dict.fromkeys(map_list, 0)
+
+    for df in df_list:
+        for cs_map in map_list:
+            round_count_dict[cs_map] += len(df[df['Map'] == cs_map].index)
+
+    fig = plt.figure()
+    plt.bar(range(len(round_count_dict)), list(round_count_dict.values()), align='center')
+    plt.xticks(range(len(round_count_dict)), list(round_count_dict.keys()))
+    plt.suptitle('Rounds Played By Map')
+    plt.xlabel('Map')
+    plt.ylabel('Count')
+    return mpld3.fig_to_html(fig)
+
+
+def money_scatter_plot(data_df):
+    x = data_df['Current Equip. Value']
+    y = data_df['Round Kills']
+
+    fig = plt.figure()
+    plt.scatter(x, y)
+    plt.xlabel('Value In Round')
+    plt.ylabel('# of Kills In Round')
+    plt.yticks([0, 1, 2, 3, 4, 5])
+    plt.suptitle('Kills/Round vs. Equipment Value')
+    return mpld3.fig_to_html(fig)
+
+
+def blank_plot():
+    fig = plt.figure()
+    fig.suptitle('No Results To Graph')
+    return mpld3.fig_to_html(fig)

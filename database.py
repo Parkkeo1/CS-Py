@@ -16,4 +16,4 @@ data_df = pd.read_sql('SELECT * FROM per_round_data', conn)
 # data_df = data_df.iloc[39:]
 # data_df = data_df[data_df['Time'] >= int(time.time()) - 604800]
 
-print(data_df)
+print(matplotlib.get_backend())

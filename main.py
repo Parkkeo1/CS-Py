@@ -112,7 +112,6 @@ def shutdown():
 @app.route('/results')
 def results():
     result = session['result']
-    print(result)
     return render_template('results.html', result=result)
 
 
