@@ -17,7 +17,7 @@ setup(name="CS-Py",
       options={
           'build_exe': {
               'packages': ['jinja2.ext', 'jinja2', 'asyncio', 'numpy', 'pandas', 'sqlite3'],
-              'excludes': ['Tkinter', 'PyQt4', 'gtk', 'PyQt5', 'email', 'mpl-data', 'matplotlib.backends'],
+              'excludes': ['Tkinter', 'PyQt4', 'gtk', 'PyQt5', 'wx'],
               'include_files': files,
               'include_msvcr': True,
           }},

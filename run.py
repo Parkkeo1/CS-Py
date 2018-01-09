@@ -1,5 +1,7 @@
 import time
 import pandas as pd
+import matplotlib
+matplotlib.use('Agg')
 import matplotlib.pyplot as plt, mpld3
 import math
 
