@@ -39,12 +39,12 @@ Ratio of pistol rounds in which you got at least one kill in. Essentially KAS bu
 
 CS-Py only considers kills because assists and surviving aren't really important in pistol rounds. The general KAS stat still accounts for all rounds, including pistol rounds.
 
-### The Graphs
+~~### The Graphs~~
 
-#### Rounds Player By Map
-Self-explanatory. Shows how much you play many different maps or just a handful.
+~~#### Rounds Player By Map~~
+~~Self-explanatory. Shows how much you play many different maps or just a handful.~~
 
-#### Kill/Round vs. Equipment Value
-The MD correlation in graph form. The regression slope would be the correlation coefficient.
+~~#### Kill/Round vs. Equipment Value~~
+~~The MD correlation in graph form. The regression slope would be the correlation coefficient.~~
 
-#### More Graphs To Be Added In The Future.
+~~#### More Graphs To Be Added In The Future.~~
