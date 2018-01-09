@@ -401,7 +401,7 @@ def money_scatter_plot(data_df):
 
     fig = plt.figure()
     plt.scatter(x, y)
-    plt.xlabel('Value In Round')
+    plt.xlabel('Equipment Value ($)')
     plt.ylabel('# of Kills In Round')
     plt.yticks([0, 1, 2, 3, 4, 5])
     plt.suptitle('Kills/Round vs. Equipment Value')
