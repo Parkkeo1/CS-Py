@@ -6,7 +6,8 @@ base = None
 if sys.platform == "win32":
     base = "Win32GUI"
 
-files = ['static/', 'templates/', 'gamestate_integration_main.cfg', 'run.py', '__init__.py', 'README.txt']
+files = ['static/', 'templates/', 'gamestate_integration_main.cfg', 'run.py', '__init__.py', 'README.txt',
+         'player_data.db']
 
 cspy_exe = Executable(script="main.py", base=base, targetName="CS-Py.exe")
 
