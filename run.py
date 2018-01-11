@@ -106,7 +106,7 @@ def query_db_current(conn):
             result = calculate_empty()
             result['money_plot'] = blank_plot()
             result['rounds_map_plot'] = blank_plot()
-            result['multi_kills'] = blank_plot()
+            result['multi_kills_plot'] = blank_plot()
             result['timeframe'] = 'Current Match'
 
             return result
@@ -114,7 +114,7 @@ def query_db_current(conn):
             result = calculate_stats(data_df)
             result['money_plot'] = money_scatter_plot(data_df)
             result['rounds_map_plot'] = rounds_per_map_plot(data_df)
-            result['multi_kills'] = multi_kills_bar(data_df)
+            result['multi_kills_plot'] = multi_kills_bar(data_df)
             result['timeframe'] = 'Current Match'
 
             return result
@@ -130,7 +130,7 @@ def query_db_match(conn):
             result = calculate_stats(data_df)
             result['money_plot'] = money_scatter_plot(data_df)
             result['rounds_map_plot'] = rounds_per_map_plot(data_df)
-            result['multi_kills'] = multi_kills_bar(data_df)
+            result['multi_kills_plot'] = multi_kills_bar(data_df)
             result['timeframe'] = 'Last Match'
 
             return result
@@ -141,7 +141,7 @@ def query_db_match(conn):
         result = calculate_stats(data_df)
         result['money_plot'] = money_scatter_plot(data_df)
         result['rounds_map_plot'] = rounds_per_map_plot(data_df)
-        result['multi_kills'] = multi_kills_bar(data_df)
+        result['multi_kills_plot'] = multi_kills_bar(data_df)
         result['timeframe'] = 'Last Match'
 
         return result
@@ -171,7 +171,7 @@ def query_db_time(conn, time_value):
         result = calculate_empty()
         result['money_plot'] = blank_plot()
         result['rounds_map_plot'] = blank_plot()
-        result['multi_kills'] = blank_plot()
+        result['multi_kills_plot'] = blank_plot()
         result['timeframe'] = timeframe['timeframe']
 
         return result
@@ -179,7 +179,7 @@ def query_db_time(conn, time_value):
         result = calculate_stats(data_df)
         result['money_plot'] = money_scatter_plot(data_df)
         result['rounds_map_plot'] = rounds_per_map_plot(data_df)
-        result['multi_kills'] = multi_kills_bar(data_df)
+        result['multi_kills_plot'] = multi_kills_bar(data_df)
         result['timeframe'] = timeframe['timeframe']
 
         return result
