@@ -106,6 +106,7 @@ def query_db_current(conn):
             result = calculate_empty()
             result['money_plot'] = blank_plot()
             result['rounds_map_plot'] = blank_plot()
+            result['multi_kills'] = blank_plot()
             result['timeframe'] = 'Current Match'
 
             return result
@@ -113,6 +114,7 @@ def query_db_current(conn):
             result = calculate_stats(data_df)
             result['money_plot'] = money_scatter_plot(data_df)
             result['rounds_map_plot'] = rounds_per_map_plot(data_df)
+            result['multi_kills'] = multi_kills_bar(data_df)
             result['timeframe'] = 'Current Match'
 
             return result
@@ -128,6 +130,7 @@ def query_db_match(conn):
             result = calculate_stats(data_df)
             result['money_plot'] = money_scatter_plot(data_df)
             result['rounds_map_plot'] = rounds_per_map_plot(data_df)
+            result['multi_kills'] = multi_kills_bar(data_df)
             result['timeframe'] = 'Last Match'
 
             return result
@@ -138,6 +141,7 @@ def query_db_match(conn):
         result = calculate_stats(data_df)
         result['money_plot'] = money_scatter_plot(data_df)
         result['rounds_map_plot'] = rounds_per_map_plot(data_df)
+        result['multi_kills'] = multi_kills_bar(data_df)
         result['timeframe'] = 'Last Match'
 
         return result
@@ -167,6 +171,7 @@ def query_db_time(conn, time_value):
         result = calculate_empty()
         result['money_plot'] = blank_plot()
         result['rounds_map_plot'] = blank_plot()
+        result['multi_kills'] = blank_plot()
         result['timeframe'] = timeframe['timeframe']
 
         return result
@@ -174,6 +179,7 @@ def query_db_time(conn, time_value):
         result = calculate_stats(data_df)
         result['money_plot'] = money_scatter_plot(data_df)
         result['rounds_map_plot'] = rounds_per_map_plot(data_df)
+        result['multi_kills'] = multi_kills_bar(data_df)
         result['timeframe'] = timeframe['timeframe']
 
         return result
@@ -407,6 +413,20 @@ def money_scatter_plot(data_df):
     plt.ylabel('# of Kills In Round')
     plt.yticks([0, 1, 2, 3, 4, 5])
     plt.suptitle('Kills/Round vs. Equipment Value')
+    return mpld3.fig_to_html(fig, no_extras=True)
+
+
+def multi_kills_bar(data_df):
+    multi_list = [0, 1, 2, 3, 4, 5]
+
+    multi_count_dict = {count: len(data_df[data_df['Round Kills'] == count]) for count in multi_list}
+
+    fig = plt.figure()
+    plt.bar(range(len(multi_count_dict)), list(multi_count_dict.values()), align='center')
+    plt.xticks(range(len(multi_count_dict)), list(multi_count_dict.keys()))
+    plt.suptitle('Multi-Kills')
+    plt.xlabel('# of Kills In Round')
+    plt.ylabel('Count')
     return mpld3.fig_to_html(fig, no_extras=True)
 
 

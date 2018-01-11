@@ -17,3 +17,8 @@ data_df = pd.read_sql('SELECT * FROM per_round_data', conn)
 # data_df = data_df[data_df['Time'] >= int(time.time()) - 604800]
 
 print(data_df)
+multi_list = [0, 1, 2, 3, 4, 5]
+
+multi_count_dict = {count: len(data_df[data_df['Round Kills'] == count]) for count in multi_list}
+print(multi_count_dict)
+
