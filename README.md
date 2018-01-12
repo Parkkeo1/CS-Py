@@ -10,24 +10,27 @@ Thus, CS-Py's purpose, as a local/standalone application, is to expand the numbe
 
 As a flask app, CS-Py collects player data at the end of each in-game round from the POST JSON requests that are locally sent by the CS:GO client when GSI is enabled. After storing this information in a SQL table, the app calculates performance metrics such as Headshot Ratio, KAS Percentage, KDR/KDA, and Monetary Dependency that the user can then view in the web browser and filter his/her data by match and time (day, week, month, lifetime). More ideas for analysis are below.
 
-My current end goal is to package this Python app into a Windows Executable so that any user can use it without having to install Python. In the future, I hope to implement remote/cloud SQL DB storage and an in-game GUI transparent overlay that will display live performance statistics for the current match.
+In the future, I hope to implement remote/cloud SQL DB storage and an in-game GUI transparent overlay that will display live performance statistics for the current match.
 
-### Installation and Usage (Pre-release)
+### v1.0 Released. Install CS-Py [here](https://github.com/Parkkeo1/CS-Py/releases/tag/v1.0) as a Windows program.
+- Current statistical features of CS-Py are explained [here.](https://github.com/Parkkeo1/CS-Py/blob/master/documentation/statistics_documentation.md)
+- Please report bugs by creating a new issue [here.](https://github.com/Parkkeo1/CS-Py/issues)
+
+### Installation and Usage
 - For developers and contributors: git clone the repository, then in terminal: $ python main.py
-- For all other users: [See Releases](https://github.com/Parkkeo1/CS-Py/releases) and [README.txt](https://github.com/Parkkeo1/CS-Py/blob/master/README.txt)
+- For all other users: [See Releases](https://github.com/Parkkeo1/CS-Py/releases) and [README.txt.](https://github.com/Parkkeo1/CS-Py/blob/master/README.txt)
 
 ### Project Objectives (By Priority)
 1. Implement by-round data storage for statistical analysis using Pandas dataframe.s *Completed 12/23/17*
 2. Integrate SQL database functionality and store player data by individual rounds. *Completed 12/23/17*
-4. Develop front-end GUI (probably an in-web-browser application) to display player statistics and graphs. *WIP*
-4. Develop full-screen (transparent) overlay to be used on top of the CSGO app as a live statistics display in-game.
+4. Develop front-end GUI (i.e. web application) to display player statistics and graphs. *Completed 1/10/18*
+4. Develop transparent screen overlay to be used on top of the CSGO app as a live statistics display.
 
 ### Current Ideas For Player Statistics & Analysis
 1. KDR and KDA
 2. HSR
-3. Modified KAST (based on HLTV, but changed to not take traded kills into account).
+3. KAS Percentage
 4. Correlation between # of kills and monetary value of player equipment by round.
-5. Using all of the above statistics to determine how well a player overall plays on different maps.
-6. Using all of the above statistics to determine how CT/T-sided a player tends to play (overall vs. depending on the map).
-7. Graphing these statistics by time to see player's skill improvement. 
-8. Specific: pistol round performance: Kills/Pistol Round, HSR, KAS, KDR, etc
+5. Using all of the above statistics to determine how CT/T-sided a player tends to play (overall vs. depending on the map).
+6. Specific: pistol round performance: Kills/Pistol Round, HSR, KAS, KDR, etc
+7. Kills Per Round; KPR
