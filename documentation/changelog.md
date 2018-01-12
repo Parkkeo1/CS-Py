@@ -38,3 +38,5 @@ in it that was causing index errors in kdr_kda and kas. I also made a remove_emp
 1/6/18-1/7/18: Focused more on making CS-Py into an installable windows program/executable with cx_Freeze, distutils, and Inno Setup. Made CS-Py.exe and the installer executable automatically require admin permissions. More testing to be done, but so far successful. Running CS-Py as admin is required because the program has to constantly access and create/edit the SQL db file. Also temporarily removed matplotlib and graph functionality, considering switching to a more lightweight and simple graphing library. TODO: Do more testing with the program and find a better graphing package.
 
 1/8/18: Released v0.3-beta. Focused on reducing the program's file size by excluding unnecessary modules in setup.py. Added and successfully tested mpld3 for matplotlib; now using direct HTML embedding using Jinja instead of using .png image files. TODO: Make more graphs, and keep testing v0.3-beta.
+
+1/11/18: Released v1.0. Tested successfully. TODO: keep testing to further ensure program's accuracy in calculating user statistics. 
