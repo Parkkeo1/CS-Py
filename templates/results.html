@@ -8,7 +8,7 @@
             <hr style="width: 75%;" class="pb-2">
         </div>
         <div class="row">
-            <div class="col-4">
+            <div class="col-5">
                 <ul class="nav nav-tabs" id="myTab" role="tablist">
                     <li class="nav-item">
                         <a class="nav-link active" id="overall-tab" data-toggle="tab" href="#overall" role="tab" aria-controls="overall" aria-selected="true">Overall</a>
@@ -22,8 +22,8 @@
                 </ul>
                 <div class="tab-content" id="stats">
                     <div class="tab-pane fade show active" id="overall" role="tabpanel" aria-labelledby="overall-tab">
-                        <table class="table">
-                            <caption>Performance metrics: <a href="/docs" target="_blank">How are these calculated?</a></caption>
+                        <table class="table table-sm">
+                            <caption>Performance metrics: <a href="https://github.com/Parkkeo1/CS-Py/blob/master/documentation/statistics_documentation.md#understanding-cs-pys-statistics" target="_blank">How are these calculated?</a></caption>
                             <thead class="thead-light">
                                 <tr class="bg-primary">
                                     <th scope="col">Statistic</th>
@@ -55,12 +55,24 @@
                                     <td>MD Correlation Coeff.</td>
                                     <td>{{ result['correl'] }}</td>
                                 </tr>
+                                <tr>
+                                    <td>Pistol HSR</td>
+                                    <td>{{ result['pistol_hsr'] }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Pistol KPR</td>
+                                    <td>{{ result['pistol_kpr'] }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Pistol Kill-Round Ratio</td>
+                                    <td>{{ result['pistol_k'] }}</td>
+                                </tr>
                             </tbody>
                         </table>
                     </div>
                     <div class="tab-pane fade" id="ct" role="tabpanel" aria-labelledby="ct-tab">
-                        <table class="table">
-                            <caption>Performance metrics: <a href="/docs" target="_blank">How are these calculated?</a></caption>
+                        <table class="table table-sm">
+                            <caption>Performance metrics: <a href="https://github.com/Parkkeo1/CS-Py/blob/master/documentation/statistics_documentation.md#understanding-cs-pys-statistics" target="_blank">How are these calculated?</a></caption>
                             <thead class="thead-light">
                                 <tr class="bg-primary">
                                     <th scope="col">Statistic</th>
@@ -70,34 +82,38 @@
                             <tbody>
                                 <tr>
                                     <td>Headshot Ratio</td>
-                                    <td>PLACEHOLDER</td>
+                                    <td>{{ result['ct_hsr'] }}</td>
                                 </tr>
                                 <tr>
                                     <td>Kills Per Round</td>
-                                    <td>PLACEHOLDER</td>
-                                </tr>
-                                <tr>
-                                    <td>KAS Percentage</td>
-                                    <td>PLACEHOLDER%</td>
-                                </tr>
-                                <tr>
-                                    <td>KDR, KDA</td>
-                                    <td>PLACEHOLDER, PLACEHOLDER</td>
+                                    <td>{{ result['ct_kpr'] }}</td>
                                 </tr>
                                 <tr>
                                     <td>Mean Equipment Value</td>
-                                    <td>$ PLACEHOLDER</td>
+                                    <td>$ {{ result['ct_equip'] }}</td>
                                 </tr>
                                 <tr>
                                     <td>MD Correlation Coeff.</td>
-                                    <td>PLACEHOLDER</td>
+                                    <td>{{ result['ct_correl'] }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Pistol HSR</td>
+                                    <td>{{ result['pistol_ct_hsr'] }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Pistol KPR</td>
+                                    <td>{{ result['pistol_ct_kpr'] }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Pistol Kill-Round Ratio</td>
+                                    <td>{{ result['pistol_ct_k'] }}</td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
-                    <div class="tab-pane fade" id="ct" role="tabpanel" aria-labelledby="ct-tab">
-                        <table class="table">
-                            <caption>Performance metrics: <a href="/docs" target="_blank">How are these calculated?</a></caption>
+                    <div class="tab-pane fade" id="t" role="tabpanel" aria-labelledby="t-tab">
+                        <table class="table table-sm">
+                            <caption>Performance metrics: <a href="https://github.com/Parkkeo1/CS-Py/blob/master/documentation/statistics_documentation.md#understanding-cs-pys-statistics" target="_blank">How are these calculated?</a></caption>
                             <thead class="thead-light">
                                 <tr class="bg-primary">
                                     <th scope="col">Statistic</th>
@@ -107,27 +123,31 @@
                             <tbody>
                                 <tr>
                                     <td>Headshot Ratio</td>
-                                    <td>PLACEHOLDER</td>
+                                    <td>{{ result['t_hsr'] }}</td>
                                 </tr>
                                 <tr>
                                     <td>Kills Per Round</td>
-                                    <td>PLACEHOLDER</td>
-                                </tr>
-                                <tr>
-                                    <td>KAS Percentage</td>
-                                    <td>PLACEHOLDER%</td>
-                                </tr>
-                                <tr>
-                                    <td>KDR, KDA</td>
-                                    <td>PLACEHOLDER, PLACEHOLDER</td>
+                                    <td>{{ result['t_kpr'] }}</td>
                                 </tr>
                                 <tr>
                                     <td>Mean Equipment Value</td>
-                                    <td>$ PLACEHOLDER</td>
+                                    <td>$ {{ result['t_equip'] }}</td>
                                 </tr>
                                 <tr>
                                     <td>MD Correlation Coeff.</td>
-                                    <td>PLACEHOLDER</td>
+                                    <td>{{ result['t_correl'] }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Pistol HSR</td>
+                                    <td>{{ result['pistol_t_hsr'] }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Pistol KPR</td>
+                                    <td>{{ result['pistol_t_kpr'] }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Pistol Kill-Round Ratio</td>
+                                    <td>{{ result['pistol_t_k'] }}</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -135,14 +155,18 @@
                 </div>
             </div>
             <div class="col-7">
+{#                <h6>Graphs are WIP and being overhauled.</h6>#}
                 <div class="container-fluid" style="padding: 0;">
                     <div id="matplotlib" class="carousel slide" data-interval="false">
                         <div class="carousel-inner">
                             <div class="carousel-item active">
-                                <img src="{{ url_for('static', filename = 'images/rounds_per_map.png') }}" alt="round/map graph">
+                                {{ result['rounds_map_plot']|safe }}
                             </div>
                             <div class="carousel-item">
-                                <img src="{{ url_for('static', filename = 'images/money_vs_kills.png') }}" alt="round/map graph">
+                                {{ result['money_plot']|safe }}
+                            </div>
+                            <div class="carousel-item">
+                                {{ result['multi_kills_plot']|safe }}
                             </div>
                         </div>
                         <a class="carousel-control-prev" href="#matplotlib" role="button" data-slide="prev">
@@ -158,7 +182,8 @@
             </div>
         </div>
         <div class="footer">
-            <a href="https://github.com/Parkkeo1" target="_blank">Created By @Parkkeo1</a>
+            <a href="/" class="pr-4">Back To Home Page</a>
+            <a href="https://github.com/Parkkeo1" class="pl-4" target="_blank">Created By @Parkkeo1</a>
         </div>
     </div>
 {% endblock %}

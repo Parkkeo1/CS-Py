@@ -5,6 +5,8 @@ import sqlite3
 import pandas as pd
 import webbrowser
 import time
+import winreg as registry
+from shutil import copyfile
 
 
 app = Flask(__name__)
@@ -35,6 +37,25 @@ def reset_match():
     return data_df
 
 
+def shutdown_server():
+    func = request.environ.get('werkzeug.server.shutdown')
+    if func is None:
+        raise RuntimeError('Not running with the Werkzeug Server')
+    func()
+
+
+def setup_gamestate_cfg():
+    key = registry.CreateKey(registry.HKEY_CURRENT_USER, "Software\Valve\Steam")
+    steam_path = registry.QueryValueEx(key, "SteamPath")[0]
+
+    steam_path = steam_path + '/steamapps/common/Counter-Strike Global Offensive/csgo/cfg'
+
+    src = 'gamestate_integration_main.cfg'
+    dst = steam_path + '/gamestate_integration_main.cfg'
+
+    copyfile(src, dst)
+
+
 @app.teardown_appcontext
 def close_db(error):
     if hasattr(g, 'sqlite_db'):
@@ -45,18 +66,16 @@ def close_db(error):
 @app.route('/', methods=['GET', 'POST'])
 def index():
     if request.method == 'POST':
-        starter = str(request.form.get('starter'))
-        ender = str(request.form.get('ender'))
-        reset = str(request.form.get('reset'))
-        if starter == 'starter':
+        post_input = str(request.form.get('input'))
+        if post_input == 'starter':
             app.config['STARTER'] = True
             return redirect(url_for('index'))
         else:
-            if ender == 'ender':
+            if post_input == 'ender':
                 app.config['STARTER'] = False
                 return redirect(url_for('index'))
             else:
-                if reset == 'reset':
+                if post_input == 'reset':
                     conn = get_db()
                     reset_df = reset_match()
                     last_df = pd.read_sql('SELECT * FROM per_round_data ORDER BY Time DESC LIMIT 1;', conn)
@@ -84,16 +103,16 @@ def index():
         return render_template('index.html', status=status)
 
 
+@app.route('/shutdown', methods=['POST'])
+def shutdown():
+    shutdown_server()
+    return 'CS-Py is shutting down. You may now close this browser window/tab.'
+
+
 @app.route('/results')
 def results():
     result = session['result']
-    print(result)
     return render_template('results.html', result=result)
-
-
-@app.route('/docs')
-def docs():
-    return render_template('docs.html')
 
 
 # backend POST request handler
@@ -115,11 +134,11 @@ def GSHandler():
                 if last_df.iloc[0]['Map Status'] != 'gameover':  # this prevents having two 'gameover' events in a row, where the latter is a None/NaN entry.
                     stats_df.to_sql("per_round_data", conn, if_exists="append", index=False)
                     clean_db(conn)
-                    print(pd.read_sql('select * from per_round_data;', conn))
+                    print('successful')
             else:
                 stats_df.to_sql("per_round_data", conn, if_exists="append", index=False)
                 clean_db(conn)
-                print(pd.read_sql('select * from per_round_data;', conn))
+                print('successful')
     print(app.config['STARTER'])
     return 'JSON Posted'
 
@@ -131,6 +150,11 @@ def add_header(response):
 
 
 if __name__ == "__main__":
+    # blank_plot()
+    try:
+        setup_gamestate_cfg()
+    except:
+        pass
     webbrowser.open_new('http://127.0.0.1:5000')  # for deployment
     app.config['STARTER'] = False  # starter variable
     app.run(debug=False)

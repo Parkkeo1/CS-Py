@@ -2,7 +2,8 @@ import time
 import pandas as pd
 import matplotlib
 matplotlib.use('Agg')
-import matplotlib.pyplot as plt
+import matplotlib.pyplot as plt, mpld3
+import math
 
 
 def check_payload(payload):
@@ -94,7 +95,6 @@ def clean_db(conn):
 # calculate & collect: HSR, KDR, KDA, KAS
 # graph: CT vs. T, player stats on various maps, player stats over rounds in a match and/or over other metrics of time
 def query_db_current(conn):
-    result = {}
     data_df = pd.read_sql('SELECT * FROM per_round_data;', conn)
     idx_range = data_df[data_df['Map Status'] == 'gameover'].index.tolist()
     if not idx_range:
@@ -103,46 +103,34 @@ def query_db_current(conn):
         idx = idx_range[-1]
         data_df = data_df.iloc[idx + 1:]
         if data_df.empty:  # if there haven't been any rounds played since the last complete match.
-            result['hsr'] = 0
-            result['equip'] = 0
-            result['correl'] = 0
-            result['kdr_kda'] = [0, 0]
-            result['kas'] = 0
-            result['kpr'] = 0
-            blank_plot()
+            result = calculate_empty()
+            result['money_plot'] = blank_plot()
+            result['rounds_map_plot'] = blank_plot()
+            result['multi_kills_plot'] = blank_plot()
             result['timeframe'] = 'Current Match'
 
             return result
         else:
-            result['hsr'] = hsr(data_df)
-            result['equip'] = int(data_df['Current Equip. Value'].mean())
-            result['correl'] = correl(data_df)
-            result['kdr_kda'] = kdr_kda(data_df)
-            result['kas'] = kas(data_df)
-            result['kpr'] = kpr(data_df)
-            rounds_per_map_plot(data_df)
-            money_scatter_plot(data_df)
+            result = calculate_stats(data_df)
+            result['money_plot'] = money_scatter_plot(data_df)
+            result['rounds_map_plot'] = rounds_per_map_plot(data_df)
+            result['multi_kills_plot'] = multi_kills_bar(data_df)
             result['timeframe'] = 'Current Match'
 
             return result
 
 
 def query_db_match(conn):
-    result = {}
     data_df = pd.read_sql('SELECT * FROM per_round_data;', conn)
     idx_range = data_df[data_df['Map Status'] == 'gameover'].index.tolist()[-2:]
     length = len(idx_range)
     if length < 2:
         if length == 1:  # there has only been one 'gameover' event.
             data_df = data_df.iloc[0:idx_range[0] + 1]
-            result['hsr'] = hsr(data_df)
-            result['equip'] = int(data_df['Current Equip. Value'].mean())
-            result['correl'] = correl(data_df)
-            result['kdr_kda'] = kdr_kda(data_df)
-            result['kas'] = kas(data_df)
-            result['kpr'] = kpr(data_df)
-            rounds_per_map_plot(data_df)
-            money_scatter_plot(data_df)
+            result = calculate_stats(data_df)
+            result['money_plot'] = money_scatter_plot(data_df)
+            result['rounds_map_plot'] = rounds_per_map_plot(data_df)
+            result['multi_kills_plot'] = multi_kills_bar(data_df)
             result['timeframe'] = 'Last Match'
 
             return result
@@ -150,58 +138,49 @@ def query_db_match(conn):
             return query_db_time(conn, 'lifetime')  # because there have been no 'gameover' events ever.
     else:
         data_df = data_df.iloc[idx_range[0] + 1:idx_range[1] + 1]
-        result['hsr'] = hsr(data_df)
-        result['equip'] = int(data_df['Current Equip. Value'].mean())
-        result['correl'] = correl(data_df)
-        result['kdr_kda'] = kdr_kda(data_df)
-        result['kas'] = kas(data_df)
-        result['kpr'] = kpr(data_df)
-        rounds_per_map_plot(data_df)
-        money_scatter_plot(data_df)
+        result = calculate_stats(data_df)
+        result['money_plot'] = money_scatter_plot(data_df)
+        result['rounds_map_plot'] = rounds_per_map_plot(data_df)
+        result['multi_kills_plot'] = multi_kills_bar(data_df)
         result['timeframe'] = 'Last Match'
 
         return result
 
 
 def query_db_time(conn, time_value):
-    result = {}
+    timeframe = {}
     data_df = pd.read_sql('SELECT * FROM per_round_data;', conn)
     offset = 0
     if time_value == 'today':
         offset = 86400
-        result['timeframe'] = 'Past 24 Hours'
+        timeframe['timeframe'] = 'Past 24 Hours'
     if time_value == 'week':
         offset = 604800
-        result['timeframe'] = 'Past 7 Days'
+        timeframe['timeframe'] = 'Past 7 Days'
     if time_value == 'month':
         offset = 2592000
-        result['timeframe'] = 'Past 30 Days'
+        timeframe['timeframe'] = 'Past 30 Days'
     lower = int(time.time()) - offset
     if time_value == 'lifetime':
-        result['timeframe'] = 'Lifetime'
+        timeframe['timeframe'] = 'Lifetime'
         lower = 0
 
     data_df = data_df[data_df['Time'] >= lower]
     test_df = data_df[['Player Name', 'Player Team']]
     if data_df.empty or test_df.isnull().all().all():  # if there are no entries that match the time criteria (i.e. no games in the past 24 hours)
-        result['hsr'] = 0
-        result['equip'] = 0
-        result['correl'] = 0
-        result['kdr_kda'] = [0, 0]
-        result['kas'] = 0
-        result['kpr'] = 0
-        blank_plot()
+        result = calculate_empty()
+        result['money_plot'] = blank_plot()
+        result['rounds_map_plot'] = blank_plot()
+        result['multi_kills_plot'] = blank_plot()
+        result['timeframe'] = timeframe['timeframe']
 
         return result
     else:
-        result['hsr'] = hsr(data_df)
-        result['equip'] = int(data_df['Current Equip. Value'].mean())
-        result['correl'] = correl(data_df)
-        result['kdr_kda'] = kdr_kda(data_df)
-        result['kas'] = kas(data_df)
-        result['kpr'] = kpr(data_df)
-        rounds_per_map_plot(data_df)
-        money_scatter_plot(data_df)
+        result = calculate_stats(data_df)
+        result['money_plot'] = money_scatter_plot(data_df)
+        result['rounds_map_plot'] = rounds_per_map_plot(data_df)
+        result['multi_kills_plot'] = multi_kills_bar(data_df)
+        result['timeframe'] = timeframe['timeframe']
 
         return result
 
@@ -209,7 +188,42 @@ def query_db_time(conn, time_value):
 # final abstraction method for ALL statistics to be displayed
 # hsr, mean equip. value, md correlation, kdr/kda, kas, kpr FOR OVERALL, CT AND T SIDES.
 def calculate_stats(data_df):
-    pass
+    ct_df = data_df[(data_df['Player Team'] == 'CT')].reset_index(drop=True)
+    t_df = data_df[(data_df['Player Team'] == 'T')].reset_index(drop=True)
+
+    if len(ct_df.index) == 0:
+        ct_equip_value = 0
+    else:
+        ct_equip_value = int(ct_df['Current Equip. Value'].mean())
+
+    if len(t_df.index) == 0:
+        t_equip_value = 0
+    else:
+        t_equip_value = int(t_df['Current Equip. Value'].mean())
+
+    pistol_results = pistol_stats(data_df)
+
+    result = {'hsr': hsr(data_df), 'equip': int(data_df['Current Equip. Value'].mean()), 'correl': correl(data_df),
+              'kdr_kda': kdr_kda(data_df), 'kas': kas(data_df), 'kpr': kpr(data_df),
+              'ct_kpr': kpr(ct_df), 'ct_equip': ct_equip_value,
+              'ct_hsr': hsr(ct_df), 'ct_correl': correl(ct_df), 't_kpr': kpr(t_df),
+              't_equip': t_equip_value, 't_hsr': hsr(t_df), 't_correl': correl(t_df),
+              'pistol_hsr': pistol_results['pistol_hsr'], 'pistol_kpr': pistol_results['pistol_kpr'],
+              'pistol_k': pistol_results['pistol_k'], 'pistol_ct_hsr': pistol_results['pistol_ct_hsr'],
+              'pistol_ct_kpr': pistol_results['pistol_ct_kpr'], 'pistol_ct_k': pistol_results['pistol_ct_k'],
+              'pistol_t_hsr': pistol_results['pistol_t_hsr'], 'pistol_t_kpr': pistol_results['pistol_t_kpr'],
+              'pistol_t_k': pistol_results['pistol_t_k']}
+
+    return result
+
+
+def calculate_empty():
+    result = {'hsr': 0, 'equip': 0, 'correl': 0, 'kdr_kda': [0, 0], 'kas': 0, 'kpr': 0, 'ct_kpr': 0, 'ct_equip': 0,
+              'ct_hsr': 0, 'ct_correl': 0, 't_kpr': 0, 't_equip': 0, 't_hsr': 0, 't_correl': 0, 'pistol_hsr': 0,
+              'pistol_kpr': 0, 'pistol_k': 0, 'pistol_ct_hsr': 0, 'pistol_ct_kpr': 0, 'pistol_ct_k': 0,
+              'pistol_t_hsr': 0, 'pistol_t_kpr': 0, 'pistol_t_k': 0}
+
+    return result
 
 
 # querying db helper function, returns list of indices of the rows of the dataframe where map status == 'gameover'.
@@ -244,6 +258,13 @@ def remove_empty(df_list):
 def hsr(data_df):
     total_kills = data_df['Round Kills'].sum()
     total_hs = data_df['Round HS Kills'].sum()
+
+    if total_kills == 0 or math.isnan(total_kills):
+        return 0
+
+    if total_hs == 0 or math.isnan(total_hs):
+        return 0
+
     return float(round(total_hs / total_kills, 3))
 
 
@@ -272,8 +293,8 @@ def kdr_kda(data_df):
         total_assists += int(max_df['Assists'])
         total_deaths += int(max_df['Deaths'])
 
-    if total_deaths == 0:
-        return ['Undef', 'Undef']
+    if total_deaths == 0 or math.isnan(total_deaths):
+        return [0, 0]
 
     total_kdr = float(round(total_kills / total_deaths, 3))
     total_kda = float(round((total_kills + total_assists) / total_deaths, 3))
@@ -302,8 +323,8 @@ def kas(data_df):
                         kas_counter += 1
                     round_counter += 1
 
-    if round_counter == 0:
-        return 'Undef'
+    if round_counter == 0 or math.isnan(round_counter):
+        return 0
 
     kas_r = round((kas_counter / round_counter), 2)
     return kas_r * 100
@@ -314,7 +335,50 @@ def kpr(data_df):
     count_df = data_df[(data_df['Player Name'].notnull()) & (data_df['Player Team'].notnull())]
     total_rounds = len(count_df.index)
 
+    if total_rounds == 0 or math.isnan(total_rounds):
+        return 0
+
+    if total_kills == 0 or math.isnan(total_kills):
+        return 0
+
     return round((total_kills / total_rounds), 2)
+
+
+def pistol_stats(data_df):
+    df_list = remove_empty(separate(data_df))
+
+    pistol_df = pd.DataFrame()
+    for df in df_list:
+        df = df.reset_index(drop=True)
+        try:
+            temp_df = df.iloc[[0, 15]]
+            pistol_df = pistol_df.append(temp_df, ignore_index=True)
+        except:
+            try:
+                temp_df = df.iloc[0]
+                pistol_df = pistol_df.append(temp_df, ignore_index=True)
+            except:
+                continue
+
+    pistol_df = pistol_df[(pistol_df['Current Equip. Value'] <= 850) & (pistol_df['Current Equip. Value'] > 0)]
+    ct_pistol_df = pistol_df[(pistol_df['Player Team'] == 'CT')].reset_index(drop=True)
+    t_pistol_df = pistol_df[(pistol_df['Player Team'] == 'T')].reset_index(drop=True)
+
+    # TODO: Improve style for code below.
+
+    pistol_results = {'pistol_hsr': hsr(pistol_df), 'pistol_kpr': kpr(pistol_df), 'pistol_k': pistol_k_ratio(pistol_df),
+                      'pistol_ct_hsr': hsr(ct_pistol_df), 'pistol_ct_kpr': kpr(ct_pistol_df),
+                      'pistol_ct_k': pistol_k_ratio(ct_pistol_df), 'pistol_t_hsr': hsr(t_pistol_df),
+                      'pistol_t_kpr': kpr(t_pistol_df), 'pistol_t_k': pistol_k_ratio(t_pistol_df)}
+
+    return pistol_results
+
+
+def pistol_k_ratio(pistol_df):
+    if len(pistol_df.index) == 0 or math.isnan(len(pistol_df.index)):
+        return 0
+
+    return round(len(pistol_df[pistol_df['Round Kills'] > 0].index) / len(pistol_df.index), 2)
 
 
 def rounds_per_map_plot(data_df):
@@ -336,7 +400,7 @@ def rounds_per_map_plot(data_df):
     plt.suptitle('Rounds Played By Map')
     plt.xlabel('Map')
     plt.ylabel('Count')
-    fig.savefig('static/images/rounds_per_map.png')
+    return mpld3.fig_to_html(fig, no_extras=True)
 
 
 def money_scatter_plot(data_df):
@@ -345,19 +409,28 @@ def money_scatter_plot(data_df):
 
     fig = plt.figure()
     plt.scatter(x, y)
-    plt.xlabel('Value In Round')
+    plt.xlabel('Equipment Value ($)')
     plt.ylabel('# of Kills In Round')
     plt.yticks([0, 1, 2, 3, 4, 5])
     plt.suptitle('Kills/Round vs. Equipment Value')
-    fig.savefig('static/images/money_vs_kills.png')
+    return mpld3.fig_to_html(fig, no_extras=True)
 
 
-def ct_t_bar_plot(data_df):
-    pass
+def multi_kills_bar(data_df):
+    multi_list = [0, 1, 2, 3, 4, 5]
+
+    multi_count_dict = {count: len(data_df[data_df['Round Kills'] == count]) for count in multi_list}
+
+    fig = plt.figure()
+    plt.bar(range(len(multi_count_dict)), list(multi_count_dict.values()), align='center')
+    plt.xticks(range(len(multi_count_dict)), list(multi_count_dict.keys()))
+    plt.suptitle('Multi-Kills')
+    plt.xlabel('# of Kills In Round')
+    plt.ylabel('Count')
+    return mpld3.fig_to_html(fig, no_extras=True)
 
 
 def blank_plot():
     fig = plt.figure()
     fig.suptitle('No Results To Graph')
-    fig.savefig('static/images/rounds_per_map.png')
-    fig.savefig('static/images/money_vs_kills.png')
+    return mpld3.fig_to_html(fig, no_extras=True)
