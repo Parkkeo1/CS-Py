@@ -13,7 +13,6 @@ pd.set_option('display.width', 1000)
 
 conn = sqlite3.connect('player_data.db')
 data_df = pd.read_sql('SELECT * FROM per_round_data', conn)
-<<<<<<< HEAD
 
 # new_df = data_df.iloc[:-1]
 # new_df.to_sql("per_round_data", conn, if_exists="replace", index=False)
@@ -56,13 +55,9 @@ t_df = data_df[(data_df['Player Team'] == 'T')].reset_index(drop=True)  # | ((da
 # print(ct_hsr)
 # print(t_hsr)
 # print('\n')
-=======
-# data_df = data_df.iloc[39:]
-# data_df = data_df[data_df['Time'] >= int(time.time()) - 604800]
 
 print(data_df)
 multi_list = [0, 1, 2, 3, 4, 5]
->>>>>>> 0846ebd912c7db71608463e34ce711c4cbbba1f4
 
 multi_count_dict = {count: len(data_df[data_df['Round Kills'] == count]) for count in multi_list}
 print(multi_count_dict)
