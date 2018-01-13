@@ -19,7 +19,7 @@ def check_payload(payload):
                                 if 'previously' in payload:
                                     if 'round' in payload['previously']:
                                         if 'phase' in payload['previously']['round'] and payload['previously']['round']['phase'] == 'live':
-                                            return 1
+                                            return 1  # parse payload; when player is alive by the end of the round/game
                             else:
                                 if payload['round']['phase'] == 'live' and (client == target):
                                     if 'state' in payload['player'] and 'health' in payload['player']['state']:
@@ -29,7 +29,7 @@ def check_payload(payload):
                                                     if 'state' in payload['previously']['player']:
                                                         if 'health' in payload['previously']['player']['state'] and (
                                                                 payload['previously']['player']['state']['health'] > 0):
-                                                            return 1
+                                                            return 1  # parse payload; when player dies mid-round
                                 else:
                                     if payload['map']['phase'] == 'gameover' and payload['round']['phase'] == 'over' and (client != target):
                                         if 'previously' in payload:
@@ -37,7 +37,7 @@ def check_payload(payload):
                                                 if 'phase' in payload['previously']['round'] and \
                                                         payload['previously']['round'][
                                                             'phase'] == 'live':
-                                                    return 2
+                                                    return 2  # triggers endgame payload
     return 0
 
 

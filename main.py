@@ -142,11 +142,21 @@ def GSHandler():
                     stats_df.to_sql("per_round_data", conn, if_exists="append", index=False)
                     clean_db(conn)
                     print('successful 2')
-            else:
+            else:  # if counter == 1; parse payload
                 if len(last_df.index) == 0 or abs(int(stats_df.iloc[0]['Time']) - int(last_df.iloc[0]['Time'])) > 1:
                     stats_df.to_sql("per_round_data", conn, if_exists="append", index=False)
                     clean_db(conn)
                     print('successful 1')
+                else:  # time difference is 1 second or less
+                    if stats_df.iloc[0]['Map Status'] == 'gameover' and last_df.iloc[0]['Map Status'] == 'live':
+                        # TODO: delete last_df's entry/row and replace it with stats_df entry.
+                        # To prevent cases such as this:
+                        #
+                        # 52  1515805253  de_cache       live   dumby  T  23.0  3.0  17.0  3.0  56.0  5000.0   1.0   0.0
+                        # 53  1515805254  de_cache   gameover   dumby  T  23.0  4.0  17.0  3.0  57.0  5000.0   1.0   0.0
+                        # stats_df.to_sql("per_round_data", conn, if_exists="append", index=False)
+                        # clean_db(conn)
+                        pass
     return 'JSON Posted'
 
 
