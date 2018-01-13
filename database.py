@@ -19,19 +19,27 @@ data_df = pd.read_sql('SELECT * FROM per_round_data', conn)
 
 print(data_df)
 
-data_df.to_csv('player_data.txt', sep='\t', index=False)
-
-ct_df = data_df[(data_df['Player Team'] == 'CT')].reset_index(drop=True)  # | ((data_df['Map Status'] == 'gameover') & (data_df['Player Team'] != 'T'))]
-t_df = data_df[(data_df['Player Team'] == 'T')].reset_index(drop=True)  # | ((data_df['Map Status'] == 'gameover') & (data_df['Player Team'] != 'CT'))]
-# current ideas for CT vs T: mean equip. value, mean # of kills per round (# of rounds = length of dataframe)
-# maybe have tabs/navs or carousel slides for tables and graphs separately?
-# tabs for tables and carousel for graphs?
-
-# print(ct_df)
-# print('\n')
-# print(t_df)
-# print('\n')
+# remove_list = []
+# # data_df = data_df[data_df['Player Name'].notnull()].reset_index(drop=True)
+# for i in range(1, len(data_df.index) - 1):
+#     time1 = data_df.iloc[i]['Time']
+#     time2 = data_df.iloc[i + 1]['Time']
+#     check1 = data_df.iloc[i]['Player Name'] is not None
+#     check2 = data_df.iloc[i + 1]['Player Name'] is not None
+#     status1 = data_df.iloc[i]['Map Status'] != 'gameover'
+#     print(i, status1, check1, check2)
+#     if time2 - time1 <= 2 and check1 and check2 and status1:
+#         remove_list.append(i)
 #
+# data_df.drop(data_df.index[remove_list], inplace=True)
+# print(data_df)
+
+
+# data_df.to_csv('player_data.txt', sep='\t', index=False)
+
+# ct_df = data_df[(data_df['Player Team'] == 'CT')].reset_index(drop=True)  # | ((data_df['Map Status'] == 'gameover') & (data_df['Player Team'] != 'T'))]
+# t_df = data_df[(data_df['Player Team'] == 'T')].reset_index(drop=True)  # | ((data_df['Map Status'] == 'gameover') & (data_df['Player Team'] != 'CT'))]
+
 # ct_kills_sum = ct_df['Round Kills'].sum()
 # ct_hs_sum = ct_df['Round HS Kills'].sum()
 # ct_round_count = len(ct_df.index)
@@ -45,20 +53,8 @@ t_df = data_df[(data_df['Player Team'] == 'T')].reset_index(drop=True)  # | ((da
 # t_kills_per_round = round(t_kills_sum / t_round_count, 2)
 # t_equip_value = int(t_df['Current Equip. Value'].mean())
 # t_hsr = round(t_hs_sum / t_kills_sum, 2)
+
+# multi_list = [0, 1, 2, 3, 4, 5]
 #
-# print(ct_kills_per_round)
-# print(t_kills_per_round)
-# print('\n')
-# print(ct_equip_value)
-# print(t_equip_value)
-# print('\n')
-# print(ct_hsr)
-# print(t_hsr)
-# print('\n')
-
-print(data_df)
-multi_list = [0, 1, 2, 3, 4, 5]
-
-multi_count_dict = {count: len(data_df[data_df['Round Kills'] == count]) for count in multi_list}
-print(multi_count_dict)
+# multi_count_dict = {count: len(data_df[data_df['Round Kills'] == count]) for count in multi_list}
 

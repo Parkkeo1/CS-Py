@@ -56,6 +56,13 @@ def setup_gamestate_cfg():
     copyfile(src, dst)
 
 
+def table_exists(con):
+    zero_df = pd.DataFrame(columns=['Time', 'Map', 'Map Status', 'Player Name', 'Player Team',
+                                    'Kills', 'Assists', 'Deaths', 'MVPs', 'Score',
+                                    'Current Equip. Value', 'Round Kills', 'Round HS Kills'])
+    zero_df.to_sql("per_round_data", con, if_exists="fail", index=False)
+
+
 @app.teardown_appcontext
 def close_db(error):
     if hasattr(g, 'sqlite_db'):
@@ -129,17 +136,17 @@ def GSHandler():
                 stats_df = endgame_payload(payload)
             print(stats_df)
             print('\n')
+            last_df = pd.read_sql('SELECT * FROM per_round_data ORDER BY Time DESC LIMIT 1;', conn)
             if counter == 2:  # makes sure that, if we are attempting to enter in an endgame-stats_df, check that the current last entry in the table is not also a 'gameover' entry.
-                last_df = pd.read_sql('SELECT * FROM per_round_data ORDER BY Time DESC LIMIT 1;', conn)
-                if last_df.iloc[0]['Map Status'] != 'gameover':  # this prevents having two 'gameover' events in a row, where the latter is a None/NaN entry.
+                if len(last_df.index) == 0 or last_df.iloc[0]['Map Status'] != 'gameover':  # this prevents having two 'gameover' events in a row, where the latter is a None/NaN entry.
                     stats_df.to_sql("per_round_data", conn, if_exists="append", index=False)
                     clean_db(conn)
-                    print('successful')
+                    print('successful 2')
             else:
-                stats_df.to_sql("per_round_data", conn, if_exists="append", index=False)
-                clean_db(conn)
-                print('successful')
-    print(app.config['STARTER'])
+                if len(last_df.index) == 0 or abs(int(stats_df.iloc[0]['Time']) - int(last_df.iloc[0]['Time'])) > 1:
+                    stats_df.to_sql("per_round_data", conn, if_exists="append", index=False)
+                    clean_db(conn)
+                    print('successful 1')
     return 'JSON Posted'
 
 
@@ -150,11 +157,16 @@ def add_header(response):
 
 
 if __name__ == "__main__":
-    # blank_plot()
+    connn = sqlite3.connect(app.config['DATABASE'])
+    try:
+        table_exists(connn)
+        print('table created')
+    except ValueError:
+        print('table already exists')
     try:
         setup_gamestate_cfg()
     except:
-        pass
+        print('auto cfg failed')
     webbrowser.open_new('http://127.0.0.1:5000')  # for deployment
     app.config['STARTER'] = False  # starter variable
     app.run(debug=False)

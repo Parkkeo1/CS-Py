@@ -360,7 +360,7 @@ def pistol_stats(data_df):
             except:
                 continue
 
-    pistol_df = pistol_df[(pistol_df['Current Equip. Value'] <= 850) & (pistol_df['Current Equip. Value'] > 0)]
+    pistol_df = pistol_df[(pistol_df['Current Equip. Value'] <= 1000) & (pistol_df['Current Equip. Value'] > 0)]
     ct_pistol_df = pistol_df[(pistol_df['Player Team'] == 'CT')].reset_index(drop=True)
     t_pistol_df = pistol_df[(pistol_df['Player Team'] == 'T')].reset_index(drop=True)
 
