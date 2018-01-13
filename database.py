@@ -17,6 +17,8 @@ data_df = pd.read_sql('SELECT * FROM per_round_data', conn)
 # new_df = data_df.iloc[:-1]
 # new_df.to_sql("per_round_data", conn, if_exists="replace", index=False)
 
+print(data_df)
+print('\n')
 print(data_df.iloc[:-1])
 print('\n')
 
