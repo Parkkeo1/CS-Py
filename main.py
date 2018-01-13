@@ -7,7 +7,6 @@ import webbrowser
 import time
 import winreg as registry
 from shutil import copyfile
-from pprint import pprint
 
 
 app = Flask(__name__)
@@ -130,16 +129,12 @@ def GSHandler():
         payload = request.get_json()
         conn = get_db()
         counter = check_payload(payload)
-        print(counter)
         if counter == 1 or counter == 2:
             if counter == 1:
-                pprint(payload)
-                print('\n')
                 stats_df = parse_payload(payload)
             else:
                 stats_df = endgame_payload(payload)
             print(stats_df)
-            print('\n')
             last_df = pd.read_sql('SELECT * FROM per_round_data ORDER BY Time DESC LIMIT 1;', conn)
             if counter == 2:
                 # makes sure that, if we are attempting to enter in an endgame-stats_df,
@@ -155,7 +150,6 @@ def GSHandler():
                     clean_db(conn)
                     print('successful 1')
                 else:  # time difference is 1 second or less
-                    # TODO: test this fix
                     total_df = pd.read_sql('SELECT * FROM per_round_data', conn)
                     new_df = total_df.iloc[:-1]  # excluding last entry AKA last_df
                     new_df.to_sql("per_round_data", conn, if_exists="replace", index=False)
@@ -180,6 +174,7 @@ def add_header(response):
 
 
 if __name__ == "__main__":
+    # auto-creates db file and table if they do not exist.
     connn = sqlite3.connect(app.config['DATABASE'])
     try:
         table_exists(connn)
