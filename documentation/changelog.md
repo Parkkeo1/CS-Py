@@ -40,3 +40,5 @@ in it that was causing index errors in kdr_kda and kas. I also made a remove_emp
 1/8/18: Released v0.3-beta. Focused on reducing the program's file size by excluding unnecessary modules in setup.py. Added and successfully tested mpld3 for matplotlib; now using direct HTML embedding using Jinja instead of using .png image files. TODO: Make more graphs, and keep testing v0.3-beta.
 
 1/11/18: Released v1.0. Tested successfully. TODO: keep testing to further ensure program's accuracy in calculating user statistics. 
+
+1/12/18: WIP fixing edge case issue where two entries are inserted into the table for one round due to nearly instantaneous traded deaths that end the round/match while the player is still in the death animation/cycle. Two methods to test to fix this issue.
