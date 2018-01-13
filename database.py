@@ -18,21 +18,21 @@ data_df = pd.read_sql('SELECT * FROM per_round_data', conn)
 # new_df.to_sql("per_round_data", conn, if_exists="replace", index=False)
 
 print(data_df)
+print('\n')
 
-# remove_list = []
-# # data_df = data_df[data_df['Player Name'].notnull()].reset_index(drop=True)
-# for i in range(1, len(data_df.index) - 1):
-#     time1 = data_df.iloc[i]['Time']
-#     time2 = data_df.iloc[i + 1]['Time']
-#     check1 = data_df.iloc[i]['Player Name'] is not None
-#     check2 = data_df.iloc[i + 1]['Player Name'] is not None
-#     status1 = data_df.iloc[i]['Map Status'] != 'gameover'
-#     print(i, status1, check1, check2)
-#     if time2 - time1 <= 2 and check1 and check2 and status1:
-#         remove_list.append(i)
-#
-# data_df.drop(data_df.index[remove_list], inplace=True)
-# print(data_df)
+# Method 2 for fixing edge case issue.
+remove_list = []
+for i in range(1, len(data_df.index) - 1):
+    time1 = data_df.iloc[i]['Time']
+    time2 = data_df.iloc[i + 1]['Time']
+    check1 = data_df.iloc[i]['Player Name'] is not None
+    check2 = data_df.iloc[i + 1]['Player Name'] is not None
+    if abs(time2 - time1) <= 2 and check1 and check2 and data_df.iloc[i]['Map Status'] != 'gameover':
+        remove_list.append(i)
+
+data_df.drop(data_df.index[remove_list], inplace=True)
+data_df.reset_index(drop=True, inplace=True)
+print(data_df)
 
 
 # data_df.to_csv('player_data.txt', sep='\t', index=False)
