@@ -7,6 +7,8 @@ matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 import time
 from run import *
+import requests
+import json
 
 pd.options.display.max_rows = 999
 pd.set_option('display.width', 1000)
@@ -14,13 +16,56 @@ pd.set_option('display.width', 1000)
 conn = sqlite3.connect('player_data.db')
 data_df = pd.read_sql('SELECT * FROM per_round_data', conn)
 
+# last_df = data_df.iloc[-1]
 # new_df = data_df.iloc[:-1]
 # new_df.to_sql("per_round_data", conn, if_exists="replace", index=False)
 
-print(data_df)
-print('\n')
-print(data_df.iloc[:-1])
-print('\n')
+data = {"map": {"current_spectators": 0,
+         "mode": "competitive",
+         "name": "de_cache",
+         "num_matches_to_win_series": 0,
+         "phase": "live",
+         "round": 0,
+         "souvenirs_total": 0,
+         "team_ct": {"matches_won_this_series": 0,
+                     "score": 0,
+                     "timeouts_remaining": 1},
+         "team_t": {"matches_won_this_series": 0,
+                    "score": 0,
+                    "timeouts_remaining": 1}},
+ "player": {"activity": "playing",
+            "match_stats": {"assists": 1,
+                            "deaths": 1,
+                            "kills": 2,
+                            "mvps": 0,
+                            "score": 2},
+            "name": "dumby",
+            "observer_slot": 1,
+            "state": {"armor": 0,
+                      "burning": 0,
+                      "equip_value": 850,
+                      "flashed": 0,
+                      "health": 0,
+                      "money": 450,
+                      "round_killhs": 1,
+                      "round_kills": 1,
+                      "smoked": 0},
+            "steamid": "76561198158189084",
+            "team": "CT"},
+ "previously": {"player": {"match_stats": {"deaths": 0},
+                           "state": {"armor": 68, "health": 31}}},
+ "provider": {"appid": 730,
+              "name": "Counter-Strike: Global Offensive",
+              "steamid": "76561198158189084",
+              "timestamp": 1515881030,
+              "version": 13622},
+ "round": {"bomb": "planted", "phase": "live"}}
+
+# r = requests.post("http://127.0.0.1:5000/GS", json=data, headers={'content-type': 'application/json'})
+# print(r.status_code, r.reason)
+
+result_df = pd.read_sql('SELECT * FROM per_round_data', conn)
+print(result_df)
 
 # Method 2 for fixing edge case issue.
 # remove_list = []

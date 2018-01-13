@@ -7,6 +7,7 @@ import webbrowser
 import time
 import winreg as registry
 from shutil import copyfile
+from pprint import pprint
 
 
 app = Flask(__name__)
@@ -129,8 +130,11 @@ def GSHandler():
         payload = request.get_json()
         conn = get_db()
         counter = check_payload(payload)
+        print(counter)
         if counter == 1 or counter == 2:
             if counter == 1:
+                pprint(payload)
+                print('\n')
                 stats_df = parse_payload(payload)
             else:
                 stats_df = endgame_payload(payload)
