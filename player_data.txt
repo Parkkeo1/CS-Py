@@ -1,0 +1,31 @@
+Time	Map	Map Status	Player Name	Player Team	Kills	Assists	Deaths	MVPs	Score	Current Equip. Value	Round Kills	Round HS Kills
+1515799260	de_cache	live	dumby	CT	0.0	0.0	1.0	0.0	0.0	850.0	0.0	0.0
+1515799379	de_cache	live	dumby	CT	0.0	0.0	2.0	0.0	0.0	1500.0	0.0	0.0
+1515799450	de_cache	live	dumby	CT	0.0	0.0	3.0	0.0	0.0	200.0	0.0	0.0
+1515799616	de_cache	live	dumby	CT	2.0	0.0	4.0	0.0	4.0	4550.0	2.0	1.0
+1515799617	de_cache	live	dumby	CT	2.0	1.0	4.0	1.0	5.0	4550.0	2.0	1.0
+1515799694	de_cache	live	dumby	CT	3.0	1.0	4.0	1.0	7.0	3950.0	1.0	0.0
+1515799768	de_cache	live	dumby	CT	3.0	1.0	5.0	1.0	7.0	5700.0	0.0	0.0
+1515799805	de_cache	live	dumby	CT	3.0	1.0	6.0	1.0	7.0	3500.0	0.0	0.0
+1515799894	de_cache	live	dumby	CT	3.0	1.0	7.0	1.0	7.0	200.0	0.0	0.0
+1515799966	de_cache	live	dumby	CT	5.0	1.0	8.0	1.0	11.0	5050.0	2.0	1.0
+1515800068	de_cache	live	dumby	CT	6.0	2.0	9.0	2.0	14.0	6000.0	1.0	0.0
+1515800135	de_cache	live	dumby	CT	7.0	2.0	10.0	2.0	16.0	1150.0	1.0	0.0
+1515800255	de_cache	live	dumby	CT	9.0	3.0	10.0	3.0	23.0	5350.0	2.0	0.0
+1515800295	de_cache	live	dumby	CT	9.0	3.0	11.0	3.0	23.0	5700.0	0.0	0.0
+1515800368	de_cache	live	dumby	CT	10.0	3.0	12.0	3.0	25.0	3000.0	1.0	0.0
+1515800411	de_cache	live	dumby	CT	10.0	3.0	13.0	3.0	25.0	4550.0	0.0	0.0
+1515800537	de_cache	live	dumby	T	14.0	4.0	13.0	4.0	38.0	900.0	4.0	4.0
+1515800603	de_cache	live	dumby	T	16.0	4.0	13.0	5.0	42.0	4600.0	2.0	0.0
+1515800685	de_cache	live	dumby	T	16.0	4.0	13.0	5.0	42.0	5500.0	0.0	0.0
+1515800732	de_cache	live	dumby	T	16.0	4.0	14.0	5.0	42.0	5500.0	0.0	0.0
+1515800875	de_cache	live	dumby	T	17.0	5.0	14.0	5.0	45.0	5000.0	1.0	1.0
+1515800923	de_cache	live	dumby	T	17.0	5.0	15.0	5.0	45.0	5000.0	0.0	0.0
+1515801079	de_cache	live	dumby	T	20.0	5.0	15.0	6.0	52.0	4400.0	3.0	0.0
+1515801135	de_cache	live	dumby	T	21.0	5.0	16.0	6.0	54.0	5000.0	1.0	0.0
+1515801296	de_cache	live	dumby	T	21.0	5.0	16.0	6.0	54.0	7150.0	0.0	0.0
+1515801407	de_cache	live	dumby	T	23.0	5.0	16.0	7.0	58.0	7350.0	2.0	0.0
+1515801483	de_cache	live	dumby	T	24.0	5.0	17.0	7.0	60.0	7350.0	1.0	0.0
+1515801582	de_cache	live	dumby	T	25.0	5.0	18.0	7.0	63.0	5000.0	1.0	1.0
+1515801672	de_cache	live	dumby	T	26.0	5.0	19.0	7.0	65.0	5000.0	1.0	0.0
+1515801707	de_cache	gameover										
