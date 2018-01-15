@@ -42,3 +42,5 @@ in it that was causing index errors in kdr_kda and kas. I also made a remove_emp
 1/11/18: Released v1.0. Tested successfully. TODO: keep testing to further ensure program's accuracy in calculating user statistics. 
 
 1/12/18: WIP fixing edge case issue where two entries are inserted into the table for one round due to nearly instantaneous traded deaths that end the round/match while the player is still in the death animation/cycle. Two methods to test to fix this issue.
+
+1/13/18-1/14/18: More testing. Released v1.1 but seems game state is now sending strings instead of int values for the categories that were being sent as ints up until a day or two ago. Added ensure_types() and edited parse_payload() to make sure the types are appropriately changed. TODO: Test this fix with more playing data, recompile and re-release v1.1, and check if game state is actually returning string data.
