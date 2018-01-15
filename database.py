@@ -2,12 +2,12 @@
 
 import sqlite3
 import pandas as pd
-import matplotlib
-matplotlib.use('Agg')
-import matplotlib.pyplot as plt
-import time
-from run import *
-import requests
+# import matplotlib
+# matplotlib.use('Agg')
+# import matplotlib.pyplot as plt
+# import time
+# from run import *
+# import requests
 import json
 from pprint import pprint
 
@@ -21,8 +21,19 @@ conn = sqlite3.connect('player_data.db')
 # pprint(results)
 data_df = pd.read_sql('SELECT * FROM per_round_data', conn)
 
-for i in range(len(data_df.index)):
-    print(type(data_df.iloc[i]['Kills']), type(data_df.iloc[i]['Deaths']), type(data_df.iloc[i]['Assists']))
+print(type(data_df.iloc[0]['Kills']))
+
+# data_df['Time'] = pd.to_numeric(data_df['Time'], errors='coerce')
+# data_df['Kills'] = pd.to_numeric(data_df['Kills'], errors='coerce')
+# data_df['Assists'] = pd.to_numeric(data_df['Assists'], errors='coerce')
+# data_df['Deaths'] = pd.to_numeric(data_df['Deaths'], errors='coerce')
+# data_df['MVPs'] = pd.to_numeric(data_df['MVPs'], errors='coerce')
+# data_df['Score'] = pd.to_numeric(data_df['Score'], errors='coerce')
+# data_df['Current Equip. Value'] = pd.to_numeric(data_df['Current Equip. Value'], errors='coerce')
+# data_df['Round Kills'] = pd.to_numeric(data_df['Round Kills'], errors='coerce')
+# data_df['Round HS Kills'] = pd.to_numeric(data_df['Round HS Kills'], errors='coerce')
+#
+# data_df.to_sql("per_round_data", conn, if_exists="replace", index=False)
 
 
 # # last_df = data_df.iloc[-1]
