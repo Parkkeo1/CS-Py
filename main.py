@@ -166,7 +166,7 @@ def GSHandler():
                     #
                     # 52  1515805253  de_cache       live   dumby  T  23.0  3.0  17.0  3.0  56.0  5000.0  1.0  0.0
                     # 53  1515805254  de_cache   gameover   dumby  T  23.0  4.0  17.0  3.0  57.0  5000.0  1.0  0.0
-
+            ensure_types(conn)
     return 'JSON Posted'
 
 
