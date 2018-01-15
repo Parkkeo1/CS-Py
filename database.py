@@ -1,27 +1,30 @@
 # standalone helper script, used for testing
 
 import sqlite3
-# import pandas as pd
-# import matplotlib
-# matplotlib.use('Agg')
-# import matplotlib.pyplot as plt
-# import time
-# from run import *
-# import requests
+import pandas as pd
+import matplotlib
+matplotlib.use('Agg')
+import matplotlib.pyplot as plt
+import time
+from run import *
+import requests
 import json
 from pprint import pprint
 
-# pd.options.display.max_rows = 999
-# pd.set_option('display.width', 1000)
+pd.options.display.max_rows = 999
+pd.set_option('display.width', 1000)
 
 conn = sqlite3.connect('player_data.db')
-cur = conn.cursor()
-cur.execute("select * from per_round_data;")
-results = cur.fetchall()
-pprint(results)
-# data_df = pd.read_sql('SELECT * FROM per_round_data', conn)
+# cur = conn.cursor()
+# cur.execute("select * from per_round_data;")
+# results = cur.fetchall()
+# pprint(results)
+data_df = pd.read_sql('SELECT * FROM per_round_data', conn)
 
-#
+for i in range(len(data_df.index)):
+    print(type(data_df.iloc[i]['Kills']), type(data_df.iloc[i]['Deaths']), type(data_df.iloc[i]['Assists']))
+
+
 # # last_df = data_df.iloc[-1]
 # # new_df = data_df.iloc[:-1]
 # # new_df.to_sql("per_round_data", conn, if_exists="replace", index=False)

@@ -48,19 +48,19 @@ def parse_payload(payload):
         player_team = None
 
     data_df = pd.DataFrame({
-        'Time': [payload['provider']['timestamp']],
+        'Time': [int(payload['provider']['timestamp'])],
         'Map': [payload['map']['name']],
         'Map Status': [payload['map']['phase']],
         'Player Name': [payload['player']['name']],
         'Player Team': [player_team],
-        'Kills': [payload['player']['match_stats']['kills']],
-        'Assists': [payload['player']['match_stats']['assists']],
-        'Deaths': [payload['player']['match_stats']['deaths']],
-        'MVPs': [payload['player']['match_stats']['mvps']],
-        'Score': [payload['player']['match_stats']['score']],
-        'Current Equip. Value': [payload['player']['state']['equip_value']],
-        'Round Kills': [payload['player']['state']['round_kills']],
-        'Round HS Kills': [payload['player']['state']['round_killhs']]
+        'Kills': [int(payload['player']['match_stats']['kills'])],
+        'Assists': [int(payload['player']['match_stats']['assists'])],
+        'Deaths': [int(payload['player']['match_stats']['deaths'])],
+        'MVPs': [int(payload['player']['match_stats']['mvps'])],
+        'Score': [int(payload['player']['match_stats']['score'])],
+        'Current Equip. Value': [int(payload['player']['state']['equip_value'])],
+        'Round Kills': [int(payload['player']['state']['round_kills'])],
+        'Round HS Kills': [int(payload['player']['state']['round_killhs'])]
     })
 
     data_df = data_df[['Time', 'Map', 'Map Status', 'Player Name', 'Player Team',
@@ -72,7 +72,7 @@ def parse_payload(payload):
 
 def endgame_payload(payload):
     data_df = pd.DataFrame({
-        'Time': [payload['provider']['timestamp']],
+        'Time': [int(payload['provider']['timestamp'])],
         'Map': [payload['map']['name']],
         'Map Status': [payload['map']['phase']],
     })
