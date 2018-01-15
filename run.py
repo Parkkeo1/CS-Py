@@ -91,6 +91,22 @@ def clean_db(conn):
     temp_df.to_sql("per_round_data", conn, if_exists="replace", index=False)
 
 
+def ensure_types(conn):
+    data_df = pd.read_sql('SELECT * FROM per_round_data;', conn)
+
+    data_df['Time'] = pd.to_numeric(data_df['Time'], errors='coerce')
+    data_df['Kills'] = pd.to_numeric(data_df['Kills'], errors='coerce')
+    data_df['Assists'] = pd.to_numeric(data_df['Assists'], errors='coerce')
+    data_df['Deaths'] = pd.to_numeric(data_df['Deaths'], errors='coerce')
+    data_df['MVPs'] = pd.to_numeric(data_df['MVPs'], errors='coerce')
+    data_df['Score'] = pd.to_numeric(data_df['Score'], errors='coerce')
+    data_df['Current Equip. Value'] = pd.to_numeric(data_df['Current Equip. Value'], errors='coerce')
+    data_df['Round Kills'] = pd.to_numeric(data_df['Round Kills'], errors='coerce')
+    data_df['Round HS Kills'] = pd.to_numeric(data_df['Round HS Kills'], errors='coerce')
+
+    data_df.to_sql("per_round_data", conn, if_exists="replace", index=False)
+
+
 # query database with pandas to gather statistical data.
 # calculate & collect: HSR, KDR, KDA, KAS
 # graph: CT vs. T, player stats on various maps, player stats over rounds in a match and/or over other metrics of time

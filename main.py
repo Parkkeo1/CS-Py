@@ -86,11 +86,14 @@ def index():
                     conn = get_db()
                     reset_df = reset_match()
                     last_df = pd.read_sql('SELECT * FROM per_round_data ORDER BY Time DESC LIMIT 1;', conn)
+                    if len(last_df.index) == 0:
+                        return redirect(url_for('index'))
                     if last_df.iloc[0]['Map Status'] != 'gameover':
                         reset_df.to_sql("per_round_data", conn, if_exists="append", index=False)
                     return redirect(url_for('index'))
                 else:
                     conn = get_db()
+                    ensure_types(conn)
                     value = str(request.form.get('choose'))
                     if value == 'last match':
                         result = query_db_match(conn)
