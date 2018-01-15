@@ -10,6 +10,14 @@ Thus, CS-Py's purpose, as a local/standalone application, is to expand the numbe
 
 As a flask app, CS-Py collects player data at the end of each in-game round from the POST JSON requests that are locally sent by the CS:GO client when GSI is enabled. After storing this information in a SQL table, the app calculates performance metrics such as Headshot Ratio, KAS Percentage, KDR/KDA, and Monetary Dependency that the user can then view in the web browser and filter his/her data by match and time (day, week, month, lifetime). More ideas for analysis are below.
 
+#### Home Screen of CS-Py When Launched
+
+![Example, Index Page](https://github.com/Parkkeo1/CS-Py/blob/master/documentation/example2.png?raw=true)
+
+#### Results Page
+
+![Example, Results Page](https://github.com/Parkkeo1/CS-Py/blob/master/documentation/example1.png?raw=true)
+
 In the future, I hope to implement remote/cloud SQL DB storage and an in-game GUI transparent overlay that will display live performance statistics for the current match.
 
 ### v1.0 Released. Install CS-Py [Here](https://github.com/Parkkeo1/CS-Py/releases/tag/v1.0) For Windows.
