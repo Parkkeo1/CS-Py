@@ -21,6 +21,8 @@ conn = sqlite3.connect('player_data.db')
 # pprint(results)
 data_df = pd.read_sql('SELECT * FROM per_round_data', conn)
 
+print(data_df)
+
 print(type(data_df.iloc[0]['Kills']))
 
 # data_df['Time'] = pd.to_numeric(data_df['Time'], errors='coerce')
