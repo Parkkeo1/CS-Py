@@ -20,7 +20,7 @@ As a flask app, CS-Py collects player data at the end of each in-game round from
 
 In the future, I hope to implement remote/cloud SQL DB storage and an in-game GUI transparent overlay that will display live performance statistics for the current match.
 
-### v1.0 Released. Install CS-Py [Here](https://github.com/Parkkeo1/CS-Py/releases/tag/v1.0) For Windows.
+### v1.1 Released. Install CS-Py [Here](https://github.com/Parkkeo1/CS-Py/releases/tag/v1.1) For Windows.
 - Current statistical features of CS-Py are explained [here.](https://github.com/Parkkeo1/CS-Py/blob/master/documentation/statistics_documentation.md)
 - Please report bugs by creating a new issue [here.](https://github.com/Parkkeo1/CS-Py/issues)
 
