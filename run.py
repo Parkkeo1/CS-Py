@@ -82,17 +82,17 @@ def endgame_payload(payload):
     return data_df
 
 
-# remove duplicates
-def clean_db(conn):
-    temp_df = pd.read_sql('SELECT * FROM per_round_data;', conn)
-    temp_df = temp_df.drop_duplicates(subset=['Map', 'Map Status', 'Player Name', 'Player Team', 'Kills', 'Assists',
-                                              'Deaths', 'MVPs', 'Score', 'Current Equip. Value', 'Round Kills',
-                                              'Round HS Kills'])
-    temp_df.to_sql("per_round_data", conn, if_exists="replace", index=False)
+# remove duplicates (deprecated, and possibly faulty in edge cases)
+# def clean_db(conn):
+#     temp_df = pd.read_sql('SELECT * FROM per_round_data;', conn)
+#     temp_df = temp_df.drop_duplicates(subset=['Map', 'Map Status', 'Player Name', 'Player Team', 'Kills', 'Assists',
+#                                               'Deaths', 'MVPs', 'Score', 'Current Equip. Value', 'Round Kills',
+#                                               'Round HS Kills'])
+#     temp_df.to_sql("per_round_data", conn, if_exists="replace", index=False)
 
 
 def ensure_types(conn):
-    data_df = pd.read_sql('SELECT * FROM per_round_data;', conn)
+    data_df = pd.read_sql('SELECT * FROM per_round_data', conn)
 
     data_df['Time'] = pd.to_numeric(data_df['Time'], errors='coerce')
     data_df['Kills'] = pd.to_numeric(data_df['Kills'], errors='coerce')

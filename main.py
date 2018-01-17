@@ -84,6 +84,7 @@ def index():
             else:
                 if post_input == 'reset':
                     conn = get_db()
+                    ensure_types(conn)
                     reset_df = reset_match()
                     last_df = pd.read_sql('SELECT * FROM per_round_data ORDER BY Time DESC LIMIT 1;', conn)
                     if len(last_df.index) == 0:
@@ -145,12 +146,10 @@ def GSHandler():
                 # This prevents having two 'gameover' events in a row, where the latter is a None/NaN entry.
                 if len(last_df.index) == 0 or last_df.iloc[0]['Map Status'] != 'gameover':
                     stats_df.to_sql("per_round_data", conn, if_exists="append", index=False)
-                    clean_db(conn)
                     print('successful 2')
             else:  # if counter == 1; parse payload
                 if len(last_df.index) == 0 or abs(int(stats_df.iloc[0]['Time']) - int(last_df.iloc[0]['Time'])) > 1:
                     stats_df.to_sql("per_round_data", conn, if_exists="append", index=False)
-                    clean_db(conn)
                     print('successful 1')
                 else:  # time difference is 1 second or less
                     total_df = pd.read_sql('SELECT * FROM per_round_data', conn)
@@ -159,14 +158,12 @@ def GSHandler():
 
                     # Inserting new entry, stats_df
                     stats_df.to_sql("per_round_data", conn, if_exists="append", index=False)
-                    clean_db(conn)
                     print('successful, last_df replaced')
 
                     # To prevent cases such as this:
                     #
                     # 52  1515805253  de_cache       live   dumby  T  23.0  3.0  17.0  3.0  56.0  5000.0  1.0  0.0
                     # 53  1515805254  de_cache   gameover   dumby  T  23.0  4.0  17.0  3.0  57.0  5000.0  1.0  0.0
-            ensure_types(conn)
     return 'JSON Posted'
 
 
@@ -183,6 +180,7 @@ if __name__ == "__main__":
         table_exists(connn)
         print('table created')
     except ValueError:
+        ensure_types(connn)
         print('table already exists')
     try:
         setup_gamestate_cfg()
