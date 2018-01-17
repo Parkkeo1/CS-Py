@@ -12,9 +12,9 @@ files = ['static/', 'templates/', 'gamestate_integration_main.cfg', 'run.py', '_
 cspy_exe = Executable(script="main.py", base=base, targetName="CS-Py")
 
 setup(name="CS-Py",
-      version="1.1",
+      version="1.2",
       author="Parkkeo1",
-      description="Pre-release",
+      description="v1.2",
       options={
           'build_exe': {
               'packages': ['jinja2.ext', 'jinja2', 'asyncio', 'numpy', 'pandas', 'sqlite3'],
