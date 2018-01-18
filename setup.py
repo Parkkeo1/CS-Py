@@ -9,7 +9,7 @@ if sys.platform == "win32":
 files = ['static/', 'templates/', 'gamestate_integration_main.cfg', 'run.py', '__init__.py', 'README.txt',
          'VCRUNTIME140.dll']
 
-cspy_exe = Executable(script="main.py", base=base, targetName="CS-Py")
+cspy_exe = Executable(script="main.py", base=base, targetName="CS-Py.exe")
 
 setup(name="CS-Py",
       version="1.2",
