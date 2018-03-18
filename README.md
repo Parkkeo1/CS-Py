@@ -1,7 +1,7 @@
 # CS-Py
 A Python Project that uses Valve's client-side [game state integration service](https://developer.valvesoftware.com/wiki/Counter-Strike:_Global_Offensive_Game_State_Integration) to augment the player experience in Counter-Strike: Global Offensive by analyzing in-game performance with data-driven metrics. By Isaac Park, CS Major @ UIUC.
 
-**Project Status:** Currently testing, finding & fixing bugs, optimizing code quality/speed, and working on new patches/releases. See [all issues so far (both opened and closed).](https://github.com/Parkkeo1/CS-Py/issues?utf8=%E2%9C%93&q=is%3Aissue)
+**Project Status:** Currently being re-implemented as a new Java program with a focus on cleaner and improved design and OOP. As for this Python version: testing, finding & fixing bugs, optimizing code quality/speed, and working on new patches/releases. See [all issues so far (both opened and closed).](https://github.com/Parkkeo1/CS-Py/issues?utf8=%E2%9C%93&q=is%3Aissue)
 
 ### Why and How
 For a game meant for competitive play, Counter-Strike: Global Offensive surprisingly lacks built-in options by which players can analyze their own performance. In standard match-making, the in-game scoreboard only displays simple statistics (kills, assists, deaths, score, and the number of round "MVPs") that, while useful for cursory glances during the game, are inadequate metrics to accurately gauge player skill. 
