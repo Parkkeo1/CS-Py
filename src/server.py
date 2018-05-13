@@ -9,6 +9,7 @@ import winreg as registry
 from shutil import copyfile, SameFileError
 
 # data processing
+from payload import GameStateCode, Payload
 import pandas as pd
 import time
 
@@ -139,9 +140,17 @@ def index():
 @cs_py.route('/GS', methods=['POST'])
 def gamestate_handler():
     if request.is_json and cs_py.config['STATE']:
-        payload = request.get_json()
+        game_data = Payload(request.get_json())
+        gs_code = game_data.gamestate_code
         player_db = get_db()
+
         # TODO: add functions for filtering payloads
+        if gs_code == GameStateCode.INVALID:
+            return
+        elif gs_code == GameStateCode.VALID:
+            pass
+        elif gs_code == GameStateCode.ENDGAME:
+            pass
 
 
 @cs_py.route('/shutdown', methods=['POST'])
