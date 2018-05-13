@@ -18,7 +18,7 @@ GS_CFG_SRC_PATH = 'req_files/gamestate_integration_main.cfg'
 GS_ON = 'GS is currently ON'
 GS_OFF = 'GS is currently OFF'
 
-
+# the CS-Py Flask object
 cs_py = Flask(__name__)
 cs_py.config['SECRET_KEY'] = 'half-life 3 confirmed'
 cs_py.config['DATABASE'] = os.path.join(cs_py.root_path, 'data/player_data.db')
@@ -31,6 +31,7 @@ def get_db():
     if not hasattr(g, 'sqlite_db'):
         g.sqlite_db = sqlite3.connect(cs_py.config['DATABASE'])
     return g.sqlite_db
+
 
 @cs_py.teardown_appcontext
 def close_db():
@@ -58,6 +59,7 @@ def setup_gamestate_cfg():
     except (OSError, SameFileError):
         print('auto cfg failed')
 
+
 def init_table_if_not_exists(sql_db):
     try:
         zero_df = pd.DataFrame(columns=['Time', 'Map', 'Map Status', 'Player Name', 'Player Team',
@@ -71,18 +73,37 @@ def init_table_if_not_exists(sql_db):
 
 # ---------------------------
 
-# TODO: Maybe put this in another file, along with other pandas related methods?
-# utility method for resetting match
-# returns blank dataframe to be inserted into db
+# utility methods for processing in flask routes
+
+# handles resetting current match
 def reset_match():
     blank_df = pd.DataFrame({
         'Time': [int(time.time())],
         'Map': ['RESET POINT'],
         'Map Status': ['gameover'],
     })
-
     blank_df = blank_df[['Time', 'Map', 'Map Status']]
-    return blank_df
+
+    player_db = get_db()
+    # TODO: Ensure types?
+    last_entry = pd.read_sql_query('SELECT * FROM per_round_data ORDER BY Time DESC LIMIT 1;', player_db)
+
+    if len(last_entry.index) > 0 and last_entry.iloc[0]['Map Status'] != 'gameover':
+        blank_df.to_sql("per_round_data", player_db, if_exists="append", index=False)
+
+
+# handles calculating user's requested data results
+def query_for_results(user_input):
+    player_db = get_db()
+
+    # TODO: Import and refactor run.py functions
+    # TODO: Ensure types?
+    if user_input == 'current match':
+        return query_current_match(player_db)
+    elif user_input == 'last match':
+        return query_last_match(player_db)
+    else:
+        return query_on_time(player_db, user_input)
 
 # ---------------------------
 
@@ -101,19 +122,33 @@ def index():
 
         # user chooses to reset, ending collection for current match
         elif user_input == 'reset':
-            pass # TODO: Handle resetting.
+            reset_match()
+            return redirect(url_for('index'))
+        # user chose to query for performance data
         else:
-            pass # TODO: Handle processing user queries for data
-
+            session['result'] = query_for_results(str(request.form.get('choose')))
+            session.modified = True
+            return redirect(url_for('results'))
     else:
         # updating frontend status of CS-Py
         status = GS_ON if cs_py.config['STATE'] else GS_OFF
         return render_template('index.html', status=status)
 
+
+# route that receives JSON payloads from the game client
+@cs_py.route('/GS', methods=['POST'])
+def gamestate_handler():
+    if request.is_json and cs_py.config['STATE']:
+        payload = request.get_json()
+        player_db = get_db()
+        # TODO: add functions for filtering payloads
+
+
 @cs_py.route('/shutdown', methods=['POST'])
 def shutdown():
     shutdown_server()
     return 'CS-Py is shutting down. You may now close this browser window/tab.'
+
 
 @cs_py.route('/results')
 def results():
@@ -123,7 +158,7 @@ def results():
 # ---------------------------
 
 # temp fix for matplotlib plot images not refreshing unless page is manually refreshed.
-@app.after_request
+@cs_py.after_request
 def add_header(response):
     response.headers['Cache-Control'] = 'public, max-age=0'
     return response
