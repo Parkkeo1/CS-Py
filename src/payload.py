@@ -44,14 +44,12 @@ class Payload:
 
 
     def insert_data_to_db(self, player_db):
-        if self.gamestate_code == GameStateCode.INVALID:
-            return -1
-        elif self.gamestate_code == GameStateCode.VALID:
+        if self.gamestate_code == GameStateCode.VALID:
             player_team = None if 'team' not in self.player else self.player['team']
             match_stats = self.player['match_stats']
             player_state = self.player['state']
 
-            data_entry = (int(self.client['timestamp']),
+            new_player_data = (int(self.client['timestamp']),
                                  self.map['name'], self.map['phase'],
                                  self.player['name'], player_team,
                                  int(match_stats['kills']),
@@ -67,17 +65,10 @@ class Payload:
                                                               Kills, Assists, Deaths, MVPs, Score, "Current Equip. Value", 
                                                               "Round Kills", "Round HS Kills") 
                                                               VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) '''
-            # TODO: Refactor to include checks about previous entries, look in main.py for reference.
-
         else:
-            data_entry = (int(self.client['timestamp']),
+            new_player_data = (int(self.client['timestamp']),
                                  self.map['name'], self.map['phase'])
 
             sql_insert = ''' INSERT INTO per_round_data(Time, Map, "Map Status") VALUES(?, ?, ?) '''
 
-            # TODO: Refactor to include checks about previous entries, look in main.py for reference.
-
-        player_db.cursor().execute(sql_insert, data_entry)
-        return 0
-
-
+        player_db.cursor().execute(sql_insert, new_player_data)

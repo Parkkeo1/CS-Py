@@ -105,6 +105,12 @@ def query_for_results(user_input):
     #     return query_on_time(player_db, user_input)
     return 0
 
+# checks previous entries in database to make sure there are no duplicates or erroneous data
+def check_prev_entries():
+    player_db = get_db()
+
+
+
 # ---------------------------
 
 # flask server routes
@@ -140,9 +146,13 @@ def index():
 def gamestate_handler():
     if request.is_json and cs_py.config['STATE']:
         game_data = Payload(request.get_json())
+        gs_code = game_data.gamestate_code
 
-        # TODO: manage checks before inserting (gameover and time checks esp)
-        game_data.insert_data_to_db(get_db())
+        if gs_code == GameStateCode.INVALID:
+            return
+        else:
+            # TODO: manage checks before inserting (gameover and time checks esp)
+            game_data.insert_data_to_db(get_db())
 
     return 'JSON Posted'
 
