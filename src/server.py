@@ -70,7 +70,6 @@ def init_table_if_not_exists(sql_db):
         print('table created')
     except ValueError:
         print('table already exists')
-        # TODO: Ensure types?
 
 # ---------------------------
 
@@ -98,13 +97,13 @@ def query_for_results(user_input):
     player_db = get_db()
 
     # TODO: Import and refactor run.py functions
-    # TODO: Ensure types?
-    if user_input == 'current match':
-        return query_current_match(player_db)
-    elif user_input == 'last match':
-        return query_last_match(player_db)
-    else:
-        return query_on_time(player_db, user_input)
+    # if user_input == 'current match':
+    #     return query_current_match(player_db)
+    # elif user_input == 'last match':
+    #     return query_last_match(player_db)
+    # else:
+    #     return query_on_time(player_db, user_input)
+    return 0
 
 # ---------------------------
 
@@ -141,16 +140,11 @@ def index():
 def gamestate_handler():
     if request.is_json and cs_py.config['STATE']:
         game_data = Payload(request.get_json())
-        gs_code = game_data.gamestate_code
-        player_db = get_db()
 
-        # TODO: add functions for filtering payloads
-        if gs_code == GameStateCode.INVALID:
-            return
-        elif gs_code == GameStateCode.VALID:
-            pass
-        elif gs_code == GameStateCode.ENDGAME:
-            pass
+        # TODO: manage checks before inserting (gameover and time checks esp)
+        game_data.insert_data_to_db(get_db())
+
+    return 'JSON Posted'
 
 
 @cs_py.route('/shutdown', methods=['POST'])
