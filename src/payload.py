@@ -8,11 +8,11 @@ class GameStateCode(Enum):
 class Payload:
 
     def __init__(self, payload):
-        self.map = payload['map']
-        self.player = payload['player']
-        self.client = payload['provider']
-        self.round = payload['round']
-        self.previous = payload['previously']
+        self.map = None if 'map' not in payload else payload['map']
+        self.player = None if 'player' not in payload else payload['player']
+        self.client = None if 'provider' not in payload else payload['provider']
+        self.round = None if 'round' not in payload else payload['round']
+        self.previous = None if 'previously' not in payload else payload['previously']
         self.gamestate_code = self.check_payload()
 
 
@@ -28,18 +28,23 @@ class Payload:
 
                     if user_id == curr_player_id:
                         if round_phase == 'over' and prev_round_phase == 'live':
+                            print('valid, end-round data')
                             return GameStateCode.VALID
                         elif (round_phase == 'live' and self.player['state']['health'] == 0
                               and self.previous['player']['state']['health'] > 0):
+                            print('valid, mid-round data')
                             return GameStateCode.VALID
 
                     else:
                         if (map_phase == 'gameover' and round_phase == 'over'
                             and prev_round_phase == 'live'):
+                            print('endgame data')
                             return GameStateCode.ENDGAME
 
+            print('invalid data')
             return GameStateCode.INVALID
-        except(TypeError, ValueError):
+        except(TypeError, ValueError, KeyError):
+            print('invalid data')
             return GameStateCode.INVALID
 
 

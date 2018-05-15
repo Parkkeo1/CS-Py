@@ -161,12 +161,12 @@ def gamestate_handler():
         gs_code = game_data.gamestate_code
 
         if gs_code == GameStateCode.INVALID:
-            return
+            return 'Invalid Data Received'
         else:
             if check_prev_entries(game_data):
                 game_data.insert_data_to_db(get_db())
 
-    return 'JSON Posted'
+    return 'Request Received'
 
 
 @cs_py.route('/shutdown', methods=['POST'])
