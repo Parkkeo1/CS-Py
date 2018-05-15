@@ -29,7 +29,7 @@ print(data_df)
 # new_df = data_df.iloc[:-1]
 # new_df.to_sql("per_round_data", conn, if_exists="replace", index=False)
 #
-# data = json.load(open('test.json'))
+# data = json.load(open('sample_data.json'))
 #
 # r = requests.post("http://127.0.0.1:5000/GS", json=data, headers={'content-type': 'application/json'})
 # print(r.status_code, r.reason)

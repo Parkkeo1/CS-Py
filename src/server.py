@@ -22,7 +22,7 @@ GS_OFF = 'GS is currently OFF'
 # the CS-Py Flask object
 cs_py = Flask(__name__)
 cs_py.config['SECRET_KEY'] = 'half-life 3 confirmed'
-cs_py.config['DATABASE'] = os.path.join(cs_py.root_path, 'data/player_data.db')
+cs_py.config['DATABASE'] = os.path.join(cs_py.root_path, 'player_data.db')
 cs_py.config['STATE'] = False
 
 # ---------------------------
@@ -35,7 +35,7 @@ def get_db():
 
 
 @cs_py.teardown_appcontext
-def close_db():
+def close_db(error):
     if hasattr(g, 'sqlite_db'):
         g.sqlite_db.close()
 
