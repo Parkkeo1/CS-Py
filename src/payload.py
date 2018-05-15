@@ -62,12 +62,11 @@ class Payload:
                                  int(player_state['round_killhs']))
 
             sql_insert = ''' INSERT INTO per_round_data(Time, Map, "Map Status", "Player Name", "Player Team", 
-                                                              Kills, Assists, Deaths, MVPs, Score, "Current Equip. Value", 
-                                                              "Round Kills", "Round HS Kills") 
-                                                              VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) '''
+                                                        Kills, Assists, Deaths, MVPs, Score, "Current Equip. Value", 
+                                                        "Round Kills", "Round HS Kills") 
+                                                        VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) '''
         else:
-            new_player_data = (int(self.client['timestamp']),
-                                 self.map['name'], self.map['phase'])
+            new_player_data = (int(self.client['timestamp']), self.map['name'], self.map['phase'])
 
             sql_insert = ''' INSERT INTO per_round_data(Time, Map, "Map Status") VALUES(?, ?, ?) '''
 

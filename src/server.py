@@ -105,11 +105,23 @@ def query_for_results(user_input):
     #     return query_on_time(player_db, user_input)
     return 0
 
+
 # checks previous entries in database to make sure there are no duplicates or erroneous data
-def check_prev_entries():
+def check_prev_entries(game_data):
     player_db = get_db()
+    last_entry = pd.read_sql('SELECT * FROM per_round_data ORDER BY Time DESC LIMIT 1;', player_db)
 
-
+    if game_data.gamestate_code == GameStateCode.ENDGAME:
+        # makes sure that, if we are attempting to enter in an endgame-stats_df,
+        # check that the current last entry in the table is not also a 'gameover' entry.
+        # This prevents having two 'gameover' events in a row, where the latter is a None/NaN entry.
+        return len(last_entry.index) == 0 or last_entry.iloc[0]['Map Status'] != 'gameover'
+    else:
+        # time difference is 1 second or less
+        if len(last_entry.index) != 0 and abs(int(game_data.client['timestamp'] - last_entry.iloc[0]['Time'])) <= 1:
+            sql_delete = 'DELETE FROM per_round_data WHERE Time = (SELECT MAX(Time) FROM per_round_data);'
+            player_db.cursor().execute(sql_delete)
+        return True
 
 # ---------------------------
 
@@ -151,8 +163,8 @@ def gamestate_handler():
         if gs_code == GameStateCode.INVALID:
             return
         else:
-            # TODO: manage checks before inserting (gameover and time checks esp)
-            game_data.insert_data_to_db(get_db())
+            if check_prev_entries(game_data):
+                game_data.insert_data_to_db(get_db())
 
     return 'JSON Posted'
 
