@@ -5,15 +5,18 @@ class GameStateCode(Enum):
     ENDGAME = 0
     VALID = 1
 
-class Payload:
+class Payload(object):
 
     def __init__(self, payload):
-        self.map = None if 'map' not in payload else payload['map']
-        self.player = None if 'player' not in payload else payload['player']
-        self.client = None if 'provider' not in payload else payload['provider']
-        self.round = None if 'round' not in payload else payload['round']
-        self.previous = None if 'previously' not in payload else payload['previously']
+        self.__dict__ = payload
         self.gamestate_code = self.check_payload()
+
+
+    def check_payload_dict(self):
+        if hasattr(self, 'map') and hasattr(self, 'provider') and hasattr(self, 'player'):
+            if 'activity' and self.player.activity == 'playing':
+
+
 
 
     def check_payload(self):
