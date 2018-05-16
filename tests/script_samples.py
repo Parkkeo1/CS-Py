@@ -52,7 +52,6 @@ def load_nested_data(root_payload):
         if type(root_payload.__getattribute__(prop)) is dict:
             subsection = TestPayload(root_payload.__getattribute__(prop))
             root_payload.__setattr__(prop, subsection)
-
             load_nested_data(subsection)
 
 
