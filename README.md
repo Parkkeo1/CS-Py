@@ -10,7 +10,7 @@ Existing third-party websites such as csgo-stats.com seem to mostly provide over
 
 Thus, CS-Py's purpose, as a local/standalone application, is to expand the number of metrics available to normal players and provide more indicative and accurate analyses of their performance in CS:GO.
 
-As a flask app, CS-Py collects player data at the end of each in-game round from the POST JSON requests that are locally sent by the CS:GO client when GSI is enabled. After storing this information in a SQL table, the app calculates performance metrics such as Headshot Ratio, KAS Percentage, KDR/KDA, and Monetary Dependency that the user can then view in the web browser and filter his/her data by match and time (day, week, month, lifetime). More ideas for analysis are below.
+As a Flask web applications, CS-Py directly collects in-game user data from JSON packages that are exposed by the CS:GO client when GSI is enabled. After storing this information in a SQL table, the app calculates performance metrics such as Headshot Ratio, KAS Percentage (impact and consistency rating), KDR/KDA, and Monetary Dependency rating that the user can then view in the web browser and filter his/her data by match and time (day, week, month, lifetime). More ideas for analysis are below.
 
 #### Home Screen of CS-Py When Launched
 
@@ -29,12 +29,6 @@ In the future, I hope to implement remote/cloud SQL DB storage and an in-game GU
 ### Installation and Usage
 - For developers and contributors: git clone the repository, then in terminal: $ python main.py
 - For all other users: [See Releases](https://github.com/Parkkeo1/CS-Py/releases) and [README.txt.](https://github.com/Parkkeo1/CS-Py/blob/master/README.txt)
-
-### Project Objectives (By Priority)
-1. Implement by-round data storage for statistical analysis using Pandas dataframe.s *Completed 12/23/17*
-2. Integrate SQL database functionality and store player data by individual rounds. *Completed 12/23/17*
-4. Develop front-end GUI (i.e. web application) to display player statistics and graphs. *Completed 1/10/18*
-4. Develop transparent screen overlay to be used on top of the CSGO app as a live statistics display.
 
 ### Current Ideas For Player Statistics & Analysis
 1. KDR and KDA
