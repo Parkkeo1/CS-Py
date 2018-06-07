@@ -1,5 +1,5 @@
 # CS-Py
-A Python Project that uses Valve's client-side [game state integration service](https://developer.valvesoftware.com/wiki/Counter-Strike:_Global_Offensive_Game_State_Integration) to augment the player experience in Counter-Strike: Global Offensive by analyzing in-game performance with data-driven metrics. By Isaac Park, CS Major @ UIUC.
+A personal statistics tracker that uses Valve's client-side [game state integration service](https://developer.valvesoftware.com/wiki/Counter-Strike:_Global_Offensive_Game_State_Integration) to augment the player experience in Counter-Strike: Global Offensive by analyzing in-game performance with data-driven metrics. By Isaac Park, CS Major @ UIUC.
 
 **Project Status:** Planning to develop this project further during this summer: testing, finding & fixing bugs, optimizing code quality/speed, and working on new patches/releases. See [all issues so far (both opened and closed).](https://github.com/Parkkeo1/CS-Py/issues?utf8=%E2%9C%93&q=is%3Aissue)
 
