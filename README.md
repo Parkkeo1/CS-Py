@@ -6,11 +6,11 @@ A Python Project that uses Valve's client-side [game state integration service](
 ### Why and How
 For a game meant for competitive play, Counter-Strike: Global Offensive surprisingly lacks built-in options by which players can analyze their own performance. In standard match-making, the in-game scoreboard only displays simple statistics (kills, assists, deaths, score, and the number of round "MVPs") that, while useful for cursory glances during the game, are inadequate metrics to accurately gauge player skill. 
 
-Existing third-party websites such as csgo-stats.com seem to mostly provide overly general (total kills, total games played, etc) and often outdated data about players. HLTV.org, while very solid in terms of data and analysis, only keeps track of professional players and matches. 
+Existing third-party websites such as csgo-stats.com seem to mostly provide overly general (total kills, total games played, etc) and often outdated data about players. HLTV.org, while very solid in terms of data and analysis, only keeps track of professional players and matches. Other websites require users to manurally upload large match-replay files.
 
 Thus, CS-Py's purpose, as a local/standalone application, is to expand the number of metrics available to normal players and provide more indicative and accurate analyses of their performance in CS:GO.
 
-As a Flask web applications, CS-Py directly collects in-game user data from JSON packages that are exposed by the CS:GO client when GSI is enabled. After storing this information in a SQL table, the app calculates performance metrics such as Headshot Ratio, KAS Percentage (impact and consistency rating), KDR/KDA, and Monetary Dependency rating that the user can then view in the web browser and filter his/her data by match and time (day, week, month, lifetime). More ideas for analysis are below.
+As a Flask web applications, CS-Py parses in-game user data directly from JSON payloads that are exposed by the CS:GO client when GSI is enabled. After storing this information in a SQL table, the app calculates performance metrics such as Headshot Ratio, KAS Percentage (impact and consistency rating), KDR/KDA, and Monetary Dependency rating that the user can then view in the web browser and filter his/her data by match and time (day, week, month, lifetime). More ideas for analysis are below.
 
 #### Home Screen of CS-Py When Launched
 
