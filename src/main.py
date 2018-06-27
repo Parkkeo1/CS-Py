@@ -9,4 +9,4 @@ if __name__ == "__main__":
 
     # auto-opens browser window to CS-Py frontend
     webbrowser.open_new('http://127.0.0.1:5000')
-    cs_py.run(debug=False)
+    cs_py.run(debug=False, threaded=True)
