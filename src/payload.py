@@ -22,7 +22,7 @@ class Payload:
             if type(self.__getattribute__(prop)) is dict:
                 subsection = Payload(self.__getattribute__(prop))
                 self.__setattr__(prop, subsection)
-                load_nested_data(subsection)
+                subsection.load_nested_data()
 
     # KEY PROPERTIES            PROPERTIES FOR CHECKS
     #
@@ -30,7 +30,7 @@ class Payload:
     # map.name                  map.mode
     # map.phase                 map.round
     # player.name               provider.steamid
-    # player.team(*)            player.steamid
+    # player.team               player.steamid
     # player.match_stats        round.phase
     # player.state              previously.player.state
     #                           previously.round.phase
@@ -39,7 +39,7 @@ class Payload:
     def basic_check(self):
         try:
             print("Pass #1: {0}, {1}, {2}, {3}, {4}, {5}".format(self.provider.timestamp, self.map.name, self.map.phase,
-                                                                 self.player.name, self.player.match_stats,
+                                                                 self.player.name, self.player.team, self.player.match_stats,
                                                                  self.player.state))
             print("Pass #2: {0}, {1}, {2}, {3}, {4}, {5}".format(self.player.activity, self.map.mode, self.map.round,
                                                                  self.provider.steamid, self.player.steamid,
@@ -60,52 +60,27 @@ class Payload:
                 curr_player_id = self.player.steamid
 
                 if client_id == curr_player_id:
-                    if self.round.phase == 'over':
+                    if self.round.phase == 'over':  # end-of-round, player is alive
                         try:
                             return GameStateCode.VALID if self.previously.round.phase == 'live' else GameStateCode.INVALID
 
                         except (TypeError, AttributeError, ValueError):
                             return GameStateCode.INVALID
-                    elif self.round.phase == 'live' and self.player.state.health == 0:
+                    elif self.round.phase == 'live' and self.player.state.health == 0:  # mid-round, player dies
                         try:
                             return GameStateCode.VALID if self.previously.player.state.health > 0 else GameStateCode.INVALID
 
                         except (TypeError, AttributeError, ValueError):
                             return GameStateCode.INVALID
                 else:
-                    if self.map.phase == 'gameover' and self.round.phase == 'over':
+                    if self.map.phase == 'gameover' and self.round.phase == 'over':  # end-game
                         try:
                             return GameStateCode.ENDGAME if self.previously.round.phase == 'live' else GameStateCode.INVALID
 
                         except (TypeError, AttributeError, ValueError):
                             return GameStateCode.INVALID
-        else:
-            return GameStateCode.INVALID
 
-    def insert_data_to_db(self, player_db):
-        if self.gamestate_code == GameStateCode.VALID:  # normal payload
-            try:
-                player_team = self.player.team
-            except (TypeError, AttributeError, ValueError):
-                player_team = None
-            match_stats = self.player.match_stats
-            player_state = self.player.state
-
-            new_player_data = (int(self.provider.timestamp), self.map.name, self.map.phase, self.player.name, player_team,
-                               int(match_stats.kills), int(match_stats.assists), int(match_stats.deaths),
-                               int(match_stats.mvps), int(match_stats.score), int(player_state.equip_value),
-                               int(player_state.round_kills), int(player_state.round_killhs))
-
-            sql_insert = ''' INSERT INTO per_round_data(Time, Map, "Map Status", "Player Name", "Player Team",
-                                                        Kills, Assists, Deaths, MVPs, Score, "Current Equip. Value",
-                                                        "Round Kills", "Round HS Kills")
-                                                        VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) '''
-        else:  # endgame payload
-            new_player_data = (int(self.provider.timestamp), self.map.name, self.map.phase)
-
-            sql_insert = ''' INSERT INTO per_round_data(Time, Map, "Map Status") VALUES(?, ?, ?) '''
-
-        player_db.cursor().execute(sql_insert, new_player_data)
+        return GameStateCode.INVALID
 
     # def check_payload(self):
     #     try:

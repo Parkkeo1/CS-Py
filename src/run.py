@@ -6,80 +6,80 @@ import matplotlib.pyplot as plt, mpld3
 import math
 
 
-def check_payload(payload):
-    if 'map' in payload and 'provider' in payload and 'player' in payload:
-        if 'activity' in payload['player'] and payload['player']['activity'] == 'playing':
-            if 'mode' in payload['map'] and payload['map']['mode'] == 'competitive':
-                if 'phase' in payload['map'] and (payload['map']['phase'] == 'live' or payload['map']['phase'] == 'intermission' or payload['map']['phase'] == 'gameover'):
-                    if 'round' in payload['map']:
-                        if 'round' in payload and 'phase' in payload['round']:
-                            client = str(payload['provider']['steamid'])
-                            target = str(payload['player']['steamid'])
-                            if payload['round']['phase'] == 'over' and (client == target):
-                                if 'previously' in payload:
-                                    if 'round' in payload['previously']:
-                                        if 'phase' in payload['previously']['round'] and payload['previously']['round']['phase'] == 'live':
-                                            return 1  # parse payload; when player is alive by the end of the round/game
-                            else:
-                                if payload['round']['phase'] == 'live' and (client == target):
-                                    if 'state' in payload['player'] and 'health' in payload['player']['state']:
-                                        if int(payload['player']['state']['health']) == 0:
-                                            if 'previously' in payload:
-                                                if 'player' in payload['previously']:
-                                                    if 'state' in payload['previously']['player']:
-                                                        if 'health' in payload['previously']['player']['state'] and (
-                                                                payload['previously']['player']['state']['health'] > 0):
-                                                            return 1  # parse payload; when player dies mid-round
-                                else:
-                                    if payload['map']['phase'] == 'gameover' and payload['round']['phase'] == 'over' and (client != target):
-                                        if 'previously' in payload:
-                                            if 'round' in payload['previously']:
-                                                if 'phase' in payload['previously']['round'] and \
-                                                        payload['previously']['round'][
-                                                            'phase'] == 'live':
-                                                    return 2  # triggers endgame payload
-    return 0
+# def check_payload(payload):
+#     if 'map' in payload and 'provider' in payload and 'player' in payload:
+#         if 'activity' in payload['player'] and payload['player']['activity'] == 'playing':
+#             if 'mode' in payload['map'] and payload['map']['mode'] == 'competitive':
+#                 if 'phase' in payload['map'] and (payload['map']['phase'] == 'live' or payload['map']['phase'] == 'intermission' or payload['map']['phase'] == 'gameover'):
+#                     if 'round' in payload['map']:
+#                         if 'round' in payload and 'phase' in payload['round']:
+#                             client = str(payload['provider']['steamid'])
+#                             target = str(payload['player']['steamid'])
+#                             if payload['round']['phase'] == 'over' and (client == target):
+#                                 if 'previously' in payload:
+#                                     if 'round' in payload['previously']:
+#                                         if 'phase' in payload['previously']['round'] and payload['previously']['round']['phase'] == 'live':
+#                                             return 1  # parse payload; when player is alive by the end of the round/game
+#                             else:
+#                                 if payload['round']['phase'] == 'live' and (client == target):
+#                                     if 'state' in payload['player'] and 'health' in payload['player']['state']:
+#                                         if int(payload['player']['state']['health']) == 0:
+#                                             if 'previously' in payload:
+#                                                 if 'player' in payload['previously']:
+#                                                     if 'state' in payload['previously']['player']:
+#                                                         if 'health' in payload['previously']['player']['state'] and (
+#                                                                 payload['previously']['player']['state']['health'] > 0):
+#                                                             return 1  # parse payload; when player dies mid-round
+#                                 else:
+#                                     if payload['map']['phase'] == 'gameover' and payload['round']['phase'] == 'over' and (client != target):
+#                                         if 'previously' in payload:
+#                                             if 'round' in payload['previously']:
+#                                                 if 'phase' in payload['previously']['round'] and \
+#                                                         payload['previously']['round'][
+#                                                             'phase'] == 'live':
+#                                                     return 2  # triggers endgame payload
+#     return 0
 
 
-def parse_payload(payload):
-    if 'team' in payload['player']:
-        player_team = payload['player']['team']
-    else:
-        player_team = None
-
-    data_df = pd.DataFrame({
-        'Time': [int(payload['provider']['timestamp'])],
-        'Map': [payload['map']['name']],
-        'Map Status': [payload['map']['phase']],
-        'Player Name': [payload['player']['name']],
-        'Player Team': [player_team],
-        'Kills': [int(payload['player']['match_stats']['kills'])],
-        'Assists': [int(payload['player']['match_stats']['assists'])],
-        'Deaths': [int(payload['player']['match_stats']['deaths'])],
-        'MVPs': [int(payload['player']['match_stats']['mvps'])],
-        'Score': [int(payload['player']['match_stats']['score'])],
-        'Current Equip. Value': [int(payload['player']['state']['equip_value'])],
-        'Round Kills': [int(payload['player']['state']['round_kills'])],
-        'Round HS Kills': [int(payload['player']['state']['round_killhs'])]
-    })
-
-    data_df = data_df[['Time', 'Map', 'Map Status', 'Player Name', 'Player Team',
-                       'Kills', 'Assists', 'Deaths', 'MVPs', 'Score',
-                       'Current Equip. Value', 'Round Kills', 'Round HS Kills']]
-
-    return data_df
-
-
-def endgame_payload(payload):
-    data_df = pd.DataFrame({
-        'Time': [int(payload['provider']['timestamp'])],
-        'Map': [payload['map']['name']],
-        'Map Status': [payload['map']['phase']],
-    })
-
-    data_df = data_df[['Time', 'Map', 'Map Status']]
-
-    return data_df
+# def parse_payload(payload):
+#     if 'team' in payload['player']:
+#         player_team = payload['player']['team']
+#     else:
+#         player_team = None
+#
+#     data_df = pd.DataFrame({
+#         'Time': [int(payload['provider']['timestamp'])],
+#         'Map': [payload['map']['name']],
+#         'Map Status': [payload['map']['phase']],
+#         'Player Name': [payload['player']['name']],
+#         'Player Team': [player_team],
+#         'Kills': [int(payload['player']['match_stats']['kills'])],
+#         'Assists': [int(payload['player']['match_stats']['assists'])],
+#         'Deaths': [int(payload['player']['match_stats']['deaths'])],
+#         'MVPs': [int(payload['player']['match_stats']['mvps'])],
+#         'Score': [int(payload['player']['match_stats']['score'])],
+#         'Current Equip. Value': [int(payload['player']['state']['equip_value'])],
+#         'Round Kills': [int(payload['player']['state']['round_kills'])],
+#         'Round HS Kills': [int(payload['player']['state']['round_killhs'])]
+#     })
+#
+#     data_df = data_df[['Time', 'Map', 'Map Status', 'Player Name', 'Player Team',
+#                        'Kills', 'Assists', 'Deaths', 'MVPs', 'Score',
+#                        'Current Equip. Value', 'Round Kills', 'Round HS Kills']]
+#
+#     return data_df
+#
+#
+# def endgame_payload(payload):
+#     data_df = pd.DataFrame({
+#         'Time': [int(payload['provider']['timestamp'])],
+#         'Map': [payload['map']['name']],
+#         'Map Status': [payload['map']['phase']],
+#     })
+#
+#     data_df = data_df[['Time', 'Map', 'Map Status']]
+#
+#     return data_df
 
 
 # remove duplicates (deprecated, and possibly faulty in edge cases)
@@ -91,20 +91,20 @@ def endgame_payload(payload):
 #     temp_df.to_sql("per_round_data", conn, if_exists="replace", index=False)
 
 
-def ensure_types(conn):
-    data_df = pd.read_sql('SELECT * FROM per_round_data', conn)
-
-    data_df['Time'] = pd.to_numeric(data_df['Time'], errors='coerce')
-    data_df['Kills'] = pd.to_numeric(data_df['Kills'], errors='coerce')
-    data_df['Assists'] = pd.to_numeric(data_df['Assists'], errors='coerce')
-    data_df['Deaths'] = pd.to_numeric(data_df['Deaths'], errors='coerce')
-    data_df['MVPs'] = pd.to_numeric(data_df['MVPs'], errors='coerce')
-    data_df['Score'] = pd.to_numeric(data_df['Score'], errors='coerce')
-    data_df['Current Equip. Value'] = pd.to_numeric(data_df['Current Equip. Value'], errors='coerce')
-    data_df['Round Kills'] = pd.to_numeric(data_df['Round Kills'], errors='coerce')
-    data_df['Round HS Kills'] = pd.to_numeric(data_df['Round HS Kills'], errors='coerce')
-
-    data_df.to_sql("per_round_data", conn, if_exists="replace", index=False)
+# def ensure_types(conn):
+#     data_df = pd.read_sql('SELECT * FROM per_round_data', conn)
+#
+#     data_df['Time'] = pd.to_numeric(data_df['Time'], errors='coerce')
+#     data_df['Kills'] = pd.to_numeric(data_df['Kills'], errors='coerce')
+#     data_df['Assists'] = pd.to_numeric(data_df['Assists'], errors='coerce')
+#     data_df['Deaths'] = pd.to_numeric(data_df['Deaths'], errors='coerce')
+#     data_df['MVPs'] = pd.to_numeric(data_df['MVPs'], errors='coerce')
+#     data_df['Score'] = pd.to_numeric(data_df['Score'], errors='coerce')
+#     data_df['Current Equip. Value'] = pd.to_numeric(data_df['Current Equip. Value'], errors='coerce')
+#     data_df['Round Kills'] = pd.to_numeric(data_df['Round Kills'], errors='coerce')
+#     data_df['Round HS Kills'] = pd.to_numeric(data_df['Round HS Kills'], errors='coerce')
+#
+#     data_df.to_sql("per_round_data", conn, if_exists="replace", index=False)
 
 
 # query database with pandas to gather statistical data.

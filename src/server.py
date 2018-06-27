@@ -20,9 +20,10 @@ GS_ON = 'GS is currently ON'
 GS_OFF = 'GS is currently OFF'
 
 # the CS-Py Flask object
-cs_py = Flask(__name__)
+cs_py = Flask(__name__, template_folder='../templates', static_folder='../static')
 cs_py.config['SECRET_KEY'] = 'half-life 3 confirmed'
-cs_py.config['DATABASE'] = os.path.join(cs_py.root_path, 'player_data.db')
+# cs_py.config['DATABASE'] = os.path.join(cs_py.root_path, 'player_data.db')
+cs_py.config['DATABASE'] = '../player_data.db'  # TODO: Fix for release
 cs_py.config['STATE'] = False
 
 
@@ -122,10 +123,37 @@ def check_prev_entries(game_data):
         return len(last_entry.index) == 0 or last_entry.iloc[0]['Map Status'] != 'gameover'  # TODO: Rethink this condition
     else:
         # time difference is 1 second or less
-        if len(last_entry.index) != 0 and abs(int(game_data.client['timestamp'] - last_entry.iloc[0]['Time'])) <= 1:
+        if len(last_entry.index) != 0 and abs(int(game_data.provider.timestamp - last_entry.iloc[0]['Time'])) <= 1:
             sql_delete = 'DELETE FROM per_round_data WHERE Time = (SELECT MAX(Time) FROM per_round_data);'
             player_db.cursor().execute(sql_delete)
         return True
+
+
+def insert_data_to_db(data):
+    if data.gamestate_code == GameStateCode.VALID:  # normal payload
+        match_stats = data.player.match_stats
+        player_state = data.player.state
+
+        new_player_data = (int(data.provider.timestamp), data.map.name, data.map.phase, data.player.name,
+                           data.player.team, int(match_stats.kills), int(match_stats.assists), int(match_stats.deaths),
+                           int(match_stats.mvps), int(match_stats.score), int(player_state.equip_value),
+                           int(player_state.round_kills), int(player_state.round_killhs))
+
+        sql_insert = ''' INSERT INTO per_round_data(Time, Map, "Map Status", "Player Name", "Player Team",
+                                                    Kills, Assists, Deaths, MVPs, Score, "Current Equip. Value",
+                                                    "Round Kills", "Round HS Kills")
+                                                    VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) '''
+
+    else:  # endgame payload
+        new_player_data = (int(data.provider.timestamp), data.map.name, data.map.phase)
+
+        sql_insert = ''' INSERT INTO per_round_data(Time, Map, "Map Status") VALUES(?, ?, ?) '''
+        print("EndGame Payload Entered Into DB")
+
+    print(new_player_data)
+    conn = get_db()
+    conn.cursor().execute(sql_insert, new_player_data)
+    conn.commit()
 
 
 # ---------------------------
@@ -163,12 +191,14 @@ def index():
 def gamestate_handler():
     if request.is_json and cs_py.config['STATE']:
         game_data = Payload(request.get_json())
+        print(game_data.gamestate_code)
 
         if game_data.gamestate_code == GameStateCode.INVALID:
             return 'Invalid Data Received'
         else:
             if check_prev_entries(game_data):
-                game_data.insert_data_to_db(get_db())
+                print("Previous Entry Check Passed")
+                insert_data_to_db(data=game_data)
 
     return 'Request Received'
 

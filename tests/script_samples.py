@@ -71,7 +71,7 @@ class Payload:
                 subsection.load_nested_data()
 
 
-a = Payload(json.load(open('midround_data.json')))
+a = Payload(json.load(open('midround_alive_data.json')))
 print(a.map.name)
 print(a.provider.steamid)
 print(a.player.name)
@@ -80,7 +80,7 @@ print(a.player.match_stats.kills)
 print(a.previously.player.match_stats.deaths)
 print(a.previously.player.state.armor)
 
-a = TestPayload(json.load(open('midround_data.json')))
+a = TestPayload(json.load(open('midround_alive_data.json')))
 load_nested_data(a)
 print(a.map.name)
 print(a.provider.steamid)
