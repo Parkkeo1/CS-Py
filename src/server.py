@@ -25,6 +25,7 @@ cs_py.config['SECRET_KEY'] = 'half-life 3 confirmed'
 cs_py.config['DATABASE'] = os.path.join(cs_py.root_path, 'player_data.db')
 cs_py.config['STATE'] = False
 
+
 # ---------------------------
 
 # database connection handling
@@ -39,6 +40,7 @@ def close_db(error):
     if hasattr(g, 'sqlite_db'):
         g.sqlite_db.close()
 
+
 # ---------------------------
 
 # manual shutdown method
@@ -48,6 +50,7 @@ def shutdown_server():
     if quit_cspy is None:
         raise RuntimeError('Flask Server Not Running')
     quit_cspy()
+
 
 # ---------------------------
 
@@ -71,6 +74,7 @@ def init_table_if_not_exists(sql_db):
     except ValueError:
         print('table already exists')
 
+
 # ---------------------------
 
 # utility methods for processing in flask routes
@@ -88,7 +92,7 @@ def reset_match():
     # TODO: Ensure types?
     last_entry = pd.read_sql_query('SELECT * FROM per_round_data ORDER BY Time DESC LIMIT 1;', player_db)
 
-    if len(last_entry.index) > 0 and last_entry.iloc[0]['Map Status'] != 'gameover':
+    if len(last_entry.index) > 0 and last_entry.iloc[0]['Map Status'] != 'gameover': # TODO: Rethink this condition
         blank_df.to_sql("per_round_data", player_db, if_exists="append", index=False)
 
 
@@ -115,13 +119,14 @@ def check_prev_entries(game_data):
         # makes sure that, if we are attempting to enter in an endgame-stats_df,
         # check that the current last entry in the table is not also a 'gameover' entry.
         # This prevents having two 'gameover' events in a row, where the latter is a None/NaN entry.
-        return len(last_entry.index) == 0 or last_entry.iloc[0]['Map Status'] != 'gameover'
+        return len(last_entry.index) == 0 or last_entry.iloc[0]['Map Status'] != 'gameover'  # TODO: Rethink this condition
     else:
         # time difference is 1 second or less
         if len(last_entry.index) != 0 and abs(int(game_data.client['timestamp'] - last_entry.iloc[0]['Time'])) <= 1:
             sql_delete = 'DELETE FROM per_round_data WHERE Time = (SELECT MAX(Time) FROM per_round_data);'
             player_db.cursor().execute(sql_delete)
         return True
+
 
 # ---------------------------
 
@@ -158,9 +163,8 @@ def index():
 def gamestate_handler():
     if request.is_json and cs_py.config['STATE']:
         game_data = Payload(request.get_json())
-        gs_code = game_data.gamestate_code
 
-        if gs_code == GameStateCode.INVALID:
+        if game_data.gamestate_code == GameStateCode.INVALID:
             return 'Invalid Data Received'
         else:
             if check_prev_entries(game_data):
@@ -179,6 +183,7 @@ def shutdown():
 def results():
     result = session['result']
     return render_template('results.html', result=result)
+
 
 # ---------------------------
 

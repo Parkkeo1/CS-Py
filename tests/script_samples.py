@@ -54,6 +54,31 @@ def load_nested_data(root_payload):
             root_payload.__setattr__(prop, subsection)
             load_nested_data(subsection)
 
+class Payload:
+
+    def __init__(self, payload):
+        self.__dict__ = payload
+        self.load_nested_data()
+
+    def get_properties_list(self):
+        return [x for x in dir(self) if not x.startswith('__') and not callable(getattr(self, x))]
+
+    def load_nested_data(self):
+        for prop in self.get_properties_list():
+            if type(self.__getattribute__(prop)) is dict:
+                subsection = Payload(self.__getattribute__(prop))
+                self.__setattr__(prop, subsection)
+                subsection.load_nested_data()
+
+
+a = Payload(json.load(open('midround_data.json')))
+print(a.map.name)
+print(a.provider.steamid)
+print(a.player.name)
+print(a.player.state.health)
+print(a.player.match_stats.kills)
+print(a.previously.player.match_stats.deaths)
+print(a.previously.player.state.armor)
 
 a = TestPayload(json.load(open('midround_data.json')))
 load_nested_data(a)
