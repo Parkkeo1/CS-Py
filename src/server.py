@@ -66,14 +66,16 @@ def setup_gamestate_cfg():
 
 
 def init_table_if_not_exists(sql_db):
-    try:
-        zero_df = pd.DataFrame(columns=['Time', 'Map', 'Map Status', 'Player Name', 'Player Team',
-                                        'Kills', 'Assists', 'Deaths', 'MVPs', 'Score',
-                                        'Current Equip. Value', 'Round Kills', 'Round HS Kills'])
-        zero_df.to_sql("per_round_data", sql_db, if_exists="fail", index=False)
-        print('table created')
-    except ValueError:
-        print('table already exists')
+
+    create_table_sql = '''CREATE TABLE IF NOT EXISTS per_round_data (Time INTEGER, Map TEXT, 
+                                                                     'Map Status' TEXT, 'Player Name' TEXT,
+                                                                     'Player Team' TEXT, Kills INTEGER, Assists INTEGER,
+                                                                     Deaths INTEGER, MVPs INTEGER, Score INTEGER,
+                                                                     'Current Equip. Value' INTEGER, 'Round Kills' INTEGER,
+                                                                     'Round HS Kills' INTEGER);'''
+
+    sql_db.cursor().execute(create_table_sql)
+    sql_db.commit()
 
 
 # ---------------------------
@@ -126,6 +128,7 @@ def check_prev_entries(game_data):
         if len(last_entry.index) != 0 and abs(int(game_data.provider.timestamp - last_entry.iloc[0]['Time'])) <= 1:
             sql_delete = 'DELETE FROM per_round_data WHERE Time = (SELECT MAX(Time) FROM per_round_data);'
             player_db.cursor().execute(sql_delete)
+            print("Time Duplicate Replaced")
         return True
 
 
