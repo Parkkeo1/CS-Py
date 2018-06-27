@@ -10,12 +10,13 @@ from shutil import copyfile, SameFileError
 
 # data processing
 from payload import GameStateCode, Payload
+from round_data_analysis import MatchDataSummary
 import pandas as pd
 import time
 
 # string constants
 GS_CFG_DEST_PATH = '/steamapps/common/Counter-Strike Global Offensive/csgo/cfg/gamestate_integration_main.cfg'
-GS_CFG_SRC_PATH = 'req_files/gamestate_integration_main.cfg'
+GS_CFG_SRC_PATH = '../req_files/gamestate_integration_main.cfg'
 GS_ON = 'GS is currently ON'
 GS_OFF = 'GS is currently OFF'
 
@@ -67,14 +68,25 @@ def setup_gamestate_cfg():
 
 def init_table_if_not_exists(sql_db):
 
-    create_table_sql = '''CREATE TABLE IF NOT EXISTS per_round_data (Time INTEGER, Map TEXT, 
+    create_round_table_sql = '''CREATE TABLE IF NOT EXISTS per_round_data (Time INTEGER, Map TEXT, 
                                                                      'Map Status' TEXT, 'Player Name' TEXT,
                                                                      'Player Team' TEXT, Kills INTEGER, Assists INTEGER,
                                                                      Deaths INTEGER, MVPs INTEGER, Score INTEGER,
                                                                      'Current Equip. Value' INTEGER, 'Round Kills' INTEGER,
                                                                      'Round HS Kills' INTEGER);'''
 
-    sql_db.cursor().execute(create_table_sql)
+    create_match_table_sql = '''CREATE TABLE IF NOT EXISTS per_match_data (Match_ID INTEGER PRIMARY KEY, 
+                                                                           'Round Count' INTEGER, Map TEXT, Rating1 REAL,
+                                                                           HSR REAL, KPR REAL, KAS REAL, KDR REAL, KDA REAL,
+                                                                           'Mean Equip. Value' REAL, CT_Rating1 REAL, 
+                                                                           CT_HSR REAL, CT_KPR REAL, CT_KAS REAL, CT_KDR REAL, 
+                                                                           CT_KDA REAL, CT_MEAN REAL, T_Rating1 REAL, 
+                                                                           T_HSR REAL, T_KPR REAL, T_KAS REAL, T_KDR REAL, 
+                                                                           T_KDA REAL, T_MEAN REAL);'''
+
+    db_cursor = sql_db.cursor()
+    db_cursor.execute(create_round_table_sql)
+    db_cursor.execute(create_match_table_sql)
     sql_db.commit()
 
 
@@ -82,21 +94,31 @@ def init_table_if_not_exists(sql_db):
 
 # utility methods for processing in flask routes
 
-# handles resetting current match
+# clears per_round_data table to indicate end of game
 def reset_match():
-    blank_df = pd.DataFrame({
-        'Time': [int(time.time())],
-        'Map': ['RESET POINT'],
-        'Map Status': ['gameover'],
-    })
-    blank_df = blank_df[['Time', 'Map', 'Map Status']]
+    # blank_df = pd.DataFrame({
+    #     'Time': [int(time.time())],
+    #     'Map': ['RESET POINT'],
+    #     'Map Status': ['gameover'],
+    # })
+    # blank_df = blank_df[['Time', 'Map', 'Map Status']]
+    #
+    # player_db = get_db()
+    #
+    # last_entry = pd.read_sql_query('SELECT * FROM per_round_data ORDER BY Time DESC LIMIT 1;', player_db)
+    #
+    # if len(last_entry.index) > 0 and last_entry.iloc[0]['Map Status'] != 'gameover': # TODO: Rethink this condition
+    #     blank_df.to_sql("per_round_data", player_db, if_exists="append", index=False)
+    round_db = get_db()
 
-    player_db = get_db()
-    # TODO: Ensure types?
-    last_entry = pd.read_sql_query('SELECT * FROM per_round_data ORDER BY Time DESC LIMIT 1;', player_db)
+    # parse current per_round_data into dataframe
+    data_for_match_df = pd.read_sql('SELECT * FROM per_round_data;', round_db)
+    # clear per_round_data table
+    # TODO: Uncomment for prod: round_db.cursor().execute('DELETE FROM per_round_data;')
 
-    if len(last_entry.index) > 0 and last_entry.iloc[0]['Map Status'] != 'gameover': # TODO: Rethink this condition
-        blank_df.to_sql("per_round_data", player_db, if_exists="append", index=False)
+    # TODO: Implement methods in round_data_analysis.py to enter data summary into per_match_data table.
+    match_data = MatchDataSummary(data_for_match_df)
+    insert_match_data(match_data)
 
 
 # handles calculating user's requested data results
@@ -132,31 +154,43 @@ def check_prev_entries(game_data):
         return True
 
 
-def insert_data_to_db(data):
-    if data.gamestate_code == GameStateCode.VALID:  # normal payload
-        match_stats = data.player.match_stats
-        player_state = data.player.state
+def insert_round_data(round_data):
+    if round_data.gamestate_code == GameStateCode.VALID:  # normal payload
+        match_stats = round_data.player.match_stats
+        player_state = round_data.player.state
 
-        new_player_data = (int(data.provider.timestamp), data.map.name, data.map.phase, data.player.name,
-                           data.player.team, int(match_stats.kills), int(match_stats.assists), int(match_stats.deaths),
+        new_round_data = (int(round_data.provider.timestamp), round_data.map.name, round_data.map.phase, round_data.player.name,
+                           round_data.player.team, int(match_stats.kills), int(match_stats.assists), int(match_stats.deaths),
                            int(match_stats.mvps), int(match_stats.score), int(player_state.equip_value),
                            int(player_state.round_kills), int(player_state.round_killhs))
 
-        sql_insert = ''' INSERT INTO per_round_data(Time, Map, "Map Status", "Player Name", "Player Team",
+        round_insert_sql = ''' INSERT INTO per_round_data(Time, Map, "Map Status", "Player Name", "Player Team",
                                                     Kills, Assists, Deaths, MVPs, Score, "Current Equip. Value",
                                                     "Round Kills", "Round HS Kills")
                                                     VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) '''
 
     else:  # endgame payload
-        new_player_data = (int(data.provider.timestamp), data.map.name, data.map.phase)
+        new_round_data = (int(round_data.provider.timestamp), round_data.map.name, round_data.map.phase)
 
-        sql_insert = ''' INSERT INTO per_round_data(Time, Map, "Map Status") VALUES(?, ?, ?) '''
-        print("EndGame Payload Entered Into DB")
+        round_insert_sql = ''' INSERT INTO per_round_data(Time, Map, "Map Status") VALUES(?, ?, ?) '''
 
-    print(new_player_data)
+    print(new_round_data)
     conn = get_db()
-    conn.cursor().execute(sql_insert, new_player_data)
+    conn.cursor().execute(round_insert_sql, new_round_data)
     conn.commit()
+
+
+def insert_match_data(match_data):
+    new_match_data = (match_data.round_count, match_data.map_name)  # TODO: Add the rest.
+
+    match_insert_sql = ''' INSERT INTO per_match_data ('Round Count', Map, Rating1, HSR, KPR, KAS, KDR, KDA,
+                                                       'Mean Equip. Value', CT_Rating1, CT_HSR, CT_KPR, CT_KAS, CT_KDR, 
+                                                       CT_KDA, CT_MEAN, T_Rating1, T_HSR, T_KPR, T_KAS, T_KDR, T_KDA, T_MEAN) 
+                                                       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)'''
+
+    print(new_match_data)
+    conn = get_db()
+    conn.cursor().execute(match_insert_sql, new_match_data)
 
 
 # ---------------------------
@@ -201,7 +235,8 @@ def gamestate_handler():
         else:
             if check_prev_entries(game_data):
                 print("Previous Entry Check Passed")
-                insert_data_to_db(data=game_data)
+                insert_round_data(round_data=game_data)
+                # TODO: call reset_match() if payload was EndGame.
 
     return 'Request Received'
 
