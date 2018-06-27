@@ -1,4 +1,4 @@
-from server import *
+from flask_webapp import *
 import webbrowser
 
 if __name__ == "__main__":

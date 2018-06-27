@@ -9,8 +9,8 @@ import winreg as registry
 from shutil import copyfile, SameFileError
 
 # data processing
-from payload import GameStateCode, Payload
-from round_data_analysis import MatchDataSummary
+from gsi_data_payload import GameStateCode, Payload
+from match_analysis import MatchDataSummary
 import pandas as pd
 import time
 
@@ -62,8 +62,9 @@ def setup_gamestate_cfg():
         steam_key = registry.CreateKey(registry.HKEY_CURRENT_USER, "Software\Valve\Steam")
         cfg_destination = registry.QueryValueEx(steam_key, "SteamPath")[0] + GS_CFG_DEST_PATH
         copyfile(GS_CFG_SRC_PATH, cfg_destination)
+        print('Auto CFG File Passed')
     except (OSError, SameFileError):
-        print('auto cfg failed')
+        print('Auto CFG File Failed')
 
 
 def init_table_if_not_exists(sql_db):
@@ -75,19 +76,21 @@ def init_table_if_not_exists(sql_db):
                                                                      'Current Equip. Value' INTEGER, 'Round Kills' INTEGER,
                                                                      'Round HS Kills' INTEGER);'''
 
-    create_match_table_sql = '''CREATE TABLE IF NOT EXISTS per_match_data (Match_ID INTEGER PRIMARY KEY, 
+    create_match_table_sql = '''CREATE TABLE IF NOT EXISTS per_match_data (Match_ID INTEGER PRIMARY KEY, Duration INTEGER,
                                                                            'Round Count' INTEGER, Map TEXT, Rating1 REAL,
-                                                                           HSR REAL, KPR REAL, KAS REAL, KDR REAL, KDA REAL,
-                                                                           'Mean Equip. Value' REAL, CT_Rating1 REAL, 
-                                                                           CT_HSR REAL, CT_KPR REAL, CT_KAS REAL, CT_KDR REAL, 
-                                                                           CT_KDA REAL, CT_MEAN REAL, T_Rating1 REAL, 
-                                                                           T_HSR REAL, T_KPR REAL, T_KAS REAL, T_KDR REAL, 
+                                                                           HSR REAL, MDC REAL, KPR REAL, KAS REAL,
+                                                                           KDR REAL, KDA REAL, MEAN REAL, CT_Rating1 REAL, 
+                                                                           CT_HSR REAL, CT_MDC REAL, CT_KPR REAL, 
+                                                                           CT_KAS REAL, CT_KDR REAL, CT_KDA REAL, 
+                                                                           CT_MEAN REAL, T_Rating1 REAL, T_HSR REAL, 
+                                                                           T_MDC REAL, T_KPR REAL, T_KAS REAL, T_KDR REAL, 
                                                                            T_KDA REAL, T_MEAN REAL);'''
 
     db_cursor = sql_db.cursor()
     db_cursor.execute(create_round_table_sql)
     db_cursor.execute(create_match_table_sql)
     sql_db.commit()
+    print("SQL Tables Check Passed")
 
 
 # ---------------------------
@@ -96,19 +99,6 @@ def init_table_if_not_exists(sql_db):
 
 # clears per_round_data table to indicate end of game
 def reset_match():
-    # blank_df = pd.DataFrame({
-    #     'Time': [int(time.time())],
-    #     'Map': ['RESET POINT'],
-    #     'Map Status': ['gameover'],
-    # })
-    # blank_df = blank_df[['Time', 'Map', 'Map Status']]
-    #
-    # player_db = get_db()
-    #
-    # last_entry = pd.read_sql_query('SELECT * FROM per_round_data ORDER BY Time DESC LIMIT 1;', player_db)
-    #
-    # if len(last_entry.index) > 0 and last_entry.iloc[0]['Map Status'] != 'gameover': # TODO: Rethink this condition
-    #     blank_df.to_sql("per_round_data", player_db, if_exists="append", index=False)
     round_db = get_db()
 
     # parse current per_round_data into dataframe
@@ -116,7 +106,7 @@ def reset_match():
     # clear per_round_data table
     # TODO: Uncomment for prod: round_db.cursor().execute('DELETE FROM per_round_data;')
 
-    # TODO: Implement methods in round_data_analysis.py to enter data summary into per_match_data table.
+    # TODO: Implement methods in match_analysis.py to enter data summary into per_match_data table.
     match_data = MatchDataSummary(data_for_match_df)
     insert_match_data(match_data)
 
@@ -169,7 +159,7 @@ def insert_round_data(round_data):
                                                     "Round Kills", "Round HS Kills")
                                                     VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) '''
 
-    else:  # endgame payload
+    else:  # endgame payload # TODO: Dont insert blank entry, just "reset" match and clear entries from per_round_data
         new_round_data = (int(round_data.provider.timestamp), round_data.map.name, round_data.map.phase)
 
         round_insert_sql = ''' INSERT INTO per_round_data(Time, Map, "Map Status") VALUES(?, ?, ?) '''
@@ -183,14 +173,16 @@ def insert_round_data(round_data):
 def insert_match_data(match_data):
     new_match_data = (match_data.round_count, match_data.map_name)  # TODO: Add the rest.
 
-    match_insert_sql = ''' INSERT INTO per_match_data ('Round Count', Map, Rating1, HSR, KPR, KAS, KDR, KDA,
-                                                       'Mean Equip. Value', CT_Rating1, CT_HSR, CT_KPR, CT_KAS, CT_KDR, 
-                                                       CT_KDA, CT_MEAN, T_Rating1, T_HSR, T_KPR, T_KAS, T_KDR, T_KDA, T_MEAN) 
-                                                       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)'''
+    match_insert_sql = ''' INSERT INTO per_match_data (Duration, 'Round Count', Map, Rating1, HSR, MDC, KPR, KAS, KDR, KDA,
+                                                       'Mean Equip. Value', CT_Rating1, CT_HSR, CT_MDC, CT_KPR, CT_KAS, 
+                                                       CT_KDR, CT_KDA, CT_MEAN, T_Rating1, T_HSR, T_MDC, T_KPR, T_KAS, 
+                                                       T_KDR, T_KDA, T_MEAN) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,
+                                                        ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)'''
 
     print(new_match_data)
     conn = get_db()
     conn.cursor().execute(match_insert_sql, new_match_data)
+    conn.commit()
 
 
 # ---------------------------

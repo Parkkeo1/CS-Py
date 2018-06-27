@@ -1,6 +1,6 @@
 import unittest
 import json
-from src.server import *
+from src.flask_webapp import *
 
 class PostRequestsTest(unittest.TestCase):
 
