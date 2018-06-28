@@ -12,6 +12,7 @@ class Payload:
     def __init__(self, payload):
         self.__dict__ = payload
         self.load_nested_data()
+        self.map_phase = ''
         self.gamestate_code = self.classify_payload()
 
     def get_properties_list(self):
@@ -56,6 +57,7 @@ class Payload:
             return GameStateCode.INVALID
         elif self.player.activity == 'playing' and self.map.mode == 'competitive':
             if self.map.phase in Payload.valid_map_phases:
+                self.map_phase = self.map.phase  # Needed to keep track of valid payloads that are also endgame, in order to call reset_match()
                 client_id = self.provider.steamid
                 curr_player_id = self.player.steamid
 

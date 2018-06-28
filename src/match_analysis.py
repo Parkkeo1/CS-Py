@@ -8,7 +8,7 @@ class MatchDataSummary:
         self.data_frame = round_data_df
 
         # simple properties
-        self.duration = self.data_frame['Time'].iloc[-1] - self.data_frame['Time'].iloc[0] # TODO: Fix to minutes, not seconds
+        self.duration = (self.data_frame['Time'].iloc[-1] - self.data_frame['Time'].iloc[0]) // 60  # TODO: Fix to minutes, not seconds
         self.round_count = self.data_frame.shape[0]
         self.map_name = self.data_frame['Map'].iloc[-1]
 

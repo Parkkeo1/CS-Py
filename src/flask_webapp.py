@@ -74,7 +74,7 @@ def init_table_if_not_exists(sql_db):
                                                                      'Current Equip. Value' INTEGER, 'Round Kills' INTEGER,
                                                                      'Round HS Kills' INTEGER);'''
 
-    create_match_table_sql = '''CREATE TABLE IF NOT EXISTS per_match_data (Match_ID INTEGER PRIMARY KEY, Duration INTEGER,
+    create_match_table_sql = '''CREATE TABLE IF NOT EXISTS per_match_data (Match_ID INTEGER PRIMARY KEY, Duration REAL,
                                                                            'Round Count' INTEGER, Map TEXT, Rating1 REAL,
                                                                            HSR REAL, MDC REAL, KPR REAL, KAS REAL,
                                                                            KDR REAL, KDA REAL, MEAN REAL, CT_Rating1 REAL, 
@@ -111,6 +111,7 @@ def reset_match():
     # clear per_round_data table
     round_db.cursor().execute('DELETE FROM per_round_data;')
     round_db.commit()
+    print("Match Has Been Reset")
 
 
 # handles calculating user's requested data results
@@ -127,7 +128,7 @@ def query_for_results(user_input):
     return 0
 
 
-# checks previous entries in database to make sure there are no duplicates or erroneous data
+# checks previous entries in database to make sure there are no duplicates.
 def check_prev_entries(game_data):
     player_db = get_db()
     last_entry = pd.read_sql('SELECT * FROM per_round_data ORDER BY Time DESC LIMIT 1;', player_db)
@@ -170,7 +171,7 @@ def insert_round_data(round_data):
 
 
 def insert_match_data(match_data):
-    new_match_data = (match_data.duration, match_data.round_count, match_data.map_name, match_data.rating1, match_data.hsr,
+    new_match_data = (int(match_data.duration), match_data.round_count, match_data.map_name, match_data.rating1, match_data.hsr,
                       match_data.mdc, match_data.kpr, match_data.kas, match_data.kdr, match_data.kda, match_data.mean_equip,
                       match_data.ct_rating1, match_data.ct_hsr, match_data.ct_mdc, match_data.ct_kpr, match_data.ct_kas,
                       match_data.ct_kdr, match_data.ct_kda, match_data.ct_mean_equip, match_data.t_rating1, match_data.t_hsr,
@@ -235,6 +236,8 @@ def gamestate_handler():
         else:
             check_prev_entries(game_data)
             insert_round_data(round_data=game_data)
+            if game_data.map_phase == 'gameover':
+                reset_match()
 
     return 'Request Received'
 
