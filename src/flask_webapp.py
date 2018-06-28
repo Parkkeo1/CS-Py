@@ -1,25 +1,21 @@
-from flask import Flask, request, render_template, g, session, redirect, url_for
-
-# database management
-import sqlite3
 import os
-
-# cfg file setup
+import sqlite3
+import requests
+import pandas as pd
 import winreg as registry
 from shutil import copyfile, SameFileError
-
-# data processing
-import json
-from gsi_data_payload import GameStateCode, GameStatePayload
 from match_analysis import MatchAnalysis
-import pandas as pd
-
+from gsi_data_payload import GameStateCode, GameStatePayload
+from flask import Flask, request, render_template, g, session, redirect, url_for
 
 # string constants
 GS_CFG_DEST_PATH = '/steamapps/common/Counter-Strike Global Offensive/csgo/cfg/gamestate_integration_main.cfg'
 GS_CFG_SRC_PATH = '../req_files/gamestate_integration_main.cfg'
 GS_ON = 'GS is currently ON'
 GS_OFF = 'GS is currently OFF'
+
+# Web address of RESTful API server to which match data is sent
+API_ADDRESS = ''
 
 # the CS-Py Flask object
 cs_py = Flask(__name__, template_folder='../templates', static_folder='../static')
@@ -101,19 +97,21 @@ def send_match_to_remote():
     # parse current per_round_data into dataframe
     data_for_match_df = pd.read_sql('SELECT * FROM per_round_data;', round_db)
     if data_for_match_df.empty or data_for_match_df.shape[0] == 0:
-        return
+        return  # cancel if there's no data to analyze or send
 
-    # TODO: Implement methods in match_analysis.py to enter data summary into per_match_data table.
     match_data = MatchAnalysis(data_for_match_df)
-
     del match_data.data_frame
-    match_json = json.dumps(match_data.__dict__)
-    # TODO: send match_json to remote server.(include steamID of user in header?)
+    # TODO: May include client's steamid also in the headers as well as in the json data in the future. TBD
+    send_match_request = requests.post(API_ADDRESS, json=match_data.__dict__)
 
-    # clear per_round_data table
-    round_db.cursor().execute('DELETE FROM per_round_data;')
-    round_db.commit()
-    print("Match Data Sent; Rounds Reset")
+    # checking if request was successful
+    if 200 <= send_match_request.status_code <= 299:
+        # clear per_round_data table
+        round_db.cursor().execute('DELETE FROM per_round_data;')
+        round_db.commit()
+        print("Match Data Sent; Rounds Reset")
+    else:
+        print("API Request Failed. Not Clearing Round Data")
 
 
 # checks previous entries in database to make sure there are no duplicates.
