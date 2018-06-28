@@ -1,4 +1,5 @@
 import pandas as pd
+import math
 
 
 class MatchDataSummary:
@@ -7,7 +8,7 @@ class MatchDataSummary:
         self.data_frame = round_data_df
 
         # simple properties
-        self.duration = (self.data_frame['Time'].iloc[-1] - self.data_frame['Time'].iloc[0]) // 60
+        self.duration = self.data_frame['Time'].iloc[-1] - self.data_frame['Time'].iloc[0] # TODO: Fix to minutes, not seconds
         self.round_count = self.data_frame.shape[0]
         self.map_name = self.data_frame['Map'].iloc[-1]
 
@@ -29,33 +30,36 @@ class MatchDataSummary:
         t_data = self.data_frame[self.data_frame['Player Team'] == 'T']
 
         # TODO: HLTV Rating 1.0
-
-        # Headshot Ratio
-        self.hsr = self.calculate_hsr(self.data_frame)
-        self.ct_hsr = self.calculate_hsr(ct_data)
-        self.t_hsr = self.calculate_hsr(t_data)
-
-        # Monetary Dependency Coefficient
-        self.mdc = self.calculate_mdc(self.data_frame)
-        self.ct_mdc = self.calculate_mdc(ct_data)
-        self.t_mdc = self.calculate_mdc(t_data)
-
-        # Kills Per Round
-        self.kpr = self.calculate_kpr(self.data_frame)
-        self.ct_kpr = self.calculate_kpr(ct_data)
-        self.t_kpr = self.calculate_kpr(t_data)
-
         # TODO: Kills, Assists, Survived Consistency Percentage
 
-        # Kill Death Ratio, Kill+Assist Death Ratio
-        self.kdr, self.kda = self.calculate_kdr_kda(self.data_frame)
-        self.ct_kdr, self.ct_kda = self.calculate_kdr_kda(ct_data)
-        self.t_kdr, self.t_kda = self.calculate_kdr_kda(t_data)
+        # HSR: Headshot Ratio
+        # MDC: Monetary Dependency Coefficient
+        # KPR: Kills Per Round
+        # KDR, KDA: Kill Death Ratio, Kill+Assist Death Ratio
+        # MEAN: Mean Equipment Value
 
-        # Mean Equipment Value
+        # Totals
+        self.hsr = self.calculate_hsr(self.data_frame)
+        self.mdc = self.calculate_mdc(self.data_frame)
+        self.kpr = self.calculate_kpr(self.data_frame)
+        self.kdr, self.kda = self.calculate_kdr_kda(self.data_frame)
         self.mean_equip = int(round(self.data_frame['Current Equip. Value'].mean(skipna=True)))
-        self.ct_mean_equip = int((ct_data['Current Equip. Value'].mean(skipna=True)))
-        self.t_mean_equip = int((t_data['Current Equip. Value'].mean(skipna=True)))
+
+        # CT
+        if not ct_data.empty:
+            self.ct_hsr = self.calculate_hsr(ct_data)
+            self.ct_mdc = self.calculate_mdc(ct_data)
+            self.ct_kpr = self.calculate_kpr(ct_data)
+            self.ct_kdr, self.ct_kda = self.calculate_kdr_kda(ct_data)
+            self.ct_mean_equip = int(round(ct_data['Current Equip. Value'].mean(skipna=True)))
+
+        # T
+        if not t_data.empty:
+            self.t_hsr = self.calculate_hsr(t_data)
+            self.t_mdc = self.calculate_mdc(t_data)
+            self.t_kpr = self.calculate_kpr(t_data)
+            self.t_kdr, self.t_kda = self.calculate_kdr_kda(t_data)
+            self.t_mean_equip = int(round(t_data['Current Equip. Value'].mean(skipna=True)))
 
     @staticmethod
     def calculate_rating(relevant_data_df):
@@ -73,7 +77,8 @@ class MatchDataSummary:
 
     @staticmethod
     def calculate_mdc(relevant_data_df):
-        return float(round(relevant_data_df['Round Kills'].corr(relevant_data_df['Current Equip. Value']), 3))
+        mdc_coeff = float(round(relevant_data_df['Round Kills'].corr(relevant_data_df['Current Equip. Value']), 3))
+        return mdc_coeff if not math.isnan(mdc_coeff) else 0
 
     @staticmethod
     def calculate_kpr(relevant_data_df):

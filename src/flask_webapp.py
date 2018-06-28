@@ -12,7 +12,6 @@ from shutil import copyfile, SameFileError
 from gsi_data_payload import GameStateCode, Payload
 from match_analysis import MatchDataSummary
 import pandas as pd
-import time
 
 # string constants
 GS_CFG_DEST_PATH = '/steamapps/common/Counter-Strike Global Offensive/csgo/cfg/gamestate_integration_main.cfg'
@@ -68,7 +67,6 @@ def setup_gamestate_cfg():
 
 
 def init_table_if_not_exists(sql_db):
-
     create_round_table_sql = '''CREATE TABLE IF NOT EXISTS per_round_data (Time INTEGER, Map TEXT, 
                                                                      'Map Status' TEXT, 'Player Name' TEXT,
                                                                      'Player Team' TEXT, Kills INTEGER, Assists INTEGER,
@@ -103,12 +101,16 @@ def reset_match():
 
     # parse current per_round_data into dataframe
     data_for_match_df = pd.read_sql('SELECT * FROM per_round_data;', round_db)
-    # clear per_round_data table
-    # TODO: Uncomment for prod: round_db.cursor().execute('DELETE FROM per_round_data;')
+    if data_for_match_df.empty or data_for_match_df.shape[0] == 0:
+        return
 
     # TODO: Implement methods in match_analysis.py to enter data summary into per_match_data table.
     match_data = MatchDataSummary(data_for_match_df)
     insert_match_data(match_data)
+
+    # clear per_round_data table
+    round_db.cursor().execute('DELETE FROM per_round_data;')
+    round_db.commit()
 
 
 # handles calculating user's requested data results
@@ -130,18 +132,14 @@ def check_prev_entries(game_data):
     player_db = get_db()
     last_entry = pd.read_sql('SELECT * FROM per_round_data ORDER BY Time DESC LIMIT 1;', player_db)
 
-    if game_data.gamestate_code == GameStateCode.ENDGAME:
-        # makes sure that, if we are attempting to enter in an endgame-stats_df,
-        # check that the current last entry in the table is not also a 'gameover' entry.
-        # This prevents having two 'gameover' events in a row, where the latter is a None/NaN entry.
-        return len(last_entry.index) == 0 or last_entry.iloc[0]['Map Status'] != 'gameover'  # TODO: Rethink this condition
+    # time difference is 1 second or less
+    if last_entry.shape[0] != 0 and abs(int(game_data.provider.timestamp - last_entry.iloc[0]['Time'])) <= 1:
+        sql_delete = 'DELETE FROM per_round_data WHERE Time = (SELECT MAX(Time) FROM per_round_data);'
+        player_db.cursor().execute(sql_delete)
+        player_db.commit()
+        print("Time Duplicate Replaced")
     else:
-        # time difference is 1 second or less
-        if len(last_entry.index) != 0 and abs(int(game_data.provider.timestamp - last_entry.iloc[0]['Time'])) <= 1:
-            sql_delete = 'DELETE FROM per_round_data WHERE Time = (SELECT MAX(Time) FROM per_round_data);'
-            player_db.cursor().execute(sql_delete)
-            print("Time Duplicate Replaced")
-        return True
+        print("Not a Duplicate")
 
 
 def insert_round_data(round_data):
@@ -149,10 +147,11 @@ def insert_round_data(round_data):
         match_stats = round_data.player.match_stats
         player_state = round_data.player.state
 
-        new_round_data = (int(round_data.provider.timestamp), round_data.map.name, round_data.map.phase, round_data.player.name,
-                           round_data.player.team, int(match_stats.kills), int(match_stats.assists), int(match_stats.deaths),
-                           int(match_stats.mvps), int(match_stats.score), int(player_state.equip_value),
-                           int(player_state.round_kills), int(player_state.round_killhs))
+        new_round_data = (
+            int(round_data.provider.timestamp), round_data.map.name, round_data.map.phase, round_data.player.name,
+            round_data.player.team, int(match_stats.kills), int(match_stats.assists), int(match_stats.deaths),
+            int(match_stats.mvps), int(match_stats.score), int(player_state.equip_value),
+            int(player_state.round_kills), int(player_state.round_killhs))
 
         round_insert_sql = ''' INSERT INTO per_round_data(Time, Map, "Map Status", "Player Name", "Player Team",
                                                     Kills, Assists, Deaths, MVPs, Score, "Current Equip. Value",
@@ -171,10 +170,15 @@ def insert_round_data(round_data):
 
 
 def insert_match_data(match_data):
-    new_match_data = (match_data.round_count, match_data.map_name)  # TODO: Add the rest.
+    new_match_data = (match_data.duration, match_data.round_count, match_data.map_name, match_data.rating1, match_data.hsr,
+                      match_data.mdc, match_data.kpr, match_data.kas, match_data.kdr, match_data.kda, match_data.mean_equip,
+                      match_data.ct_rating1, match_data.ct_hsr, match_data.ct_mdc, match_data.ct_kpr, match_data.ct_kas,
+                      match_data.ct_kdr, match_data.ct_kda, match_data.ct_mean_equip, match_data.t_rating1, match_data.t_hsr,
+                      match_data.t_mdc, match_data.t_kpr, match_data.t_kas, match_data.t_kdr, match_data.t_kda,
+                      match_data.t_mean_equip)
 
     match_insert_sql = ''' INSERT INTO per_match_data (Duration, 'Round Count', Map, Rating1, HSR, MDC, KPR, KAS, KDR, KDA,
-                                                       'Mean Equip. Value', CT_Rating1, CT_HSR, CT_MDC, CT_KPR, CT_KAS, 
+                                                       MEAN, CT_Rating1, CT_HSR, CT_MDC, CT_KPR, CT_KAS, 
                                                        CT_KDR, CT_KDA, CT_MEAN, T_Rating1, T_HSR, T_MDC, T_KPR, T_KAS, 
                                                        T_KDR, T_KDA, T_MEAN) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,
                                                         ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)'''
@@ -216,6 +220,7 @@ def index():
 
 
 # route that receives JSON payloads from the game client
+# noinspection PyTypeChecker
 @cs_py.route('/GS', methods=['POST'])
 def gamestate_handler():
     if request.is_json and cs_py.config['STATE']:
@@ -224,11 +229,12 @@ def gamestate_handler():
 
         if game_data.gamestate_code == GameStateCode.INVALID:
             return 'Invalid Data Received'
+        elif game_data.gamestate_code == GameStateCode.ENDGAME_DIFF_PLAYER:
+            print("End Game Payload Received")
+            reset_match()
         else:
-            if check_prev_entries(game_data):
-                print("Previous Entry Check Passed")
-                insert_round_data(round_data=game_data)
-                # TODO: call reset_match() if payload was EndGame.
+            check_prev_entries(game_data)
+            insert_round_data(round_data=game_data)
 
     return 'Request Received'
 

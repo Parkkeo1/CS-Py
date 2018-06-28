@@ -3,7 +3,7 @@ from enum import Enum
 
 class GameStateCode(Enum):
     INVALID = -1
-    ENDGAME = 0
+    ENDGAME_DIFF_PLAYER = 0
     VALID = 1
 
 
@@ -75,7 +75,7 @@ class Payload:
                 else:
                     if self.map.phase == 'gameover' and self.round.phase == 'over':  # end-game
                         try:
-                            return GameStateCode.ENDGAME if self.previously.round.phase == 'live' else GameStateCode.INVALID
+                            return GameStateCode.ENDGAME_DIFF_PLAYER if self.previously.round.phase == 'live' else GameStateCode.INVALID
 
                         except (TypeError, AttributeError, ValueError):
                             return GameStateCode.INVALID
