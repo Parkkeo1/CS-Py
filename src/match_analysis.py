@@ -2,13 +2,14 @@ import pandas as pd
 import math
 
 
-class MatchDataSummary:
+class MatchAnalysis:
 
     def __init__(self, round_data_df):
         self.data_frame = round_data_df
 
         # simple properties
-        self.duration = (self.data_frame['Time'].iloc[-1] - self.data_frame['Time'].iloc[0]) // 60  # TODO: Fix to minutes, not seconds
+        self.steamid = int(self.data_frame['SteamID'].iloc[-1])  # to keep track of user when sending match data to remote.
+        self.duration = int((self.data_frame['Time'].iloc[-1] - self.data_frame['Time'].iloc[0]) // 60)  # TODO: Fix to minutes, not seconds
         self.round_count = self.data_frame.shape[0]
         self.map_name = self.data_frame['Map'].iloc[-1]
 
@@ -100,5 +101,3 @@ class MatchDataSummary:
         kdr = float(round(last_entry['Kills'] / last_entry['Deaths'], 3))
         kda = float(round((last_entry['Kills'] + last_entry['Assists']) / last_entry['Deaths'], 3))
         return kdr, kda
-
-

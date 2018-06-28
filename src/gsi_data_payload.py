@@ -7,12 +7,15 @@ class GameStateCode(Enum):
     VALID = 1
 
 
-class Payload:
+class GameStatePayload:
 
     def __init__(self, payload):
         self.__dict__ = payload
         self.load_nested_data()
-        self.map_phase = ''
+        # TODO: Track client's steamID as attribute. Add new field to per_round_data table. Then in MatchDataSummary,
+        # TODO: add attribute to client SteamID. This attribute will be used in the JSON POST Request to the remote server
+        # TODO: (probably headers, if not in the content of JSON).
+
         self.gamestate_code = self.classify_payload()
 
     def get_properties_list(self):
@@ -21,7 +24,7 @@ class Payload:
     def load_nested_data(self):
         for prop in self.get_properties_list():
             if type(self.__getattribute__(prop)) is dict:
-                subsection = Payload(self.__getattribute__(prop))
+                subsection = GameStatePayload(self.__getattribute__(prop))
                 self.__setattr__(prop, subsection)
                 subsection.load_nested_data()
 
@@ -56,12 +59,9 @@ class Payload:
         if not self.basic_check():
             return GameStateCode.INVALID
         elif self.player.activity == 'playing' and self.map.mode == 'competitive':
-            if self.map.phase in Payload.valid_map_phases:
-                self.map_phase = self.map.phase  # Needed to keep track of valid payloads that are also endgame, in order to call reset_match()
-                client_id = self.provider.steamid
-                curr_player_id = self.player.steamid
+            if self.map.phase in GameStatePayload.valid_map_phases:
 
-                if client_id == curr_player_id:
+                if self.provider.steamid == self.player.steamid:  # if player is alive (not an observer at time of payload)
                     if self.round.phase == 'over':  # end-of-round, player is alive
                         try:
                             return GameStateCode.VALID if self.previously.round.phase == 'live' else GameStateCode.INVALID
