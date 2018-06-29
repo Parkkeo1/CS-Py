@@ -1,16 +1,19 @@
 import os
+import shutil
 import sqlite3
-import requests
+import winreg
+
+from flask import Flask, request, render_template, g, redirect, url_for
 import pandas as pd
-import winreg as registry
-from shutil import copyfile, SameFileError
+import requests
+
 from match_analysis import MatchAnalysis
-from gsi_data_payload import GameStateCode, GameStatePayload
-from flask import Flask, request, render_template, g, session, redirect, url_for
+from game_state_payload import GameStateCode, GameStatePayload
+
 
 # string constants
 GS_CFG_DEST_PATH = '/steamapps/common/Counter-Strike Global Offensive/csgo/cfg/gamestate_integration_main.cfg'
-GS_CFG_SRC_PATH = '../req_files/gamestate_integration_main.cfg'
+GS_CFG_SRC_PATH = '../../required_user_files/gamestate_integration_main.cfg'
 GS_ON = 'GS is currently ON'
 GS_OFF = 'GS is currently OFF'
 
@@ -18,10 +21,10 @@ GS_OFF = 'GS is currently OFF'
 API_ADDRESS = ''
 
 # the CS-Py Flask object
-cs_py = Flask(__name__, template_folder='../templates', static_folder='../static')
-cs_py.config['SECRET_KEY'] = 'half-life 3 confirmed'
-cs_py.config['DATABASE'] = os.path.join(cs_py.root_path, '..', 'player_data.db')
-cs_py.config['STATE'] = False
+cs_py_client = Flask(__name__, template_folder='../templates', static_folder='../static')
+# cs_py_client.config['SECRET_KEY'] = '6f27695310b33e0db1f04a54d2aaf8632b4ad551e9ff8c95'
+cs_py_client.config['DATABASE'] = os.path.join(cs_py_client.root_path, '..', 'rounds_data.db')
+cs_py_client.config['STATE'] = False
 
 
 # ---------------------------
@@ -29,11 +32,11 @@ cs_py.config['STATE'] = False
 # database connection handling
 def get_db():
     if not hasattr(g, 'sqlite_db'):
-        g.sqlite_db = sqlite3.connect(cs_py.config['DATABASE'])
+        g.sqlite_db = sqlite3.connect(cs_py_client.config['DATABASE'])
     return g.sqlite_db
 
 
-@cs_py.teardown_appcontext
+@cs_py_client.teardown_appcontext
 def close_db(error):
     if hasattr(g, 'sqlite_db'):
         g.sqlite_db.close()
@@ -55,11 +58,11 @@ def shutdown_server():
 # checks and setup on startup
 def setup_gamestate_cfg():
     try:
-        steam_key = registry.CreateKey(registry.HKEY_CURRENT_USER, "Software\Valve\Steam")
-        cfg_destination = registry.QueryValueEx(steam_key, "SteamPath")[0] + GS_CFG_DEST_PATH
-        copyfile(GS_CFG_SRC_PATH, cfg_destination)
+        steam_key = winreg.CreateKey(winreg.HKEY_CURRENT_USER, "Software\Valve\Steam")
+        cfg_destination = winreg.QueryValueEx(steam_key, "SteamPath")[0] + GS_CFG_DEST_PATH
+        shutil.copyfile(GS_CFG_SRC_PATH, cfg_destination)
         print('Auto CFG File Passed')
-    except (OSError, SameFileError):
+    except (OSError, shutil.SameFileError):
         print('Auto CFG File Failed')
 
 
@@ -105,7 +108,7 @@ def send_match_to_remote():
     send_match_request = requests.post(API_ADDRESS, json=match_data.__dict__)
 
     # checking if request was successful
-    if 200 <= send_match_request.status_code <= 299:
+    if send_match_request.status_code == 202:  # CS-Py's API should send 202: Accepted as response code upon success.
         # clear per_round_data table
         round_db.cursor().execute('DELETE FROM per_round_data;')
         round_db.commit()
@@ -173,14 +176,14 @@ def insert_round_data(round_data):
 # flask server routes
 
 # the home page, handles frontend user interaction
-@cs_py.route('/', methods=['GET', 'POST'])
+@cs_py_client.route('/', methods=['GET', 'POST'])
 def index():
     if request.method == 'POST':
         user_input = str(request.form.get('input'))
 
         # user chooses to start or end active data collection
         if user_input == 'start' or user_input == 'end':
-            cs_py.config['STATE'] = True if user_input == 'start' else False
+            cs_py_client.config['STATE'] = True if user_input == 'start' else False
             return redirect(url_for('index'))
 
         # user chooses to reset, ending collection for current match
@@ -189,15 +192,15 @@ def index():
             return redirect(url_for('index'))
     else:
         # updating frontend status of CS-Py
-        status = GS_ON if cs_py.config['STATE'] else GS_OFF
+        status = GS_ON if cs_py_client.config['STATE'] else GS_OFF
         return render_template('index.html', status=status)
 
 
 # route that receives JSON payloads from the game client
 # noinspection PyTypeChecker
-@cs_py.route('/GS', methods=['POST'])
+@cs_py_client.route('/GS', methods=['POST'])
 def gamestate_handler():
-    if request.is_json and cs_py.config['STATE']:
+    if request.is_json and cs_py_client.config['STATE']:
         game_data = GameStatePayload(request.get_json())
         print(game_data.gamestate_code)
 
@@ -215,22 +218,22 @@ def gamestate_handler():
     return 'Request Received'
 
 
-@cs_py.route('/shutdown', methods=['POST'])
+@cs_py_client.route('/shutdown', methods=['POST'])
 def shutdown():
     shutdown_server()
     return 'CS-Py is shutting down. You may now close this browser window/tab.'
 
 
-@cs_py.route('/results')
-def results():
-    result = session['result']
-    return render_template('results.html', result=result)
+# @cs_py_client.route('/results')
+# def results():
+#     result = session['result']
+#     return render_template('results.html', result=result)
 
 
 # ---------------------------
 
-# temp fix for matplotlib plot images not refreshing unless page is manually refreshed.
-@cs_py.after_request
-def add_header(response):
-    response.headers['Cache-Control'] = 'public, max-age=0'
-    return response
+# # temp fix for matplotlib plot images not refreshing unless page is manually refreshed.
+# @cs_py_client.after_request
+# def add_header(response):
+#     response.headers['Cache-Control'] = 'public, max-age=0'
+#     return response

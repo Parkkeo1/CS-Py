@@ -1,18 +1,18 @@
 import unittest
 import json
-from src.flask_webapp import *
+from flask_user_app import *
 
 class PostRequestsTest(unittest.TestCase):
 
     def setUp(self):
-        cs_py.config['DATABASE'] = 'tests/test_data.db'
-        cs_py.config['TESTING'] = True
-        cs_py.config['WTF_CSRF_ENABLED'] = False
-        cs_py.config['DEBUG'] = False
-        cs_py.config['STATE'] = True
+        cs_py_client.config['DATABASE'] = 'dev_testing/test_data.db'
+        cs_py_client.config['TESTING'] = True
+        cs_py_client.config['WTF_CSRF_ENABLED'] = False
+        cs_py_client.config['DEBUG'] = False
+        cs_py_client.config['STATE'] = True
 
-        self.test_cspy = cs_py.test_client()
-        self.assertEqual(cs_py.debug, False)
+        self.test_cspy = cs_py_client.test_client()
+        self.assertEqual(cs_py_client.debug, False)
 
     @classmethod
     def setUpClass(cls):
@@ -25,7 +25,7 @@ class PostRequestsTest(unittest.TestCase):
 
     @classmethod
     def get_test_db(cls):
-        return sqlite3.connect('tests/test_data.db')
+        return sqlite3.connect('dev_testing/test_data.db')
 
     @classmethod
     def get_db_as_df(cls):
@@ -38,7 +38,7 @@ class PostRequestsTest(unittest.TestCase):
         self.assertEqual(response.status_code, 200)
 
     def test_endround_entry(self):
-        self.test_cspy.post('/GS', json=json.load(open('tests/endround_data.json')),
+        self.test_cspy.post('/GS', json=json.load(open('dev_testing/endround_data.json')),
                                    headers={'content-type': 'application/json'})
         result_df = self.get_db_as_df()
         self.assertEqual(1, len(result_df.index))
