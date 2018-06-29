@@ -19,7 +19,9 @@ def get_db():
 
 
 # makes sure required tables exist; if not, create them
-def server_sql_setup(sql_db):
+def server_sql_setup():
+    sql_db = sqlite3.connect(cs_py_server.config['DATABASE'])
+
     create_users_table_sql = '''CREATE TABLE IF NOT EXISTS all_users (User_SteamID INTEGER, "Match Count" INTEGER)'''
 
     create_matches_table_sql = '''CREATE TABLE IF NOT EXISTS all_matches (Match_ID INTEGER PRIMARY KEY, 
@@ -44,11 +46,14 @@ def server_sql_setup(sql_db):
 # ---------------------------
 
 
-class MatchDataApi(Resource):
-    # TODO: For the future front-end website/web app on EWS
-    def get(self):
-        return 'Sample Text'
+# for the future frontend website/webapp on EWS for CS-Py that will display to users their results
+class FrontEndDataApi(Resource):
+    def get(self, user_steamid):
+        return user_steamid
 
+
+# for receiving match data from user clients
+class ReceiveDataApi(Resource):
     def post(self):
         if request.is_json:
             print(request.get_json())
@@ -58,10 +63,10 @@ class MatchDataApi(Resource):
             return 'Invalid Data', 400
 
 
-cs_py_rest_api.add_resource(MatchDataApi, '/api')
+cs_py_rest_api.add_resource(ReceiveDataApi, '/api/data_receiver')
+# cs_py_rest_api.add_resource(FrontEndDataApi, '/api/results/<string:user_steamid>')
 
 # TODO: Only for testing, remove for deployment. For deployment, use PythonAnywhere.
 if __name__ == '__main__':
-    startup_conn = sqlite3.connect(cs_py_server.config['DATABASE'])
-    server_sql_setup(startup_conn)
+    server_sql_setup()
     cs_py_server.run(debug=False, port=5001)

@@ -22,12 +22,12 @@ match_data = MatchAnalysis(data_for_match_df)
 del match_data.data_frame
 print(match_data.__dict__)
 
-r1 = requests.post('http://127.0.0.1:5001/api', json=data)
+r1 = requests.post('http://127.0.0.1:5001/api/data_receiver', json=data)
 print(r1.status_code)
 print(r1.headers)
 print(r1.text)
 
-r2 = requests.post('http://127.0.0.1:5001/api', json=match_data.__dict__)
+r2 = requests.post('http://127.0.0.1:5001/api/data_receiver', json=match_data.__dict__)
 print(r2.status_code)
 print(r2.headers)
 print(r2.text)
