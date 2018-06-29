@@ -23,7 +23,7 @@ def server_sql_setup(sql_db):
     create_users_table_sql = '''CREATE TABLE IF NOT EXISTS all_users (User_SteamID INTEGER, "Match Count" INTEGER)'''
 
     create_matches_table_sql = '''CREATE TABLE IF NOT EXISTS all_matches (Match_ID INTEGER PRIMARY KEY, 
-                                                                          User_SteamID INTEGER, Duration REAL, 
+                                                                          User_SteamID INTEGER, Start INTEGER, End Integer, 
                                                                           'Round Count' INTEGER, Map TEXT, Rating1 REAL,
                                                                           HSR REAL, MDC REAL, KPR REAL, KAS REAL, 
                                                                           KDR REAL, KDA REAL, MEAN REAL, 
@@ -44,8 +44,19 @@ def server_sql_setup(sql_db):
 # ---------------------------
 
 
-# TODO: Only for testing, remove for deployment.
+class MatchDataApi(Resource):
+    def post(self):
+        print(request.headers)
+        print(request.is_json)
+        print(request.get_json())
+        return 'Data Accepted', 202
+
+
+cs_py_rest_api.add_resource(MatchDataApi, '/api')
+
+
+# TODO: Only for testing, remove for deployment. For deployment, use PythonAnywhere.
 if __name__ == '__main__':
     startup_conn = sqlite3.connect(cs_py_server.config['DATABASE'])
     server_sql_setup(startup_conn)
-    # cs_py_server.run(debug=True)
+    cs_py_server.run(debug=False)

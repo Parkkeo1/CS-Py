@@ -8,7 +8,8 @@ class MatchAnalysis:
 
         # simple properties
         self.steamid = int(self.data_frame['SteamID'].iloc[-1])  # to keep track of user when sending match data to remote.
-        self.duration = int((self.data_frame['Time'].iloc[-1] - self.data_frame['Time'].iloc[0]) // 60)  # TODO: Fix to minutes, not seconds
+        self.start = int(self.data_frame['Time'].iloc[0])
+        self.end = int(self.data_frame['Time'].iloc[-1])
         self.round_count = self.data_frame.shape[0]
         self.map_name = self.data_frame['Map'].iloc[-1]
 

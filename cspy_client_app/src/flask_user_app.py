@@ -18,7 +18,7 @@ GS_ON = 'GS is currently ON'
 GS_OFF = 'GS is currently OFF'
 
 # Web address of RESTful API server to which match data is sent
-API_ADDRESS = ''
+API_ADDRESS = '/api'
 
 # the CS-Py Flask object
 cs_py_client = Flask(__name__, template_folder='../templates', static_folder='../static')
@@ -74,16 +74,6 @@ def init_table_if_not_exists(sql_db):
                                                                      'Current Equip. Value' INTEGER, 'Round Kills' INTEGER,
                                                                      'Round HS Kills' INTEGER);'''
 
-    # create_match_table_sql = '''CREATE TABLE IF NOT EXISTS per_match_data (Match_ID INTEGER PRIMARY KEY, Duration REAL,
-    #                                                                        'Round Count' INTEGER, Map TEXT, Rating1 REAL,
-    #                                                                        HSR REAL, MDC REAL, KPR REAL, KAS REAL,
-    #                                                                        KDR REAL, KDA REAL, MEAN REAL, CT_Rating1 REAL,
-    #                                                                        CT_HSR REAL, CT_MDC REAL, CT_KPR REAL,
-    #                                                                        CT_KAS REAL, CT_KDR REAL, CT_KDA REAL,
-    #                                                                        CT_MEAN REAL, T_Rating1 REAL, T_HSR REAL,
-    #                                                                        T_MDC REAL, T_KPR REAL, T_KAS REAL, T_KDR REAL,
-    #                                                                        T_KDA REAL, T_MEAN REAL);'''
-
     sql_db.cursor().execute(create_round_table_sql)
     sql_db.commit()
     print("SQL Table Check Passed")
@@ -114,7 +104,7 @@ def send_match_to_remote():
         round_db.commit()
         print("Match Data Sent; Rounds Reset")
     else:
-        print("API Request Failed. Not Clearing Round Data")
+        print("API Request Failed. Not Clearing Round Data. Code: " + send_match_request.status_code)
 
 
 # checks previous entries in database to make sure there are no duplicates.
