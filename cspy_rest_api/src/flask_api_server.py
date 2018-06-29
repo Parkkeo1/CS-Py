@@ -58,6 +58,9 @@ class ReceiveDataApi(Resource):
         if request.is_json:
             print(request.get_json())
 
+            # TODO: Implement method(s) to check specific format of JSON to make sure it matches SQL table layout.
+            # TODO: Handle duplicate match entries by comparing SteamID and Start/End Times.
+
             return 'Data Accepted', 202
         else:
             return 'Invalid Data', 400

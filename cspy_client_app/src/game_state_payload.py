@@ -12,10 +12,6 @@ class GameStatePayload:
     def __init__(self, payload):
         self.__dict__ = payload
         self.load_nested_data()
-        # TODO: Track client's steamID as attribute. Add new field to per_round_data table. Then in MatchDataSummary,
-        # TODO: add attribute to client SteamID. This attribute will be used in the JSON POST Request to the remote server
-        # TODO: (probably headers, if not in the content of JSON).
-
         self.gamestate_code = self.classify_payload()
 
     def get_properties_list(self):

@@ -69,7 +69,7 @@ def setup_gamestate_cfg():
 
 def init_table_if_not_exists(sql_db):
     create_round_table_sql = '''CREATE TABLE IF NOT EXISTS per_round_data (Time INTEGER, SteamID INTEGER, Map TEXT, 
-                                                                     'Map Status' TEXT, 'Player Name' TEXT,
+                                                                     'Map Status' TEXT, Round INTEGER, 'Player Name' TEXT,
                                                                      'Player Team' TEXT, Kills INTEGER, Assists INTEGER,
                                                                      Deaths INTEGER, MVPs INTEGER, Score INTEGER,
                                                                      'Current Equip. Value' INTEGER, 'Round Kills' INTEGER,
@@ -114,14 +114,19 @@ def check_prev_entries(game_data):
     player_db = get_db()
     last_entry = pd.read_sql('SELECT * FROM per_round_data ORDER BY Time DESC LIMIT 1;', player_db)
 
-    # time difference is 1 second or less
-    if last_entry.shape[0] != 0 and abs(int(game_data.provider.timestamp - last_entry.iloc[0]['Time'])) <= 1:
-        sql_delete = 'DELETE FROM per_round_data WHERE Time = (SELECT MAX(Time) FROM per_round_data);'
-        player_db.cursor().execute(sql_delete)
-        player_db.commit()
-        print("Time Duplicate Replaced")
-    else:
-        print("Not a Duplicate")
+    if last_entry.shape[0] != 0:
+        if abs(int(game_data.provider.timestamp - last_entry.iloc[0]['Time'])) <= 1:
+            sql_delete = 'DELETE FROM per_round_data WHERE Time = (SELECT MAX(Time) FROM per_round_data);'
+            player_db.cursor().execute(sql_delete)
+            player_db.commit()
+            print("Time Duplicate Replaced")
+            return True
+
+        if int(last_entry['Round'].iloc[0]) == game_data.map.round:  # checking for duplicates by round number.
+            return False
+
+    print("Not a Duplicate")
+    return True
 
 
 def insert_round_data(round_data):
@@ -133,34 +138,14 @@ def insert_round_data(round_data):
         round_data.player.name, round_data.player.team, match_stats.kills, match_stats.assists, match_stats.deaths,
         match_stats.mvps, match_stats.score, player_state.equip_value, player_state.round_kills, player_state.round_killhs)
 
-    round_insert_sql = ''' INSERT INTO per_round_data(Time, SteamID, Map, "Map Status", "Player Name", "Player Team",
+    round_insert_sql = ''' INSERT INTO per_round_data(Time, SteamID, Map, "Map Status", Round, "Player Name", "Player Team",
                                                 Kills, Assists, Deaths, MVPs, Score, "Current Equip. Value",
                                                 "Round Kills", "Round HS Kills")
-                                                VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) '''
+                                                VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) '''
     print(new_round_data)
     conn = get_db()
     conn.cursor().execute(round_insert_sql, new_round_data)
     conn.commit()
-
-
-# def insert_match_data(match_data):
-#     new_match_data = (int(match_data.duration), match_data.round_count, match_data.map_name, match_data.rating1, match_data.hsr,
-#                       match_data.mdc, match_data.kpr, match_data.kas, match_data.kdr, match_data.kda, match_data.mean_equip,
-#                       match_data.ct_rating1, match_data.ct_hsr, match_data.ct_mdc, match_data.ct_kpr, match_data.ct_kas,
-#                       match_data.ct_kdr, match_data.ct_kda, match_data.ct_mean_equip, match_data.t_rating1, match_data.t_hsr,
-#                       match_data.t_mdc, match_data.t_kpr, match_data.t_kas, match_data.t_kdr, match_data.t_kda,
-#                       match_data.t_mean_equip)
-#
-#     match_insert_sql = ''' INSERT INTO per_match_data (Duration, 'Round Count', Map, Rating1, HSR, MDC, KPR, KAS, KDR, KDA,
-#                                                        MEAN, CT_Rating1, CT_HSR, CT_MDC, CT_KPR, CT_KAS,
-#                                                        CT_KDR, CT_KDA, CT_MEAN, T_Rating1, T_HSR, T_MDC, T_KPR, T_KAS,
-#                                                        T_KDR, T_KDA, T_MEAN) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,
-#                                                         ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)'''
-#
-#     print(new_match_data)
-#     conn = get_db()
-#     conn.cursor().execute(match_insert_sql, new_match_data)
-#     conn.commit()
 
 
 # ---------------------------
@@ -168,7 +153,7 @@ def insert_round_data(round_data):
 # flask server routes
 
 # the home page, handles frontend user interaction
-@cs_py_client.route('/', methods=['GET', 'POST'])
+@cs_py_client.route('/index', methods=['GET', 'POST'])
 def index():
     if request.method == 'POST':
         user_input = str(request.form.get('input'))
@@ -176,12 +161,12 @@ def index():
         # user chooses to start or end active data collection
         if user_input == 'start' or user_input == 'end':
             cs_py_client.config['STATE'] = True if user_input == 'start' else False
-            return redirect(url_for('index'))
 
         # user chooses to reset, ending collection for current match
         elif user_input == 'reset':
             send_match_to_remote()
-            return redirect(url_for('index'))
+
+        return redirect(url_for('index'))
     else:
         # updating frontend status of CS-Py
         status = GS_ON if cs_py_client.config['STATE'] else GS_OFF
@@ -201,9 +186,10 @@ def gamestate_handler():
         elif game_data.gamestate_code == GameStateCode.ENDGAME_DIFF_PLAYER:
             print("End Game Payload Received")
             send_match_to_remote()
+            return 'Request Received'
         else:
-            check_prev_entries(game_data)
-            insert_round_data(round_data=game_data)
+            if check_prev_entries(game_data):  # checks for round AND time duplicate entries.
+                insert_round_data(round_data=game_data)
             if game_data.map.phase == 'gameover':  # automatic reset if player was alive by end of game.
                 send_match_to_remote()
 
@@ -223,5 +209,5 @@ if __name__ == "__main__":
     setup_gamestate_cfg()
 
     # auto-opens browser window to CS-Py frontend
-    webbrowser.open_new('http://127.0.0.1:5000')
+    webbrowser.open_new('http://127.0.0.1:5000/index')
     cs_py_client.run(debug=False, threaded=True)
