@@ -45,18 +45,23 @@ def server_sql_setup(sql_db):
 
 
 class MatchDataApi(Resource):
+    # TODO: For the future front-end website/web app on EWS
+    def get(self):
+        return 'Sample Text'
+
     def post(self):
-        print(request.headers)
-        print(request.is_json)
-        print(request.get_json())
-        return 'Data Accepted', 202
+        if request.is_json:
+            print(request.get_json())
+
+            return 'Data Accepted', 202
+        else:
+            return 'Invalid Data', 400
 
 
 cs_py_rest_api.add_resource(MatchDataApi, '/api')
-
 
 # TODO: Only for testing, remove for deployment. For deployment, use PythonAnywhere.
 if __name__ == '__main__':
     startup_conn = sqlite3.connect(cs_py_server.config['DATABASE'])
     server_sql_setup(startup_conn)
-    cs_py_server.run(debug=False)
+    cs_py_server.run(debug=False, port=5001)

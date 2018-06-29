@@ -1,6 +1,7 @@
 import os
 import shutil
 import sqlite3
+import webbrowser
 import winreg
 
 from flask import Flask, request, render_template, g, redirect, url_for
@@ -18,7 +19,7 @@ GS_ON = 'GS is currently ON'
 GS_OFF = 'GS is currently OFF'
 
 # Web address of RESTful API server to which match data is sent
-API_ADDRESS = '/api'
+API_ADDRESS = 'http://127.0.0.1:5001/api'  # TODO: For Testing
 
 # the CS-Py Flask object
 cs_py_client = Flask(__name__, template_folder='../templates', static_folder='../static')
@@ -95,6 +96,7 @@ def send_match_to_remote():
     match_data = MatchAnalysis(data_for_match_df)
     del match_data.data_frame
     # TODO: May include client's steamid also in the headers as well as in the json data in the future. TBD
+    print(match_data.__dict__)
     send_match_request = requests.post(API_ADDRESS, json=match_data.__dict__)
 
     # checking if request was successful
@@ -104,7 +106,7 @@ def send_match_to_remote():
         round_db.commit()
         print("Match Data Sent; Rounds Reset")
     else:
-        print("API Request Failed. Not Clearing Round Data. Code: " + send_match_request.status_code)
+        print("API Request Failed. Not Clearing Round Data. Code: " + str(send_match_request.status_code))
 
 
 # checks previous entries in database to make sure there are no duplicates.
@@ -214,16 +216,12 @@ def shutdown():
     return 'CS-Py is shutting down. You may now close this browser window/tab.'
 
 
-# @cs_py_client.route('/results')
-# def results():
-#     result = session['result']
-#     return render_template('results.html', result=result)
+if __name__ == "__main__":
+    # setup
+    db_conn = sqlite3.connect(cs_py_client.config['DATABASE'])
+    init_table_if_not_exists(db_conn)
+    setup_gamestate_cfg()
 
-
-# ---------------------------
-
-# # temp fix for matplotlib plot images not refreshing unless page is manually refreshed.
-# @cs_py_client.after_request
-# def add_header(response):
-#     response.headers['Cache-Control'] = 'public, max-age=0'
-#     return response
+    # auto-opens browser window to CS-Py frontend
+    webbrowser.open_new('http://127.0.0.1:5000')
+    cs_py_client.run(debug=False, threaded=True)
