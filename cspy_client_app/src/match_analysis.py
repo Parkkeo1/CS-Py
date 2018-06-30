@@ -3,6 +3,12 @@ import math
 
 class MatchAnalysis:
 
+    # Formula Constants
+    HLTV_KPR_CONST = 0.658
+    HLTV_SURVIVAL_CONST = 0.318
+    HLTV_MULTIKILL_CONST = 1.193
+    HLTV_DIVIDE_CONST = 2.7
+
     def __init__(self, round_data_df):
         self.data_frame = round_data_df
 
@@ -31,7 +37,6 @@ class MatchAnalysis:
         t_data = self.data_frame[self.data_frame['Player Team'] == 'T']
 
         # TODO: HLTV Rating 1.0
-        # TODO: Kills, Assists, Survived Consistency Percentage
 
         # HSR: Headshot Ratio
         # MDC: Monetary Dependency Coefficient
@@ -40,31 +45,58 @@ class MatchAnalysis:
         # MEAN: Mean Equipment Value
 
         # Totals
-        self.hsr = self.calculate_hsr(self.data_frame)
-        self.mdc = self.calculate_mdc(self.data_frame)
-        self.kpr = self.calculate_kpr(self.data_frame)
-        self.kdr, self.kda = self.calculate_kdr_kda(self.data_frame)
-        self.mean_equip = int(round(self.data_frame['Current Equip. Value'].mean(skipna=True)))
+        if not self.data_frame.empty:
+            self.rating1 = self.calculate_rating(self.data_frame)
+            self.hsr = self.calculate_hsr(self.data_frame)
+            self.mdc = self.calculate_mdc(self.data_frame)
+            self.kpr = self.calculate_kpr(self.data_frame)
+            self.kas = self.calculate_kas(self.data_frame)
+            self.kdr, self.kda = self.calculate_kdr_kda(self.data_frame)
+            self.mean_equip = int(round(self.data_frame['Current Equip. Value'].mean(skipna=True)))
 
         # CT
         if not ct_data.empty:
+            self.ct_rating1 = self.calculate_rating(ct_data)
             self.ct_hsr = self.calculate_hsr(ct_data)
             self.ct_mdc = self.calculate_mdc(ct_data)
             self.ct_kpr = self.calculate_kpr(ct_data)
+            self.ct_kas = self.calculate_kas(ct_data)
             self.ct_kdr, self.ct_kda = self.calculate_kdr_kda(ct_data)
             self.ct_mean_equip = int(round(ct_data['Current Equip. Value'].mean(skipna=True)))
 
         # T
         if not t_data.empty:
+            self.t_rating1 = self.calculate_rating(t_data)
             self.t_hsr = self.calculate_hsr(t_data)
             self.t_mdc = self.calculate_mdc(t_data)
             self.t_kpr = self.calculate_kpr(t_data)
+            self.t_kas = self.calculate_kas(t_data)
             self.t_kdr, self.t_kda = self.calculate_kdr_kda(t_data)
             self.t_mean_equip = int(round(t_data['Current Equip. Value'].mean(skipna=True)))
 
-    @staticmethod
-    def calculate_rating(relevant_data_df):
-        pass
+    def calculate_rating(self, relevant_data_df):
+        # HLTV's Kill Rating Formula
+        kill_rating = self.calculate_kpr(relevant_data_df) / MatchAnalysis.HLTV_KPR_CONST
+
+        total_rounds = relevant_data_df.shape[0]
+        # HLTV's Survival Rating Formula
+        survival_rating = ((total_rounds - relevant_data_df['Deaths'].iloc[-1]) / total_rounds) / MatchAnalysis.HLTV_SURVIVAL_CONST
+
+        multikill_rounds = [0, 0, 0, 0, 0, 0]
+
+        for i in range(total_rounds):
+            multikill_rounds[int(relevant_data_df['Round Kills'].iloc[i])] += 1
+
+        # HLTV's MultiKill Rating Formula
+        multikill_rating = ((multikill_rounds[1] +
+                           (4 * multikill_rounds[2]) +
+                           (9 * multikill_rounds[3]) +
+                           (16 * multikill_rounds[4]) +
+                           (25 * multikill_rounds[5])) / total_rounds) / MatchAnalysis.HLTV_MULTIKILL_CONST
+
+        # HLTV's Rating 1.0 Formula
+        combined_rating = (kill_rating + (0.7 * survival_rating) + multikill_rating) / MatchAnalysis.HLTV_DIVIDE_CONST
+        return float(round(combined_rating, 2))
 
     @staticmethod
     def calculate_hsr(relevant_data_df):
@@ -93,7 +125,35 @@ class MatchAnalysis:
 
     @staticmethod
     def calculate_kas(relevant_data_df):
-        pass
+        kas_count = 0
+
+        # Check first entry
+        if relevant_data_df['Round Kills'].iloc[0] > 0 or \
+           relevant_data_df['Kills'].iloc[0] > 0 or \
+           relevant_data_df['Assists'].iloc[0] > 0 or \
+           relevant_data_df['Deaths'].iloc[0] == 0:
+            kas_count += 1
+
+        prev_kill_count = relevant_data_df['Kills'].iloc[0]
+        prev_assist_count = relevant_data_df['Assists'].iloc[0]
+        prev_death_count = relevant_data_df['Deaths'].iloc[0]
+
+        # Check rest of rounds
+        for i in range(1, relevant_data_df.shape[0]):
+            if relevant_data_df['Round Kills'].iloc[i] > 0 or \
+               relevant_data_df['Kills'].iloc[i] > prev_kill_count or \
+               relevant_data_df['Assists'].iloc[i] > prev_assist_count or \
+               relevant_data_df['Deaths'].iloc[i] == prev_death_count:
+                kas_count += 1
+
+            prev_kill_count = relevant_data_df['Kills'].iloc[i]
+            prev_assist_count = relevant_data_df['Assists'].iloc[i]
+            prev_death_count = relevant_data_df['Deaths'].iloc[i]
+
+        if kas_count == 0:
+            return 0
+
+        return round(kas_count / relevant_data_df.shape[0], 2) * 100
 
     @staticmethod
     def calculate_kdr_kda(relevant_data_df):
