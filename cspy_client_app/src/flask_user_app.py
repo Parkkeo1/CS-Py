@@ -23,7 +23,6 @@ API_ADDRESS = 'http://127.0.0.1:5001/api/data_receiver'  # TODO: For Testing
 
 # the CS-Py Flask object
 cs_py_client = Flask(__name__, template_folder='../templates', static_folder='../static')
-# cs_py_client.config['SECRET_KEY'] = '6f27695310b33e0db1f04a54d2aaf8632b4ad551e9ff8c95'
 cs_py_client.config['DATABASE'] = os.path.join(cs_py_client.root_path, '..', 'rounds_data.db')
 cs_py_client.config['STATE'] = False
 
@@ -122,8 +121,9 @@ def check_prev_entries(game_data):
             print("Time Duplicate Replaced")
             return True
 
-        if int(last_entry['Round'].iloc[0]) == game_data.map.round:  # checking for duplicates by round number.
-            return False
+        # TODO: Temp removal while testing
+        # if int(last_entry['Round'].iloc[0]) == game_data.map.round:  # checking for duplicates by round number.
+        #     return False
 
     print("Not a Duplicate")
     return True

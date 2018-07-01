@@ -29,9 +29,9 @@ def server_sql_setup():
                                                                           'Round Count' INTEGER, Map TEXT, Rating1 REAL,
                                                                           HSR REAL, MDC REAL, KPR REAL, KAS REAL, 
                                                                           KDR REAL, KDA REAL, MEAN REAL, 
-                                                                          CT_Rating1 REAL, CT_HSR REAL, CT_MDC REAL, 
+                                                                          CT_HSR REAL, CT_MDC REAL, 
                                                                           CT_KPR REAL, CT_KAS REAL, CT_KDR REAL, 
-                                                                          CT_KDA REAL, CT_MEAN REAL, T_Rating1 REAL, 
+                                                                          CT_KDA REAL, CT_MEAN REAL, 
                                                                           T_HSR REAL, T_MDC REAL, T_KPR REAL, T_KAS REAL, 
                                                                           T_KDR REAL, T_KDA REAL, T_MEAN REAL,
                                                                           FOREIGN KEY (User_SteamID) 

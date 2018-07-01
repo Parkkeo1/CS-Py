@@ -20,7 +20,7 @@ class MatchAnalysis:
         self.map_name = self.data_frame['Map'].iloc[-1]
 
         # to-be calculated properties
-        self.rating1, self.ct_rating1, self.t_rating1 = 0, 0, 0
+        self.rating1 = 0
         self.hsr, self.ct_hsr, self.t_hsr = 0, 0, 0
         self.mdc, self.ct_mdc, self.t_mdc = 0, 0, 0
         self.kpr, self.ct_kpr, self.t_kpr = 0, 0, 0
@@ -35,8 +35,6 @@ class MatchAnalysis:
     def calculate_main(self):
         ct_data = self.data_frame[self.data_frame['Player Team'] == 'CT']
         t_data = self.data_frame[self.data_frame['Player Team'] == 'T']
-
-        # TODO: HLTV Rating 1.0
 
         # HSR: Headshot Ratio
         # MDC: Monetary Dependency Coefficient
@@ -56,7 +54,6 @@ class MatchAnalysis:
 
         # CT
         if not ct_data.empty:
-            self.ct_rating1 = self.calculate_rating(ct_data)
             self.ct_hsr = self.calculate_hsr(ct_data)
             self.ct_mdc = self.calculate_mdc(ct_data)
             self.ct_kpr = self.calculate_kpr(ct_data)
@@ -66,7 +63,6 @@ class MatchAnalysis:
 
         # T
         if not t_data.empty:
-            self.t_rating1 = self.calculate_rating(t_data)
             self.t_hsr = self.calculate_hsr(t_data)
             self.t_mdc = self.calculate_mdc(t_data)
             self.t_kpr = self.calculate_kpr(t_data)
