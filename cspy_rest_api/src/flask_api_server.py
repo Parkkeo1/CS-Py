@@ -4,6 +4,8 @@ import sqlite3
 from flask import Flask, request, g
 from flask_restful import Resource, Api
 
+from user_data_payload import UserDataPayload
+
 cs_py_server = Flask(__name__)
 cs_py_rest_api = Api(cs_py_server)
 cs_py_server.config['DATABASE'] = os.path.join(cs_py_server.root_path, '..', 'users_and_matches.db')
@@ -46,6 +48,20 @@ def server_sql_setup():
 # ---------------------------
 
 
+# returns True if user already exists in database, False if user is not yet in DB.
+def check_for_user_id(payload_user_id):
+    sql_db = sqlite3.connect(cs_py_server.config['DATABASE'])
+    all_users_cursor = sql_db.cursor()
+
+    check_for_user_sql = '''SELECT EXISTS (SELECT 1 FROM all_users WHERE User_SteamID == %s''' % payload_user_id
+    all_users_cursor.execute(check_for_user_sql)
+    return all_users_cursor.fetchone()
+
+# ---------------------------
+
+# API classes and functions
+
+
 # for the future frontend website/webapp on EWS for CS-Py that will display to users their results
 class FrontEndDataApi(Resource):
     def get(self, user_steamid):
@@ -57,13 +73,15 @@ class ReceiveDataApi(Resource):
     def post(self):
         if request.is_json:
             print(request.get_json())
+            payload = UserDataPayload(request.get_json())
 
-            # TODO: Implement method(s) to check specific format of JSON to make sure it matches SQL table layout.
-            # TODO: Handle duplicate match entries by comparing SteamID and Start/End Times.
+            if payload.is_valid:
+                pass  # insert into sql table(s) accordingly, check for whether user is already in user table
+                # TODO: Handle duplicate match entries by comparing SteamID and Start/End Times.
 
-            return 'Data Accepted', 202
-        else:
-            return 'Invalid Data', 400
+                return 'Data Accepted', 202
+
+        return 'Invalid Data', 400
 
 
 cs_py_rest_api.add_resource(ReceiveDataApi, '/api/data_receiver')
