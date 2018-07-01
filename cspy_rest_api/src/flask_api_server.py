@@ -13,13 +13,6 @@ cs_py_server.config['DATABASE'] = os.path.join(cs_py_server.root_path, '..', 'us
 # ---------------------------
 
 
-# database connection handling
-def get_db():
-    if not hasattr(g, 'sqlite_db'):
-        g.sqlite_db = sqlite3.connect(cs_py_server.config['DATABASE'])
-    return g.sqlite_db
-
-
 # makes sure required tables exist; if not, create them
 def server_sql_setup():
     sql_db = sqlite3.connect(cs_py_server.config['DATABASE'])
@@ -47,15 +40,40 @@ def server_sql_setup():
 
 # ---------------------------
 
+# utility functions for payload validation and sql statements
+
 
 # returns True if user already exists in database, False if user is not yet in DB.
 def check_for_user_id(payload_user_id):
     sql_db = sqlite3.connect(cs_py_server.config['DATABASE'])
     all_users_cursor = sql_db.cursor()
 
-    check_for_user_sql = '''SELECT EXISTS (SELECT 1 FROM all_users WHERE User_SteamID == %s''' % payload_user_id
-    all_users_cursor.execute(check_for_user_sql)
+    check_for_user_sql = '''SELECT EXISTS (SELECT 1 FROM all_users WHERE User_SteamID == ?)'''
+    all_users_cursor.execute(check_for_user_sql, payload_user_id)
     return all_users_cursor.fetchone()
+
+
+# adds new user and initializes the match count to 1
+def add_new_user(user_id):
+    sql_db = sqlite3.connect(cs_py_server.config['DATABASE'])
+    all_users_cursor = sql_db.cursor()
+
+    add_user_sql = '''INSERT INTO all_users(User_SteamID, "Match Count") VALUES (?, ?)'''
+    all_users_cursor.execute(add_user_sql, (user_id, 1))
+    sql_db.commit()
+    print("New User: %s Added" % user_id)
+
+
+# adds 1 to the match count of user in the all_users sql table
+def update_existing_user(user_id):
+    sql_db = sqlite3.connect(cs_py_server.config['DATABASE'])
+    all_users_cursor = sql_db.cursor()
+
+    update_user_sql = '''UPDATE all_users SET "Match Count" = "Match Count" + 1 WHERE User_SteamID == ?'''
+    all_users_cursor.execute(update_user_sql, user_id)
+    sql_db.commit()
+    print("Match Count of User: %s Updated" % user_id)
+
 
 # ---------------------------
 
@@ -76,8 +94,13 @@ class ReceiveDataApi(Resource):
             payload = UserDataPayload(request.get_json())
 
             if payload.is_valid:
-                pass  # insert into sql table(s) accordingly, check for whether user is already in user table
-                # TODO: Handle duplicate match entries by comparing SteamID and Start/End Times.
+                print("Valid Payload Received")
+                # insert into sql table(s) accordingly
+                if check_for_user_id(payload.steamid):  # user already exists
+                    # TODO: Handle duplicate match entries by comparing SteamID and Start/End Times.
+                    pass
+                else:  # user does not exist
+                    pass
 
                 return 'Data Accepted', 202
 
