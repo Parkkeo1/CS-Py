@@ -19,7 +19,7 @@ GS_ON = 'GS is currently ON'
 GS_OFF = 'GS is currently OFF'
 
 # Web address of RESTful API server to which match data is sent
-API_ADDRESS = 'http://127.0.0.1:5001/api/data_receiver'  # TODO: For Testing
+API_ADDRESS = 'http://Parkkeo1.pythonanywhere.com/api/data_receiver'  # TODO: For Testing
 
 # the CS-Py Flask object
 cs_py_client = Flask(__name__, template_folder='../templates', static_folder='../static')
