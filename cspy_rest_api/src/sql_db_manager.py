@@ -42,8 +42,8 @@ def check_for_duplicate_matches(payload, sql_db):
 def insert_match_data(payload, sql_db):
     all_matches_cursor = sql_db.cursor()
 
-    insert_user_data_sql = '''INSERT INTO all_matches(User_SteamID, Start, End, 'Round Count', Map, Rating1, HSR, MDC, 
-                                                      KPR, KAS, KDR, KDA, MEAN, CT_HSR, CT_MDC, CT_KPR, CT_KAS, CT_KDR, 
+    insert_user_data_sql = '''INSERT INTO all_matches(User_SteamID, Start, End, 'Round Count', Map, Rating1, HSR, MDC,
+                                                      KPR, KAS, KDR, KDA, MEAN, CT_HSR, CT_MDC, CT_KPR, CT_KAS, CT_KDR,
                                                       CT_KDA, CT_MEAN, T_HSR, T_MDC, T_KPR, T_KAS, T_KDR, T_KDA, T_MEAN)
                                                       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,
                                                       ?, ?, ?, ?, ?, ?, ?, ?)'''

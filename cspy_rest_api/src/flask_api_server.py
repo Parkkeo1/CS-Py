@@ -4,7 +4,7 @@ import sqlite3
 from flask import Flask, request
 from flask_restful import Resource, Api
 
-from sql_db_manager import *
+from sql_db_manager import check_for_user_id, add_new_user, update_existing_user, check_for_duplicate_matches, insert_match_data
 from user_data_payload import UserDataPayload
 
 cs_py_server = Flask(__name__)
@@ -20,17 +20,17 @@ def server_sql_setup():
 
     create_users_table_sql = '''CREATE TABLE IF NOT EXISTS all_users (User_SteamID INTEGER, "Match Count" INTEGER)'''
 
-    create_matches_table_sql = '''CREATE TABLE IF NOT EXISTS all_matches (Match_ID INTEGER PRIMARY KEY, 
-                                                                          User_SteamID INTEGER, Start INTEGER, End INTEGER, 
+    create_matches_table_sql = '''CREATE TABLE IF NOT EXISTS all_matches (Match_ID INTEGER PRIMARY KEY,
+                                                                          User_SteamID INTEGER, Start INTEGER, End INTEGER,
                                                                           'Round Count' INTEGER, Map TEXT, Rating1 REAL,
-                                                                          HSR REAL, MDC REAL, KPR REAL, KAS REAL, 
-                                                                          KDR REAL, KDA REAL, MEAN REAL, 
-                                                                          CT_HSR REAL, CT_MDC REAL, 
-                                                                          CT_KPR REAL, CT_KAS REAL, CT_KDR REAL, 
-                                                                          CT_KDA REAL, CT_MEAN REAL, 
-                                                                          T_HSR REAL, T_MDC REAL, T_KPR REAL, T_KAS REAL, 
+                                                                          HSR REAL, MDC REAL, KPR REAL, KAS REAL,
+                                                                          KDR REAL, KDA REAL, MEAN REAL,
+                                                                          CT_HSR REAL, CT_MDC REAL,
+                                                                          CT_KPR REAL, CT_KAS REAL, CT_KDR REAL,
+                                                                          CT_KDA REAL, CT_MEAN REAL,
+                                                                          T_HSR REAL, T_MDC REAL, T_KPR REAL, T_KAS REAL,
                                                                           T_KDR REAL, T_KDA REAL, T_MEAN REAL,
-                                                                          FOREIGN KEY (User_SteamID) 
+                                                                          FOREIGN KEY (User_SteamID)
                                                                           REFERENCES all_users(User_SteamID))'''
 
     db_cursor = sql_db.cursor()
@@ -85,4 +85,4 @@ cs_py_rest_api.add_resource(ReceiveDataApi, '/api/data_receiver')
 # TODO For deployment, use PythonAnywhere.
 if __name__ == '__main__':
     server_sql_setup()
-    cs_py_server.run(debug=False, port=5001)
+    # cs_py_server.run(debug=False, port=5001)
