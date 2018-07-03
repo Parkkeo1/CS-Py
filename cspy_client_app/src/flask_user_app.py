@@ -68,7 +68,8 @@ def setup_gamestate_cfg():
 
 def init_table_if_not_exists(sql_db):
     create_round_table_sql = '''CREATE TABLE IF NOT EXISTS per_round_data (Time INTEGER, SteamID INTEGER, Map TEXT, 
-                                                                     'Map Status' TEXT, Round INTEGER, 'Player Name' TEXT,
+                                                                     'Map Status' TEXT, Round INTEGER, CT_Score INTEGER, 
+                                                                     T_Score INTEGER, 'Player Name' TEXT,
                                                                      'Player Team' TEXT, Kills INTEGER, Assists INTEGER,
                                                                      Deaths INTEGER, MVPs INTEGER, Score INTEGER,
                                                                      'Current Equip. Value' INTEGER, 'Round Kills' INTEGER,
@@ -100,6 +101,7 @@ def send_match_to_remote():
 
     # checking if request was successful
     if send_match_request.status_code == 202:  # CS-Py's API should send 202: Accepted as response code upon success.
+        # TODO: Temporarily removing auto-wipe of round_data table
         # clear per_round_data table
         # round_db.cursor().execute('DELETE FROM per_round_data;')
         # round_db.commit()
@@ -121,6 +123,8 @@ def check_prev_entries(game_data):
             print("Time Duplicate Replaced")
             return True
 
+        # TODO: Add more duplicate checks after testing.
+
     print("Not a Duplicate")
     return True
 
@@ -130,14 +134,15 @@ def insert_round_data(round_data):
     player_state = round_data.player.state
 
     new_round_data = (
-        round_data.provider.timestamp, round_data.provider.steamid, round_data.map.name, round_data.map.phase, round_data.map.round,
+        round_data.provider.timestamp, round_data.provider.steamid, round_data.map.name, round_data.map.phase,
+        round_data.map.round, round_data.map.team_ct.score, round_data.team_t.score,
         round_data.player.name, round_data.player.team, match_stats.kills, match_stats.assists, match_stats.deaths,
         match_stats.mvps, match_stats.score, player_state.equip_value, player_state.round_kills, player_state.round_killhs)
 
-    round_insert_sql = ''' INSERT INTO per_round_data(Time, SteamID, Map, "Map Status", Round, "Player Name", "Player Team",
-                                                Kills, Assists, Deaths, MVPs, Score, "Current Equip. Value",
-                                                "Round Kills", "Round HS Kills")
-                                                VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) '''
+    round_insert_sql = ''' INSERT INTO per_round_data(Time, SteamID, Map, "Map Status", Round, CT_Score, T_Score, 
+                                                      "Player Name", "Player Team", Kills, Assists, Deaths, MVPs, Score, 
+                                                      "Current Equip. Value", "Round Kills", "Round HS Kills")
+                                                      VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) '''
     print(new_round_data)
     conn = get_db()
     conn.cursor().execute(round_insert_sql, new_round_data)
@@ -188,7 +193,7 @@ def gamestate_handler():
             send_match_to_remote()
             return 'Request Received'
         else:
-            if check_prev_entries(game_data):  # checks for round AND time duplicate entries.
+            if check_prev_entries(game_data):  # checks for time duplicate entries.
                 insert_round_data(round_data=game_data)
             if game_data.map.phase == 'gameover':  # automatic reset if player was alive by end of game.
                 send_match_to_remote()

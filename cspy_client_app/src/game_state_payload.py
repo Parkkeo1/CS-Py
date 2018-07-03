@@ -38,12 +38,10 @@ class GameStatePayload:
     # check the existence of key properties (provider, player, map, etc)
     def basic_check(self):
         try:
-            print("Pass #1: {0}, {1}, {2}, {3}, {4}, {5}".format(self.provider.timestamp, self.map.name, self.map.phase,
-                                                                 self.player.name, self.player.team, self.player.match_stats,
-                                                                 self.player.state))
-            print("Pass #2: {0}, {1}, {2}, {3}, {4}, {5}".format(self.player.activity, self.map.mode, self.map.round,
-                                                                 self.provider.steamid, self.player.steamid,
-                                                                 self.round.phase))
+            print(self.provider.timestamp, self.map.name, self.map.phase, self.player.name, self.player.team,
+                  self.player.match_stats, self.player.state, self.map.team_ct.score, self.map.team_t.score)
+            print(self.player.activity, self.map.mode, self.map.round, self.provider.steamid, self.player.steamid,
+                  self.round.phase)
             return True
         except (TypeError, AttributeError, ValueError):
             return False
