@@ -1,10 +1,16 @@
 # returns True if user already exists in database, False if user is not yet in DB.
-def check_for_user_id(payload_user_id, sql_db):
+def does_user_exist(payload_user_id, sql_db):
     all_users_cursor = sql_db.cursor()
 
     check_for_user_sql = '''SELECT EXISTS (SELECT 1 FROM all_users WHERE User_SteamID == ?)'''
     all_users_cursor.execute(check_for_user_sql, (payload_user_id,))
-    return all_users_cursor.fetchone()
+
+    if all_users_cursor.fetchone() == (0,):
+        print("New User")
+        return False
+    else:
+        print("Existing User")
+        return True
 
 
 # adds new user and initializes the match count to 1
@@ -29,13 +35,19 @@ def update_existing_user(user_id, sql_db):
 
 # checks for duplicate matches in the all_matches table with current payload, using user_id, start, and end times
 # Returns True if duplicate exists. False if payload is unique, new entry.
-def check_for_duplicate_matches(payload, sql_db):
+def is_duplicate_match(payload, sql_db):
     all_matches_cursor = sql_db.cursor()
 
     # if there's at least one that matches the current payload, then duplicate exists.
     check_for_duplicate_sql = '''SELECT EXISTS (SELECT 1 from all_matches WHERE User_SteamID == ? AND Start == ? AND End == ?)'''
     all_matches_cursor.execute(check_for_duplicate_sql, (payload.steamid, payload.start, payload.end))
-    return all_matches_cursor.fetchone()
+
+    if all_matches_cursor.fetchone() == (0,):
+        print("Not A Duplicate, Inserting")
+        return False
+    else:
+        print("Duplicate Found, Not Inserting")
+        return True
 
 
 # inserts user data into all_matches SQL table

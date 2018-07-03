@@ -4,7 +4,7 @@ import sqlite3
 from flask import Flask, request
 from flask_restful import Resource, Api
 
-from sql_db_manager import check_for_user_id, add_new_user, update_existing_user, check_for_duplicate_matches, insert_match_data
+from sql_db_manager import does_user_exist, add_new_user, update_existing_user, is_duplicate_match, insert_match_data
 from user_data_payload import UserDataPayload
 
 cs_py_server = Flask(__name__)
@@ -59,15 +59,11 @@ class ReceiveDataApi(Resource):
 
             if payload.is_valid:
                 sql_db = sqlite3.connect(cs_py_server.config['DATABASE'])
-                print("Valid Payload Received")
 
-                # insert into sql table(s) accordingly
-                if check_for_user_id(payload.steamid, sql_db):  # user already exists
-                    if check_for_duplicate_matches(payload, sql_db):
+                if does_user_exist(payload.steamid, sql_db):  # user already exists
+                    if not is_duplicate_match(payload, sql_db):
                         insert_match_data(payload, sql_db)
                         update_existing_user(payload.steamid, sql_db)
-                    else:
-                        print("Duplicate Found, Not Inserting")
 
                 else:  # user does not exist
                     insert_match_data(payload, sql_db)

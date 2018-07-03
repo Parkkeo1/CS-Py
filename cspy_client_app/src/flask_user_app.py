@@ -19,7 +19,7 @@ GS_ON = 'GS is currently ON'
 GS_OFF = 'GS is currently OFF'
 
 # Web address of RESTful API server to which match data is sent
-API_ADDRESS = 'http://Parkkeo1.pythonanywhere.com/api/data_receiver'  # TODO: For Testing
+API_ADDRESS = 'http://Parkkeo1.pythonanywhere.com/api/data_receiver'
 
 # the CS-Py Flask object
 cs_py_client = Flask(__name__, template_folder='../templates', static_folder='../static')
@@ -101,8 +101,8 @@ def send_match_to_remote():
     # checking if request was successful
     if send_match_request.status_code == 202:  # CS-Py's API should send 202: Accepted as response code upon success.
         # clear per_round_data table
-        round_db.cursor().execute('DELETE FROM per_round_data;')
-        round_db.commit()
+        # round_db.cursor().execute('DELETE FROM per_round_data;')
+        # round_db.commit()
         print("Match Data Sent; Rounds Reset")
     else:
         print("API Request Failed. Not Clearing Round Data. Code: " + str(send_match_request.status_code))
@@ -120,10 +120,6 @@ def check_prev_entries(game_data):
             player_db.commit()
             print("Time Duplicate Replaced")
             return True
-
-        # TODO: Temp removal while testing
-        # if int(last_entry['Round'].iloc[0]) == game_data.map.round:  # checking for duplicates by round number.
-        #     return False
 
     print("Not a Duplicate")
     return True
@@ -153,7 +149,7 @@ def insert_round_data(round_data):
 # flask server routes
 
 # the home page, handles frontend user interaction
-@cs_py_client.route('/index', methods=['GET', 'POST'])
+@cs_py_client.route('/', methods=['GET', 'POST'])
 def index():
     if request.method == 'POST':
         user_input = str(request.form.get('input'))
@@ -209,5 +205,5 @@ if __name__ == "__main__":
     setup_gamestate_cfg()
 
     # auto-opens browser window to CS-Py frontend
-    webbrowser.open_new('http://127.0.0.1:5000/index')
-    cs_py_client.run(debug=False, threaded=True)
+    webbrowser.open_new('http://127.0.0.1:5000')
+    cs_py_client.run(debug=False)

@@ -28,5 +28,7 @@ class UserDataPayload:
             for prop in self.get_properties_list():
                 self.__setattr__(prop, payload[prop])
             self.is_valid = True
+            print("Valid Payload")
         except (ValueError, AttributeError, TypeError):
             self.is_valid = False
+            print("Invalid Payload")
