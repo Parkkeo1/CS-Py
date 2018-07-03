@@ -4,7 +4,8 @@ from enum import Enum
 class GameStateCode(Enum):
     INVALID = -1
     ENDGAME_DIFF_PLAYER = 0
-    VALID = 1
+    ALIVE_END_ROUND = 1
+    DEAD_MID_ROUND = 2
 
 
 class GameStatePayload:
@@ -58,13 +59,13 @@ class GameStatePayload:
                 if self.provider.steamid == self.player.steamid:  # if player is alive (not an observer at time of payload)
                     if self.round.phase == 'over':  # end-of-round, player is alive
                         try:
-                            return GameStateCode.VALID if self.previously.round.phase == 'live' else GameStateCode.INVALID
+                            return GameStateCode.ALIVE_END_ROUND if self.previously.round.phase == 'live' else GameStateCode.INVALID
 
                         except (TypeError, AttributeError, ValueError):
                             return GameStateCode.INVALID
                     elif self.round.phase == 'live' and self.player.state.health == 0:  # mid-round, player dies
                         try:
-                            return GameStateCode.VALID if self.previously.player.state.health > 0 else GameStateCode.INVALID
+                            return GameStateCode.DEAD_MID_ROUND if self.previously.player.state.health > 0 else GameStateCode.INVALID
 
                         except (TypeError, AttributeError, ValueError):
                             return GameStateCode.INVALID

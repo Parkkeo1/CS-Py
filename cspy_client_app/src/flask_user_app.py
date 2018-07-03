@@ -68,8 +68,8 @@ def setup_gamestate_cfg():
 
 def init_table_if_not_exists(sql_db):
     create_round_table_sql = '''CREATE TABLE IF NOT EXISTS per_round_data (Time INTEGER, SteamID INTEGER, Map TEXT, 
-                                                                     'Map Status' TEXT, Round INTEGER, CT_Score INTEGER, 
-                                                                     T_Score INTEGER, 'Player Name' TEXT,
+                                                                     'Map Status' TEXT, Round INTEGER, 'Data Type' BLOB, 
+                                                                     CT_Score INTEGER, T_Score INTEGER, 'Player Name' TEXT,
                                                                      'Player Team' TEXT, Kills INTEGER, Assists INTEGER,
                                                                      Deaths INTEGER, MVPs INTEGER, Score INTEGER,
                                                                      'Current Equip. Value' INTEGER, 'Round Kills' INTEGER,
@@ -135,14 +135,14 @@ def insert_round_data(round_data):
 
     new_round_data = (
         round_data.provider.timestamp, round_data.provider.steamid, round_data.map.name, round_data.map.phase,
-        round_data.map.round, round_data.map.team_ct.score, round_data.team_t.score,
+        round_data.map.round, round_data.gamestate_code, round_data.map.team_ct.score, round_data.map.team_t.score,
         round_data.player.name, round_data.player.team, match_stats.kills, match_stats.assists, match_stats.deaths,
         match_stats.mvps, match_stats.score, player_state.equip_value, player_state.round_kills, player_state.round_killhs)
 
-    round_insert_sql = ''' INSERT INTO per_round_data(Time, SteamID, Map, "Map Status", Round, CT_Score, T_Score, 
+    round_insert_sql = ''' INSERT INTO per_round_data(Time, SteamID, Map, "Map Status", Round, 'Data Type', CT_Score, T_Score, 
                                                       "Player Name", "Player Team", Kills, Assists, Deaths, MVPs, Score, 
                                                       "Current Equip. Value", "Round Kills", "Round HS Kills")
-                                                      VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) '''
+                                                      VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) '''
     print(new_round_data)
     conn = get_db()
     conn.cursor().execute(round_insert_sql, new_round_data)
