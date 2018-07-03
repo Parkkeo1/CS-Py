@@ -101,8 +101,8 @@ def send_match_to_remote():
     # checking if request was successful
     if send_match_request.status_code == 202:  # CS-Py's API should send 202: Accepted as response code upon success.
         # clear per_round_data table
-        # round_db.cursor().execute('DELETE FROM per_round_data;')
-        # round_db.commit()
+        round_db.cursor().execute('DELETE FROM per_round_data;')
+        round_db.commit()
         print("Match Data Sent; Rounds Reset")
     else:
         print("API Request Failed. Not Clearing Round Data. Code: " + str(send_match_request.status_code))
