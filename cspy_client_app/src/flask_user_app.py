@@ -155,14 +155,18 @@ def index():
         user_input = str(request.form.get('input'))
 
         # user chooses to start or end active data collection
-        if user_input == 'start' or user_input == 'end':
-            cs_py_client.config['STATE'] = True if user_input == 'start' else False
+        if user_input == 'start':
+            cs_py_client.config['STATE'] = True
+
+        elif user_input == 'stop':
+            cs_py_client.config['STATE'] = False
 
         # user chooses to reset, ending collection for current match
         elif user_input == 'reset':
             send_match_to_remote()
 
         return redirect(url_for('index'))
+
     else:
         # updating frontend status of CS-Py
         status = GS_ON if cs_py_client.config['STATE'] else GS_OFF
