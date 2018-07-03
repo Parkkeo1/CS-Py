@@ -21,11 +21,11 @@ As a flask app, CS-Py collects player data at the end of each in-game round from
 
 #### Home Screen of CS-Py When Launched
 
-![Example, Index Page](https://github.com/Parkkeo1/CS-Py/blob/master/documentation/example2.png?raw=true)
+![Example, Index Page](https://github.com/Parkkeo1/CS-Py/blob/master/docs/example2.png?raw=true)
 
 #### Results Page
 
-![Example, Results Page](https://github.com/Parkkeo1/CS-Py/blob/master/documentation/example1.png?raw=true)
+![Example, Results Page](https://github.com/Parkkeo1/CS-Py/blob/master/docs/example1.png?raw=true)
 
 In the future, I hope to implement remote/cloud SQL DB storage and an in-game GUI transparent overlay that will display live performance statistics for the current match.
 
