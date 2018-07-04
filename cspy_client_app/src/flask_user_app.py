@@ -135,7 +135,7 @@ def insert_round_data(round_data):
 
     new_round_data = (
         round_data.provider.timestamp, round_data.provider.steamid, round_data.map.name, round_data.map.phase,
-        round_data.map.round, round_data.gamestate_code, round_data.map.team_ct.score, round_data.map.team_t.score,
+        round_data.map.round, str(round_data.gamestate_code), round_data.map.team_ct.score, round_data.map.team_t.score,
         round_data.player.name, round_data.player.team, match_stats.kills, match_stats.assists, match_stats.deaths,
         match_stats.mvps, match_stats.score, player_state.equip_value, player_state.round_kills, player_state.round_killhs)
 
