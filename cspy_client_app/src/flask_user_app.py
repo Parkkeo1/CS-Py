@@ -11,7 +11,6 @@ import requests
 from match_analysis import MatchAnalysis
 from game_state_payload import GameStateCode, GameStatePayload
 
-
 # string constants
 GS_CFG_DEST_PATH = '/steamapps/common/Counter-Strike Global Offensive/csgo/cfg/gamestate_integration_main.cfg'
 GS_CFG_SRC_PATH = '../../required_user_files/gamestate_integration_main.cfg'
@@ -68,7 +67,7 @@ def setup_gamestate_cfg():
 
 def init_table_if_not_exists(sql_db):
     create_round_table_sql = '''CREATE TABLE IF NOT EXISTS per_round_data (Time INTEGER, SteamID INTEGER, Map TEXT, 
-                                                                     'Map Status' TEXT, Round INTEGER, 'Data Type' BLOB, 
+                                                                     'Map Status' TEXT, Round INTEGER, 'GS Code' INTEGER, 
                                                                      CT_Score INTEGER, T_Score INTEGER, 'Player Name' TEXT,
                                                                      'Player Team' TEXT, Kills INTEGER, Assists INTEGER,
                                                                      Deaths INTEGER, MVPs INTEGER, Score INTEGER,
@@ -112,6 +111,20 @@ def send_match_to_remote():
 
 # checks previous entries in database to make sure there are no duplicates.
 def check_prev_entries(game_data):
+
+    # returns True if they are the same (except Time)
+    def is_equal(last_entry_row, payload):
+        match_stats = payload.player.match_stats
+        player_state = payload.player.state
+
+        return last_entry_row['Player Team'] == payload.player.team and \
+               last_entry_row['Kills'] == match_stats.kills and \
+               last_entry_row['Assists'] == match_stats.assists and \
+               last_entry_row['Deaths'] == match_stats.deaths and \
+               last_entry_row['Current Equip. Value'] == player_state.equip_value and \
+               last_entry_row['Round Kills'] == player_state.round_kills and \
+               last_entry_row['Round HS Kills'] == player_state.round_killhs
+
     player_db = get_db()
     last_entry = pd.read_sql('SELECT * FROM per_round_data ORDER BY Time DESC LIMIT 1;', player_db)
 
@@ -123,7 +136,10 @@ def check_prev_entries(game_data):
             print("Time Duplicate Replaced")
             return True
 
-        # TODO: Add more duplicate checks after testing.
+        if game_data.gamestate_code.value == 1:
+            if last_entry.iloc[0]['Data Type'] == 2:
+                if is_equal(last_entry.iloc[0], game_data):
+                    return False  # do not insert a duplicate.
 
     print("Not a Duplicate")
     return True
@@ -135,9 +151,11 @@ def insert_round_data(round_data):
 
     new_round_data = (
         round_data.provider.timestamp, round_data.provider.steamid, round_data.map.name, round_data.map.phase,
-        round_data.map.round, str(round_data.gamestate_code), round_data.map.team_ct.score, round_data.map.team_t.score,
+        round_data.map.round, round_data.gamestate_code.value, round_data.map.team_ct.score,
+        round_data.map.team_t.score,
         round_data.player.name, round_data.player.team, match_stats.kills, match_stats.assists, match_stats.deaths,
-        match_stats.mvps, match_stats.score, player_state.equip_value, player_state.round_kills, player_state.round_killhs)
+        match_stats.mvps, match_stats.score, player_state.equip_value, player_state.round_kills,
+        player_state.round_killhs)
 
     round_insert_sql = ''' INSERT INTO per_round_data(Time, SteamID, Map, "Map Status", Round, 'Data Type', CT_Score, T_Score, 
                                                       "Player Name", "Player Team", Kills, Assists, Deaths, MVPs, Score, 
@@ -195,8 +213,8 @@ def gamestate_handler():
         else:
             if check_prev_entries(game_data):  # checks for time duplicate entries.
                 insert_round_data(round_data=game_data)
-            if game_data.map.phase == 'gameover':  # automatic reset if player was alive by end of game.
-                send_match_to_remote()
+                if game_data.map.phase == 'gameover':  # automatic reset if player was alive by end of game.
+                    send_match_to_remote()
 
     return 'Request Received'
 
