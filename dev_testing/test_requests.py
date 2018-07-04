@@ -38,7 +38,7 @@ class PostRequestsTest(unittest.TestCase):
         self.assertEqual(response.status_code, 200)
 
     def test_endround_entry(self):
-        self.test_cspy.post('/GS', json=json.load(open('dev_testing/endround_data.json')),
+        self.test_cspy.post('/GS', json=json.load(open('dev_testing/alive_end_round.json')),
                                    headers={'content-type': 'application/json'})
         result_df = self.get_db_as_df()
         self.assertEqual(1, len(result_df.index))

@@ -9,7 +9,7 @@ import pandas as pd
 from match_analysis import MatchAnalysis
 
 # # testing with round_data json file instead of match_data
-# with open('midround_death_data.json') as json_file:
+# with open('dead_midround_data.json') as json_file:
 #     data = json.load(json_file)
 #
 # # backup
