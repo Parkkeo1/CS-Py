@@ -137,7 +137,7 @@ def check_prev_entries(game_data):
             return True
 
         if game_data.gamestate_code.value == 1:
-            if last_entry.iloc[0]['Data Type'] == 2:
+            if last_entry.iloc[0]['GS Code'] == 2:
                 if is_equal(last_entry.iloc[0], game_data):
                     return False  # do not insert a duplicate.
 
@@ -157,7 +157,7 @@ def insert_round_data(round_data):
         match_stats.mvps, match_stats.score, player_state.equip_value, player_state.round_kills,
         player_state.round_killhs)
 
-    round_insert_sql = ''' INSERT INTO per_round_data(Time, SteamID, Map, "Map Status", Round, 'Data Type', CT_Score, T_Score, 
+    round_insert_sql = ''' INSERT INTO per_round_data(Time, SteamID, Map, "Map Status", Round, 'GS Code', CT_Score, T_Score, 
                                                       "Player Name", "Player Team", Kills, Assists, Deaths, MVPs, Score, 
                                                       "Current Equip. Value", "Round Kills", "Round HS Kills")
                                                       VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) '''
