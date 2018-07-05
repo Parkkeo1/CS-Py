@@ -1,6 +1,7 @@
 import os
 import shutil
 import sqlite3
+import sys
 import webbrowser
 import winreg
 
@@ -94,8 +95,6 @@ def send_match_to_remote():
 
     match_data = MatchAnalysis(data_for_match_df)
     del match_data.data_frame
-    # TODO: May include client's steamid also in the headers as well as in the json data in the future. TBD
-    print(match_data.__dict__)
     send_match_request = requests.post(API_ADDRESS, json=match_data.__dict__)
 
     # checking if request was successful
@@ -139,6 +138,7 @@ def check_prev_entries(game_data):
         if game_data.gamestate_code.value == 1:
             if last_entry.iloc[0]['GS Code'] == 2:
                 if is_equal(last_entry.iloc[0], game_data):
+                    print("Round Duplicate Not Inserted")
                     return False  # do not insert a duplicate.
 
     print("Not a Duplicate")
@@ -230,6 +230,10 @@ if __name__ == "__main__":
     db_conn = sqlite3.connect(cs_py_client.config['DATABASE'])
     init_table_if_not_exists(db_conn)
     setup_gamestate_cfg()
+
+    # redirecting stdout for logging purposes
+    sys.stdout = open('server_log.txt', 'a')
+    print('---')
 
     # auto-opens browser window to CS-Py frontend
     webbrowser.open_new('http://127.0.0.1:5000')

@@ -22,8 +22,9 @@ def server_sql_setup():
 
     create_matches_table_sql = '''CREATE TABLE IF NOT EXISTS all_matches (Match_ID INTEGER PRIMARY KEY,
                                                                           User_SteamID INTEGER, Start INTEGER, End INTEGER,
-                                                                          'Round Count' INTEGER, Map TEXT, Rating1 REAL,
-                                                                          HSR REAL, MDC REAL, KPR REAL, KAS REAL,
+                                                                          'Round Count' INTEGER, Map TEXT, Kills INTEGER, 
+                                                                          Assists INTEGER, Deaths INTEGER, Score INTEGER, 
+                                                                          Rating1 REAL, HSR REAL, MDC REAL, KPR REAL, KAS REAL,
                                                                           KDR REAL, KDA REAL, MEAN REAL,
                                                                           CT_HSR REAL, CT_MDC REAL,
                                                                           CT_KPR REAL, CT_KAS REAL, CT_KDR REAL,

@@ -9,6 +9,11 @@ class UserDataPayload:
         self.round_count = 0
         self.map_name = ''
 
+        self.kills = 0
+        self.assists = 0
+        self.deaths = 0
+        self.score = 0
+
         self.rating1 = 0
         self.hsr, self.ct_hsr, self.t_hsr = 0, 0, 0
         self.mdc, self.ct_mdc, self.t_mdc = 0, 0, 0

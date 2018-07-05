@@ -54,14 +54,16 @@ def is_duplicate_match(payload, sql_db):
 def insert_match_data(payload, sql_db):
     all_matches_cursor = sql_db.cursor()
 
-    insert_user_data_sql = '''INSERT INTO all_matches(User_SteamID, Start, End, 'Round Count', Map, Rating1, HSR, MDC,
+    insert_user_data_sql = '''INSERT INTO all_matches(User_SteamID, Start, End, 'Round Count', Map, Kills, Assists, 
+                                                      Deaths, Score, Rating1, HSR, MDC,
                                                       KPR, KAS, KDR, KDA, MEAN, CT_HSR, CT_MDC, CT_KPR, CT_KAS, CT_KDR,
                                                       CT_KDA, CT_MEAN, T_HSR, T_MDC, T_KPR, T_KAS, T_KDR, T_KDA, T_MEAN)
                                                       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,
-                                                      ?, ?, ?, ?, ?, ?, ?, ?)'''
+                                                      ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)'''
 
     new_match_data = (
-        payload.steamid, payload.start, payload.end, payload.round_count, payload.map_name, payload.rating1,
+        payload.steamid, payload.start, payload.end, payload.round_count, payload.map_name, payload.kills,
+        payload.assists, payload.deaths, payload.score, payload.rating1,
         payload.hsr, payload.mdc, payload.kpr, payload.kas, payload.kdr, payload.kda, payload.mean_equip, payload.ct_hsr,
         payload.ct_mdc, payload.ct_kpr, payload.ct_kas, payload.ct_kdr, payload.ct_kda, payload.ct_mean_equip, payload.t_hsr,
         payload.t_mdc, payload.t_kpr, payload.t_kas, payload.t_kdr, payload.t_kda, payload.t_mean_equip

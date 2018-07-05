@@ -19,6 +19,12 @@ class MatchAnalysis:
         self.round_count = self.data_frame.shape[0]
         self.map_name = self.data_frame['Map'].iloc[-1]
 
+        # overall stats
+        self.kills = self.data_frame['Kills'].iloc[-1]
+        self.assists = self.data_frame['Assists'].iloc[-1]
+        self.deaths = self.data_frame['Deaths'].iloc[-1]
+        self.score = self.data_frame['Score'].iloc[-1]
+
         # to-be calculated properties
         self.rating1 = 0
         self.hsr, self.ct_hsr, self.t_hsr = 0, 0, 0
