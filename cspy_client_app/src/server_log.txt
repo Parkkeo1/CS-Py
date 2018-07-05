@@ -621,3 +621,737 @@ playing competitive 22 76561198268849559 76561198268849559 over
 GameStateCode.ALIVE_END_ROUND
 Round Duplicate Not Inserted
 GameStateCode.INVALID
+---
+---
+GameStateCode.INVALID
+1530824857 de_cache warmup gumby CT <game_state_payload.GameStatePayload object at 0x00000264EDD842E8> <game_state_payload.GameStatePayload object at 0x00000264EDD84240> 0 0
+GameStateCode.INVALID
+1530824867 de_cache warmup gumby CT <game_state_payload.GameStatePayload object at 0x00000264EDD8A128> <game_state_payload.GameStatePayload object at 0x00000264EDD8AF60> 0 0
+GameStateCode.INVALID
+1530824892 de_cache warmup gumby CT <game_state_payload.GameStatePayload object at 0x00000264EDD68F60> <game_state_payload.GameStatePayload object at 0x00000264EDD8AD30> 0 0
+GameStateCode.INVALID
+1530824916 de_cache warmup gumby CT <game_state_payload.GameStatePayload object at 0x00000264EDD5E908> <game_state_payload.GameStatePayload object at 0x00000264EDD689E8> 0 0
+GameStateCode.INVALID
+1530824920 de_cache warmup gumby CT <game_state_payload.GameStatePayload object at 0x00000264EDD5E2E8> <game_state_payload.GameStatePayload object at 0x00000264EDD5E668> 0 0
+GameStateCode.INVALID
+1530824921 de_cache warmup gumby CT <game_state_payload.GameStatePayload object at 0x00000264EDD7A6D8> <game_state_payload.GameStatePayload object at 0x00000264EDD5E9E8> 0 0
+GameStateCode.INVALID
+1530824932 de_cache live gumby CT <game_state_payload.GameStatePayload object at 0x00000264EDD73C50> <game_state_payload.GameStatePayload object at 0x00000264EDD7A358> 0 0
+playing competitive 0 76561198158189084 76561198158189084 freezetime
+GameStateCode.INVALID
+1530824947 de_cache live gumby CT <game_state_payload.GameStatePayload object at 0x00000264EDD57860> <game_state_payload.GameStatePayload object at 0x00000264EDD73B70> 0 0
+playing competitive 0 76561198158189084 76561198158189084 live
+GameStateCode.INVALID
+1530824960 de_cache live gumby CT <game_state_payload.GameStatePayload object at 0x00000264EDD7A128> <game_state_payload.GameStatePayload object at 0x00000264EDD7A1D0> 0 0
+playing competitive 0 76561198158189084 76561198158189084 live
+GameStateCode.DEAD_MID_ROUND
+Not a Duplicate
+(1530824960, '76561198158189084', 'de_cache', 'live', 0, 2, 0, 0, 'gumby', 'CT', 0, 0, 1, 0, 0, 850, 0, 0)
+1530824964 de_cache live Cadenza CT <game_state_payload.GameStatePayload object at 0x00000264EDD5E828> <game_state_payload.GameStatePayload object at 0x00000264EDD5E1D0> 0 0
+playing competitive 0 76561198158189084 76561197977148757 live
+GameStateCode.INVALID
+1530824966 de_cache live SuperFS CT <game_state_payload.GameStatePayload object at 0x00000264EDD686D8> <game_state_payload.GameStatePayload object at 0x00000264EDD5E3C8> 0 0
+playing competitive 0 76561198158189084 76561198028374124 live
+GameStateCode.INVALID
+1530824968 de_cache live SuperFS CT <game_state_payload.GameStatePayload object at 0x00000264EDD68A58> <game_state_payload.GameStatePayload object at 0x00000264EDD68668> 0 0
+playing competitive 0 76561198158189084 76561198028374124 live
+GameStateCode.INVALID
+1530824968 de_cache live Alimo CT <game_state_payload.GameStatePayload object at 0x00000264EDD912B0> <game_state_payload.GameStatePayload object at 0x00000264EDD68EB8> 0 0
+playing competitive 0 76561198158189084 76561198263290199 live
+GameStateCode.INVALID
+1530824971 de_cache live Dozer CT <game_state_payload.GameStatePayload object at 0x00000264EDD8A1D0> <game_state_payload.GameStatePayload object at 0x00000264EDD91C18> 0 0
+playing competitive 0 76561198158189084 76561198108077844 live
+GameStateCode.INVALID
+1530824972 de_cache live Dozer CT <game_state_payload.GameStatePayload object at 0x00000264EDD8A7F0> <game_state_payload.GameStatePayload object at 0x00000264EDD91048> 0 0
+playing competitive 0 76561198158189084 76561198108077844 live
+GameStateCode.INVALID
+1530824979 de_cache live Dozer CT <game_state_payload.GameStatePayload object at 0x00000264EDD84748> <game_state_payload.GameStatePayload object at 0x00000264EDD8A860> 0 0
+playing competitive 0 76561198158189084 76561198108077844 live
+GameStateCode.INVALID
+1530824984 de_cache live Dozer CT <game_state_payload.GameStatePayload object at 0x00000264EDD84668> <game_state_payload.GameStatePayload object at 0x00000264EDD847B8> 0 1
+playing competitive 1 76561198158189084 76561198108077844 over
+GameStateCode.INVALID
+1530824985 de_cache live gumby CT <game_state_payload.GameStatePayload object at 0x00000264EDD7E240> <game_state_payload.GameStatePayload object at 0x00000264EDD84B70> 0 1
+playing competitive 1 76561198158189084 76561198158189084 over
+GameStateCode.INVALID
+1530824991 de_cache live gumby CT <game_state_payload.GameStatePayload object at 0x00000264EDD7EA58> <game_state_payload.GameStatePayload object at 0x00000264EDD7EEF0> 0 1
+playing competitive 1 76561198158189084 76561198158189084 freezetime
+GameStateCode.INVALID
+1530825006 de_cache live gumby CT <game_state_payload.GameStatePayload object at 0x00000264EDD7E128> <game_state_payload.GameStatePayload object at 0x00000264EDD7EF60> 0 1
+playing competitive 1 76561198158189084 76561198158189084 live
+GameStateCode.INVALID
+1530825033 de_cache live gumby CT <game_state_payload.GameStatePayload object at 0x00000264EDD8AF60> <game_state_payload.GameStatePayload object at 0x00000264EDD7E390> 0 1
+playing competitive 1 76561198158189084 76561198158189084 live
+GameStateCode.INVALID
+1530825035 de_cache live gumby CT <game_state_payload.GameStatePayload object at 0x00000264EDD8A9B0> <game_state_payload.GameStatePayload object at 0x00000264EDD8ADA0> 0 1
+playing competitive 1 76561198158189084 76561198158189084 live
+GameStateCode.DEAD_MID_ROUND
+Not a Duplicate
+(1530825035, '76561198158189084', 'de_cache', 'live', 1, 2, 0, 1, 'gumby', 'CT', 1, 0, 2, 0, 2, 1500, 1, 0)
+1530825036 de_cache live gumby CT <game_state_payload.GameStatePayload object at 0x00000264EDD68BA8> <game_state_payload.GameStatePayload object at 0x00000264EDD68F60> 0 1
+playing competitive 1 76561198158189084 76561198158189084 live
+GameStateCode.INVALID
+1530825039 de_cache live Alimo CT <game_state_payload.GameStatePayload object at 0x00000264EDD68208> <game_state_payload.GameStatePayload object at 0x00000264EDD68278> 0 1
+playing competitive 1 76561198158189084 76561198263290199 live
+GameStateCode.INVALID
+1530825041 de_cache live Alimo CT <game_state_payload.GameStatePayload object at 0x00000264EDD5EEF0> <game_state_payload.GameStatePayload object at 0x00000264EDD68D30> 0 1
+playing competitive 1 76561198158189084 76561198263290199 live
+GameStateCode.INVALID
+1530825043 de_cache live Alimo CT <game_state_payload.GameStatePayload object at 0x00000264EDD7A748> <game_state_payload.GameStatePayload object at 0x00000264EDD5E2B0> 0 1
+playing competitive 1 76561198158189084 76561198263290199 live
+GameStateCode.INVALID
+1530825043 de_cache live SuperFS CT <game_state_payload.GameStatePayload object at 0x00000264EDD7AC88> <game_state_payload.GameStatePayload object at 0x00000264EDD5EE80> 0 1
+playing competitive 1 76561198158189084 76561198028374124 live
+GameStateCode.INVALID
+1530825052 de_cache live SuperFS CT <game_state_payload.GameStatePayload object at 0x00000264EDD73FD0> <game_state_payload.GameStatePayload object at 0x00000264EDD7ACF8> 0 1
+playing competitive 2 76561198158189084 76561198028374124 over
+GameStateCode.INVALID
+1530825053 de_cache live gumby CT <game_state_payload.GameStatePayload object at 0x00000264EDD7AE10> <game_state_payload.GameStatePayload object at 0x00000264EDD73C18> 0 2
+playing competitive 2 76561198158189084 76561198158189084 over
+GameStateCode.INVALID
+1530825059 de_cache live gumby CT <game_state_payload.GameStatePayload object at 0x00000264EDD5EE80> <game_state_payload.GameStatePayload object at 0x00000264EDD736A0> 0 2
+playing competitive 2 76561198158189084 76561198158189084 freezetime
+GameStateCode.INVALID
+1530825074 de_cache live gumby CT <game_state_payload.GameStatePayload object at 0x00000264EDD68C88> <game_state_payload.GameStatePayload object at 0x00000264EDD7AC50> 0 2
+playing competitive 2 76561198158189084 76561198158189084 live
+GameStateCode.INVALID
+1530825159 de_cache live gumby CT <game_state_payload.GameStatePayload object at 0x00000264EDD84DA0> <game_state_payload.GameStatePayload object at 0x00000264EDD5EB00> 0 2
+playing competitive 2 76561198158189084 76561198158189084 live
+GameStateCode.INVALID
+1530825160 de_cache live gumby CT <game_state_payload.GameStatePayload object at 0x00000264EDD84438> <game_state_payload.GameStatePayload object at 0x00000264EDD842E8> 0 2
+playing competitive 2 76561198158189084 76561198158189084 live
+GameStateCode.INVALID
+1530825174 de_cache live gumby CT <game_state_payload.GameStatePayload object at 0x00000264EDD7EEB8> <game_state_payload.GameStatePayload object at 0x00000264EDD5E358> 0 2
+playing competitive 3 76561198158189084 76561198158189084 over
+GameStateCode.ALIVE_END_ROUND
+Not a Duplicate
+(1530825174, '76561198158189084', 'de_cache', 'live', 3, 1, 0, 2, 'gumby', 'CT', 1, 1, 2, 0, 5, 2900, 0, 0)
+1530825181 de_cache live gumby CT <game_state_payload.GameStatePayload object at 0x00000264EDD84A20> <game_state_payload.GameStatePayload object at 0x00000264EDD84D68> 1 2
+playing competitive 3 76561198158189084 76561198158189084 freezetime
+GameStateCode.INVALID
+1530825196 de_cache live gumby CT <game_state_payload.GameStatePayload object at 0x00000264EDD8A898> <game_state_payload.GameStatePayload object at 0x00000264EDD84748> 1 2
+playing competitive 3 76561198158189084 76561198158189084 live
+GameStateCode.INVALID
+1530825234 de_cache live gumby CT <game_state_payload.GameStatePayload object at 0x00000264EDD686A0> <game_state_payload.GameStatePayload object at 0x00000264EDD8ADA0> 1 2
+playing competitive 3 76561198158189084 76561198158189084 live
+GameStateCode.DEAD_MID_ROUND
+Not a Duplicate
+(1530825234, '76561198158189084', 'de_cache', 'live', 3, 2, 1, 2, 'gumby', 'CT', 1, 1, 3, 0, 5, 5600, 0, 0)
+1530825239 de_cache live Alimo CT <game_state_payload.GameStatePayload object at 0x00000264EDD5EC18> <game_state_payload.GameStatePayload object at 0x00000264EDD5E320> 1 2
+playing competitive 3 76561198158189084 76561198263290199 live
+GameStateCode.INVALID
+1530825245 de_cache live Alimo CT <game_state_payload.GameStatePayload object at 0x00000264EDD5E080> <game_state_payload.GameStatePayload object at 0x00000264EDD5ECF8> 1 2
+playing competitive 3 76561198158189084 76561198263290199 live
+GameStateCode.INVALID
+1530825247 de_cache live Alimo CT <game_state_payload.GameStatePayload object at 0x00000264EDD7A470> <game_state_payload.GameStatePayload object at 0x00000264EDD5EBE0> 1 2
+playing competitive 3 76561198158189084 76561198263290199 live
+GameStateCode.INVALID
+1530825248 de_cache live Dozer CT <game_state_payload.GameStatePayload object at 0x00000264EDD73390> <game_state_payload.GameStatePayload object at 0x00000264EDD7AF60> 1 2
+playing competitive 3 76561198158189084 76561198108077844 live
+GameStateCode.INVALID
+1530825250 de_cache live Dozer CT <game_state_payload.GameStatePayload object at 0x00000264EDD733C8> <game_state_payload.GameStatePayload object at 0x00000264EDD7A390> 1 2
+playing competitive 3 76561198158189084 76561198108077844 live
+GameStateCode.INVALID
+1530825255 de_cache live Dozer CT <game_state_payload.GameStatePayload object at 0x00000264EDD6DE80> <game_state_payload.GameStatePayload object at 0x00000264EDD73048> 1 2
+textinput competitive 3 76561198158189084 76561198108077844 live
+GameStateCode.INVALID
+1530825257 de_cache live Dozer CT <game_state_payload.GameStatePayload object at 0x00000264EDD6D6D8> <game_state_payload.GameStatePayload object at 0x00000264EDD6DF98> 1 2
+playing competitive 3 76561198158189084 76561198108077844 live
+GameStateCode.INVALID
+1530825271 de_cache live Dozer CT <game_state_payload.GameStatePayload object at 0x00000264EDD7A160> <game_state_payload.GameStatePayload object at 0x00000264EDD7A748> 1 3
+playing competitive 4 76561198158189084 76561198108077844 over
+GameStateCode.INVALID
+1530825271 de_cache live gumby CT <game_state_payload.GameStatePayload object at 0x00000264EDD5E4A8> <game_state_payload.GameStatePayload object at 0x00000264EDD7AC18> 1 3
+playing competitive 4 76561198158189084 76561198158189084 over
+GameStateCode.INVALID
+1530825278 de_cache live gumby CT <game_state_payload.GameStatePayload object at 0x00000264EDD5EFD0> <game_state_payload.GameStatePayload object at 0x00000264EBBE9048> 1 3
+playing competitive 4 76561198158189084 76561198158189084 freezetime
+GameStateCode.INVALID
+1530825293 de_cache live gumby CT <game_state_payload.GameStatePayload object at 0x00000264EDD68BE0> <game_state_payload.GameStatePayload object at 0x00000264EDD5E080> 1 3
+playing competitive 4 76561198158189084 76561198158189084 live
+GameStateCode.INVALID
+1530825321 de_cache live gumby CT <game_state_payload.GameStatePayload object at 0x00000264EDD8A5C0> <game_state_payload.GameStatePayload object at 0x00000264EDD68E48> 1 3
+playing competitive 4 76561198158189084 76561198158189084 live
+GameStateCode.DEAD_MID_ROUND
+Not a Duplicate
+(1530825321, '76561198158189084', 'de_cache', 'live', 4, 2, 1, 3, 'gumby', 'CT', 1, 1, 4, 0, 5, 1000, 0, 0)
+1530825325 de_cache live Dozer CT <game_state_payload.GameStatePayload object at 0x00000264EDD845C0> <game_state_payload.GameStatePayload object at 0x00000264EDD84D68> 1 3
+playing competitive 4 76561198158189084 76561198108077844 live
+GameStateCode.INVALID
+1530825326 de_cache live Dozer CT <game_state_payload.GameStatePayload object at 0x00000264EDD7E240> <game_state_payload.GameStatePayload object at 0x00000264EDD845F8> 1 3
+playing competitive 4 76561198158189084 76561198108077844 live
+GameStateCode.INVALID
+1530825331 de_cache live Dozer CT <game_state_payload.GameStatePayload object at 0x00000264EDD7EB38> <game_state_payload.GameStatePayload object at 0x00000264EDD84CC0> 1 3
+playing competitive 5 76561198158189084 76561198108077844 over
+GameStateCode.INVALID
+1530825331 de_cache live gumby CT <game_state_payload.GameStatePayload object at 0x00000264EDD57E48> <game_state_payload.GameStatePayload object at 0x00000264EDD7EDA0> 1 4
+playing competitive 5 76561198158189084 76561198158189084 over
+GameStateCode.INVALID
+1530825338 de_cache live gumby CT <game_state_payload.GameStatePayload object at 0x00000264EDD7EC18> <game_state_payload.GameStatePayload object at 0x00000264EDD7E630> 1 4
+textinput competitive 5 76561198158189084 76561198158189084 freezetime
+GameStateCode.INVALID
+1530825353 de_cache live gumby CT <game_state_payload.GameStatePayload object at 0x00000264EDD8A588> <game_state_payload.GameStatePayload object at 0x00000264EDD7EDA0> 1 4
+playing competitive 5 76561198158189084 76561198158189084 live
+GameStateCode.INVALID
+1530825369 de_cache live gumby CT <game_state_payload.GameStatePayload object at 0x00000264EDD910F0> <game_state_payload.GameStatePayload object at 0x00000264EDD8A0B8> 1 4
+playing competitive 5 76561198158189084 76561198158189084 live
+GameStateCode.INVALID
+1530825370 de_cache live gumby CT <game_state_payload.GameStatePayload object at 0x00000264EDD68DA0> <game_state_payload.GameStatePayload object at 0x00000264EDD91630> 1 4
+playing competitive 5 76561198158189084 76561198158189084 live
+GameStateCode.DEAD_MID_ROUND
+Not a Duplicate
+(1530825370, '76561198158189084', 'de_cache', 'live', 5, 2, 1, 4, 'gumby', 'CT', 2, 1, 5, 0, 7, 1550, 1, 0)
+1530825374 de_cache live Dozer CT <game_state_payload.GameStatePayload object at 0x00000264EDD5EB00> <game_state_payload.GameStatePayload object at 0x00000264EDD5EB38> 1 4
+playing competitive 5 76561198158189084 76561198108077844 live
+GameStateCode.INVALID
+1530825376 de_cache live Dozer CT <game_state_payload.GameStatePayload object at 0x00000264EDD5E3C8> <game_state_payload.GameStatePayload object at 0x00000264EDD5EA58> 1 4
+playing competitive 5 76561198158189084 76561198108077844 live
+GameStateCode.INVALID
+1530825377 de_cache live Cadenza CT <game_state_payload.GameStatePayload object at 0x00000264EDD7A048> <game_state_payload.GameStatePayload object at 0x00000264EDD5E198> 1 4
+playing competitive 5 76561198158189084 76561197977148757 live
+GameStateCode.INVALID
+1530825404 de_cache live Cadenza CT <game_state_payload.GameStatePayload object at 0x00000264EDD6DF60> <game_state_payload.GameStatePayload object at 0x00000264EDD7A7F0> 1 4
+playing competitive 5 76561198158189084 76561197977148757 live
+GameStateCode.INVALID
+1530825428 de_cache live Cadenza CT <game_state_payload.GameStatePayload object at 0x00000264EDD2A2E8> <game_state_payload.GameStatePayload object at 0x00000264EDD6D6D8> 1 4
+playing competitive 5 76561198158189084 76561197977148757 live
+GameStateCode.INVALID
+1530825438 de_cache live Cadenza CT <game_state_payload.GameStatePayload object at 0x00000264EDD57E48> <game_state_payload.GameStatePayload object at 0x00000264EDD574A8> 1 4
+playing competitive 5 76561198158189084 76561197977148757 live
+GameStateCode.INVALID
+1530825439 de_cache live Cadenza CT <game_state_payload.GameStatePayload object at 0x00000264EDD7EB38> <game_state_payload.GameStatePayload object at 0x00000264EDD577B8> 1 4
+playing competitive 6 76561198158189084 76561197977148757 over
+GameStateCode.INVALID
+1530825440 de_cache live gumby CT <game_state_payload.GameStatePayload object at 0x00000264EDD84CC0> <game_state_payload.GameStatePayload object at 0x00000264EDD7E940> 1 5
+playing competitive 6 76561198158189084 76561198158189084 over
+GameStateCode.INVALID
+1530825446 de_cache live gumby CT <game_state_payload.GameStatePayload object at 0x00000264EDD84898> <game_state_payload.GameStatePayload object at 0x00000264EDD7E9B0> 1 5
+playing competitive 6 76561198158189084 76561198158189084 freezetime
+GameStateCode.INVALID
+1530825461 de_cache live gumby CT <game_state_payload.GameStatePayload object at 0x00000264EDD8A550> <game_state_payload.GameStatePayload object at 0x00000264EDD84048> 1 5
+playing competitive 6 76561198158189084 76561198158189084 live
+GameStateCode.INVALID
+1530825498 de_cache live gumby CT <game_state_payload.GameStatePayload object at 0x00000264EDD5EE10> <game_state_payload.GameStatePayload object at 0x00000264EDD8AB70> 1 5
+playing competitive 6 76561198158189084 76561198158189084 live
+GameStateCode.DEAD_MID_ROUND
+Not a Duplicate
+(1530825498, '76561198158189084', 'de_cache', 'live', 6, 2, 1, 5, 'gumby', 'CT', 2, 1, 6, 0, 7, 4650, 0, 0)
+1530825503 de_cache live Alimo CT <game_state_payload.GameStatePayload object at 0x00000264EDD7AD30> <game_state_payload.GameStatePayload object at 0x00000264EDD7A908> 1 5
+playing competitive 6 76561198158189084 76561198263290199 live
+GameStateCode.INVALID
+1530825524 de_cache live Alimo CT <game_state_payload.GameStatePayload object at 0x00000264EDD73518> <game_state_payload.GameStatePayload object at 0x00000264EDD7ACF8> 1 5
+playing competitive 6 76561198158189084 76561198263290199 live
+GameStateCode.INVALID
+1530825529 de_cache live Alimo CT <game_state_payload.GameStatePayload object at 0x00000264EDD7A390> <game_state_payload.GameStatePayload object at 0x00000264EDD7A5C0> 1 5
+playing competitive 6 76561198158189084 76561198263290199 live
+GameStateCode.INVALID
+1530825532 de_cache live Alimo CT <game_state_payload.GameStatePayload object at 0x00000264EDD5EB00> <game_state_payload.GameStatePayload object at 0x00000264EDD7AE10> 1 5
+playing competitive 6 76561198158189084 76561198263290199 live
+GameStateCode.INVALID
+1530825555 de_cache live Alimo CT <game_state_payload.GameStatePayload object at 0x00000264EDD91048> <game_state_payload.GameStatePayload object at 0x00000264EDD5E5C0> 1 5
+playing competitive 6 76561198158189084 76561198263290199 live
+GameStateCode.INVALID
+1530825560 de_cache live Alimo CT <game_state_payload.GameStatePayload object at 0x00000264EDD8A3C8> <game_state_payload.GameStatePayload object at 0x00000264EDD91F60> 2 5
+textinput competitive 7 76561198158189084 76561198263290199 over
+GameStateCode.INVALID
+1530825567 de_cache live gumby CT <game_state_payload.GameStatePayload object at 0x00000264EDD84B00> <game_state_payload.GameStatePayload object at 0x00000264EDD8A0F0> 2 5
+playing competitive 7 76561198158189084 76561198158189084 freezetime
+GameStateCode.INVALID
+1530825582 de_cache live gumby CT <game_state_payload.GameStatePayload object at 0x00000264EDD7E828> <game_state_payload.GameStatePayload object at 0x00000264EDD8A048> 2 5
+playing competitive 7 76561198158189084 76561198158189084 live
+GameStateCode.INVALID
+1530825604 de_cache live gumby CT <game_state_payload.GameStatePayload object at 0x00000264EDD68470> <game_state_payload.GameStatePayload object at 0x00000264EDD7EEB8> 2 5
+playing competitive 7 76561198158189084 76561198158189084 live
+GameStateCode.DEAD_MID_ROUND
+Not a Duplicate
+(1530825604, '76561198158189084', 'de_cache', 'live', 7, 2, 2, 5, 'gumby', 'CT', 2, 2, 7, 0, 8, 5700, 0, 0)
+1530825608 de_cache live SuperFS CT <game_state_payload.GameStatePayload object at 0x00000264EDD73080> <game_state_payload.GameStatePayload object at 0x00000264EDD736A0> 2 5
+playing competitive 7 76561198158189084 76561198028374124 live
+GameStateCode.INVALID
+1530825621 de_cache live SuperFS CT <game_state_payload.GameStatePayload object at 0x00000264EDD6D240> <game_state_payload.GameStatePayload object at 0x00000264EDD6D2B0> 2 5
+playing competitive 7 76561198158189084 76561198028374124 live
+GameStateCode.INVALID
+1530825633 de_cache live SuperFS CT <game_state_payload.GameStatePayload object at 0x00000264EDD57438> <game_state_payload.GameStatePayload object at 0x00000264EDD57470> 2 5
+playing competitive 8 76561198158189084 76561198028374124 over
+GameStateCode.INVALID
+1530825634 de_cache live gumby CT <game_state_payload.GameStatePayload object at 0x00000264EDD7E0B8> <game_state_payload.GameStatePayload object at 0x00000264EDD57550> 2 6
+playing competitive 8 76561198158189084 76561198158189084 over
+GameStateCode.INVALID
+1530825640 de_cache live gumby CT <game_state_payload.GameStatePayload object at 0x00000264EDD84F98> <game_state_payload.GameStatePayload object at 0x00000264EDD7EF28> 2 6
+playing competitive 8 76561198158189084 76561198158189084 freezetime
+GameStateCode.INVALID
+1530825655 de_cache live gumby CT <game_state_payload.GameStatePayload object at 0x00000264EDD8A630> <game_state_payload.GameStatePayload object at 0x00000264EDD84400> 2 6
+playing competitive 8 76561198158189084 76561198158189084 live
+GameStateCode.INVALID
+1530825673 de_cache live gumby CT <game_state_payload.GameStatePayload object at 0x00000264EDD91518> <game_state_payload.GameStatePayload object at 0x00000264EDD8A940> 2 6
+playing competitive 8 76561198158189084 76561198158189084 live
+GameStateCode.INVALID
+1530825674 de_cache live gumby CT <game_state_payload.GameStatePayload object at 0x00000264EDD5E4A8> <game_state_payload.GameStatePayload object at 0x00000264EDD91080> 2 6
+playing competitive 9 76561198158189084 76561198158189084 over
+GameStateCode.ALIVE_END_ROUND
+Not a Duplicate
+(1530825674, '76561198158189084', 'de_cache', 'live', 9, 1, 2, 6, 'gumby', 'CT', 3, 2, 8, 0, 10, 600, 1, 0)
+1530825674 de_cache live gumby CT <game_state_payload.GameStatePayload object at 0x00000264EDD7AF60> <game_state_payload.GameStatePayload object at 0x00000264EDD7AEB8> 2 7
+playing competitive 9 76561198158189084 76561198158189084 over
+GameStateCode.INVALID
+1530825680 de_cache live gumby CT <game_state_payload.GameStatePayload object at 0x00000264EDD6D5C0> <game_state_payload.GameStatePayload object at 0x00000264EDD7AB38> 2 7
+textinput competitive 9 76561198158189084 76561198158189084 freezetime
+GameStateCode.INVALID
+1530825695 de_cache live gumby CT <game_state_payload.GameStatePayload object at 0x00000264EDD1F780> <game_state_payload.GameStatePayload object at 0x00000264EDD6DE10> 2 7
+playing competitive 9 76561198158189084 76561198158189084 live
+GameStateCode.INVALID
+1530825705 de_cache live gumby CT <game_state_payload.GameStatePayload object at 0x00000264EDD951D0> <game_state_payload.GameStatePayload object at 0x00000264EDD73898> 2 7
+playing competitive 9 76561198158189084 76561198158189084 live
+GameStateCode.INVALID
+1530825715 de_cache live gumby CT <game_state_payload.GameStatePayload object at 0x00000264EDD5E080> <game_state_payload.GameStatePayload object at 0x00000264EDD5E8D0> 2 7
+playing competitive 9 76561198158189084 76561198158189084 live
+GameStateCode.DEAD_MID_ROUND
+Not a Duplicate
+(1530825715, '76561198158189084', 'de_cache', 'live', 9, 2, 2, 7, 'gumby', 'CT', 4, 2, 9, 0, 12, 800, 1, 0)
+1530825719 de_cache live Alimo CT <game_state_payload.GameStatePayload object at 0x00000264EDD91860> <game_state_payload.GameStatePayload object at 0x00000264EDD91080> 2 7
+playing competitive 9 76561198158189084 76561198263290199 live
+GameStateCode.INVALID
+1530825726 de_cache live Dozer CT <game_state_payload.GameStatePayload object at 0x00000264EDD91518> <game_state_payload.GameStatePayload object at 0x00000264EDD91940> 2 7
+playing competitive 9 76561198158189084 76561198108077844 live
+GameStateCode.INVALID
+1530825732 de_cache live Dozer CT <game_state_payload.GameStatePayload object at 0x00000264EDD8A860> <game_state_payload.GameStatePayload object at 0x00000264EDD91160> 2 7
+playing competitive 9 76561198158189084 76561198108077844 live
+GameStateCode.INVALID
+1530825735 de_cache live Dozer CT <game_state_payload.GameStatePayload object at 0x00000264EDD8AD68> <game_state_payload.GameStatePayload object at 0x00000264EDD8A320> 2 7
+playing competitive 9 76561198158189084 76561198108077844 live
+GameStateCode.INVALID
+1530825741 de_cache live Dozer CT <game_state_payload.GameStatePayload object at 0x00000264EDD842E8> <game_state_payload.GameStatePayload object at 0x00000264EDD8A780> 2 7
+playing competitive 10 76561198158189084 76561198108077844 over
+GameStateCode.INVALID
+1530825742 de_cache live gumby CT <game_state_payload.GameStatePayload object at 0x00000264EDD7EC88> <game_state_payload.GameStatePayload object at 0x00000264EDD848D0> 2 8
+playing competitive 10 76561198158189084 76561198158189084 over
+GameStateCode.INVALID
+1530825748 de_cache live gumby CT <game_state_payload.GameStatePayload object at 0x00000264EDD57518> <game_state_payload.GameStatePayload object at 0x00000264EDD7ED68> 2 8
+playing competitive 10 76561198158189084 76561198158189084 freezetime
+GameStateCode.INVALID
+1530825763 de_cache live gumby CT <game_state_payload.GameStatePayload object at 0x00000264EDD687F0> <game_state_payload.GameStatePayload object at 0x00000264EDD7EDA0> 2 8
+playing competitive 10 76561198158189084 76561198158189084 live
+GameStateCode.INVALID
+1530825789 de_cache live gumby CT <game_state_payload.GameStatePayload object at 0x00000264EDD73A90> <game_state_payload.GameStatePayload object at 0x00000264EDD68860> 2 8
+playing competitive 10 76561198158189084 76561198158189084 live
+GameStateCode.INVALID
+1530825800 de_cache live gumby CT <game_state_payload.GameStatePayload object at 0x00000264EDD913C8> <game_state_payload.GameStatePayload object at 0x00000264EDD916A0> 2 8
+playing competitive 10 76561198158189084 76561198158189084 live
+GameStateCode.INVALID
+1530825810 de_cache live gumby CT <game_state_payload.GameStatePayload object at 0x00000264EDD91E80> <game_state_payload.GameStatePayload object at 0x00000264EDD910F0> 2 8
+playing competitive 11 76561198158189084 76561198158189084 over
+GameStateCode.ALIVE_END_ROUND
+Not a Duplicate
+(1530825810, '76561198158189084', 'de_cache', 'live', 11, 1, 2, 8, 'gumby', 'CT', 5, 2, 10, 0, 14, 4950, 1, 1)
+1530825811 de_cache live gumby CT <game_state_payload.GameStatePayload object at 0x00000264EDD57B38> <game_state_payload.GameStatePayload object at 0x00000264EDD57B00> 2 9
+playing competitive 11 76561198158189084 76561198158189084 over
+GameStateCode.INVALID
+1530825817 de_cache live gumby CT <game_state_payload.GameStatePayload object at 0x00000264EDD5E940> <game_state_payload.GameStatePayload object at 0x00000264EDD57E80> 2 9
+playing competitive 11 76561198158189084 76561198158189084 freezetime
+GameStateCode.INVALID
+1530825832 de_cache live gumby CT <game_state_payload.GameStatePayload object at 0x00000264EDD84978> <game_state_payload.GameStatePayload object at 0x00000264EDD5E2B0> 2 9
+playing competitive 11 76561198158189084 76561198158189084 live
+GameStateCode.INVALID
+1530825883 de_cache live gumby CT <game_state_payload.GameStatePayload object at 0x00000264EDD7AEB8> <game_state_payload.GameStatePayload object at 0x00000264EDD5E828> 2 9
+playing competitive 11 76561198158189084 76561198158189084 live
+GameStateCode.INVALID
+1530825890 de_cache live gumby CT <game_state_payload.GameStatePayload object at 0x00000264EDD7AFD0> <game_state_payload.GameStatePayload object at 0x00000264EDD7E860> 2 9
+playing competitive 12 76561198158189084 76561198158189084 over
+GameStateCode.ALIVE_END_ROUND
+Not a Duplicate
+(1530825890, '76561198158189084', 'de_cache', 'live', 12, 1, 2, 9, 'gumby', 'CT', 5, 2, 11, 0, 14, 800, 0, 0)
+1530825891 de_cache live gumby CT <game_state_payload.GameStatePayload object at 0x00000264EDD84CC0> <game_state_payload.GameStatePayload object at 0x00000264EDD84438> 2 10
+playing competitive 12 76561198158189084 76561198158189084 over
+GameStateCode.INVALID
+1530825897 de_cache live gumby CT <game_state_payload.GameStatePayload object at 0x00000264EDD84978> <game_state_payload.GameStatePayload object at 0x00000264EDD7E0B8> 2 10
+playing competitive 12 76561198158189084 76561198158189084 freezetime
+GameStateCode.INVALID
+1530825912 de_cache live gumby CT <game_state_payload.GameStatePayload object at 0x00000264EDD5ECF8> <game_state_payload.GameStatePayload object at 0x00000264EDD842B0> 2 10
+playing competitive 12 76561198158189084 76561198158189084 live
+GameStateCode.INVALID
+1530825945 de_cache live gumby CT <game_state_payload.GameStatePayload object at 0x00000264EDD2A390> <game_state_payload.GameStatePayload object at 0x00000264EDD5E9B0> 2 10
+playing competitive 12 76561198158189084 76561198158189084 live
+GameStateCode.INVALID
+1530825978 de_cache live gumby CT <game_state_payload.GameStatePayload object at 0x00000264EDD8A780> <game_state_payload.GameStatePayload object at 0x00000264EDBCBBE0> 2 10
+playing competitive 13 76561198158189084 76561198158189084 over
+GameStateCode.ALIVE_END_ROUND
+Not a Duplicate
+(1530825978, '76561198158189084', 'de_cache', 'live', 13, 1, 2, 10, 'gumby', 'CT', 6, 3, 11, 0, 17, 5650, 1, 1)
+1530825985 de_cache live gumby CT <game_state_payload.GameStatePayload object at 0x00000264EDD91BE0> <game_state_payload.GameStatePayload object at 0x00000264EDD91550> 3 10
+textinput competitive 13 76561198158189084 76561198158189084 freezetime
+GameStateCode.INVALID
+1530826000 de_cache live gumby CT <game_state_payload.GameStatePayload object at 0x00000264EDD576A0> <game_state_payload.GameStatePayload object at 0x00000264EDD91080> 3 10
+playing competitive 13 76561198158189084 76561198158189084 live
+GameStateCode.INVALID
+1530826050 de_cache live gumby CT <game_state_payload.GameStatePayload object at 0x00000264EDD84B70> <game_state_payload.GameStatePayload object at 0x00000264EDBCBF28> 3 10
+playing competitive 13 76561198158189084 76561198158189084 live
+GameStateCode.DEAD_MID_ROUND
+Not a Duplicate
+(1530826050, '76561198158189084', 'de_cache', 'live', 13, 2, 3, 10, 'gumby', 'CT', 6, 3, 12, 0, 17, 5650, 0, 0)
+1530826053 de_cache live gumby CT <game_state_payload.GameStatePayload object at 0x00000264EDD7E080> <game_state_payload.GameStatePayload object at 0x00000264EDD7EAC8> 3 10
+playing competitive 13 76561198158189084 76561198158189084 live
+GameStateCode.INVALID
+1530826054 de_cache live SuperFS CT <game_state_payload.GameStatePayload object at 0x00000264EDD7A048> <game_state_payload.GameStatePayload object at 0x00000264EDD7E4E0> 3 10
+playing competitive 13 76561198158189084 76561198028374124 live
+GameStateCode.INVALID
+1530826055 de_cache live SuperFS CT <game_state_payload.GameStatePayload object at 0x00000264EDD73B00> <game_state_payload.GameStatePayload object at 0x00000264EDD7ACF8> 3 10
+playing competitive 13 76561198158189084 76561198028374124 live
+GameStateCode.INVALID
+1530826064 de_cache live SuperFS CT <game_state_payload.GameStatePayload object at 0x00000264EDD68C18> <game_state_payload.GameStatePayload object at 0x00000264EDD73240> 3 10
+playing competitive 13 76561198158189084 76561198028374124 live
+GameStateCode.INVALID
+1530826075 de_cache live SuperFS CT <game_state_payload.GameStatePayload object at 0x00000264EDD68EF0> <game_state_payload.GameStatePayload object at 0x00000264EDD68E80> 3 10
+playing competitive 13 76561198158189084 76561198028374124 live
+GameStateCode.INVALID
+1530826087 de_cache live SuperFS CT <game_state_payload.GameStatePayload object at 0x00000264EDD7A710> <game_state_payload.GameStatePayload object at 0x00000264EDD68780> 3 10
+playing competitive 14 76561198158189084 76561198028374124 over
+GameStateCode.INVALID
+1530826088 de_cache live gumby CT <game_state_payload.GameStatePayload object at 0x00000264EDD7AAC8> <game_state_payload.GameStatePayload object at 0x00000264EDD7A3C8> 3 11
+playing competitive 14 76561198158189084 76561198158189084 over
+GameStateCode.INVALID
+1530826094 de_cache live gumby CT <game_state_payload.GameStatePayload object at 0x00000264EDD7E978> <game_state_payload.GameStatePayload object at 0x00000264EDD7A358> 3 11
+playing competitive 14 76561198158189084 76561198158189084 freezetime
+GameStateCode.INVALID
+1530826109 de_cache live gumby CT <game_state_payload.GameStatePayload object at 0x00000264EDD845F8> <game_state_payload.GameStatePayload object at 0x00000264EDD7E240> 3 11
+playing competitive 14 76561198158189084 76561198158189084 live
+GameStateCode.INVALID
+1530826176 de_cache live gumby CT <game_state_payload.GameStatePayload object at 0x00000264EDD2A4A8> <game_state_payload.GameStatePayload object at 0x00000264EDD84C18> 3 11
+playing competitive 14 76561198158189084 76561198158189084 live
+GameStateCode.INVALID
+1530826189 de_cache live gumby CT <game_state_payload.GameStatePayload object at 0x00000264EDD91BE0> <game_state_payload.GameStatePayload object at 0x00000264EDD57D30> 3 11
+playing competitive 14 76561198158189084 76561198158189084 live
+GameStateCode.DEAD_MID_ROUND
+Not a Duplicate
+(1530826189, '76561198158189084', 'de_cache', 'live', 14, 2, 3, 11, 'gumby', 'CT', 7, 4, 13, 0, 20, 1700, 1, 0)
+1530826193 de_cache live Alimo CT <game_state_payload.GameStatePayload object at 0x00000264EDD5E2B0> <game_state_payload.GameStatePayload object at 0x00000264EDD5EB00> 3 11
+playing competitive 14 76561198158189084 76561198263290199 live
+GameStateCode.INVALID
+1530826197 de_cache live Alimo CT <game_state_payload.GameStatePayload object at 0x00000264EDD5E160> <game_state_payload.GameStatePayload object at 0x00000264EDD577B8> 3 11
+playing competitive 14 76561198158189084 76561198263290199 live
+GameStateCode.INVALID
+1530826197 de_cache live Dozer CT <game_state_payload.GameStatePayload object at 0x00000264EDD846A0> <game_state_payload.GameStatePayload object at 0x00000264EDD5E7F0> 3 11
+playing competitive 14 76561198158189084 76561198108077844 live
+GameStateCode.INVALID
+1530826198 de_cache intermission Dozer CT <game_state_payload.GameStatePayload object at 0x00000264EDD845C0> <game_state_payload.GameStatePayload object at 0x00000264EDD5E908> 3 11
+playing competitive 15 76561198158189084 76561198108077844 over
+GameStateCode.INVALID
+1530826213 de_cache live gumby T <game_state_payload.GameStatePayload object at 0x00000264EDD7EBE0> <game_state_payload.GameStatePayload object at 0x00000264EDD84940> 4 11
+playing competitive 15 76561198158189084 76561198158189084 freezetime
+GameStateCode.INVALID
+1530826214 de_cache live gumby T <game_state_payload.GameStatePayload object at 0x00000264EDD7AA90> <game_state_payload.GameStatePayload object at 0x00000264EDD7E2B0> 11 4
+playing competitive 15 76561198158189084 76561198158189084 freezetime
+GameStateCode.INVALID
+1530826228 de_cache live gumby T <game_state_payload.GameStatePayload object at 0x00000264EDD73D68> <game_state_payload.GameStatePayload object at 0x00000264EDD7A8D0> 11 4
+playing competitive 15 76561198158189084 76561198158189084 live
+GameStateCode.INVALID
+1530826254 de_cache live gumby T <game_state_payload.GameStatePayload object at 0x00000264EDD918D0> <game_state_payload.GameStatePayload object at 0x00000264EDD735C0> 11 4
+playing competitive 15 76561198158189084 76561198158189084 live
+GameStateCode.INVALID
+1530826255 de_cache live gumby T <game_state_payload.GameStatePayload object at 0x00000264EDD8A7B8> <game_state_payload.GameStatePayload object at 0x00000264EDD91710> 11 4
+playing competitive 15 76561198158189084 76561198158189084 live
+GameStateCode.INVALID
+1530826268 de_cache live gumby T <game_state_payload.GameStatePayload object at 0x00000264EDD6D2B0> <game_state_payload.GameStatePayload object at 0x00000264EDD8A860> 11 4
+playing competitive 16 76561198158189084 76561198158189084 over
+GameStateCode.ALIVE_END_ROUND
+Not a Duplicate
+(1530826268, '76561198158189084', 'de_cache', 'live', 16, 1, 11, 4, 'gumby', 'T', 7, 6, 13, 0, 24, 200, 0, 0)
+1530826268 de_cache live gumby T <game_state_payload.GameStatePayload object at 0x00000264EDD683C8> <game_state_payload.GameStatePayload object at 0x00000264EDD68128> 11 5
+playing competitive 16 76561198158189084 76561198158189084 over
+GameStateCode.INVALID
+1530826275 de_cache live gumby T <game_state_payload.GameStatePayload object at 0x00000264EDD68240> <game_state_payload.GameStatePayload object at 0x00000264EDD918D0> 11 5
+playing competitive 16 76561198158189084 76561198158189084 freezetime
+GameStateCode.INVALID
+1530826290 de_cache live gumby T <game_state_payload.GameStatePayload object at 0x00000264EC899CC0> <game_state_payload.GameStatePayload object at 0x00000264EDD68CC0> 11 5
+textinput competitive 16 76561198158189084 76561198158189084 live
+GameStateCode.INVALID
+1530826320 de_cache live gumby T <game_state_payload.GameStatePayload object at 0x00000264EDD7EEB8> <game_state_payload.GameStatePayload object at 0x00000264EDD73978> 11 5
+playing competitive 16 76561198158189084 76561198158189084 live
+GameStateCode.INVALID
+1530826321 de_cache live gumby T <game_state_payload.GameStatePayload object at 0x00000264EDD84DD8> <game_state_payload.GameStatePayload object at 0x00000264EDD7E2E8> 11 5
+playing competitive 16 76561198158189084 76561198158189084 live
+GameStateCode.DEAD_MID_ROUND
+Not a Duplicate
+(1530826321, '76561198158189084', 'de_cache', 'live', 16, 2, 11, 5, 'gumby', 'T', 8, 6, 14, 0, 26, 3400, 1, 0)
+1530826325 de_cache live Dozer T <game_state_payload.GameStatePayload object at 0x00000264EDD5EB38> <game_state_payload.GameStatePayload object at 0x00000264EDD5EF28> 11 5
+playing competitive 16 76561198158189084 76561198108077844 live
+GameStateCode.INVALID
+1530826331 de_cache live Dozer T <game_state_payload.GameStatePayload object at 0x00000264EDD1F128> <game_state_payload.GameStatePayload object at 0x00000264EDD5E6D8> 11 5
+playing competitive 16 76561198158189084 76561198108077844 live
+GameStateCode.INVALID
+1530826353 de_cache live Dozer T <game_state_payload.GameStatePayload object at 0x00000264EDD959B0> <game_state_payload.GameStatePayload object at 0x00000264EDD2A5F8> 11 5
+playing competitive 17 76561198158189084 76561198108077844 over
+GameStateCode.INVALID
+1530826353 de_cache live Dozer T <game_state_payload.GameStatePayload object at 0x00000264EDD1F128> <game_state_payload.GameStatePayload object at 0x00000264EDD1F0B8> 11 6
+playing competitive 17 76561198158189084 76561198108077844 over
+GameStateCode.INVALID
+1530826360 de_cache live gumby T <game_state_payload.GameStatePayload object at 0x00000264EDD5E4A8> <game_state_payload.GameStatePayload object at 0x00000264EDD5E860> 11 6
+playing competitive 17 76561198158189084 76561198158189084 freezetime
+GameStateCode.INVALID
+1530826375 de_cache live gumby T <game_state_payload.GameStatePayload object at 0x00000264EDD845C0> <game_state_payload.GameStatePayload object at 0x00000264EDD5E3C8> 11 6
+playing competitive 17 76561198158189084 76561198158189084 live
+GameStateCode.INVALID
+1530826391 de_cache live gumby T <game_state_payload.GameStatePayload object at 0x00000264EDD7EDD8> <game_state_payload.GameStatePayload object at 0x00000264EDD84898> 11 6
+playing competitive 17 76561198158189084 76561198158189084 live
+GameStateCode.INVALID
+1530826395 de_cache live gumby T <game_state_payload.GameStatePayload object at 0x00000264EDD7A438> <game_state_payload.GameStatePayload object at 0x00000264EDD7E400> 11 6
+playing competitive 17 76561198158189084 76561198158189084 live
+GameStateCode.INVALID
+1530826401 de_cache live gumby T <game_state_payload.GameStatePayload object at 0x00000264EDD73B70> <game_state_payload.GameStatePayload object at 0x00000264EDD7A160> 11 6
+playing competitive 17 76561198158189084 76561198158189084 live
+GameStateCode.INVALID
+1530826418 de_cache live gumby T <game_state_payload.GameStatePayload object at 0x00000264EDD68358> <game_state_payload.GameStatePayload object at 0x00000264EDD73A90> 11 6
+playing competitive 17 76561198158189084 76561198158189084 live
+GameStateCode.DEAD_MID_ROUND
+Not a Duplicate
+(1530826418, '76561198158189084', 'de_cache', 'live', 17, 2, 11, 6, 'gumby', 'T', 9, 7, 15, 0, 29, 2400, 1, 1)
+1530826422 de_cache live Dozer T <game_state_payload.GameStatePayload object at 0x00000264EDD68780> <game_state_payload.GameStatePayload object at 0x00000264EDD68898> 11 6
+textinput competitive 17 76561198158189084 76561198108077844 live
+GameStateCode.INVALID
+1530826434 de_cache live Dozer T <game_state_payload.GameStatePayload object at 0x00000264EDD91C18> <game_state_payload.GameStatePayload object at 0x00000264EDD68BE0> 11 6
+playing competitive 18 76561198158189084 76561198108077844 over
+GameStateCode.INVALID
+1530826435 de_cache live Dozer T <game_state_payload.GameStatePayload object at 0x00000264EDD8AC18> <game_state_payload.GameStatePayload object at 0x00000264EDD6DA90> 11 7
+playing competitive 18 76561198158189084 76561198108077844 over
+GameStateCode.INVALID
+1530826442 de_cache live gumby T <game_state_payload.GameStatePayload object at 0x00000264EDD68C18> <game_state_payload.GameStatePayload object at 0x00000264EDD68470> 11 7
+playing competitive 18 76561198158189084 76561198158189084 freezetime
+GameStateCode.INVALID
+1530826456 de_cache live gumby T <game_state_payload.GameStatePayload object at 0x00000264EDD730F0> <game_state_payload.GameStatePayload object at 0x00000264EDD68BE0> 11 7
+playing competitive 18 76561198158189084 76561198158189084 live
+GameStateCode.INVALID
+1530826468 de_cache live gumby T <game_state_payload.GameStatePayload object at 0x00000264EDD7A438> <game_state_payload.GameStatePayload object at 0x00000264EDD738D0> 11 7
+playing competitive 18 76561198158189084 76561198158189084 live
+GameStateCode.INVALID
+1530826532 de_cache live gumby T <game_state_payload.GameStatePayload object at 0x00000264EDD5ECF8> <game_state_payload.GameStatePayload object at 0x00000264EDD7A2B0> 11 7
+playing competitive 18 76561198158189084 76561198158189084 live
+GameStateCode.INVALID
+1530826535 de_cache live gumby T <game_state_payload.GameStatePayload object at 0x00000264EDBCBFD0> <game_state_payload.GameStatePayload object at 0x00000264EDD5E1D0> 11 7
+playing competitive 19 76561198158189084 76561198158189084 over
+GameStateCode.ALIVE_END_ROUND
+Not a Duplicate
+(1530826535, '76561198158189084', 'de_cache', 'live', 19, 1, 11, 7, 'gumby', 'T', 11, 7, 15, 0, 33, 3900, 2, 1)
+1530826536 de_cache live gumby T <game_state_payload.GameStatePayload object at 0x00000264EDD8ADA0> <game_state_payload.GameStatePayload object at 0x00000264EDD8A390> 11 8
+playing competitive 19 76561198158189084 76561198158189084 over
+GameStateCode.INVALID
+1530826543 de_cache live gumby T <game_state_payload.GameStatePayload object at 0x00000264EDD8A710> <game_state_payload.GameStatePayload object at 0x00000264EDD1F208> 11 8
+playing competitive 19 76561198158189084 76561198158189084 freezetime
+GameStateCode.INVALID
+1530826557 de_cache live gumby T <game_state_payload.GameStatePayload object at 0x00000264EDBCBAC8> <game_state_payload.GameStatePayload object at 0x00000264EDBCBB38> 11 8
+playing competitive 19 76561198158189084 76561198158189084 live
+GameStateCode.INVALID
+1530826591 de_cache live gumby T <game_state_payload.GameStatePayload object at 0x00000264EDD841D0> <game_state_payload.GameStatePayload object at 0x00000264EDD57E80> 11 8
+playing competitive 20 76561198158189084 76561198158189084 over
+GameStateCode.ALIVE_END_ROUND
+Not a Duplicate
+(1530826591, '76561198158189084', 'de_cache', 'live', 20, 1, 11, 8, 'gumby', 'T', 11, 7, 15, 0, 33, 7350, 0, 0)
+1530826592 de_cache live gumby T <game_state_payload.GameStatePayload object at 0x00000264EDD7EC18> <game_state_payload.GameStatePayload object at 0x00000264EDD7EEF0> 11 9
+playing competitive 20 76561198158189084 76561198158189084 over
+GameStateCode.INVALID
+1530826598 de_cache live gumby T <game_state_payload.GameStatePayload object at 0x00000264EDD7A128> <game_state_payload.GameStatePayload object at 0x00000264EDD7E320> 11 9
+textinput competitive 20 76561198158189084 76561198158189084 freezetime
+GameStateCode.INVALID
+1530826613 de_cache live gumby T <game_state_payload.GameStatePayload object at 0x00000264EDD73B00> <game_state_payload.GameStatePayload object at 0x00000264EDD7A278> 11 9
+playing competitive 20 76561198158189084 76561198158189084 live
+GameStateCode.INVALID
+1530826635 de_cache live gumby T <game_state_payload.GameStatePayload object at 0x00000264EDD6D4A8> <game_state_payload.GameStatePayload object at 0x00000264EDD73710> 11 9
+playing competitive 20 76561198158189084 76561198158189084 live
+GameStateCode.INVALID
+1530826688 de_cache live gumby T <game_state_payload.GameStatePayload object at 0x00000264EDD68748> <game_state_payload.GameStatePayload object at 0x00000264EDD6DEF0> 11 9
+playing competitive 20 76561198158189084 76561198158189084 live
+GameStateCode.DEAD_MID_ROUND
+Not a Duplicate
+(1530826688, '76561198158189084', 'de_cache', 'live', 20, 2, 11, 9, 'gumby', 'T', 12, 7, 16, 0, 35, 6550, 1, 0)
+1530826692 de_cache live Alimo T <game_state_payload.GameStatePayload object at 0x00000264EDD7ACF8> <game_state_payload.GameStatePayload object at 0x00000264EDD7A6D8> 11 9
+playing competitive 20 76561198158189084 76561198263290199 live
+GameStateCode.INVALID
+1530826695 de_cache live Alimo T <game_state_payload.GameStatePayload object at 0x00000264EDD7E390> <game_state_payload.GameStatePayload object at 0x00000264EDD7A4A8> 11 9
+playing competitive 20 76561198158189084 76561198263290199 live
+GameStateCode.INVALID
+1530826698 de_cache live Dozer T <game_state_payload.GameStatePayload object at 0x00000264EDD7E438> <game_state_payload.GameStatePayload object at 0x00000264EDD7EBE0> 11 9
+playing competitive 20 76561198158189084 76561198108077844 live
+GameStateCode.INVALID
+1530826699 de_cache live Cadenza T <game_state_payload.GameStatePayload object at 0x00000264EDD84D30> <game_state_payload.GameStatePayload object at 0x00000264EDD7E5F8> 11 9
+playing competitive 20 76561198158189084 76561197977148757 live
+GameStateCode.INVALID
+1530826710 de_cache live Cadenza T <game_state_payload.GameStatePayload object at 0x00000264EDD5EA20> <game_state_payload.GameStatePayload object at 0x00000264EDD84160> 11 9
+playing competitive 20 76561198158189084 76561197977148757 live
+GameStateCode.INVALID
+1530826734 de_cache live Alimo T <game_state_payload.GameStatePayload object at 0x00000264EDD579E8> <game_state_payload.GameStatePayload object at 0x00000264EDD5EC88> 11 9
+playing competitive 20 76561198158189084 76561198263290199 live
+GameStateCode.INVALID
+1530826735 de_cache live Dozer T <game_state_payload.GameStatePayload object at 0x00000264EDD95208> <game_state_payload.GameStatePayload object at 0x00000264EDD57AC8> 11 9
+playing competitive 20 76561198158189084 76561198108077844 live
+GameStateCode.INVALID
+1530826738 de_cache live Cadenza T <game_state_payload.GameStatePayload object at 0x00000264EDDA3080> <game_state_payload.GameStatePayload object at 0x00000264EDD95CC0> 11 9
+playing competitive 20 76561198158189084 76561197977148757 live
+GameStateCode.INVALID
+1530826747 de_cache live Alimo T <game_state_payload.GameStatePayload object at 0x00000264EDD95A58> <game_state_payload.GameStatePayload object at 0x00000264EDD95B70> 11 9
+playing competitive 20 76561198158189084 76561198263290199 live
+GameStateCode.INVALID
+1530826748 de_cache live Dozer T <game_state_payload.GameStatePayload object at 0x00000264EDD57B70> <game_state_payload.GameStatePayload object at 0x00000264EDD57D30> 11 9
+playing competitive 20 76561198158189084 76561198108077844 live
+GameStateCode.INVALID
+1530826749 de_cache live Dozer T <game_state_payload.GameStatePayload object at 0x00000264EDD5E278> <game_state_payload.GameStatePayload object at 0x00000264EDD57B00> 11 9
+playing competitive 21 76561198158189084 76561198108077844 over
+GameStateCode.INVALID
+1530826750 de_cache live Dozer T <game_state_payload.GameStatePayload object at 0x00000264EDD84C88> <game_state_payload.GameStatePayload object at 0x00000264EDD5E860> 11 10
+playing competitive 21 76561198158189084 76561198108077844 over
+GameStateCode.INVALID
+1530826756 de_cache live gumby T <game_state_payload.GameStatePayload object at 0x00000264EDD84908> <game_state_payload.GameStatePayload object at 0x00000264EC899CC0> 11 10
+playing competitive 21 76561198158189084 76561198158189084 freezetime
+GameStateCode.INVALID
+1530826771 de_cache live gumby T <game_state_payload.GameStatePayload object at 0x00000264EDD7E320> <game_state_payload.GameStatePayload object at 0x00000264EDD84160> 11 10
+playing competitive 21 76561198158189084 76561198158189084 live
+GameStateCode.INVALID
+1530826798 de_cache live gumby T <game_state_payload.GameStatePayload object at 0x00000264EDD7A278> <game_state_payload.GameStatePayload object at 0x00000264EDD7E470> 11 10
+playing competitive 21 76561198158189084 76561198158189084 live
+GameStateCode.INVALID
+1530826820 de_cache live gumby T <game_state_payload.GameStatePayload object at 0x00000264EDD68278> <game_state_payload.GameStatePayload object at 0x00000264EDD7AFD0> 11 10
+playing competitive 22 76561198158189084 76561198158189084 over
+GameStateCode.ALIVE_END_ROUND
+Not a Duplicate
+(1530826820, '76561198158189084', 'de_cache', 'live', 22, 1, 11, 10, 'gumby', 'T', 13, 7, 16, 0, 37, 7150, 1, 0)
+1530826822 de_cache live gumby T <game_state_payload.GameStatePayload object at 0x00000264EDD6D630> <game_state_payload.GameStatePayload object at 0x00000264EDD91A90> 11 11
+playing competitive 22 76561198158189084 76561198158189084 over
+GameStateCode.INVALID
+1530826828 de_cache live gumby T <game_state_payload.GameStatePayload object at 0x00000264EDD6DDA0> <game_state_payload.GameStatePayload object at 0x00000264EDD6D1D0> 11 11
+playing competitive 22 76561198158189084 76561198158189084 freezetime
+GameStateCode.INVALID
+1530826842 de_cache live gumby T <game_state_payload.GameStatePayload object at 0x00000264EDD737B8> <game_state_payload.GameStatePayload object at 0x00000264EDD73160> 11 11
+playing competitive 22 76561198158189084 76561198158189084 live
+GameStateCode.INVALID
+1530826881 de_cache live gumby T <game_state_payload.GameStatePayload object at 0x00000264EDD7E320> <game_state_payload.GameStatePayload object at 0x00000264EDD73940> 11 11
+playing competitive 22 76561198158189084 76561198158189084 live
+GameStateCode.INVALID
+1530826892 de_cache live gumby T <game_state_payload.GameStatePayload object at 0x00000264EDD84048> <game_state_payload.GameStatePayload object at 0x00000264EDD7E3C8> 11 11
+playing competitive 22 76561198158189084 76561198158189084 live
+GameStateCode.INVALID
+1530826896 de_cache live gumby T <game_state_payload.GameStatePayload object at 0x00000264EDD5E630> <game_state_payload.GameStatePayload object at 0x00000264EDD84E48> 11 11
+playing competitive 22 76561198158189084 76561198158189084 live
+GameStateCode.INVALID
+1530826900 de_cache live gumby T <game_state_payload.GameStatePayload object at 0x00000264EDD5EDA0> <game_state_payload.GameStatePayload object at 0x00000264EDD84588> 11 11
+playing competitive 23 76561198158189084 76561198158189084 over
+GameStateCode.ALIVE_END_ROUND
+Not a Duplicate
+(1530826900, '76561198158189084', 'de_cache', 'live', 23, 1, 11, 11, 'gumby', 'T', 15, 7, 16, 0, 43, 7150, 2, 0)
+1530826901 de_cache live gumby T <game_state_payload.GameStatePayload object at 0x00000264EDBCBDD8> <game_state_payload.GameStatePayload object at 0x00000264EDD2ADD8> 11 12
+playing competitive 23 76561198158189084 76561198158189084 over
+GameStateCode.INVALID
+1530826907 de_cache live gumby T <game_state_payload.GameStatePayload object at 0x00000264EDD95F28> <game_state_payload.GameStatePayload object at 0x00000264EDBCBF28> 11 12
+playing competitive 23 76561198158189084 76561198158189084 freezetime
+GameStateCode.INVALID
+1530826922 de_cache live gumby T <game_state_payload.GameStatePayload object at 0x00000264EDDA3240> <game_state_payload.GameStatePayload object at 0x00000264EDD955F8> 11 12
+playing competitive 23 76561198158189084 76561198158189084 live
+GameStateCode.INVALID
+1530826942 de_cache live gumby T <game_state_payload.GameStatePayload object at 0x00000264EDD57B00> <game_state_payload.GameStatePayload object at 0x00000264EDD57828> 11 12
+playing competitive 23 76561198158189084 76561198158189084 live
+GameStateCode.INVALID
+1530826944 de_cache live gumby T <game_state_payload.GameStatePayload object at 0x00000264EDD6D0B8> <game_state_payload.GameStatePayload object at 0x00000264EDD57A20> 11 12
+playing competitive 23 76561198158189084 76561198158189084 live
+GameStateCode.INVALID
+1530826966 de_cache live gumby T <game_state_payload.GameStatePayload object at 0x00000264EDD5E588> <game_state_payload.GameStatePayload object at 0x00000264EDD57F98> 11 12
+playing competitive 23 76561198158189084 76561198158189084 live
+GameStateCode.DEAD_MID_ROUND
+Not a Duplicate
+(1530826966, '76561198158189084', 'de_cache', 'live', 23, 2, 11, 12, 'gumby', 'T', 17, 7, 17, 0, 47, 7150, 2, 0)
+1530826971 de_cache live Cadenza T <game_state_payload.GameStatePayload object at 0x00000264EDD687F0> <game_state_payload.GameStatePayload object at 0x00000264EDD684E0> 11 12
+playing competitive 23 76561198158189084 76561197977148757 live
+GameStateCode.INVALID
+1530826972 de_cache live Cadenza T <game_state_payload.GameStatePayload object at 0x00000264EDD68828> <game_state_payload.GameStatePayload object at 0x00000264EDD2A5F8> 11 12
+playing competitive 23 76561198158189084 76561197977148757 live
+GameStateCode.INVALID
+1530826972 de_cache live SuperFS T <game_state_payload.GameStatePayload object at 0x00000264EDD8ACC0> <game_state_payload.GameStatePayload object at 0x00000264EDD681D0> 11 12
+playing competitive 23 76561198158189084 76561198028374124 live
+GameStateCode.INVALID
+1530826976 de_cache live SuperFS T <game_state_payload.GameStatePayload object at 0x00000264EDBCBB70> <game_state_payload.GameStatePayload object at 0x00000264EDD8A470> 11 13
+playing competitive 24 76561198158189084 76561198028374124 over
+GameStateCode.INVALID
+1530826983 de_cache live gumby T <game_state_payload.GameStatePayload object at 0x00000264EDD73B38> <game_state_payload.GameStatePayload object at 0x00000264EDD8A198> 11 13
+playing competitive 24 76561198158189084 76561198158189084 freezetime
+GameStateCode.INVALID
+1530826998 de_cache live gumby T <game_state_payload.GameStatePayload object at 0x00000264EDD7E080> <game_state_payload.GameStatePayload object at 0x00000264EDD737F0> 11 13
+playing competitive 24 76561198158189084 76561198158189084 live
+GameStateCode.INVALID
+1530827066 de_cache live gumby T <game_state_payload.GameStatePayload object at 0x00000264EDD68BE0> <game_state_payload.GameStatePayload object at 0x00000264EDD684A8> 11 13
+playing competitive 24 76561198158189084 76561198158189084 live
+GameStateCode.INVALID
+1530827068 de_cache live gumby T <game_state_payload.GameStatePayload object at 0x00000264EDD5EAC8> <game_state_payload.GameStatePayload object at 0x00000264EDD68128> 11 13
+playing competitive 24 76561198158189084 76561198158189084 live
+GameStateCode.INVALID
+1530827078 de_cache live gumby T <game_state_payload.GameStatePayload object at 0x00000264EDD5EC88> <game_state_payload.GameStatePayload object at 0x00000264EDD2A898> 11 13
+playing competitive 25 76561198158189084 76561198158189084 over
+GameStateCode.ALIVE_END_ROUND
+Not a Duplicate
+(1530827078, '76561198158189084', 'de_cache', 'live', 25, 1, 11, 13, 'gumby', 'T', 17, 7, 17, 1, 49, 6950, 0, 0)
+1530827078 de_cache live gumby T <game_state_payload.GameStatePayload object at 0x00000264EDD6D438> <game_state_payload.GameStatePayload object at 0x00000264EC86BBA8> 11 14
+playing competitive 25 76561198158189084 76561198158189084 over
+GameStateCode.INVALID
+1530827085 de_cache live gumby T <game_state_payload.GameStatePayload object at 0x00000264EDD57E80> <game_state_payload.GameStatePayload object at 0x00000264EDD6D7F0> 11 14
+playing competitive 25 76561198158189084 76561198158189084 freezetime
+GameStateCode.INVALID
+1530827100 de_cache live gumby T <game_state_payload.GameStatePayload object at 0x00000264EDD84CC0> <game_state_payload.GameStatePayload object at 0x00000264EDD57B38> 11 14
+playing competitive 25 76561198158189084 76561198158189084 live
+GameStateCode.INVALID
+1530827136 de_cache live gumby T <game_state_payload.GameStatePayload object at 0x00000264EDD7E630> <game_state_payload.GameStatePayload object at 0x00000264EDD84780> 11 14
+playing competitive 25 76561198158189084 76561198158189084 live
+GameStateCode.INVALID
+1530827147 de_cache live gumby T <game_state_payload.GameStatePayload object at 0x00000264EDD6D710> <game_state_payload.GameStatePayload object at 0x00000264EDD1F320> 11 14
+playing competitive 25 76561198158189084 76561198158189084 live
+GameStateCode.INVALID
+1530827156 de_cache live gumby T <game_state_payload.GameStatePayload object at 0x00000264EDD5E9B0> <game_state_payload.GameStatePayload object at 0x00000264EDD6DDA0> 11 14
+playing competitive 26 76561198158189084 76561198158189084 over
+GameStateCode.ALIVE_END_ROUND
+Not a Duplicate
+(1530827156, '76561198158189084', 'de_cache', 'live', 26, 1, 11, 14, 'gumby', 'T', 18, 7, 17, 1, 51, 7350, 1, 0)
+1530827157 de_cache live gumby T <game_state_payload.GameStatePayload object at 0x00000264EDD2A3C8> <game_state_payload.GameStatePayload object at 0x00000264EDD2A4A8> 11 15
+playing competitive 26 76561198158189084 76561198158189084 over
+GameStateCode.INVALID
+1530827163 de_cache live gumby T <game_state_payload.GameStatePayload object at 0x00000264EDD68C18> <game_state_payload.GameStatePayload object at 0x00000264EDD2ABE0> 11 15
+textinput competitive 26 76561198158189084 76561198158189084 freezetime
+GameStateCode.INVALID
+1530827178 de_cache live gumby T <game_state_payload.GameStatePayload object at 0x00000264EDD8A470> <game_state_payload.GameStatePayload object at 0x00000264EDD68160> 11 15
+playing competitive 26 76561198158189084 76561198158189084 live
+GameStateCode.INVALID
+1530827223 de_cache live gumby T <game_state_payload.GameStatePayload object at 0x00000264EDD73160> <game_state_payload.GameStatePayload object at 0x00000264EDD68358> 11 15
+playing competitive 26 76561198158189084 76561198158189084 live
+GameStateCode.DEAD_MID_ROUND
+Not a Duplicate
+(1530827223, '76561198158189084', 'de_cache', 'live', 26, 2, 11, 15, 'gumby', 'T', 18, 7, 18, 1, 51, 7350, 0, 0)
+1530827227 de_cache live Dozer T <game_state_payload.GameStatePayload object at 0x00000264EDD8A780> <game_state_payload.GameStatePayload object at 0x00000264EDD8A860> 11 15
+playing competitive 26 76561198158189084 76561198108077844 live
+GameStateCode.INVALID
+1530827234 de_cache live Dozer T <game_state_payload.GameStatePayload object at 0x00000264EDD686A0> <game_state_payload.GameStatePayload object at 0x00000264EDD8ABE0> 11 15
+playing competitive 26 76561198158189084 76561198108077844 live
+GameStateCode.INVALID
+1530827240 de_cache live Dozer T <game_state_payload.GameStatePayload object at 0x00000264EDD2ABE0> <game_state_payload.GameStatePayload object at 0x00000264EDD682B0> 11 15
+playing competitive 27 76561198158189084 76561198108077844 over
+GameStateCode.INVALID
+1530827241 de_cache live gumby T <game_state_payload.GameStatePayload object at 0x00000264EDD5E978> <game_state_payload.GameStatePayload object at 0x00000264EDD688D0> 12 15
+playing competitive 27 76561198158189084 76561198158189084 over
+GameStateCode.INVALID
+1530827247 de_cache live gumby T <game_state_payload.GameStatePayload object at 0x00000264EDD5E908> <game_state_payload.GameStatePayload object at 0x00000264EDD5E780> 12 15
+playing competitive 27 76561198158189084 76561198158189084 freezetime
+GameStateCode.INVALID
+1530827262 de_cache live gumby T <game_state_payload.GameStatePayload object at 0x00000264EDD6DB00> <game_state_payload.GameStatePayload object at 0x00000264EDD5ED30> 12 15
+playing competitive 27 76561198158189084 76561198158189084 live
+GameStateCode.INVALID
+1530827305 de_cache live gumby T <game_state_payload.GameStatePayload object at 0x00000264EDD7EFD0> <game_state_payload.GameStatePayload object at 0x00000264EDD6D5F8> 12 15
+playing competitive 27 76561198158189084 76561198158189084 live
+GameStateCode.INVALID
+1530827310 de_cache live gumby T <game_state_payload.GameStatePayload object at 0x00000264EDD7E780> <game_state_payload.GameStatePayload object at 0x00000264EDD845C0> 12 15
+playing competitive 27 76561198158189084 76561198158189084 live
+GameStateCode.DEAD_MID_ROUND
+Not a Duplicate
+(1530827310, '76561198158189084', 'de_cache', 'live', 27, 2, 12, 15, 'gumby', 'T', 19, 7, 19, 1, 53, 7350, 1, 0)
+1530827314 de_cache live Alimo T <game_state_payload.GameStatePayload object at 0x00000264EDD1F208> <game_state_payload.GameStatePayload object at 0x00000264EDD1F0B8> 12 15
+playing competitive 27 76561198158189084 76561198263290199 live
+GameStateCode.INVALID
+1530827316 de_cache gameover Alimo T <game_state_payload.GameStatePayload object at 0x00000264EDD57E10> <game_state_payload.GameStatePayload object at 0x00000264EDD84DD8> 12 15
+playing competitive 28 76561198158189084 76561198263290199 over
+GameStateCode.ENDGAME_DIFF_PLAYER
+End Game Payload Received
+Match Data Sent; Rounds Reset
+1530827317 de_cache gameover Alimo T <game_state_payload.GameStatePayload object at 0x00000264EDD1F0B8> <game_state_payload.GameStatePayload object at 0x00000264EDD577F0> 12 16
+playing competitive 28 76561198158189084 76561198263290199 over
+GameStateCode.INVALID
+GameStateCode.INVALID
