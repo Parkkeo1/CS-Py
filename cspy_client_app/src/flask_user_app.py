@@ -6,11 +6,9 @@ import webbrowser
 import winreg
 
 from flask import Flask, request, render_template, g, redirect, url_for
-import pandas as pd
-import requests
 
-from match_analysis import MatchAnalysis
 from game_state_payload import GameStateCode, GameStatePayload
+from sql_data_processing import init_table_if_not_exists, check_prev_entries, insert_round_data, send_match_to_remote
 
 # string constants
 GS_CFG_DEST_PATH = '/steamapps/common/Counter-Strike Global Offensive/csgo/cfg/gamestate_integration_main.cfg'
@@ -55,7 +53,6 @@ def shutdown_server():
 
 # ---------------------------
 
-# checks and setup on startup
 def setup_gamestate_cfg():
     try:
         steam_key = winreg.CreateKey(winreg.HKEY_CURRENT_USER, "Software\Valve\Steam")
@@ -65,109 +62,8 @@ def setup_gamestate_cfg():
     except (OSError, shutil.SameFileError):
         print('Auto CFG File Failed')
 
-
-def init_table_if_not_exists(sql_db):
-    create_round_table_sql = '''CREATE TABLE IF NOT EXISTS per_round_data (Time INTEGER, SteamID INTEGER, Map TEXT, 
-                                                                     'Map Status' TEXT, Round INTEGER, 'GS Code' INTEGER, 
-                                                                     CT_Score INTEGER, T_Score INTEGER, 'Player Name' TEXT,
-                                                                     'Player Team' TEXT, Kills INTEGER, Assists INTEGER,
-                                                                     Deaths INTEGER, MVPs INTEGER, Score INTEGER,
-                                                                     'Current Equip. Value' INTEGER, 'Round Kills' INTEGER,
-                                                                     'Round HS Kills' INTEGER);'''
-
-    sql_db.cursor().execute(create_round_table_sql)
-    sql_db.commit()
-    print("SQL Table Check Passed")
-
-
 # ---------------------------
 
-# utility methods for processing in flask routes
-
-# clears per_round_data table to indicate end of game
-def send_match_to_remote():
-    round_db = get_db()
-
-    # parse current per_round_data into dataframe
-    data_for_match_df = pd.read_sql('SELECT * FROM per_round_data;', round_db)
-    if data_for_match_df.empty or data_for_match_df.shape[0] == 0:
-        return  # cancel if there's no data to analyze or send
-
-    match_data = MatchAnalysis(data_for_match_df)
-    del match_data.data_frame
-    send_match_request = requests.post(API_ADDRESS, json=match_data.__dict__)
-
-    # checking if request was successful
-    if send_match_request.status_code == 202:  # CS-Py's API should send 202: Accepted as response code upon success.
-        # TODO: Temporarily removing auto-wipe of round_data table
-        # clear per_round_data table
-        # round_db.cursor().execute('DELETE FROM per_round_data;')
-        # round_db.commit()
-        print("Match Data Sent; Rounds Reset")
-    else:
-        print("API Request Failed. Not Clearing Round Data. Code: " + str(send_match_request.status_code))
-
-
-# checks previous entries in database to make sure there are no duplicates.
-def check_prev_entries(game_data):
-
-    # returns True if they are the same (except Time)
-    def is_equal(last_entry_row, payload):
-        match_stats = payload.player.match_stats
-        player_state = payload.player.state
-
-        return last_entry_row['Player Team'] == payload.player.team and \
-               last_entry_row['Kills'] == match_stats.kills and \
-               last_entry_row['Assists'] == match_stats.assists and \
-               last_entry_row['Deaths'] == match_stats.deaths and \
-               last_entry_row['Current Equip. Value'] == player_state.equip_value and \
-               last_entry_row['Round Kills'] == player_state.round_kills and \
-               last_entry_row['Round HS Kills'] == player_state.round_killhs
-
-    player_db = get_db()
-    last_entry = pd.read_sql('SELECT * FROM per_round_data ORDER BY Time DESC LIMIT 1;', player_db)
-
-    if last_entry.shape[0] != 0:
-        if abs(int(game_data.provider.timestamp - last_entry.iloc[0]['Time'])) <= 1:
-            sql_delete = 'DELETE FROM per_round_data WHERE Time = (SELECT MAX(Time) FROM per_round_data);'
-            player_db.cursor().execute(sql_delete)
-            player_db.commit()
-            print("Time Duplicate Replaced")
-            return True
-
-        if game_data.gamestate_code.value == 1:
-            if last_entry.iloc[0]['GS Code'] == 2:
-                if is_equal(last_entry.iloc[0], game_data):
-                    print("Round Duplicate Not Inserted")
-                    return False  # do not insert a duplicate.
-
-    print("Not a Duplicate")
-    return True
-
-
-def insert_round_data(round_data):
-    match_stats = round_data.player.match_stats
-    player_state = round_data.player.state
-
-    new_round_data = (
-        round_data.provider.timestamp, round_data.provider.steamid, round_data.map.name, round_data.map.phase,
-        round_data.map.round, round_data.gamestate_code.value, round_data.map.team_ct.score,
-        round_data.map.team_t.score,
-        round_data.player.name, round_data.player.team, match_stats.kills, match_stats.assists, match_stats.deaths,
-        match_stats.mvps, match_stats.score, player_state.equip_value, player_state.round_kills,
-        player_state.round_killhs)
-
-    round_insert_sql = ''' INSERT INTO per_round_data(Time, SteamID, Map, "Map Status", Round, 'GS Code', CT_Score, T_Score, 
-                                                      "Player Name", "Player Team", Kills, Assists, Deaths, MVPs, Score, 
-                                                      "Current Equip. Value", "Round Kills", "Round HS Kills")
-                                                      VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) '''
-    print(new_round_data)
-    conn = get_db()
-    conn.cursor().execute(round_insert_sql, new_round_data)
-    conn.commit()
-
-
-# ---------------------------
 
 # flask server routes
 
@@ -201,6 +97,7 @@ def index():
 @cs_py_client.route('/GS', methods=['POST'])
 def gamestate_handler():
     if request.is_json and cs_py_client.config['STATE']:
+        round_db = get_db()
         game_data = GameStatePayload(request.get_json())
         print(game_data.gamestate_code)
 
@@ -208,15 +105,16 @@ def gamestate_handler():
             return 'Invalid Data Received'
         elif game_data.gamestate_code == GameStateCode.ENDGAME_DIFF_PLAYER:
             print("End Game Payload Received")
-            send_match_to_remote()
+            send_match_to_remote(round_db, API_ADDRESS)
             return 'Request Received'
         else:
-            if check_prev_entries(game_data):  # checks for time duplicate entries.
-                insert_round_data(round_data=game_data)
+            if check_prev_entries(game_data, round_db):  # checks for time duplicate entries.
+                insert_round_data(game_data, round_db)
                 if game_data.map.phase == 'gameover':  # automatic reset if player was alive by end of game.
-                    send_match_to_remote()
-
-    return 'Request Received'
+                    send_match_to_remote(round_db, API_ADDRESS)
+        round_db.close()
+        return 'Request Received'
+    return 'GS is OFF or non-JSON Received'
 
 
 @cs_py_client.route('/shutdown', methods=['POST'])
@@ -227,8 +125,8 @@ def shutdown():
 
 if __name__ == "__main__":
     # setup
-    db_conn = sqlite3.connect(cs_py_client.config['DATABASE'])
-    init_table_if_not_exists(db_conn)
+    sql_db = sqlite3.connect(cs_py_client.config['DATABASE'])
+    init_table_if_not_exists(sql_db)
     setup_gamestate_cfg()
 
     # redirecting stdout for logging purposes
