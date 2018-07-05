@@ -20,10 +20,10 @@ class MatchAnalysis:
         self.map_name = self.data_frame['Map'].iloc[-1]
 
         # overall stats
-        self.kills = self.data_frame['Kills'].iloc[-1]
-        self.assists = self.data_frame['Assists'].iloc[-1]
-        self.deaths = self.data_frame['Deaths'].iloc[-1]
-        self.score = self.data_frame['Score'].iloc[-1]
+        self.kills = int(self.data_frame['Kills'].iloc[-1])
+        self.assists = int(self.data_frame['Assists'].iloc[-1])
+        self.deaths = int(self.data_frame['Deaths'].iloc[-1])
+        self.score = int(self.data_frame['Score'].iloc[-1])
 
         # to-be calculated properties
         self.rating1 = 0
