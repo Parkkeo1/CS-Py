@@ -1,0 +1,47 @@
+html,
+body {
+    height: 100%;
+    background-color: #202020;
+}
+
+body {
+    color: #C0C0C0;
+    text-align: center;
+}
+
+form {
+    display: inline;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.site-wrapper {
+    display: table;
+    width: 100%;
+    height: 100%;
+    min-height: 100%;
+}
+
+.site-wrapper-inner {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.cover-container {
+    margin-right: auto;
+    margin-left: auto;
+    width: 100%;
+}
+
+.footer {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    padding: 2rem;
+    text-align: center;
+}
+
+.btn {
+    color: #C0C0C0;
+}

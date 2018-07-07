@@ -1,3 +1,28 @@
+# makes sure required tables exist; if not, create them
+def server_sql_setup(sql_db):
+    create_users_table_sql = '''CREATE TABLE IF NOT EXISTS all_users (User_SteamID INTEGER, "Match Count" INTEGER)'''
+
+    create_matches_table_sql = '''CREATE TABLE IF NOT EXISTS all_matches (Match_ID INTEGER PRIMARY KEY,
+                                                                          User_SteamID INTEGER, Start INTEGER, End INTEGER,
+                                                                          'Round Count' INTEGER, Map TEXT, Kills INTEGER, 
+                                                                          Assists INTEGER, Deaths INTEGER, Score INTEGER, 
+                                                                          Rating1 REAL, HSR REAL, MDC REAL, KPR REAL, KAS REAL,
+                                                                          KDR REAL, KDA REAL, MEAN REAL,
+                                                                          CT_HSR REAL, CT_MDC REAL,
+                                                                          CT_KPR REAL, CT_KAS REAL, CT_KDR REAL,
+                                                                          CT_KDA REAL, CT_MEAN REAL,
+                                                                          T_HSR REAL, T_MDC REAL, T_KPR REAL, T_KAS REAL,
+                                                                          T_KDR REAL, T_KDA REAL, T_MEAN REAL,
+                                                                          FOREIGN KEY (User_SteamID)
+                                                                          REFERENCES all_users(User_SteamID))'''
+
+    db_cursor = sql_db.cursor()
+    db_cursor.execute(create_users_table_sql)
+    db_cursor.execute(create_matches_table_sql)
+    sql_db.commit()
+    print("SQL Table Check Passed")
+
+
 # returns True if user already exists in database, False if user is not yet in DB.
 def does_user_exist(payload_user_id, sql_db):
     all_users_cursor = sql_db.cursor()
