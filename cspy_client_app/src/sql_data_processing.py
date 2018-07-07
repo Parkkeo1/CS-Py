@@ -75,7 +75,6 @@ def insert_round_data(round_data, round_db):
                                                       "Player Name", "Player Team", Kills, Assists, Deaths, MVPs, Score, 
                                                       "Current Equip. Value", "Round Kills", "Round HS Kills")
                                                       VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) '''
-    print(new_round_data)
     round_db.cursor().execute(round_insert_sql, new_round_data)
     round_db.commit()
 

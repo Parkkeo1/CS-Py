@@ -82,7 +82,7 @@ def index():
 
         # user chooses to reset, ending collection for current match
         elif user_input == 'reset':
-            send_match_to_remote()
+            send_match_to_remote(get_db(), API_ADDRESS)
 
         return redirect(url_for('index'))
 
@@ -104,14 +104,13 @@ def gamestate_handler():
         if game_data.gamestate_code == GameStateCode.INVALID:
             return 'Invalid Data Received'
         elif game_data.gamestate_code == GameStateCode.ENDGAME_DIFF_PLAYER:
-            print("End Game Payload Received")
             send_match_to_remote(round_db, API_ADDRESS)
             return 'Request Received'
         else:
             if check_prev_entries(game_data, round_db):  # checks for time duplicate entries.
                 insert_round_data(game_data, round_db)
-                if game_data.map.phase == 'gameover':  # automatic reset if player was alive by end of game.
-                    send_match_to_remote(round_db, API_ADDRESS)
+            if game_data.map.phase == 'gameover':  # automatic reset if player was alive by end of game.
+                send_match_to_remote(round_db, API_ADDRESS)
         round_db.close()
         return 'Request Received'
     return 'GS is OFF or non-JSON Received'
@@ -121,6 +120,12 @@ def gamestate_handler():
 def shutdown():
     shutdown_server()
     return 'CS-Py is shutting down. You may now close this browser window/tab.'
+
+
+@cs_py_client.after_request
+def add_header(response):
+    response.headers['Cache-Control'] = 'public, max-age=0'
+    return response
 
 
 if __name__ == "__main__":

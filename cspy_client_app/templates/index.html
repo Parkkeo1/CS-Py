@@ -1,44 +1,41 @@
-{% extends 'layout.html' %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>CS-Py For CS:GO</title>
+        <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
+	    <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+    </head>
+    <body>
 
-{% block body %}
-    <div class="site-wrapper">
-        <div class="site-wrapper-inner">
-            <div class="cover-container">
-                <h1 class="text-center">CS-Py</h1>
-                <p class="text-center">A Python-based Player Statistics Display & Analysis Program For CS:GO</p>
-                <hr style="width: 60%;" class="pb-2">
-                <div class="container-fluid">
-                    <form method="POST">
-                        <button type="submit" value="start" name="input" id="starter" class="btn btn-primary">Start GS</button>
-                    </form>
-                    <form method="POST">
-                        <button type="submit" value="stop" name="input" id="ender" class="btn btn-primary">Stop</button>
-                    </form>
-                    <form method="POST">
-                        <button type="submit" value="reset" name="input" id="reset" class="btn btn-primary">Reset Match</button>
-                    </form>
-                    <form action="{{ url_for('shutdown') }}" method="POST">
-                        <button type="submit" value="shutdown" name="input" id="shutdown" class="btn btn-danger">Quit CS-Py</button>
-                    </form>
-                    <form method="POST">
-                        <label class="mr-sm-2" for="choose">Or Examine Stats From:</label>
-                        <select class="custom-select mr-sm-2" name='choose' id="choose">
-                            <option selected value="current match">Current Match</option>
-                            <option value="last match">Last Match</option>
-                            <option value="today">Past 24 Hours</option>
-                            <option value="week">Past 7 Days</option>
-                            <option value="month">Past 30 Days</option>
-                            <option value="lifetime">Lifetime</option>
-                        </select>
-                        <button type="submit" class="btn btn-primary">Analyze</button>
-                    </form>
+        <div class="site-wrapper">
+            <div class="site-wrapper-inner">
+                <div class="cover-container">
+                    <h1 class="text-center">CS-Py</h1>
+                    <p class="text-center">A Personal Performance Analytics & Tracker Tool For CS:GO</p>
+                    <div class="container-fluid">
+                        <form method="POST">
+                            <button type="submit" value="start" name="input" id="starter" class="btn btn-primary">Start GS</button>
+                        </form>
+                        <form method="POST">
+                            <button type="submit" value="stop" name="input" id="ender" class="btn btn-primary">Stop</button>
+                        </form>
+                        <form method="POST">
+                            <button type="submit" value="reset" name="input" id="reset" class="btn btn-primary">End Match</button>
+                        </form>
+                        <form action="{{ url_for('shutdown') }}" method="POST">
+                            <button type="submit" value="shutdown" name="input" id="shutdown" class="btn btn-danger">Quit CS-Py</button>
+                        </form>
+                    </div>
+                    <div class="footer">
+                        <a class="pr-4" href="https://github.com/Parkkeo1/CS-Py" target="_blank">What Is CS-Py?</a>
+                        <a class="pl-4" href="https://github.com/Parkkeo1" target="_blank">Developed By @Parkkeo1</a>
+                    </div>
                 </div>
-                <div class="footer">
-                    <a class="pr-4" href="https://github.com/Parkkeo1/CS-Py/blob/master/README.md" target="_blank">README For CS-Py</a>
-                    <a class="pl-4" href="https://github.com/Parkkeo1" target="_blank">Created By @Parkkeo1</a>
-                </div>
+                <p class="pt-3 text-muted">{{ status }}</p>
             </div>
-            <p class="pt-3 text-muted">{{ status }}</p>
         </div>
-    </div>
-{% endblock %}
+    </body>
+</html>
