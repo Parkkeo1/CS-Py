@@ -4714,3 +4714,821 @@ GameStateCode.INVALID
 playing competitive 28 76561198158189084---
 ---
 ---
+---
+GameStateCode.INVALID
+GameStateCode.INVALID
+GameStateCode.INVALID
+1530993558 de_cbble warmup fortnite player CT <game_state_payload.GameStatePayload object at 0x0000019EB5032978> <game_state_payload.GameStatePayload object at 0x0000019EB5032748> 0 0
+GameStateCode.INVALID
+1530993612 de_cbble warmup fortnite player CT <game_state_payload.GameStatePayload object at 0x0000019EB4FFB940> <game_state_payload.GameStatePayload object at 0x0000019EB502B400> 0 0
+GameStateCode.INVALID
+1530993618 de_cbble warmup fortnite player CT <game_state_payload.GameStatePayload object at 0x0000019EB5019978> <game_state_payload.GameStatePayload object at 0x0000019EB4FFBB70> 0 0
+GameStateCode.INVALID
+1530993622 de_cbble live fortnite player CT <game_state_payload.GameStatePayload object at 0x0000019EB501E358> <game_state_payload.GameStatePayload object at 0x0000019EB5019D68> 0 0
+playing competitive 0 76561198268849559 76561198268849559 freezetime
+GameStateCode.INVALID
+1530993637 de_cbble live fortnite player CT <game_state_payload.GameStatePayload object at 0x0000019EB5039668> <game_state_payload.GameStatePayload object at 0x0000019EB50195F8> 0 0
+playing competitive 0 76561198268849559 76561198268849559 live
+GameStateCode.INVALID
+1530993649 de_cbble live fortnite player CT <game_state_payload.GameStatePayload object at 0x0000019EB503E048> <game_state_payload.GameStatePayload object at 0x0000019EB501EF28> 0 0
+playing competitive 0 76561198268849559 76561198268849559 live
+GameStateCode.DEAD_MID_ROUND
+Not a Duplicate
+1530993653 de_cbble live Frylock CT <game_state_payload.GameStatePayload object at 0x0000019EB501EB38> <game_state_payload.GameStatePayload object at 0x0000019EB501E860> 0 0
+playing competitive 0 76561198268849559 76561197978125886 live
+GameStateCode.INVALID
+1530993674 de_cbble live Frylock CT <game_state_payload.GameStatePayload object at 0x0000019EB5019550> <game_state_payload.GameStatePayload object at 0x0000019EB501E278> 0 0
+playing competitive 0 76561198268849559 76561197978125886 live
+GameStateCode.INVALID
+1530993677 de_cbble live Frylock CT <game_state_payload.GameStatePayload object at 0x0000019EB4FFBE80> <game_state_payload.GameStatePayload object at 0x0000019EB5019128> 0 0
+textinput competitive 0 76561198268849559 76561197978125886 live
+GameStateCode.INVALID
+1530993682 de_cbble live Frylock CT <game_state_payload.GameStatePayload object at 0x0000019EB5025080> <game_state_payload.GameStatePayload object at 0x0000019EB4FFBBE0> 0 0
+playing competitive 0 76561198268849559 76561197978125886 live
+GameStateCode.INVALID
+1530993697 de_cbble live Frylock CT <game_state_payload.GameStatePayload object at 0x0000019EB502B3C8> <game_state_payload.GameStatePayload object at 0x0000019EB50253C8> 0 0
+menu competitive 1 76561198268849559 76561197978125886 over
+GameStateCode.INVALID
+1530993704 de_cbble live fortnite player CT <game_state_payload.GameStatePayload object at 0x0000019EB502BBE0> <game_state_payload.GameStatePayload object at 0x0000019EB502BB70> 1 0
+menu competitive 1 76561198268849559 76561198268849559 freezetime
+GameStateCode.INVALID
+1530993717 de_cbble live fortnite player CT <game_state_payload.GameStatePayload object at 0x0000019EB5032DD8> <game_state_payload.GameStatePayload object at 0x0000019EB502B780> 1 0
+playing competitive 1 76561198268849559 76561198268849559 freezetime
+GameStateCode.INVALID
+1530993792 de_cbble live fortnite player CT <game_state_payload.GameStatePayload object at 0x0000019EB50534A8> <game_state_payload.GameStatePayload object at 0x0000019EB5053240> 1 0
+playing competitive 1 76561198268849559 76561198268849559 live
+GameStateCode.INVALID
+1530993816 de_cbble live fortnite player CT <game_state_payload.GameStatePayload object at 0x0000019EB5032D68> <game_state_payload.GameStatePayload object at 0x0000019EB5053588> 1 0
+playing competitive 2 76561198268849559 76561198268849559 over
+GameStateCode.ALIVE_END_ROUND
+Round Duplicate Not Inserted
+1530993823 de_cbble live fortnite player CT <game_state_payload.GameStatePayload object at 0x0000019EB502B978> <game_state_payload.GameStatePayload object at 0x0000019EB502B908> 2 0
+playing competitive 2 76561198268849559 76561198268849559 freezetime
+GameStateCode.INVALID
+1530993838 de_cbble live fortnite player CT <game_state_payload.GameStatePayload object at 0x0000019EB5025C50> <game_state_payload.GameStatePayload object at 0x0000019EB502B5F8> 2 0
+playing competitive 2 76561198268849559 76561198268849559 live
+GameStateCode.INVALID
+1530993928 de_cbble live fortnite player CT <game_state_payload.GameStatePayload object at 0x0000019EB4FFB198> <game_state_payload.GameStatePayload object at 0x0000019EB4FFBE80> 2 0
+playing competitive 2 76561198268849559 76561198268849559 live
+GameStateCode.INVALID
+1530993940 de_cbble live fortnite player CT <game_state_payload.GameStatePayload object at 0x0000019EB5025160> <game_state_payload.GameStatePayload object at 0x0000019EB50199B0> 2 0
+playing competitive 2 76561198268849559 76561198268849559 live
+GameStateCode.DEAD_MID_ROUND
+Not a Duplicate
+1530993943 de_cbble live fortnite player CT <game_state_payload.GameStatePayload object at 0x0000019EB502B5C0> <game_state_payload.GameStatePayload object at 0x0000019EB502BB38> 2 0
+playing competitive 2 76561198268849559 76561198268849559 live
+GameStateCode.INVALID
+1530993944 de_cbble live Frylock CT <game_state_payload.GameStatePayload object at 0x0000019EB5032C50> <game_state_payload.GameStatePayload object at 0x0000019EB502B9B0> 2 0
+playing competitive 2 76561198268849559 76561197978125886 live
+GameStateCode.INVALID
+1530993976 de_cbble live Frylock CT <game_state_payload.GameStatePayload object at 0x0000019EB5053AC8> <game_state_payload.GameStatePayload object at 0x0000019EB5032DA0> 2 0
+playing competitive 2 76561198268849559 76561197978125886 live
+GameStateCode.INVALID
+1530993983 de_cbble live Frylock CT <game_state_payload.GameStatePayload object at 0x0000019EB501EA20> <game_state_payload.GameStatePayload object at 0x0000019EB5053BA8> 2 0
+playing competitive 3 76561198268849559 76561197978125886 over
+GameStateCode.INVALID
+1530993984 de_cbble live Frylock CT <game_state_payload.GameStatePayload object at 0x0000019EB501EEF0> <game_state_payload.GameStatePayload object at 0x0000019EB50539E8> 2 1
+playing competitive 3 76561198268849559 76561197978125886 over
+GameStateCode.INVALID
+1530993990 de_cbble live fortnite player CT <game_state_payload.GameStatePayload object at 0x0000019EB5039D30> <game_state_payload.GameStatePayload object at 0x0000019EB501E9B0> 2 1
+playing competitive 3 76561198268849559 76561198268849559 freezetime
+GameStateCode.INVALID
+1530994005 de_cbble live fortnite player CT <game_state_payload.GameStatePayload object at 0x0000019EB5057A90> <game_state_payload.GameStatePayload object at 0x0000019EB5039390> 2 1
+playing competitive 3 76561198268849559 76561198268849559 live
+GameStateCode.INVALID
+1530994095 de_cbble live fortnite player CT <game_state_payload.GameStatePayload object at 0x0000019EB3B89CC0> <game_state_payload.GameStatePayload object at 0x0000019EB3B5BBA8> 2 1
+playing competitive 3 76561198268849559 76561198268849559 live
+GameStateCode.INVALID
+1530994104 de_cbble live fortnite player CT <game_state_payload.GameStatePayload object at 0x0000019EB4FED7B8> <game_state_payload.GameStatePayload object at 0x0000019EB502B978> 2 1
+playing competitive 3 76561198268849559 76561198268849559 live
+GameStateCode.DEAD_MID_ROUND
+Not a Duplicate
+1530994107 de_cbble live fortnite player CT <game_state_payload.GameStatePayload object at 0x0000019EB5019748> <game_state_payload.GameStatePayload object at 0x0000019EB5019320> 2 1
+playing competitive 3 76561198268849559 76561198268849559 live
+GameStateCode.INVALID
+1530994108 de_cbble live Frylock CT <game_state_payload.GameStatePayload object at 0x0000019EB501E160> <game_state_payload.GameStatePayload object at 0x0000019EB5019438> 2 1
+playing competitive 3 76561198268849559 76561197978125886 live
+GameStateCode.INVALID
+1530994115 de_cbble live Frylock CT <game_state_payload.GameStatePayload object at 0x0000019EB5057780> <game_state_payload.GameStatePayload object at 0x0000019EB501E4A8> 2 1
+playing competitive 3 76561198268849559 76561197978125886 live
+GameStateCode.INVALID
+1530994120 de_cbble live Frylock CT <game_state_payload.GameStatePayload object at 0x0000019EB501E780> <game_state_payload.GameStatePayload object at 0x0000019EB501E2E8> 2 1
+playing competitive 3 76561198268849559 76561197978125886 live
+GameStateCode.INVALID
+1530994121 de_cbble live Meatwad CT <game_state_payload.GameStatePayload object at 0x0000019EB501E3C8> <game_state_payload.GameStatePayload object at 0x0000019EB501E9B0> 2 1
+playing competitive 3 76561198268849559 76561198065772791 live
+GameStateCode.INVALID
+1530994134 de_cbble live Meatwad CT <game_state_payload.GameStatePayload object at 0x0000019EB5025710> <game_state_payload.GameStatePayload object at 0x0000019EB5025D30> 2 1
+playing competitive 4 76561198268849559 76561198065772791 over
+GameStateCode.INVALID
+1530994135 de_cbble live fortnite player CT <game_state_payload.GameStatePayload object at 0x0000019EB5025438> <game_state_payload.GameStatePayload object at 0x0000019EB4FFB780> 2 2
+playing competitive 4 76561198268849559 76561198268849559 over
+GameStateCode.INVALID
+1530994142 de_cbble live fortnite player CT <game_state_payload.GameStatePayload object at 0x0000019EB502B048> <game_state_payload.GameStatePayload object at 0x0000019EB5025978> 2 2
+playing competitive 4 76561198268849559 76561198268849559 freezetime
+GameStateCode.INVALID
+1530994156 de_cbble live fortnite player CT <game_state_payload.GameStatePayload object at 0x0000019EB50326A0> <game_state_payload.GameStatePayload object at 0x0000019EB502BA90> 2 2
+playing competitive 4 76561198268849559 76561198268849559 live
+GameStateCode.INVALID
+1530994192 de_cbble live fortnite player CT <game_state_payload.GameStatePayload object at 0x0000019EB5053CF8> <game_state_payload.GameStatePayload object at 0x0000019EB50323C8> 2 2
+playing competitive 4 76561198268849559 76561198268849559 live
+GameStateCode.DEAD_MID_ROUND
+Not a Duplicate
+1530994196 de_cbble live Frylock CT <game_state_payload.GameStatePayload object at 0x0000019EB5039358> <game_state_payload.GameStatePayload object at 0x0000019EB5039BA8> 2 2
+playing competitive 4 76561198268849559 76561197978125886 live
+GameStateCode.INVALID
+1530994198 de_cbble live Frylock CT <game_state_payload.GameStatePayload object at 0x0000019EB5019CF8> <game_state_payload.GameStatePayload object at 0x0000019EB50392B0> 2 2
+textinput competitive 4 76561198268849559 76561197978125886 live
+GameStateCode.INVALID
+1530994206 de_cbble live Meatwad CT <game_state_payload.GameStatePayload object at 0x0000019EB5039748> <game_state_payload.GameStatePayload object at 0x0000019EB5019400> 2 2
+playing competitive 4 76561198268849559 76561198065772791 live
+GameStateCode.INVALID
+1530994208 de_cbble live Frylock CT <game_state_payload.GameStatePayload object at 0x0000019EB5019D30> <game_state_payload.GameStatePayload object at 0x0000019EB5019EF0> 2 2
+playing competitive 4 76561198268849559 76561197978125886 live
+GameStateCode.INVALID
+1530994210 de_cbble live Meatwad CT <game_state_payload.GameStatePayload object at 0x0000019EB5053860> <game_state_payload.GameStatePayload object at 0x0000019EB5053128> 2 2
+playing competitive 4 76561198268849559 76561198065772791 live
+GameStateCode.INVALID
+1530994212 de_cbble live Frylock CT <game_state_payload.GameStatePayload object at 0x0000019EB50536D8> <game_state_payload.GameStatePayload object at 0x0000019EB5039E48> 2 2
+playing competitive 4 76561198268849559 76561197978125886 live
+GameStateCode.INVALID
+1530994217 de_cbble live Frylock CT <game_state_payload.GameStatePayload object at 0x0000019EB503EEB8> <game_state_payload.GameStatePayload object at 0x0000019EB50538D0> 2 2
+playing competitive 4 76561198268849559 76561197978125886 live
+GameStateCode.INVALID
+1530994218 de_cbble live Meatwad CT <game_state_payload.GameStatePayload object at 0x0000019EB50322E8> <game_state_payload.GameStatePayload object at 0x0000019EB503E828> 2 2
+playing competitive 4 76561198268849559 76561198065772791 live
+GameStateCode.INVALID
+1530994256 de_cbble live Meatwad CT <game_state_payload.GameStatePayload object at 0x0000019EB5025160> <game_state_payload.GameStatePayload object at 0x0000019EB5032048> 2 2
+playing competitive 5 76561198268849559 76561198065772791 over
+GameStateCode.INVALID
+1530994257 de_cbble live Meatwad CT <game_state_payload.GameStatePayload object at 0x0000019EB5025518> <game_state_payload.GameStatePayload object at 0x0000019EB502B048> 2 3
+playing competitive 5 76561198268849559 76561198065772791 over
+GameStateCode.INVALID
+1530994263 de_cbble live fortnite player CT <game_state_payload.GameStatePayload object at 0x0000019EB4FFB860> <game_state_payload.GameStatePayload object at 0x0000019EB5025898> 2 3
+playing competitive 5 76561198268849559 76561198268849559 freezetime
+GameStateCode.INVALID
+1530994278 de_cbble live fortnite player CT <game_state_payload.GameStatePayload object at 0x0000019EB501E320> <game_state_payload.GameStatePayload object at 0x0000019EB4FFBCC0> 2 3
+playing competitive 5 76561198268849559 76561198268849559 live
+GameStateCode.INVALID
+1530994335 de_cbble live fortnite player CT <game_state_payload.GameStatePayload object at 0x0000019EB5061F98> <game_state_payload.GameStatePayload object at 0x0000019EB5061FD0> 2 3
+playing competitive 5 76561198268849559 76561198268849559 live
+GameStateCode.INVALID
+1530994374 de_cbble live fortnite player CT <game_state_payload.GameStatePayload object at 0x0000019EB4FFB5C0> <game_state_payload.GameStatePayload object at 0x0000019EB4FFB2E8> 2 3
+playing competitive 6 76561198268849559 76561198268849559 over
+GameStateCode.ALIVE_END_ROUND
+Round Duplicate Not Inserted
+1530994375 de_cbble live fortnite player CT <game_state_payload.GameStatePayload object at 0x0000019EB50257B8> <game_state_payload.GameStatePayload object at 0x0000019EB5025358> 2 4
+playing competitive 6 76561198268849559 76561198268849559 over
+GameStateCode.INVALID
+1530994381 de_cbble live fortnite player CT <game_state_payload.GameStatePayload object at 0x0000019EB502B9B0> <game_state_payload.GameStatePayload object at 0x0000019EB5025C18> 2 4
+playing competitive 6 76561198268849559 76561198268849559 freezetime
+GameStateCode.INVALID
+1530994396 de_cbble live fortnite player CT <game_state_payload.GameStatePayload object at 0x0000019EB5032A20> <game_state_payload.GameStatePayload object at 0x0000019EB502B198> 2 4
+playing competitive 6 76561198268849559 76561198268849559 live
+GameStateCode.INVALID
+1530994460 de_cbble live fortnite player CT <game_state_payload.GameStatePayload object at 0x0000019EB5019438> <game_state_payload.GameStatePayload object at 0x0000019EB5032550> 2 4
+playing competitive 6 76561198268849559 76561198268849559 live
+GameStateCode.INVALID
+1530994469 de_cbble live fortnite player CT <game_state_payload.GameStatePayload object at 0x0000019EB5061E10> <game_state_payload.GameStatePayload object at 0x0000019EB5019860> 2 4
+playing competitive 6 76561198268849559 76561198268849559 live
+GameStateCode.DEAD_MID_ROUND
+Not a Duplicate
+1530994474 de_cbble live Frylock CT <game_state_payload.GameStatePayload object at 0x0000019EB5053C50> <game_state_payload.GameStatePayload object at 0x0000019EB5053358> 2 4
+playing competitive 6 76561198268849559 76561197978125886 live
+GameStateCode.INVALID
+1530994482 de_cbble live Chase CT <game_state_payload.GameStatePayload object at 0x0000019EB50535F8> <game_state_payload.GameStatePayload object at 0x0000019EB5053A90> 2 4
+playing competitive 6 76561198268849559 76561198043773225 live
+GameStateCode.INVALID
+1530994483 de_cbble live Frylock CT <game_state_payload.GameStatePayload object at 0x0000019EB50325F8> <game_state_payload.GameStatePayload object at 0x0000019EB503E710> 2 4
+playing competitive 6 76561198268849559 76561197978125886 live
+GameStateCode.INVALID
+1530994487 de_cbble live Frylock CT <game_state_payload.GameStatePayload object at 0x0000019EB502B208> <game_state_payload.GameStatePayload object at 0x0000019EB5032240> 2 4
+playing competitive 6 76561198268849559 76561197978125886 live
+GameStateCode.INVALID
+1530994509 de_cbble live Frylock CT <game_state_payload.GameStatePayload object at 0x0000019EB50255F8> <game_state_payload.GameStatePayload object at 0x0000019EB502B2B0> 2 4
+playing competitive 7 76561198268849559 76561197978125886 over
+GameStateCode.INVALID
+1530994516 de_cbble live fortnite player CT <game_state_payload.GameStatePayload object at 0x0000019EB5053080> <game_state_payload.GameStatePayload object at 0x0000019EB5053DD8> 3 4
+playing competitive 7 76561198268849559 76561198268849559 freezetime
+GameStateCode.INVALID
+1530994531 de_cbble live fortnite player CT <game_state_payload.GameStatePayload object at 0x0000019EB4FFB6A0> <game_state_payload.GameStatePayload object at 0x0000019EB502BB00> 3 4
+playing competitive 7 76561198268849559 76561198268849559 live
+GameStateCode.INVALID
+1530994551 de_cbble live fortnite player CT <game_state_payload.GameStatePayload object at 0x0000019EB501E898> <game_state_payload.GameStatePayload object at 0x0000019EB5025898> 3 4
+playing competitive 7 76561198268849559 76561198268849559 live
+GameStateCode.DEAD_MID_ROUND
+Not a Duplicate
+1530994555 de_cbble live Frylock CT <game_state_payload.GameStatePayload object at 0x0000019EB502BF98> <game_state_payload.GameStatePayload object at 0x0000019EB502B1D0> 3 4
+playing competitive 7 76561198268849559 76561197978125886 live
+GameStateCode.INVALID
+1530994568 de_cbble live GameStateCode.INVALID
+1530994570 de_cbble live GameStateCode.INVALID
+1530994570 de_cbble live Frylock CT <game_state_payload.GameStatePayload object at 0x0000019EB5053D30> <game_state_payload.GameStatePayload object at 0x0000019EB5053C18> 3 4
+playing competitive 7 76561198268849559 76561197978125886 live
+GameStateCode.INVALID
+1530994572 de_cbble live Meatwad CT <game_state_payload.GameStatePayload object at 0x0000019EB503E4A8> <game_state_payload.GameStatePayload object at 0x0000019EB5053DA0> 3 4
+playing competitive 7 76561198268849559 76561198065772791 live
+GameStateCode.INVALID
+1530994573 de_cbble live Meatwad CT <game_state_payload.GameStatePayload object at 0x0000019EB503EB00> <game_state_payload.GameStatePayload object at 0x0000019EB503E160> 3 4
+playing competitive 7 76561198268849559 76561198065772791 live
+GameStateCode.INVALID
+1530994574 de_cbble live Frylock CT <game_state_payload.GameStatePayload object at 0x0000019EB5019630> <game_state_payload.GameStatePayload object at 0x0000019EB503E2E8> 3 4
+playing competitive 7 76561198268849559 76561197978125886 live
+GameStateCode.INVALID
+1530994579 de_cbble live Chase CT <game_state_payload.GameStatePayload object at 0x0000019EB5039EB8> <game_state_payload.GameStatePayload object at 0x0000019EB5019128> 3 4
+playing competitive 7 76561198268849559 76561198043773225 live
+GameStateCode.INVALID
+1530994581 de_cbble live Chase CT <game_state_payload.GameStatePayload object at 0x0000019EB5039668> <game_state_payload.GameStatePayload object at 0x0000019EB5039160> 3 4
+playing competitive 7 76561198268849559 76561198043773225 live
+GameStateCode.INVALID
+1530994584 de_cbble live Frylock CT <game_state_payload.GameStatePayload object at 0x0000019EB5025780> <game_state_payload.GameStatePayload object at 0x0000019EB5039128> 3 4
+playing competitive 7 76561198268849559 76561197978125886 live
+GameStateCode.INVALID
+1530994587 de_cbble live Frylock CT <game_state_payload.GameStatePayload object at 0x0000019EB50250F0> <game_state_payload.GameStatePayload object at 0x0000019EB5025940> 3 4
+playing competitive 8 76561198268849559 76561197978125886 over
+GameStateCode.INVALID
+1530994594 de_cbble live fortnite player CT <game_state_payload.GameStatePayload object at 0x0000019EB501EBA8> <game_state_payload.GameStatePayload object at 0x0000019EB5025550> 4 4
+playing competitive 8 76561198268849559 76561198268849559 freezetime
+GameStateCode.INVALID
+1530994609 de_cbble live fortnite player CT <game_state_payload.GameStatePayload object at 0x0000019EB5057588> <game_state_payload.GameStatePayload object at 0x0000019EB501E978> 4 4
+playing competitive 8 76561198268849559 76561198268849559 live
+GameStateCode.INVALID
+1530994650 de_cbble live fortnite player CT <game_state_payload.GameStatePayload object at 0x0000019EB501ECF8> <game_state_payload.GameStatePayload object at 0x0000019EB5057278> 4 4
+playing competitive 8 76561198268849559 76561198268849559 live
+GameStateCode.INVALID
+1530994661 de_cbble live fortnite player CT <game_state_payload.GameStatePayload object at 0x0000019EB5025978> <game_state_payload.GameStatePayload object at 0x0000019EB501E9B0> 4 4
+playing competitive 8 76561198268849559 76561198268849559 live
+GameStateCode.INVALID
+1530994670 de_cbble live fortnite player CT <game_state_payload.GameStatePayload object at 0x0000019EB5039860> <game_state_payload.GameStatePayload object at 0x0000019EB5025BA8> 4 4
+playing competitive 8 76561198268849559 76561198268849559 live
+GameStateCode.INVALID
+1530994682 de_cbble live fortnite player CT <game_state_payload.GameStatePayload object at 0x0000019EB5019240> <game_state_payload.GameStatePayload object at 0x0000019EB5039A20> 4 4
+playing competitive 9 76561198268849559 76561198268849559 over
+GameStateCode.ALIVE_END_ROUND
+Not a Duplicate
+1530994689 de_cbble live fortnite player CT <game_state_payload.GameStatePayload object at 0x0000019EB503EBE0> <game_state_payload.GameStatePayload object at 0x0000019EB503E208> 5 4
+playing competitive 9 76561198268849559 76561198268849559 freezetime
+GameStateCode.INVALID
+1530994704 de_cbble live fortnite player CT <game_state_payload.GameStatePayload object at 0x0000019EB5053EB8> <game_state_payload.GameStatePayload object at 0x0000019EB503E1D0> 5 4
+playing competitive 9 76561198268849559 76561198268849559 live
+GameStateCode.INVALID
+1530994730 de_cbble live fortnite player CT <game_state_payload.GameStatePayload object at 0x0000019EB50324E0> <game_state_payload.GameStatePayload object at 0x0000019EB5053C18> 5 4
+playing competitive 9 76561198268849559 76561198268849559 live
+GameStateCode.INVALID
+1530994737 de_cbble live fortnite player CT <game_state_payload.GameStatePayload object at 0x0000019EB4FFB7F0> <game_state_payload.GameStatePayload object at 0x0000019EB5032208> 5 4
+playing competitive 9 76561198268849559 76561198268849559 live
+GameStateCode.INVALID
+1530994798 de_cbble live fortnite player CT <game_state_payload.GameStatePayload object at 0x0000019EB3B5BBA8> <game_state_payload.GameStatePayload object at 0x0000019EB5019BE0> 5 4
+playing competitive 10 76561198268849559 76561198268849559 over
+GameStateCode.ALIVE_END_ROUND
+Not a Duplicate
+1530994805 de_cbble live fortnite player CT <game_state_payload.GameStatePayload object at 0x0000019EB50394A8> <game_state_payload.GameStatePayload object at 0x0000019EB5039A20> 6 4
+playing competitive 10 76561198268849559 76561198268849559 freezetime
+GameStateCode.INVALID
+1530994820 de_cbble live fortnite player CT <game_state_payload.GameStatePayload object at 0x0000019EB5025780> <game_state_payload.GameStatePayload object at 0x0000019EB5039518> 6 4
+playing competitive 10 76561198268849559 76561198268849559 live
+GameStateCode.INVALID
+1530994857 de_cbble live fortnite player CT <game_state_payload.GameStatePayload object at 0x0000019EB50574E0> <game_state_payload.GameStatePayload object at 0x0000019EB5025278> 6 4
+playing competitive 10 76561198268849559 76561198268849559 live
+GameStateCode.INVALID
+1530994859 de_cbble live fortnite player CT <game_state_payload.GameStatePayload object at 0x0000019EB4FFB7B8> <game_state_payload.GameStatePayload object at 0x0000019EB5057400> 6 4
+playing competitive 10 76561198268849559 76561198268849559 live
+GameStateCode.DEAD_MID_ROUND
+Not a Duplicate
+1530994863 de_cbble live GameStateCode.INVALID
+1530994886 de_cbble live GameStateCode.INVALID
+1530994907 de_cbble live GameStateCode.INVALID
+1530994908 de_cbble live GameStateCode.INVALID
+1530994915 de_cbble live Chase CT <game_state_payload.GameStatePayload object at 0x0000019EB50535C0> <game_state_payload.GameStatePayload object at 0x0000019EB503EDD8> 7 4
+playing competitive 11 76561198268849559 76561198043773225 over
+GameStateCode.INVALID
+1530994915 de_cbble live fortnite player CT <game_state_payload.GameStatePayload object at 0x0000019EB5053940> <game_state_payload.GameStatePayload object at 0x0000019EB50538D0> 7 4
+playing competitive 11 76561198268849559 76561198268849559 freezetime
+GameStateCode.INVALID
+1530994930 de_cbble live fortnite player CT <game_state_payload.GameStatePayload object at 0x0000019EB5053C18> <game_state_payload.GameStatePayload object at 0x0000019EB5053D30> 7 4
+playing competitive 11 76561198268849559 76561198268849559 live
+GameStateCode.INVALID
+1530994988 de_cbble live fortnite player CT <game_state_payload.GameStatePayload object at 0x0000019EB5032B00> <game_state_payload.GameStatePayload object at 0x0000019EB5032630> 7 4
+playing competitive 11 76561198268849559 76561198268849559 live
+GameStateCode.INVALID
+1530995002 de_cbble live fortnite player CT <game_state_payload.GameStatePayload object at 0x0000019EB503EEB8> <game_state_payload.GameStatePayload object at 0x0000019EB50327F0> 7 4
+playing competitive 12 76561198268849559 76561198268849559 over
+GameStateCode.ALIVE_END_ROUND
+Not a Duplicate
+1530995009 de_cbble live fortnite player CT <game_state_payload.GameStatePayload object at 0x0000019EB5019E80> <game_state_payload.GameStatePayload object at 0x0000019EB5019518> 8 4
+playing competitive 12 76561198268849559 76561198268849559 freezetime
+GameStateCode.INVALID
+1530995024 de_cbble live fortnite player CT <game_state_payload.GameStatePayload object at 0x0000019EB50399E8> <game_state_payload.GameStatePayload object at 0x0000019EB503ED68> 8 4
+playing competitive 12 76561198268849559 76561198268849559 live
+GameStateCode.INVALID
+1530995041 de_cbble live fortnite player CT <game_state_payload.GameStatePayload object at 0x0000019EB5039438> <game_state_payload.GameStatePayload object at 0x0000019EB5019F28> 8 4
+playing competitive 12 76561198268849559 76561198268849559 live
+GameStateCode.INVALID
+1530995050 de_cbble live fortnite player CT <game_state_payload.GameStatePayload object at 0x0000019EB5025C18> <game_state_payload.GameStatePayload object at 0x0000019EB50392B0> 8 4
+playing competitive 12 76561198268849559 76561198268849559 live
+GameStateCode.INVALID
+1530995108 de_cbble live fortnite player CT <game_state_payload.GameStatePayload object at 0x0000019EB4FFB6D8> <game_state_payload.GameStatePayload object at 0x0000019EB5025E80> 8 4
+playing competitive 13 76561198268849559 76561198268849559 over
+GameStateCode.ALIVE_END_ROUND
+Not a Duplicate
+1530995115 de_cbble live fortnite player CT <game_state_payload.GameStatePayload object at 0x0000019EB5025860> <game_state_payload.GameStatePayload object at 0x0000019EB5025358> 9 4
+playing competitive 13 76561198268849559 76561198268849559 freezetime
+GameStateCode.INVALID
+1530995130 de_cbble live fortnite player CT <game_state_payload.GameStatePayload object at 0x0000019EB5039E10> <game_state_payload.GameStatePayload object at 0x0000019EB5057630> 9 4
+playing competitive 13 76561198268849559 76561198268849559 live
+GameStateCode.INVALID
+1530995188 de_cbble live fortnite player CT <game_state_payload.GameStatePayload object at 0x0000019EB503E208> <game_state_payload.GameStatePayload object at 0x0000019EB5025208> 9 4
+playing competitive 13 76561198268849559 76561198268849559 live
+GameStateCode.INVALID
+1530995189 de_cbble live fortnite player CT <game_state_payload.GameStatePayload object at 0x0000019EB503E0F0> <game_state_payload.GameStatePayload object at 0x0000019EB503E358> 9 4
+playing competitive 13 76561198268849559 76561198268849559 live
+GameStateCode.INVALID
+1530995190 de_cbble live fortnite player CT <game_state_payload.GameStatePayload object at 0x0000019EB5053470> <game_state_payload.GameStatePayload object at 0x0000019EB503EB38> 9 4
+playing competitive 13 76561198268849559 76561198268849559 live
+GameStateCode.INVALID
+1530995208 de_cbble live fortnite player CT <game_state_payload.GameStatePayload object at 0x0000019EB50326D8> <game_state_payload.GameStatePayload object at 0x0000019EB5053D68> 9 4
+playing competitive 13 76561198268849559 76561198268849559 live
+GameStateCode.INVALID
+1530995214 de_cbble live fortnite player CT <game_state_payload.GameStatePayload object at 0x0000019EB502BF60> <game_state_payload.GameStatePayload object at 0x0000019EB5032CF8> 9 4
+playing competitive 13 76561198268849559 76561198268849559 live
+GameStateCode.INVALID
+1530995220 de_cbble live fortnite player CT <game_state_payload.GameStatePayload object at 0x0000019EB5061278> <game_state_payload.GameStatePayload object at 0x0000019EB502B2E8> 10 4
+playing competitive 14 76561198268849559 76561198268849559 over
+GameStateCode.ALIVE_END_ROUND
+Not a Duplicate
+1530995227 de_cbble live fortnite player CT <game_state_payload.GameStatePayload object at 0x0000019EB503E908> <game_state_payload.GameStatePayload object at 0x0000019EB503E128> 10 4
+playing competitive 14 76561198268849559 76561198268849559 freezetime
+GameStateCode.INVALID
+1530995242 de_cbble live fortnite player CT <game_state_payload.GameStatePayload object at 0x0000019EB5019438> <game_state_payload.GameStatePayload object at 0x0000019EB5053208> 10 4
+playing competitive 14 76561198268849559 76561198268849559 live
+GameStateCode.INVALID
+1530995301 de_cbble live fortnite player CT <game_state_payload.GameStatePayload object at 0x0000019EB50253C8> <game_state_payload.GameStatePayload object at 0x0000019EB50195F8> 10 4
+playing competitive 14 76561198268849559 76561198268849559 live
+GameStateCode.INVALID
+1530995312 de_cbble live fortnite player CT <game_state_payload.GameStatePayload object at 0x0000019EB502BC88> <game_state_payload.GameStatePayload object at 0x0000019EB50254A8> 10 4
+playing competitive 14 76561198268849559 76561198268849559 live
+GameStateCode.INVALID
+1530995329 de_cbble intermission fortnite player CT <game_state_payload.GameStatePayload object at 0x0000019EB50576D8> <game_state_payload.GameStatePayload object at 0x0000019EAC131C88> 10 4
+playing competitive 15 76561198268849559 76561198268849559 over
+GameStateCode.ALIVE_END_ROUND
+Not a Duplicate
+1530995344 de_cbble live fortnite player T <game_state_payload.GameStatePayload object at 0x0000019EB4FFB780> <game_state_payload.GameStatePayload object at 0x0000019EB4FFB860> 4 11
+playing competitive 15 76561198268849559 76561198268849559 freezetime
+GameStateCode.INVALID
+1530995359 de_cbble live fortnite player T <game_state_payload.GameStatePayload object at 0x0000019EB50256A0> <game_state_payload.GameStatePayload object at 0x0000019EB502B8D0> 4 11
+playing competitive 15 76561198268849559 76561198268849559 live
+GameStateCode.INVALID
+1530995375 de_cbble live fortnite player T <game_state_payload.GameStatePayload object at 0x0000019EB5039A58> <game_state_payload.GameStatePayload object at 0x0000019EB5025438> 4 11
+playing competitive 15 76561198268849559 76561198268849559 live
+GameStateCode.INVALID
+1530995383 de_cbble live fortnite player T <game_state_payload.GameStatePayload object at 0x0000019EB5019898> <game_state_payload.GameStatePayload object at 0x0000019EB5039128> 4 11
+playing competitive 15 76561198268849559 76561198268849559 live
+GameStateCode.INVALID
+1530995386 de_cbble live fortnite player T <game_state_payload.GameStatePayload object at 0x0000019EB50191D0> <game_state_payload.GameStatePayload object at 0x0000019EB5039898> 4 11
+playing competitive 15 76561198268849559 76561198268849559 live
+GameStateCode.INVALID
+1530995396 de_cbble live fortnite player T <game_state_payload.GameStatePayload object at 0x0000019EB503E208> <game_state_payload.GameStatePayload object at 0x0000019EB50199B0> 4 11
+playing competitive 16 76561198268849559 76561198268849559 over
+GameStateCode.ALIVE_END_ROUND
+Not a Duplicate
+1530995396 de_cbble live fortnite player T <game_state_payload.GameStatePayload object at 0x0000019EB5032BE0> <game_state_payload.GameStatePayload object at 0x0000019EB5032160> 4 12
+playing competitive 16 76561198268849559 76561198268849559 over
+GameStateCode.INVALID
+1530995403 de_cbble live fortnite player T <game_state_payload.GameStatePayload object at 0x0000019EB5061668> <game_state_payload.GameStatePayload object at 0x0000019EB5053B38> 4 12
+playing competitive 16 76561198268849559 76561198268849559 freezetime
+GameStateCode.INVALID
+1530995418 de_cbble live fortnite player T <game_state_payload.GameStatePayload object at 0x0000019EB5053B38> <game_state_payload.GameStatePayload object at 0x0000019EB5053DA0> 4 12
+playing competitive 16 76561198268849559 76561198268849559 live
+GameStateCode.INVALID
+1530995452 de_cbble live fortnite player T <game_state_payload.GameStatePayload object at 0x0000019EB5019F28> <game_state_payload.GameStatePayload object at 0x0000019EB5032908> 4 12
+playing competitive 16 76561198268849559 76561198268849559 live
+GameStateCode.INVALID
+1530995454 de_cbble live fortnite player T <game_state_payload.GameStatePayload object at 0x0000019EB3B5BBA8> <game_state_payload.GameStatePayload object at 0x0000019EB5019470> 4 12
+playing competitive 16 76561198268849559 76561198268849559 live
+GameStateCode.DEAD_MID_ROUND
+Not a Duplicate
+1530995455 de_cbble live fortnite player T <game_state_payload.GameStatePayload object at 0x0000019EB5025DA0> <game_state_payload.GameStatePayload object at 0x0000019EB5025438> 4 12
+playing competitive 17 76561198268849559 76561198268849559 over
+GameStateCode.ALIVE_END_ROUND
+Time Duplicate Replaced
+1530995456 de_cbble live fortnite player T <game_state_payload.GameStatePayload object at 0x0000019EB4FCBDD8> <game_state_payload.GameStatePayload object at 0x0000019EB4FCB9B0> 4 13
+playing competitive 17 76561198268849559 76561198268849559 over
+GameStateCode.INVALID
+1530995458 de_cbble live Frylock T <game_state_payload.GameStatePayload object at 0x0000019EB502B3C8> <game_state_payload.GameStatePayload object at 0x0000019EB4FCBE10> 4 13
+playing competitive 17 76561198268849559 76561197978125886 over
+GameStateCode.INVALID
+1530995462 de_cbble live fortnite player T <game_state_payload.GameStatePayload object at 0x0000019EB5057278> <game_state_payload.GameStatePayload object at 0x0000019EB502B780> 4 13
+playing competitive 17 76561198268849559 76561198268849559 freezetime
+GameStateCode.INVALID
+1530995477 de_cbble live fortnite player T <game_state_payload.GameStatePayload object at 0x0000019EB5053F28> <game_state_payload.GameStatePayload object at 0x0000019EB50574E0> 4 13
+playing competitive 17 76561198268849559 76561198268849559 live
+GameStateCode.INVALID
+1530995496 de_cbble live fortnite player T <game_state_payload.GameStatePayload object at 0x0000019EB5025B00> <game_state_payload.GameStatePayload object at 0x0000019EB501E978> 4 13
+playing competitive 17 76561198268849559 76561198268849559 live
+GameStateCode.INVALID
+1530995517 de_cbble live fortnite player T <game_state_payload.GameStatePayload object at 0x0000019EB5039898> <game_state_payload.GameStatePayload object at 0x0000019EB50251D0> 4 13
+playing competitive 17 76561198268849559 76561198268849559 live
+GameStateCode.INVALID
+1530995522 de_cbble live fortnite player T <game_state_payload.GameStatePayload object at 0x0000019EB5019A20> <game_state_payload.GameStatePayload object at 0x0000019EB5039FD0> 4 13
+playing competitive 18 76561198268849559 76561198268849559 over
+GameStateCode.ALIVE_END_ROUND
+Not a Duplicate
+1530995523 de_cbble live fortnite player T <game_state_payload.GameStatePayload object at 0x0000019EB503E080> <game_state_payload.GameStatePayload object at 0x0000019EB503ED30> 4 14
+playing competitive 18 76561198268849559 76561198268849559 over
+GameStateCode.INVALID
+1530995529 de_cbble live fortnite player T <game_state_payload.GameStatePayload object at 0x0000019EB50321D0> <game_state_payload.GameStatePayload object at 0x0000019EB503EC50> 4 14
+playing competitive 18 76561198268849559 76561198268849559 freezetime
+GameStateCode.INVALID
+1530995544 de_cbble live fortnite player T <game_state_payload.GameStatePayload object at 0x0000019EB5053390> <game_state_payload.GameStatePayload object at 0x0000019EB503E2E8> 4 14
+playing competitive 18 76561198268849559 76561198268849559 live
+GameStateCode.INVALID
+1530995576 de_cbble live fortnite player T <game_state_payload.GameStatePayload object at 0x0000019EB5071208> <game_state_payload.GameStatePayload object at 0x0000019EB5057080> 4 14
+playing competitive 18 76561198268849559 76561198268849559 live
+GameStateCode.INVALID
+1530995582 de_cbble live fortnite player T <game_state_payload.GameStatePayload object at 0x0000019EB50536D8> <game_state_payload.GameStatePayload object at 0x0000019EB5061710> 4 14
+playing competitive 18 76561198268849559 76561198268849559 live
+GameStateCode.INVALID
+1530995586 de_cbble live fortnite player T <game_state_payload.GameStatePayload object at 0x0000019EB5057240> <game_state_payload.GameStatePayload object at 0x0000019EB5053E80> 4 14
+playing competitive 18 76561198268849559 76561198268849559 live
+GameStateCode.DEAD_MID_ROUND
+Not a Duplicate
+1530995589 de_cbble live fortnite player T <game_state_payload.GameStatePayload object at 0x0000019EB503E208> <game_state_payload.GameStatePayload object at 0x0000019EB503E860> 4 14
+playing competitive 18 76561198268849559 76561198268849559 live
+GameStateCode.INVALID
+1530995590 de_cbble live GameStateCode.INVALID
+1530995619 de_cbble live GameStateCode.INVALID
+1530995620 de_cbble live fortnite player T <game_state_payload.GameStatePayload object at 0x0000019EB5025E10> <game_state_payload.GameStatePayload object at 0x0000019EB5039438> 5 14
+playing competitive 19 76561198268849559 76561198268849559 over
+GameStateCode.INVALID
+1530995626 de_cbble live fortnite player T <game_state_payload.GameStatePayload object at 0x0000019EB5025080> <game_state_payload.GameStatePayload object at 0x0000019EB50250B8> 5 14
+playing competitive 19 76561198268849559 76561198268849559 freezetime
+GameStateCode.INVALID
+1530995641 de_cbble live fortnite player T <game_state_payload.GameStatePayload object at 0x0000019EB502B898> <game_state_payload.GameStatePayload object at 0x0000019EB5025668> 5 14
+playing competitive 19 76561198268849559 76561198268849559 live
+GameStateCode.INVALID
+1530995670 de_cbble live fortnite player T <game_state_payload.GameStatePayload object at 0x0000019EB5071A58> <game_state_payload.GameStatePayload object at 0x0000019EB502B780> 5 14
+playing competitive 19 76561198268849559 76561198268849559 live
+GameStateCode.INVALID
+1530995673 de_cbble live fortnite player T <game_state_payload.GameStatePayload object at 0x0000019EB5071080> <game_state_payload.GameStatePayload object at 0x0000019EB5071B70> 5 14
+playing competitive 19 76561198268849559 76561198268849559 live
+GameStateCode.INVALID
+1530995682 de_cbble live fortnite player T <game_state_payload.GameStatePayload object at 0x0000019EB502B128> <game_state_payload.GameStatePayload object at 0x0000019EB502BF60> 5 14
+playing competitive 19 76561198268849559 76561198268849559 live
+GameStateCode.DEAD_MID_ROUND
+Not a Duplicate
+1530995686 de_cbble live Frylock T <game_state_payload.GameStatePayload object at 0x0000019EB5025F60> <game_state_payload.GameStatePayload object at 0x0000019EB5025240> 5 14
+playing competitive 19 76561198268849559 76561197978125886 live
+GameStateCode.INVALID
+1530995688 de_cbble live Frylock T <game_state_payload.GameStatePayload object at 0x0000019EB5039438> <game_state_payload.GameStatePayload object at 0x0000019EB5025780> 5 14
+playing competitive 19 76561198268849559 76561197978125886 live
+GameStateCode.INVALID
+1530995693 de_cbble live Frylock T <game_state_payload.GameStatePayload object at 0x0000019EB5019EF0> <game_state_payload.GameStatePayload object at 0x0000019EB50399E8> 5 14
+playing competitive 20 76561198268849559 76561197978125886 over
+GameStateCode.INVALID
+1530995693 de_cbble live fortnite player T <game_state_payload.GameStatePayload object at 0x0000019EB5019B38> <game_state_payload.GameStatePayload object at 0x0000019EB5039E10> 6 14
+playing competitive 20 76561198268849559 76561198268849559 over
+GameStateCode.INVALID
+1530995700 de_cbble live fortnite player T <game_state_payload.GameStatePayload object at 0x0000019EB503EEB8> <game_state_payload.GameStatePayload object at 0x0000019EB5019978> 6 14
+playing competitive 20 76561198268849559 76561198268849559 freezetime
+GameStateCode.INVALID
+1530995715 de_cbble live fortnite player T <game_state_payload.GameStatePayload object at 0x0000019EB5032080> <game_state_payload.GameStatePayload object at 0x0000019EB5019438> 6 14
+playing competitive 20 76561198268849559 76561198268849559 live
+GameStateCode.INVALID
+1530995746 de_cbble live fortnite player T <game_state_payload.GameStatePayload object at 0x0000019EB5057B00> <game_state_payload.GameStatePayload object at 0x0000019EB50329B0> 6 14
+playing competitive 20 76561198268849559 76561198268849559 live
+GameStateCode.INVALID
+1530995764 de_cbble live fortnite player T <game_state_payload.GameStatePayload object at 0x0000019EB503EEB8> <game_state_payload.GameStatePayload object at 0x0000019EB503E550> 6 14
+playing competitive 20 76561198268849559 76561198268849559 live
+GameStateCode.INVALID
+1530995823 de_cbble live fortnite player T <game_state_payload.GameStatePayload object at 0x0000019EB5019710> <game_state_payload.GameStatePayload object at 0x0000019EB503E630> 6 14
+playing competitive 20 76561198268849559 76561198268849559 live
+GameStateCode.INVALID
+1530995837 de_cbble live fortnite player T <game_state_payload.GameStatePayload object at 0x0000019EB502B6A0> <game_state_payload.GameStatePayload object at 0x0000019EB50191D0> 6 14
+playing competitive 20 76561198268849559 76561198268849559 live
+GameStateCode.DEAD_MID_ROUND
+Not a Duplicate
+1530995841 de_cbble live Frylock T <game_state_payload.GameStatePayload object at 0x0000019EB50254A8> <game_state_payload.GameStatePayload object at 0x0000019EB50257F0> 6 14
+textinput competitive 20 76561198268849559 76561197978125886 live
+GameStateCode.INVALID
+1530995848 de_cbble live Frylock T <game_state_payload.GameStatePayload object at 0x0000019EB4FED358> <game_state_payload.GameStatePayload object at 0x0000019EB5025978> 6 15
+playing competitive 21 76561198268849559 76561197978125886 over
+GameStateCode.INVALID
+1530995855 de_cbble live fortnite player T <game_state_payload.GameStatePayload object at 0x0000019EB4FFBF28> <game_state_payload.GameStatePayload object at 0x0000019EB5025748> 6 15
+playing competitive 21 76561198268849559 76561198268849559 freezetime
+GameStateCode.INVALID
+1530995870 de_cbble live fortnite player T <game_state_payload.GameStatePayload object at 0x0000019EB5032748> <game_state_payload.GameStatePayload object at 0x0000019EB4FFBFD0> 6 15
+playing competitive 21 76561198268849559 76561198268849559 live
+GameStateCode.INVALID
+1530995889 de_cbble live fortnite player T <game_state_payload.GameStatePayload object at 0x0000019EB5032C50> <game_state_payload.GameStatePayload object at 0x0000019EB5032C18> 6 15
+playing competitive 21 76561198268849559 76561198268849559 live
+GameStateCode.INVALID
+1530995920 de_cbble live fortnite player T <game_state_payload.GameStatePayload object at 0x0000019EB5025C88> <game_state_payload.GameStatePayload object at 0x0000019EB50254A8> 6 15
+playing competitive 22 76561198268849559 76561198268849559 over
+GameStateCode.ALIVE_END_ROUND
+Not a Duplicate
+1530995927 de_cbble live fortnite player T <game_state_payload.GameStatePayload object at 0x0000019EB502BB00> <game_state_payload.GameStatePayload object at 0x0000019EB502B358> 7 15
+playing competitive 22 76561198268849559 76561198268849559 freezetime
+GameStateCode.INVALID
+1530995942 de_cbble live fortnite player T <game_state_payload.GameStatePayload object at 0x0000019EB5019F60> <game_state_payload.GameStatePayload object at 0x0000019EB502BCF8> 7 15
+playing competitive 22 76561198268849559 76561198268849559 live
+GameStateCode.INVALID
+1530995987 de_cbble live fortnite player T <game_state_payload.GameStatePayload object at 0x0000019EB503EBE0> <game_state_payload.GameStatePayload object at 0x0000019EB5019780> 7 15
+playing competitive 22 76561198268849559 76561198268849559 live
+GameStateCode.INVALID
+1530995988 de_cbble gameover fortnite player T <game_state_payload.GameStatePayload object at 0x0000019EB503E9E8> <game_state_payload.GameStatePayload object at 0x0000019EB5039198> 7 15
+playing competitive 23 76561198268849559 76561198268849559 over
+GameStateCode.ALIVE_END_ROUND
+Not a Duplicate
+Match Data Sent; Rounds Reset
+1530995989 de_cbble gameover fortnite player T <game_state_payload.GameStatePayload object at 0x0000019EB503EEB8> <game_state_payload.GameStatePayload object at 0x0000019EB501E860> 7 16
+playing competitive 23 76561198268849559 76561198268849559 over
+GameStateCode.INVALID
+GameStateCode.INVALID
+---
+1530996168 de_train warmup fortnite player CT <game_state_payload.GameStatePayload object at 0x000001F650AAC748> <game_state_payload.GameStatePayload object at 0x000001F650AAC780> 0 0
+GameStateCode.INVALID
+1530996218 de_train warmup fortnite player CT <game_state_payload.GameStatePayload object at 0x000001F650AA9320> <game_state_payload.GameStatePayload object at 0x000001F650AAC550> 0 0
+GameStateCode.INVALID
+1530996232 de_train live fortnite player CT <game_state_payload.GameStatePayload object at 0x000001F650A8D710> <game_state_payload.GameStatePayload object at 0x000001F650AA9860> 0 0
+playing competitive 0 76561198268849559 76561198268849559 freezetime
+GameStateCode.INVALID
+1530996247 de_train live fortnite player CT <game_state_payload.GameStatePayload object at 0x000001F650AB5B70> <game_state_payload.GameStatePayload object at 0x000001F650A8D320> 0 0
+playing competitive 0 76561198268849559 76561198268849559 live
+GameStateCode.INVALID
+1530996275 de_train live fortnite player CT <game_state_payload.GameStatePayload object at 0x000001F650AB8E48> <game_state_payload.GameStatePayload object at 0x000001F650AB59B0> 0 0
+playing competitive 0 76561198268849559 76561198268849559 live
+GameStateCode.INVALID
+1530996277 de_train live fortnite player CT <game_state_payload.GameStatePayload object at 0x000001F650AC2748> <game_state_payload.GameStatePayload object at 0x000001F650AB8C18> 0 0
+playing competitive 0 76561198268849559 76561198268849559 live
+GameStateCode.DEAD_MID_ROUND
+Not a Duplicate
+1530996281 de_train live GameStateCode.INVALID
+1530996286 de_train live GameStateCode.INVALID
+1530996293 de_train live fortnite player CT <game_state_payload.GameStatePayload object at 0x000001F650A8D978> <game_state_payload.GameStatePayload object at 0x000001F650A5BA90> 1 0
+playing competitive 1 76561198268849559 76561198268849559 freezetime
+GameStateCode.INVALID
+1530996308 de_train live fortnite player CT <game_state_payload.GameStatePayload object at 0x000001F650AA9E48> <game_state_payload.GameStatePayload object at 0x000001F650A8D5F8> 1 0
+playing competitive 1 76561198268849559 76561198268849559 live
+GameStateCode.INVALID
+1530996337 de_train live fortnite player CT <game_state_payload.GameStatePayload object at 0x000001F650AC2518> <game_state_payload.GameStatePayload object at 0x000001F650AA9E80> 1 0
+playing competitive 2 76561198268849559 76561198268849559 over
+GameStateCode.ALIVE_END_ROUND
+Not a Duplicate
+1530996345 de_train live fortnite player CT <game_state_payload.GameStatePayload object at 0x000001F650ADE438> <game_state_payload.GameStatePayload object at 0x000001F650ADE470> 2 0
+playing competitive 2 76561198268849559 76561198268849559 freezetime
+GameStateCode.INVALID
+1530996359 de_train live fortnite player CT <game_state_payload.GameStatePayload object at 0x000001F650ADE5F8> <game_state_payload.GameStatePayload object at 0x000001F650ADE6A0> 2 0
+playing competitive 2 76561198268849559 76561198268849559 live
+GameStateCode.INVALID
+1530996388 de_train live fortnite player CT <game_state_payload.GameStatePayload object at 0x000001F650AAC9E8> <game_state_payload.GameStatePayload object at 0x000001F650ADEF60> 2 0
+playing competitive 3 76561198268849559 76561198268849559 over
+GameStateCode.ALIVE_END_ROUND
+Not a Duplicate
+1530996395 de_train live fortnite player CT <game_state_payload.GameStatePayload object at 0x000001F650AA9208> <game_state_payload.GameStatePayload object at 0x000001F650AA9E48> 3 0
+playing competitive 3 76561198268849559 76561198268849559 freezetime
+GameStateCode.INVALID
+1530996410 de_train live fortnite player CT <game_state_payload.GameStatePayload object at 0x000001F650A8D978> <game_state_payload.GameStatePayload object at 0x000001F650AA92B0> 3 0
+playing competitive 3 76561198268849559 76561198268849559 live
+GameStateCode.INVALID
+1530996454 de_train live fortnite player CT <game_state_payload.GameStatePayload object at 0x000001F650AB89E8> <game_state_payload.GameStatePayload object at 0x000001F650A8DB00> 3 0
+playing competitive 3 76561198268849559 76561198268849559 live
+GameStateCode.DEAD_MID_ROUND
+Not a Duplicate
+1530996460 de_train live Frylock CT <game_state_payload.GameStatePayload object at 0x000001F650A81EB8> <game_state_payload.GameStatePayload object at 0x000001F650A81FD0> 3 0
+playing competitive 3 76561198268849559 76561197978125886 live
+GameStateCode.INVALID
+1530996470 de_train live fortnite player CT <game_state_payload.GameStatePayload object at 0x000001F650A8DBA8> <game_state_payload.GameStatePayload object at 0x000001F650AB54E0> 4 0
+playing competitive 4 76561198268849559 76561198268849559 freezetime
+GameStateCode.INVALID
+1530996481 de_train live fortnite player CT <game_state_payload.GameStatePayload object at 0x000001F650AA9320> <game_state_payload.GameStatePayload object at 0x000001F650A8DB70> 4 0
+playing competitive 4 76561198268849559 76561198268849559 live
+GameStateCode.INVALID
+1530996532 de_train live fortnite player CT <game_state_payload.GameStatePayload object at 0x000001F650ADEA20> <game_state_payload.GameStatePayload object at 0x000001F650AA9B00> 4 0
+playing competitive 4 76561198268849559 76561198268849559 live
+GameStateCode.INVALID
+1530996534 de_train live fortnite player CT <game_state_payload.GameStatePayload object at 0x000001F650AE7748> <game_state_payload.GameStatePayload object at 0x000001F650ADEA90> 4 0
+playing competitive 4 76561198268849559 76561198268849559 live
+GameStateCode.INVALID
+1530996537 de_train live fortnite player CT <game_state_payload.GameStatePayload object at 0x000001F650AED128> <game_state_payload.GameStatePayload object at 0x000001F650AE7278> 4 0
+playing competitive 5 76561198268849559 76561198268849559 over
+GameStateCode.ALIVE_END_ROUND
+Not a Duplicate
+1530996544 de_train live fortnite player CT <game_state_payload.GameStatePayload object at 0x000001F650ADEA20> <game_state_payload.GameStatePayload object at 0x000001F650ADEE80> 5 0
+playing competitive 5 76561198268849559 76561198268849559 freezetime
+GameStateCode.INVALID
+1530996559 de_train live fortnite player CT <game_state_payload.GameStatePayload object at 0x000001F650AACCF8> <game_state_payload.GameStatePayload object at 0x000001F650ADE8D0> 5 0
+playing competitive 5 76561198268849559 76561198268849559 live
+GameStateCode.INVALID
+1530996597 de_train live fortnite player CT <game_state_payload.GameStatePayload object at 0x000001F650AA9710> <game_state_payload.GameStatePayload object at 0x000001F650AAC4A8> 5 0
+playing competitive 5 76561198268849559 76561198268849559 live
+GameStateCode.INVALID
+1530996609 de_train live fortnite player CT <game_state_payload.GameStatePayload object at 0x000001F650AB8C18> <game_state_payload.GameStatePayload object at 0x000001F650AA9278> 5 0
+playing competitive 5 76561198268849559 76561198268849559 live
+GameStateCode.INVALID
+1530996610 de_train live fortnite player CT <game_state_payload.GameStatePayload object at 0x000001F650AB56A0> <game_state_payload.GameStatePayload object at 0x000001F650A5BB00> 5 0
+playing competitive 6 76561198268849559 76561198268849559 over
+GameStateCode.ALIVE_END_ROUND
+Not a Duplicate
+1530996617 de_train live fortnite player CT <game_state_payload.GameStatePayload object at 0x000001F650AED908> <game_state_payload.GameStatePayload object at 0x000001F650AED8D0> 6 0
+playing competitive 6 76561198268849559 76561198268849559 freezetime
+GameStateCode.INVALID
+1530996632 de_train live fortnite player CT <game_state_payload.GameStatePayload object at 0x000001F650AFA780> <game_state_payload.GameStatePayload object at 0x000001F650AEDD30> 6 0
+playing competitive 6 76561198268849559 76561198268849559 live
+GameStateCode.INVALID
+1530996669 de_train live fortnite player CT <game_state_payload.GameStatePayload object at 0x000001F650AB8278> <game_state_payload.GameStatePayload object at 0x000001F650AB86A0> 6 0
+playing competitive 6 76561198268849559 76561198268849559 live
+GameStateCode.INVALID
+1530996670 de_train live fortnite player CT <game_state_payload.GameStatePayload object at 0x000001F650A8DF98> <game_state_payload.GameStatePayload object at 0x000001F650AB87B8> 6 0
+playing competitive 6 76561198268849559 76561198268849559 live
+GameStateCode.INVALID
+1530996679 de_train live fortnite player CT <game_state_payload.GameStatePayload object at 0x000001F650A8D940> <game_state_payload.GameStatePayload object at 0x000001F650A8DA90> 6 0
+playing competitive 6 76561198268849559 76561198268849559 live
+GameStateCode.INVALID
+1530996690 de_train live fortnite player CT <game_state_payload.GameStatePayload object at 0x000001F650AA90B8> <game_state_payload.GameStatePayload object at 0x000001F650A8DE80> 6 0
+playing competitive 7 76561198268849559 76561198268849559 over
+GameStateCode.ALIVE_END_ROUND
+Not a Duplicate
+1530996697 de_train live fortnite player CT <game_state_payload.GameStatePayload object at 0x000001F650AACAC8> <game_state_payload.GameStatePayload object at 0x000001F650AACB00> 7 0
+playing competitive 7 76561198268849559 76561198268849559 freezetime
+GameStateCode.INVALID
+1530996712 de_train live fortnite player CT <game_state_payload.GameStatePayload object at 0x000001F650AC2630> <game_state_payload.GameStatePayload object at 0x000001F650AACCF8> 7 0
+playing competitive 7 76561198268849559 76561198268849559 live
+GameStateCode.INVALID
+1530996746 de_train live fortnite player CT <game_state_payload.GameStatePayload object at 0x000001F650AFA7B8> <game_state_payload.GameStatePayload object at 0x000001F650AC2F28> 7 0
+playing competitive 7 76561198268849559 76561198268849559 live
+GameStateCode.INVALID
+1530996756 de_train live fortnite player CT <game_state_payload.GameStatePayload object at 0x000001F650ADECC0> <game_state_payload.GameStatePayload object at 0x000001F650AE79B0> 7 0
+playing competitive 7 76561198268849559 76561198268849559 live
+GameStateCode.INVALID
+1530996760 de_train live fortnite player CT <game_state_payload.GameStatePayload object at 0x000001F650AC2CF8> <game_state_payload.GameStatePayload object at 0x000001F650ADE5F8> 7 0
+playing competitive 7 76561198268849559 76561198268849559 live
+GameStateCode.INVALID
+1530996774 de_train live fortnite player CT <game_state_payload.GameStatePayload object at 0x000001F650AAC9B0> <game_state_payload.GameStatePayload object at 0x000001F650AC2160> 7 0
+playing competitive 8 76561198268849559 76561198268849559 over
+GameStateCode.ALIVE_END_ROUND
+Not a Duplicate
+1530996781 de_train live fortnite player CT <game_state_payload.GameStatePayload object at 0x000001F650AA9EB8> <game_state_payload.GameStatePayload object at 0x000001F650AA9550> 8 0
+playing competitive 8 76561198268849559 76561198268849559 freezetime
+GameStateCode.INVALID
+1530996796 de_train live fortnite player CT <game_state_payload.GameStatePayload object at 0x000001F650AB8A90> <game_state_payload.GameStatePayload object at 0x000001F650AA9D30> 8 0
+playing competitive 8 76561198268849559 76561198268849559 live
+GameStateCode.INVALID
+1530996814 de_train live fortnite player CT <game_state_payload.GameStatePayload object at 0x000001F650AB5748> <game_state_payload.GameStatePayload object at 0x000001F647BA1C88> 8 0
+playing competitive 8 76561198268849559 76561198268849559 live
+GameStateCode.INVALID
+1530996822 de_train live fortnite player CT <game_state_payload.GameStatePayload object at 0x000001F650AED6A0> <game_state_payload.GameStatePayload object at 0x000001F650AB5668> 8 0
+playing competitive 8 76561198268849559 76561198268849559 live
+GameStateCode.INVALID
+1530996825 de_train live fortnite player CT <game_state_payload.GameStatePayload object at 0x000001F650AED588> <game_state_payload.GameStatePayload object at 0x000001F650A81FD0> 8 0
+playing competitive 8 76561198268849559 76561198268849559 live
+GameStateCode.DEAD_MID_ROUND
+Not a Duplicate
+1530996827 de_train live fortnite player CT <game_state_payload.GameStatePayload object at 0x000001F650AB82B0> <game_state_payload.GameStatePayload object at 0x000001F650AB8208> 9 0
+playing competitive 9 76561198268849559 76561198268849559 over
+GameStateCode.ALIVE_END_ROUND
+Round Duplicate Not Inserted
+1530996829 de_train live Frylock CT <game_state_payload.GameStatePayload object at 0x000001F650AA9550> <game_state_payload.GameStatePayload object at 0x000001F650AB8E48> 9 0
+playing competitive 9 76561198268849559 76561197978125886 over
+GameStateCode.INVALID
+1530996834 de_train live fortnite player CT <game_state_payload.GameStatePayload object at 0x000001F650AA95C0> <game_state_payload.GameStatePayload object at 0x000001F650A8DB00> 9 0
+playing competitive 9 76561198268849559 76561198268849559 freezetime
+GameStateCode.INVALID
+1530996849 de_train live fortnite player CT <game_state_payload.GameStatePayload object at 0x000001F650AAC358> <game_state_payload.GameStatePayload object at 0x000001F650AA9630> 9 0
+playing competitive 9 76561198268849559 76561198268849559 live
+GameStateCode.INVALID
+1530996885 de_train live fortnite player CT <game_state_payload.GameStatePayload object at 0x000001F650ADED30> <game_state_payload.GameStatePayload object at 0x000001F650AAC1D0> 9 0
+playing competitive 9 76561198268849559 76561198268849559 live
+GameStateCode.INVALID
+1530996885 de_train live fortnite player CT <game_state_payload.GameStatePayload object at 0x000001F650AFA8D0> <game_state_payload.GameStatePayload object at 0x000001F650ADE860> 9 0
+playing competitive 9 76561198268849559 76561198268849559 live
+GameStateCode.INVALID
+1530996899 de_train live fortnite player CT <game_state_payload.GameStatePayload object at 0x000001F650AFE240> <game_state_payload.GameStatePayload object at 0x000001F650AE7D68> 9 0
+playing competitive 9 76561198268849559 76561198268849559 live
+GameStateCode.DEAD_MID_ROUND
+Not a Duplicate
+1530996900 de_train live fortnite player CT <game_state_payload.GameStatePayload object at 0x000001F650ADE630> <game_state_payload.GameStatePayload object at 0x000001F650ADEA20> 9 0
+playing competitive 9 76561198268849559 76561198268849559 live
+GameStateCode.INVALID
+1530996903 de_train live Frylock CT <game_state_payload.GameStatePayload object at 0x000001F650AC2390> <game_state_payload.GameStatePayload object at 0x000001F650ADED30> 9 0
+playing competitive 9 76561198268849559 76561197978125886 live
+GameStateCode.INVALID
+1530996908 de_train live Frylock CT <game_state_payload.GameStatePayload object at 0x000001F650AAC358> <game_state_payload.GameStatePayload object at 0x000001F650AC21D0> 10 0
+playing competitive 10 76561198268849559 76561197978125886 over
+GameStateCode.INVALID
+1530996915 de_train live fortnite player CT <game_state_payload.GameStatePayload object at 0x000001F650AA9278> <game_state_payload.GameStatePayload object at 0x000001F650AAC438> 10 0
+playing competitive 10 76561198268849559 76561198268849559 freezetime
+GameStateCode.INVALID
+1530996930 de_train live fortnite player CT <game_state_payload.GameStatePayload object at 0x000001F650A8DBE0> <game_state_payload.GameStatePayload object at 0x000001F650AA9438> 10 0
+playing competitive 10 76561198268849559 76561198268849559 live
+GameStateCode.INVALID
+1530996953 de_train live fortnite player CT <game_state_payload.GameStatePayload object at 0x000001F650AEDA58> <game_state_payload.GameStatePayload object at 0x000001F650A8DB00> 10 0
+playing competitive 10 76561198268849559 76561198268849559 live
+GameStateCode.INVALID
+1530997004 de_train live fortnite player CT <game_state_payload.GameStatePayload object at 0x000001F650B02940> <game_state_payload.GameStatePayload object at 0x000001F650AED9B0> 10 0
+playing competitive 11 76561198268849559 76561198268849559 over
+GameStateCode.ALIVE_END_ROUND
+Not a Duplicate
+1530997011 de_train live fortnite player CT <game_state_payload.GameStatePayload object at 0x000001F650AED898> <game_state_payload.GameStatePayload object at 0x000001F650AED160> 11 0
+playing competitive 11 76561198268849559 76561198268849559 freezetime
+GameStateCode.INVALID
+1530997026 de_train live fortnite player CT <game_state_payload.GameStatePayload object at 0x000001F650A8DF98> <game_state_payload.GameStatePayload object at 0x000001F650AED2B0> 11 0
+playing competitive 11 76561198268849559 76561198268849559 live
+GameStateCode.INVALID
+1530997043 de_train live fortnite player CT <game_state_payload.GameStatePayload object at 0x000001F650AA90F0> <game_state_payload.GameStatePayload object at 0x000001F650A8D710> 11 0
+playing competitive 11 76561198268849559 76561198268849559 live
+GameStateCode.INVALID
+1530997067 de_train live fortnite player CT <game_state_payload.GameStatePayload object at 0x000001F650AAC710> <game_state_payload.GameStatePayload object at 0x000001F650AA9F98> 11 0
+playing competitive 11 76561198268849559 76561198268849559 live
+GameStateCode.DEAD_MID_ROUND
+Not a Duplicate
+1530997069 de_train live fortnite player CT <game_state_payload.GameStatePayload object at 0x000001F650AC2470> <game_state_payload.GameStatePayload object at 0x000001F650AC2240> 11 0
+playing competitive 11 76561198268849559 76561198268849559 live
+GameStateCode.INVALID
+1530997071 de_train live Frylock CT <game_state_payload.GameStatePayload object at 0x000001F650AFAD30> <game_state_payload.GameStatePayload object at 0x000001F650AC2DD8> 11 0
+playing competitive 11 76561198268849559 76561197978125886 live
+GameStateCode.INVALID
+1530997083 de_train live Frylock CT <game_state_payload.GameStatePayload object at 0x000001F650ADEC50> <game_state_payload.GameStatePayload object at 0x000001F650AFAA90> 11 0
+playing competitive 11 76561198268849559 76561197978125886 live
+GameStateCode.INVALID
+1530997105 de_train live Frylock CT <game_state_payload.GameStatePayload object at 0x000001F650AA9E80> <game_state_payload.GameStatePayload object at 0x000001F650AA9B00> 11 0
+playing competitive 12 76561198268849559 76561197978125886 over
+GameStateCode.INVALID
+1530997106 de_train live fortnite player CT <game_state_payload.GameStatePayload object at 0x000001F650AFE860> <game_state_payload.GameStatePayload object at 0x000001F650AA90B8> 11 1
+playing competitive 12 76561198268849559 76561198268849559 over
+GameStateCode.INVALID
+1530997112 de_train live fortnite player CT <game_state_payload.GameStatePayload object at 0x000001F650AFE320> <game_state_payload.GameStatePayload object at 0x000001F650AFE2E8> 11 1
+playing competitive 12 76561198268849559 76561198268849559 freezetime
+GameStateCode.INVALID
+1530997127 de_train live fortnite player CT <game_state_payload.GameStatePayload object at 0x000001F650AFA470> <game_state_payload.GameStatePayload object at 0x000001F650AFE518> 11 1
+playing competitive 12 76561198268849559 76561198268849559 live
+GameStateCode.INVALID
+1530997163 de_train live fortnite player CT <game_state_payload.GameStatePayload object at 0x000001F650AE77F0> <game_state_payload.GameStatePayload object at 0x000001F650AFA588> 11 1
+playing competitive 12 76561198268849559 76561198268849559 live
+GameStateCode.INVALID
+1530997164 de_train live fortnite player CT <game_state_payload.GameStatePayload object at 0x000001F650AE7358> <game_state_payload.GameStatePayload object at 0x000001F650AE7320> 11 1
+playing competitive 12 76561198268849559 76561198268849559 live
+GameStateCode.INVALID
+1530997167 de_train live fortnite player CT <game_state_payload.GameStatePayload object at 0x000001F650AC25C0> <game_state_payload.GameStatePayload object at 0x000001F650AE74A8> 11 1
+playing competitive 12 76561198268849559 76561198268849559 live
+GameStateCode.DEAD_MID_ROUND
+Not a Duplicate
+1530997171 de_train live Frylock CT <game_state_payload.GameStatePayload object at 0x000001F650AB8BE0> <game_state_payload.GameStatePayload object at 0x000001F650AB8E48> 11 1
+playing competitive 12 76561198268849559 76561197978125886 live
+GameStateCode.INVALID
+1530997185 de_train live Meatwad CT <game_state_payload.GameStatePayload object at 0x000001F650AE7AC8> <game_state_payload.GameStatePayload object at 0x000001F650AE7438> 11 1
+playing competitive 12 76561198268849559 76561198065772791 live
+GameStateCode.INVALID
+1530997188 de_train live GameStateCode.INVALID
+1530997189 de_train live Chase CT <game_state_payload.GameStatePayload object at 0x000001F650AED748> <game_state_payload.GameStatePayload object at 0x000001F650AE7828> 11 1
+playing competitive 12 76561198268849559 76561198043773225 live
+GameStateCode.INVALID
+1530997190 de_train live Frylock CT <game_state_payload.GameStatePayload object at 0x000001F650AEDD30> <game_state_payload.GameStatePayload object at 0x000001F650AED9E8> 11 1
+playing competitive 12 76561198268849559 76561197978125886 live
+GameStateCode.INVALID
+1530997191 de_train live Meatwad CT <game_state_payload.GameStatePayload object at 0x000001F650AFA438> <game_state_payload.GameStatePayload object at 0x000001F650AEDCC0> 11 1
+playing competitive 12 76561198268849559 76561198065772791 live
+GameStateCode.INVALID
+1530997192 de_train live Meatwad CT <game_state_payload.GameStatePayload object at 0x000001F650AFEA20> <game_state_payload.GameStatePayload object at 0x000001F650AFAD30> 11 1
+playing competitive 12 76561198268849559 76561198065772791 live
+GameStateCode.INVALID
+1530997193 de_train live Frylock CT <game_state_payload.GameStatePayload object at 0x000001F650AFE320> <game_state_payload.GameStatePayload object at 0x000001F650AFAE48> 11 1
+playing competitive 12 76561198268849559 76561197978125886 live
+GameStateCode.INVALID
+1530997200 de_train live GameStateCode.INVALID
+1530997208 de_train live GameStateCode.INVALID
+1530997213 de_train live Chase CT <game_state_payload.GameStatePayload object at 0x000001F650A8D080> <game_state_payload.GameStatePayload object at 0x000001F650AA93C8> 12 1
+playing competitive 13 76561198268849559 76561198043773225 over
+GameStateCode.INVALID
+1530997215 de_train live GameStateCode.INVALID
+1530997216 de_train live fortnite player CT <game_state_payload.GameStatePayload object at 0x000001F650AB8860> <game_state_payload.GameStatePayload object at 0x000001F650AB8B70> 12 1
+playing competitive 13 76561198268849559 76561198268849559 freezetime
+GameStateCode.INVALID
+1530997230 de_train live fortnite player CT <game_state_payload.GameStatePayload object at 0x000001F650AB5AC8> <game_state_payload.GameStatePayload object at 0x000001F650AB8B38> 12 1
+playing competitive 13 76561198268849559 76561198268849559 live
+GameStateCode.INVALID
+1530997244 de_train live fortnite player CT <game_state_payload.GameStatePayload object at 0x000001F650AAC668> <game_state_payload.GameStatePayload object at 0x000001F650AB55F8> 12 1
+playing competitive 13 76561198268849559 76561198268849559 live
+GameStateCode.INVALID
+1530997261 de_train live fortnite player CT <game_state_payload.GameStatePayload object at 0x000001F650ADEAC8> <game_state_payload.GameStatePayload object at 0x000001F650AACE80> 12 1
+playing competitive 13 76561198268849559 76561198268849559 live
+GameStateCode.INVALID
+1530997293 de_train live fortnite player CT <game_state_payload.GameStatePayload object at 0x000001F650A8D828> <game_state_payload.GameStatePayload object at 0x000001F650A8D748> 12 1
+playing competitive 14 76561198268849559 76561198268849559 over
+GameStateCode.ALIVE_END_ROUND
+Not a Duplicate
+1530997300 de_train live fortnite player CT <game_state_payload.GameStatePayload object at 0x000001F650AA9160> <game_state_payload.GameStatePayload object at 0x000001F650AA9668> 13 1
+playing competitive 14 76561198268849559 76561198268849559 freezetime
+GameStateCode.INVALID
+1530997315 de_train live fortnite player CT <game_state_payload.GameStatePayload object at 0x000001F650AFE550> <game_state_payload.GameStatePayload object at 0x000001F650AA9390> 13 1
+playing competitive 14 76561198268849559 76561198268849559 live
+GameStateCode.INVALID
+1530997349 de_train live fortnite player CT <game_state_payload.GameStatePayload object at 0x000001F650AED390> <game_state_payload.GameStatePayload object at 0x000001F650AFE6A0> 13 1
+playing competitive 14 76561198268849559 76561198268849559 live
+GameStateCode.INVALID
+1530997380 de_train intermission fortnite player CT <game_state_payload.GameStatePayload object at 0x000001F650AC2128> <game_state_payload.GameStatePayload object at 0x000001F650AEDF28> 13 1
+playing competitive 15 76561198268849559 76561198268849559 over
+GameStateCode.ALIVE_END_ROUND
+Not a Duplicate
+1530997395 de_train live fortnite player T <game_state_payload.GameStatePayload object at 0x000001F650AFAB00> <game_state_payload.GameStatePayload object at 0x000001F650AFAC50> 14 1
+playing competitive 15 76561198268849559 76561198268849559 freezetime
+GameStateCode.INVALID

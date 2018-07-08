@@ -1,0 +1,4 @@
+pandas>=0.23.3
+requests>=2.19.1
+Flask>=1.0.2
+cx_Freeze>=5.1.1
