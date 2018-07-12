@@ -1,4 +1,5 @@
 import requests
+import time
 
 import pandas as pd
 
@@ -32,12 +33,22 @@ def check_prev_entries(game_data, round_db):
         if player_state.round_kills > 0 and last_entry_row['Kills'] == match_stats.kills:
             return True
 
-        return last_entry_row['Player Team'] == payload.player.team and \
+        first_pass = last_entry_row['Player Team'] == payload.player.team and \
                last_entry_row['Kills'] == match_stats.kills and \
                last_entry_row['Assists'] == match_stats.assists and \
                last_entry_row['Deaths'] == match_stats.deaths and \
                last_entry_row['Round Kills'] == player_state.round_kills and \
                last_entry_row['Round HS Kills'] == player_state.round_killhs
+
+        second_pass = last_entry_row['Player Team'] == payload.player.team and \
+               last_entry_row['Kills'] == match_stats.kills and \
+               last_entry_row['Deaths'] == match_stats.deaths and \
+               last_entry_row['Round Kills'] == player_state.round_kills and \
+               last_entry_row['Round HS Kills'] == player_state.round_killhs and \
+               last_entry_row['CT_Score'] == payload.map.team_ct.score and \
+               last_entry_row['T_Score'] == payload.map.team_t.score
+
+        return True if first_pass or second_pass else False
 
     last_entry = pd.read_sql('SELECT * FROM per_round_data ORDER BY Time DESC LIMIT 1;', round_db)
 
@@ -88,14 +99,24 @@ def send_match_to_remote(round_db, api_address):
 
     match_data = MatchAnalysis(data_for_match_df)
     del match_data.data_frame
-    send_match_request = requests.post(api_address, json=match_data.__dict__)
+    req_success = False
+
+    for i in range(3):
+        time.sleep(2)
+        try:
+            send_match_request = requests.post(api_address, json=match_data.__dict__, timeout=5)
+            if send_match_request.status_code == 202:
+                req_success = True
+                break
+        except requests.exceptions.RequestException as e:
+            print("Requests Exception: ", e)
 
     # checking if request was successful
-    if send_match_request.status_code == 202:  # CS-Py's API should send 202: Accepted as response code upon success.
+    if req_success:  # CS-Py's API should send 202: Accepted as response code upon success.
         # TODO: Temporarily removing auto-wipe of round_data table
         # clear per_round_data table
         # round_db.cursor().execute('DELETE FROM per_round_data;')
         # round_db.commit()
         print("Match Data Sent; Rounds Reset")
     else:
-        print("API Request Failed. Not Clearing Round Data. Code: " + str(send_match_request.status_code))
+        print("API Request Failed. Not Clearing Round Data.")

@@ -110,6 +110,7 @@ def gamestate_handler():
             if check_prev_entries(game_data, round_db):  # checks for time duplicate entries.
                 insert_round_data(game_data, round_db)
             if game_data.map.phase == 'gameover':  # automatic reset if player was alive by end of game.
+                print("GameOver")
                 send_match_to_remote(round_db, API_ADDRESS)
         round_db.close()
         return 'Request Received'
