@@ -33,22 +33,30 @@ def check_prev_entries(game_data, round_db):
         if player_state.round_kills > 0 and last_entry_row['Kills'] == match_stats.kills:
             return True
 
-        first_pass = last_entry_row['Player Team'] == payload.player.team and \
+        # TODO: Temp removal
+        # first_pass = last_entry_row['Player Team'] == payload.player.team and \
+        #        last_entry_row['Kills'] == match_stats.kills and \
+        #        last_entry_row['Assists'] == match_stats.assists and \
+        #        last_entry_row['Deaths'] == match_stats.deaths and \
+        #        last_entry_row['Round Kills'] == player_state.round_kills and \
+        #        last_entry_row['Round HS Kills'] == player_state.round_killhs
+        #
+        # second_pass = last_entry_row['Player Team'] == payload.player.team and \
+        #        last_entry_row['Kills'] == match_stats.kills and \
+        #        last_entry_row['Deaths'] == match_stats.deaths and \
+        #        last_entry_row['Round Kills'] == player_state.round_kills and \
+        #        last_entry_row['Round HS Kills'] == player_state.round_killhs and \
+        #        last_entry_row['CT_Score'] == payload.map.team_ct.score and \
+        #        last_entry_row['T_Score'] == payload.map.team_t.score
+        #
+        # return True if first_pass or second_pass else False
+
+        return last_entry_row['Player Team'] == payload.player.team and \
                last_entry_row['Kills'] == match_stats.kills and \
                last_entry_row['Assists'] == match_stats.assists and \
                last_entry_row['Deaths'] == match_stats.deaths and \
                last_entry_row['Round Kills'] == player_state.round_kills and \
                last_entry_row['Round HS Kills'] == player_state.round_killhs
-
-        second_pass = last_entry_row['Player Team'] == payload.player.team and \
-               last_entry_row['Kills'] == match_stats.kills and \
-               last_entry_row['Deaths'] == match_stats.deaths and \
-               last_entry_row['Round Kills'] == player_state.round_kills and \
-               last_entry_row['Round HS Kills'] == player_state.round_killhs and \
-               last_entry_row['CT_Score'] == payload.map.team_ct.score and \
-               last_entry_row['T_Score'] == payload.map.team_t.score
-
-        return True if first_pass or second_pass else False
 
     last_entry = pd.read_sql('SELECT * FROM per_round_data ORDER BY Time DESC LIMIT 1;', round_db)
 
