@@ -5,7 +5,7 @@ from flask import Flask, request, render_template
 from flask_restful import Resource, Api
 
 from sql_db_manager import does_user_exist, add_new_user, update_existing_user, is_duplicate_match, insert_match_data, \
-                           server_sql_setup, load_user_matches_to_dict
+                           server_sql_setup, load_matches_from_sql
 from user_data_payload import UserDataPayload
 
 cs_py_server = Flask(__name__, template_folder='../templates', static_folder='../static')
@@ -29,7 +29,6 @@ def add_header(response):
 
 # ---------------------------
 
-
 # API classes and functions
 
 
@@ -39,7 +38,8 @@ class FrontEndDataApi(Resource):
         sql_db = sqlite3.connect(cs_py_server.config['DATABASE'])
 
         if does_user_exist(user_steamid, sql_db):
-            all_user_matches = load_user_matches_to_dict(int(user_steamid), sql_db)
+            # format is a list of dictionaries
+            all_user_matches = load_matches_from_sql(int(user_steamid), sql_db)
             sql_db.close()
             return all_user_matches
         else:

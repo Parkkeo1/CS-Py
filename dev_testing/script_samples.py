@@ -1,12 +1,11 @@
 # standalone helper script, used for testing
 
+import sys
 import json
 import requests
 import sqlite3
-
+from pprint import pprint
 import pandas as pd
-
-from match_analysis import MatchAnalysis
 
 # # testing with round_data json file instead of match_data
 # with open('dead_midround_data.json') as json_file:
@@ -21,22 +20,22 @@ from match_analysis import MatchAnalysis
 # match_data = MatchAnalysis(data_for_match_df)
 # del match_data.data_frame
 # print(match_data.__dict__)
-#
-# r1 = requests.post('http://127.0.0.1:5001/api/data_receiver', json=data)
-# print(r1.status_code)
-# print(r1.headers)
-# print(r1.text)
-#
-# r2 = requests.post('http://127.0.0.1:5001/api/data_receiver', json=match_data.__dict__)
-# print(r2.status_code)
-# print(r2.headers)
-# print(r2.text)
 
-from enum import Enum
+sys.stdout = open('testing_log.txt', 'a')
+print('\n')
+
+# valid user 1
+r1 = requests.get('http://127.0.0.1:5001/api/user_data/76561198268849559')
+pprint(r1.json())
+
+# valid user 2
+r2 = requests.get('http://127.0.0.1:5001/api/user_data/76561198158189084')
+pprint(r2.json())
+
+# invalid user
+r3 = requests.get('http://127.0.0.1:5001/api/user_data/12345')
+pprint(r3.json())
 
 
-class GameStateCode(Enum):
-    INVALID = -1
-    ENDGAME_DIFF_PLAYER = 0
-    ALIVE_END_ROUND = 1
-    DEAD_MID_ROUND = 2
+
+

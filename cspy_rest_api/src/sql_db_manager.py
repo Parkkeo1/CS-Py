@@ -116,11 +116,8 @@ def insert_match_data(payload, sql_db):
 
 
 # Gets matches of given user as SQL query, loads data into Pandas dataframe, then returns dataframe as list of dicts.
-def load_user_matches_to_dict(user_steam_id, sql_db):
+def load_matches_from_sql(user_steam_id, sql_db):
     get_user_matches_sql = '''SELECT * from all_matches WHERE User_SteamID == ?'''
     user_matches_df = pd.read_sql(get_user_matches_sql, sql_db, params=(user_steam_id,))
-    user_matches_dict = user_matches_df.to_dict(orient='index')
-
-    user_matches_dict['user_id'] = user_steam_id
-    user_matches_dict['match_count'] = user_matches_df.shape[0]
-    return user_matches_dict
+    user_matches_list = user_matches_df.to_dict(orient='records')
+    return user_matches_list
