@@ -1,3 +1,14 @@
+import pandas as pd
+
+pd.set_option('display.max_rows', 500)
+pd.set_option('display.max_columns', 500)
+pd.set_option('display.width', 1000)
+
+# ---------------------------
+
+# Functions for handling POST requests
+
+
 # makes sure required tables exist; if not, create them
 def server_sql_setup(sql_db):
     create_users_table_sql = '''CREATE TABLE IF NOT EXISTS all_users (User_SteamID INTEGER, "Match Count" INTEGER)'''
@@ -97,3 +108,19 @@ def insert_match_data(payload, sql_db):
     all_matches_cursor.execute(insert_user_data_sql, new_match_data)
     sql_db.commit()
     print("New Match Data Inserted For User: %s" % payload.steamid)
+
+
+# ---------------------------
+
+# Functions for handling GET requests
+
+
+# Gets matches of given user as SQL query, loads data into Pandas dataframe, then returns dataframe as list of dicts.
+def load_user_matches_to_dict(user_steam_id, sql_db):
+    get_user_matches_sql = '''SELECT * from all_matches WHERE User_SteamID == ?'''
+    user_matches_df = pd.read_sql(get_user_matches_sql, sql_db, params=(user_steam_id,))
+    user_matches_dict = user_matches_df.to_dict(orient='index')
+
+    user_matches_dict['user_id'] = user_steam_id
+    user_matches_dict['match_count'] = user_matches_df.shape[0]
+    return user_matches_dict

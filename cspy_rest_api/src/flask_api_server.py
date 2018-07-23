@@ -4,7 +4,8 @@ import sqlite3
 from flask import Flask, request, render_template
 from flask_restful import Resource, Api
 
-from sql_db_manager import does_user_exist, add_new_user, update_existing_user, is_duplicate_match, insert_match_data, server_sql_setup
+from sql_db_manager import does_user_exist, add_new_user, update_existing_user, is_duplicate_match, insert_match_data, \
+                           server_sql_setup, load_user_matches_to_dict
 from user_data_payload import UserDataPayload
 
 cs_py_server = Flask(__name__, template_folder='../templates', static_folder='../static')
@@ -32,10 +33,18 @@ def add_header(response):
 # API classes and functions
 
 
-# for the future frontend website/webapp on EWS for CS-Py that will display to users their results
+# for the future frontend website/web app on EWS for CS-Py that will display to users their results
 class FrontEndDataApi(Resource):
     def get(self, user_steamid):
-        return user_steamid
+        sql_db = sqlite3.connect(cs_py_server.config['DATABASE'])
+
+        if does_user_exist(user_steamid, sql_db):
+            all_user_matches = load_user_matches_to_dict(int(user_steamid), sql_db)
+            sql_db.close()
+            return all_user_matches
+        else:
+            sql_db.close()
+            return 'User Has No Saved Matches', 404
 
 
 # for receiving match data from user clients
@@ -64,7 +73,7 @@ class ReceiveDataApi(Resource):
 
 
 cs_py_rest_api.add_resource(ReceiveDataApi, '/api/data_receiver')
-# cs_py_rest_api.add_resource(FrontEndDataApi, '/api/results/<string:user_steamid>')
+cs_py_rest_api.add_resource(FrontEndDataApi, '/api/user_data/<string:user_steamid>')
 
 # TODO For deployment, use PythonAnywhere.
 if __name__ == '__main__':
