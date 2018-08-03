@@ -10,7 +10,7 @@ from sql_db_manager import does_user_exist, add_new_user, update_existing_user, 
 from user_data_payload import UserDataPayload
 
 cs_py_server = Flask(__name__, template_folder='../templates', static_folder='../static')
-cors = CORS(cs_py_server, resources={r'/api/user_data/*': {'origins': ''*''}})
+cors = CORS(cs_py_server, resources={r'/api/user_data/*': {'origins': '*'}})
 
 cs_py_rest_api = Api(cs_py_server)
 cs_py_server.config['DATABASE'] = os.path.join(cs_py_server.root_path, '..', 'users_and_matches.db')
