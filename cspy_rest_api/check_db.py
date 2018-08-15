@@ -13,3 +13,8 @@ all_users_df = pd.read_sql('SELECT * FROM all_users;', conn)
 print(all_users_df, file=open('all_data.txt', 'w'))
 print('\n', file=open('all_data.txt', 'a'))
 print(all_matches_df, file=open('all_data.txt', 'a'))
+
+# Deletes Last Entered Entry
+# cur = conn.cursor()
+# cur.execute('DELETE FROM all_matches WHERE Match_ID = (SELECT MAX(Match_ID) FROM all_matches)')
+# conn.commit()
