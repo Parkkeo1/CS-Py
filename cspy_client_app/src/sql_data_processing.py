@@ -31,9 +31,11 @@ def check_prev_entries(game_data, round_db):
         if player_state.round_kills > 0 and last_entry_row['Kills'] == match_stats.kills:
             return True
 
+        # assists cause duplicates (+1 to assists in the second entry while everything else is same)
         return last_entry_row['Player Team'] == payload.player.team and \
+               last_entry_row['CT_Score'] == payload.map.team_ct.score and \
+               last_entry_row['T_Score'] == payload.map.team_t.score and \
                last_entry_row['Kills'] == match_stats.kills and \
-               last_entry_row['Assists'] == match_stats.assists and \
                last_entry_row['Deaths'] == match_stats.deaths and \
                last_entry_row['Round Kills'] == player_state.round_kills and \
                last_entry_row['Round HS Kills'] == player_state.round_killhs
