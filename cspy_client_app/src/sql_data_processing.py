@@ -74,6 +74,7 @@ def check_prev_entries(game_data, round_db):
         #
         # return True if first_pass or second_pass else False
 
+    server_log = open('../logs/server_log.txt', 'a')
     last_entry = pd.read_sql('SELECT * FROM per_round_data ORDER BY Time DESC LIMIT 1;', round_db)
 
     if last_entry.shape[0] != 0:
@@ -81,14 +82,16 @@ def check_prev_entries(game_data, round_db):
             sql_delete = 'DELETE FROM per_round_data WHERE Time = (SELECT MAX(Time) FROM per_round_data);'
             round_db.cursor().execute(sql_delete)
             round_db.commit()
-            print("Time Duplicate Replaced")
+            server_log.write('Time Duplicate Replaced\n')
+            server_log.close()
             return True
 
         # 2->1
         if game_data.gamestate_code.value == 1:  # Checking for duplicate combo of midround death + endround payloads
             if last_entry.iloc[0]['GS Code'] == 2:
                 if is_endround_duplicate(last_entry.iloc[0], game_data):
-                    print("Round Duplicate Not Inserted")
+                    server_log.write('Round Duplicate Not Inserted\n')
+                    server_log.close()
                     return False  # do not insert a duplicate.
 
         # 2->2
@@ -96,10 +99,11 @@ def check_prev_entries(game_data, round_db):
             if last_entry.iloc[0]['GS Code'] == 2:
                 # TODO: Tentative
                 if is_midround_duplicate(last_entry.iloc[0], game_data):
-                    print("Round Duplicate Not Inserted")
+                    server_log.write('Round Duplicate Not Inserted\n')
+                    server_log.close()
                     return False  # do not insert a duplicate.
 
-    print("Not a Duplicate")
+    server_log.close()
     return True
 
 
@@ -125,9 +129,12 @@ def insert_round_data(round_data, round_db):
 
 # clears per_round_data table to indicate end of game
 def send_match_to_remote(round_db, api_address):
+    server_log = open('../logs/server_log.txt', 'a')
+
     # parse current per_round_data into dataframe
     data_for_match_df = pd.read_sql('SELECT * FROM per_round_data;', round_db)
     if data_for_match_df.empty or data_for_match_df.shape[0] == 0:
+        server_log.close()
         return  # cancel if there's no data to analyze or send
 
     match_data = MatchAnalysis(data_for_match_df)
@@ -142,7 +149,7 @@ def send_match_to_remote(round_db, api_address):
                 req_success = True
                 break
         except requests.exceptions.RequestException as e:
-            print("Requests Exception: ", e)
+            server_log.write('Requests Exception: %s\n' % e)
 
     # checking if request was successful
     if req_success:  # CS-Py's API should send 202: Accepted as response code upon success.
@@ -150,6 +157,7 @@ def send_match_to_remote(round_db, api_address):
         # clear per_round_data table
         # round_db.cursor().execute('DELETE FROM per_round_data;')
         # round_db.commit()
-        print("Match Data Sent; Rounds Reset")
+        server_log.write('Match Data Sent; Rounds Reset\n---\n\n')
     else:
-        print("API Request Failed. Not Clearing Round Data.")
+        server_log.write('API Request Failed. Not Clearing Round Data\n--\n\n')
+    server_log.close()

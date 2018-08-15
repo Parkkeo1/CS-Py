@@ -60,9 +60,10 @@ def setup_gamestate_cfg():
         steam_key = winreg.CreateKey(winreg.HKEY_CURRENT_USER, "Software\Valve\Steam")
         cfg_destination = winreg.QueryValueEx(steam_key, "SteamPath")[0] + GS_CFG_DEST_PATH
         shutil.copyfile(GS_CFG_SRC_PATH, cfg_destination)
-        print('Auto CFG File Passed')
+        # print('Auto CFG File Passed')
     except (OSError, shutil.SameFileError):
-        print('Auto CFG File Failed')
+        # print('Auto CFG File Failed')
+        return
 
 # ---------------------------
 
@@ -101,8 +102,6 @@ def gamestate_handler():
     if request.is_json and cs_py_client.config['STATE']:
         round_db = get_db()
         game_data = GameStatePayload(copy.deepcopy(request.get_json()))
-        print(game_data.gamestate_code)
-
         json_log = open('../logs/rounds_json.txt', 'a')
 
         if game_data.gamestate_code == GameStateCode.INVALID:
@@ -121,7 +120,6 @@ def gamestate_handler():
 
                 insert_round_data(game_data, round_db)
             if game_data.map.phase == 'gameover':  # automatic reset if player was alive by end of game.
-                print("Automatic Reset; player was alive at end of game")
                 json_log.write('----\n\n')
 
                 send_match_to_remote(round_db, API_ADDRESS)
@@ -148,10 +146,6 @@ if __name__ == "__main__":
     sql_db = sqlite3.connect(cs_py_client.config['DATABASE'])
     init_table_if_not_exists(sql_db)
     setup_gamestate_cfg()
-
-    # redirecting stdout for logging purposes
-    sys.stdout = open('../logs/server_log.txt', 'a')
-    print('---')
 
     # auto-opens browser window to CS-Py frontend
     webbrowser.open_new('http://127.0.0.1:5000')
