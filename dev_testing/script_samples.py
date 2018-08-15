@@ -21,20 +21,23 @@ import pandas as pd
 # del match_data.data_frame
 # print(match_data.__dict__)
 
-sys.stdout = open('testing_log.txt', 'a')
-print('\n')
+# sys.stdout = open('testing_log.txt', 'a')
+# print('\n')
+#
+# # valid user 1
+# r1 = requests.get('http://127.0.0.1:5001/api/user_data/76561198268849559')
+# pprint(r1.json())
+#
+# # valid user 2
+# r2 = requests.get('http://127.0.0.1:5001/api/user_data/76561198158189084')
+# pprint(r2.json())
+#
+# # invalid user
+# r3 = requests.get('http://127.0.0.1:5001/api/user_data/12345')
+# pprint(r3.json())
 
-# valid user 1
-r1 = requests.get('http://127.0.0.1:5001/api/user_data/76561198268849559')
-pprint(r1.json())
-
-# valid user 2
-r2 = requests.get('http://127.0.0.1:5001/api/user_data/76561198158189084')
-pprint(r2.json())
-
-# invalid user
-r3 = requests.get('http://127.0.0.1:5001/api/user_data/12345')
-pprint(r3.json())
+d = json.loads('{"provider": {"name": "Counter-Strike: Global Offensive", "appid": 730, "version": 13647, "steamid": "76561198268849559", "timestamp": 1534361906}, "map": {"mode": "competitive", "name": "de_overpass", "phase": "gameover", "round": 26, "team_ct": {"score": 15, "timeouts_remaining": 1, "matches_won_this_series": 0}, "team_t": {"score": 10, "timeouts_remaining": 1, "matches_won_this_series": 0}, "num_matches_to_win_series": 0, "current_spectators": 0, "souvenirs_total": 0}, "round": {"phase": "over", "win_team": "CT", "bomb": "defused"}, "player": {"steamid": "76561198268849559", "name": "post office malone", "observer_slot": 6, "team": "CT", "activity": "playing", "state": {"health": 100, "armor": 100, "helmet": false, "flashed": 0, "smoked": 0, "burning": 0, "money": 4550, "round_kills": 2, "round_killhs": 0, "equip_value": 3550}, "match_stats": {"kills": 29, "assists": 8, "deaths": 16, "mvps": 6, "score": 79}}, "previously": {"map": {"phase": "live", "round": 25}, "round": {"phase": "live", "bomb": "planted"}, "player": {"observer_slot": 5, "state": {"money": 750}, "match_stats": {"mvps": 5, "score": 77}}}, "added": {"round": {"win_team": true}}}')
+r = requests.post('http://127.0.0.1:5000/GS', json=d)
 
 
 
