@@ -19,37 +19,17 @@ def init_table_if_not_exists(sql_db):
 
     sql_db.cursor().execute(create_round_table_sql)
     sql_db.commit()
-    print("SQL Table Check Passed")
 
 
 # checks previous entries in database to make sure there are no duplicates.
 def check_prev_entries(game_data, round_db):
 
-    # returns True if they are duplicates (except Time)
-    def is_duplicate(last_entry_row, payload):
+    def is_endround_duplicate(last_entry_row, payload):
         match_stats = payload.player.match_stats
         player_state = payload.player.state
 
         if player_state.round_kills > 0 and last_entry_row['Kills'] == match_stats.kills:
             return True
-
-        # TODO: Temp removal
-        # first_pass = last_entry_row['Player Team'] == payload.player.team and \
-        #        last_entry_row['Kills'] == match_stats.kills and \
-        #        last_entry_row['Assists'] == match_stats.assists and \
-        #        last_entry_row['Deaths'] == match_stats.deaths and \
-        #        last_entry_row['Round Kills'] == player_state.round_kills and \
-        #        last_entry_row['Round HS Kills'] == player_state.round_killhs
-        #
-        # second_pass = last_entry_row['Player Team'] == payload.player.team and \
-        #        last_entry_row['Kills'] == match_stats.kills and \
-        #        last_entry_row['Deaths'] == match_stats.deaths and \
-        #        last_entry_row['Round Kills'] == player_state.round_kills and \
-        #        last_entry_row['Round HS Kills'] == player_state.round_killhs and \
-        #        last_entry_row['CT_Score'] == payload.map.team_ct.score and \
-        #        last_entry_row['T_Score'] == payload.map.team_t.score
-        #
-        # return True if first_pass or second_pass else False
 
         return last_entry_row['Player Team'] == payload.player.team and \
                last_entry_row['Kills'] == match_stats.kills and \
@@ -57,6 +37,42 @@ def check_prev_entries(game_data, round_db):
                last_entry_row['Deaths'] == match_stats.deaths and \
                last_entry_row['Round Kills'] == player_state.round_kills and \
                last_entry_row['Round HS Kills'] == player_state.round_killhs
+
+    # TODO: Tentative
+    # for when player supposedly died midround for two rounds in a row.
+    def is_midround_duplicate(last_entry_row, payload):
+        match_stats = payload.player.match_stats
+        player_state = payload.player.state
+
+        if player_state.round_kills > 0 and last_entry_row['Kills'] == match_stats.kills:
+            return True
+
+        # if 2->2, then deaths must be different.
+        if match_stats.deaths == last_entry_row['Deaths']:
+            return True
+
+        # TODO: temp removal in favor of deaths simple count check
+        # # includes assists check
+        # # can check deaths == deaths because for GS codes == 2 two in a row, must have died.
+        # # checks round # because same round # entries seem to only occur with a GS code pattern of 1, 2.
+        # first_pass = last_entry_row['Player Team'] == payload.player.team and \
+        #        last_entry_row['Kills'] == match_stats.kills and \
+        #        last_entry_row['Assists'] == match_stats.assists and \
+        #        last_entry_row['Deaths'] == match_stats.deaths and \
+        #        last_entry_row['Round Kills'] == player_state.round_kills and \
+        #        last_entry_row['Round HS Kills'] == player_state.round_killhs
+        #
+        # # excludes assists check, instead includes equip. value check
+        # second_pass = last_entry_row['Player Team'] == payload.player.team and \
+        #        last_entry_row['Kills'] == match_stats.kills and \
+        #        last_entry_row['Deaths'] == match_stats.deaths and \
+        #        last_entry_row['Round Kills'] == player_state.round_kills and \
+        #        last_entry_row['Round HS Kills'] == player_state.round_killhs and \
+        #        last_entry_row['CT_Score'] == payload.map.team_ct.score and \
+        #        last_entry_row['T_Score'] == payload.map.team_t.score and \
+        #        last_entry_row['Current Equip. Value'] == player_state.equip_value
+        #
+        # return True if first_pass or second_pass else False
 
     last_entry = pd.read_sql('SELECT * FROM per_round_data ORDER BY Time DESC LIMIT 1;', round_db)
 
@@ -68,9 +84,18 @@ def check_prev_entries(game_data, round_db):
             print("Time Duplicate Replaced")
             return True
 
+        # 2->1
         if game_data.gamestate_code.value == 1:  # Checking for duplicate combo of midround death + endround payloads
             if last_entry.iloc[0]['GS Code'] == 2:
-                if is_duplicate(last_entry.iloc[0], game_data):
+                if is_endround_duplicate(last_entry.iloc[0], game_data):
+                    print("Round Duplicate Not Inserted")
+                    return False  # do not insert a duplicate.
+
+        # 2->2
+        if game_data.gamestate_code.value == 2:
+            if last_entry.iloc[0]['GS Code'] == 2:
+                # TODO: Tentative
+                if is_midround_duplicate(last_entry.iloc[0], game_data):
                     print("Round Duplicate Not Inserted")
                     return False  # do not insert a duplicate.
 

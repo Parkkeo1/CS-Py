@@ -1,3 +1,5 @@
+import copy
+import json
 import os
 import shutil
 import sqlite3
@@ -98,21 +100,33 @@ def index():
 def gamestate_handler():
     if request.is_json and cs_py_client.config['STATE']:
         round_db = get_db()
-        game_data = GameStatePayload(request.get_json())
+        game_data = GameStatePayload(copy.deepcopy(request.get_json()))
         print(game_data.gamestate_code)
 
+        json_log = open('../logs/rounds_json.txt', 'a')
+
         if game_data.gamestate_code == GameStateCode.INVALID:
+            round_db.close()
+            json_log.close()
             return 'Invalid Data Received'
         elif game_data.gamestate_code == GameStateCode.ENDGAME_DIFF_PLAYER:
+            json_log.write('----\n\n')
+
             send_match_to_remote(round_db, API_ADDRESS)
-            return 'Request Received'
         else:
-            if check_prev_entries(game_data, round_db):  # checks for time duplicate entries.
+            if check_prev_entries(game_data, round_db):  # checks for duplicate entries.
+                # saving raw json of accepted data to file
+                json_log.write(json.dumps(request.get_json()))
+                json_log.write('\n\n')
+
                 insert_round_data(game_data, round_db)
             if game_data.map.phase == 'gameover':  # automatic reset if player was alive by end of game.
-                print("GameOver")
+                print("Automatic Reset; player was alive at end of game")
+                json_log.write('----\n\n')
+
                 send_match_to_remote(round_db, API_ADDRESS)
         round_db.close()
+        json_log.close()
         return 'Request Received'
     return 'GS is OFF or non-JSON Received'
 
@@ -136,7 +150,7 @@ if __name__ == "__main__":
     setup_gamestate_cfg()
 
     # redirecting stdout for logging purposes
-    sys.stdout = open('server_log.txt', 'a')
+    sys.stdout = open('../logs/server_log.txt', 'a')
     print('---')
 
     # auto-opens browser window to CS-Py frontend
