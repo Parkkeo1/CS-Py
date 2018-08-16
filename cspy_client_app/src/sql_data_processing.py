@@ -53,6 +53,9 @@ def check_prev_entries(game_data, round_db):
         if match_stats.deaths == last_entry_row['Deaths']:
             return True
 
+        # forgot to return False!!!
+        return False
+
         # TODO: temp removal in favor of deaths simple count check
         # # includes assists check
         # # can check deaths == deaths because for GS codes == 2 two in a row, must have died.
