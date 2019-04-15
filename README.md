@@ -19,5 +19,5 @@ CS-Py is made possible by CS:GO's developer feature: [Game-State Integration](ht
 
 ### v1.1 Released. Install CS-Py [Here](https://github.com/Parkkeo1/CS-Py/releases/tag/v1.1) For Windows.
 - **Note**: v1 is the old release; CS-Py is a standalone, local Flask application and not a client-server web app.
-- Current statistical features of CS-Py are explained [here.](https://github.com/Parkkeo1/CS-Py/blob/master/documentation/statistics_documentation.md)
+- Current statistical features of CS-Py are explained [here.]https://github.com/Parkkeo1/CS-Py/blob/master/docs/stats.md)
 - Please report bugs by creating a new issue [here.](https://github.com/Parkkeo1/CS-Py/issues)
